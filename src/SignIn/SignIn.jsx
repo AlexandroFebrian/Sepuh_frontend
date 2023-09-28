@@ -142,7 +142,7 @@ export default function SignIn() {
 
   return (
     <>
-      <div className="bg-ghostwhite font-bold h-screen flex">
+      <div className="container-signInSignUp bg-ghostwhite font-bold h-screen flex">
         <animated.div
           onClick={handleClick}
           style={{
@@ -155,7 +155,7 @@ export default function SignIn() {
         ></animated.div>
         <div className="left w-1/2 h-screen flex justify-center items-center text-navyblue-800">
           <div id="left" className=" w-5/6 h-[33rem] border p-10">
-            <h1 className=" text-5xl text-center mb-10">Sign Up</h1>
+            <h1 className=" text-5xl text-center mb-10 font-mooli">Sign Up</h1>
 
             {/* <form> */}
 
@@ -269,7 +269,7 @@ export default function SignIn() {
         </div>
         <div className="right w-1/2 h-screen flex justify-center items-center text-navyblue-800">
           <div id="right" className=" w-5/6 h-[33rem] border p-10">
-            <h1 className=" text-5xl text-center mb-10">Sign In</h1>
+            <h1 className=" text-5xl text-center mb-10 font-mooli">Sign In</h1>
 
             {/* <p>Username</p>
             <Input variant="outline" placeholder="Username" />
@@ -397,7 +397,7 @@ export default function SignIn() {
               </div>
             </div>
             <div className="flex w-full justify-center">
-              <div className="w-4/6">
+              <div className="w-4/6 mb-2">
                 <Checkbox>
                   I agree to the <span>Terms and Conditions.</span>
                   <span className="text-red-500">*</span>
