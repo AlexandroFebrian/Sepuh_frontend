@@ -154,10 +154,11 @@ export default function SignIn() {
           className=" bg-navyblue-800 fixed"
         ></animated.div>
         <div className="left w-1/2 h-screen flex justify-center items-center text-navyblue-800">
-          <div id="left" className=" w-5/6 h-[33rem] border p-10">
+          <div
+            id="left"
+            className=" w-5/6 h-[33rem] border p-10 shadow-2xl rounded-xl"
+          >
             <h1 className=" text-5xl text-center mb-10 font-mooli">Sign Up</h1>
-
-            {/* <form> */}
 
             {/* <form onSubmit={(e) => e.preventDefault()}> */}
             {/* INPUT USERNAME */}
@@ -268,7 +269,10 @@ export default function SignIn() {
           </div>
         </div>
         <div className="right w-1/2 h-screen flex justify-center items-center text-navyblue-800">
-          <div id="right" className=" w-5/6 h-[33rem] border p-10">
+          <div
+            id="right"
+            className=" w-5/6 h-[33rem] border p-10 shadow-2xl rounded-xl"
+          >
             <h1 className=" text-5xl text-center mb-10 font-mooli">Sign In</h1>
 
             {/* <p>Username</p>
