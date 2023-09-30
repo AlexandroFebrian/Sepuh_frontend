@@ -73,8 +73,14 @@ export default function SignIn() {
     submitSignIn,
   } = SignInViewModel()
 
-  const [showPass, setShowPass] = useState(false);
-  const handlePass = () => setShowPass(!showPass);
+  const [showPassSignUp, setShowPassSignUp] = useState(false);
+  const handlePassSignUp = () => setShowPassSignUp(!showPassSignUp);
+
+  const [showConfirmSignUp, setShowConfirmSignUp] = useState(false);
+  const handleConfirmSignUp = () => setShowConfirmSignUp(!showConfirmSignUp);
+
+  const [showPassSignIn, setShowPassSignIn] = useState(false);
+  const handlePassSignIn = () => setShowPassSignIn(!showPassSignIn);
   
   const [showConfirm, setShowConfirm] = useState(false);
 
@@ -180,7 +186,7 @@ export default function SignIn() {
 
                     <Input
                       pr="4.5rem"
-                      type={showPass ? "text" : "password"}
+                      type={showPassSignUp ? "text" : "password"}
                       placeholder="Enter password"
                       className="outline-none shadow-lg"
                       variant="outline"
@@ -188,8 +194,8 @@ export default function SignIn() {
                     />
 
                     <InputRightElement width="4.5rem">
-                      <button h="1.75rem" size="sm" onClick={handlePass}>
-                        {showPass ? (
+                      <button h="1.75rem" size="sm" type="button" onClick={handlePassSignUp}>
+                        {showPassSignUp ? (
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
@@ -226,7 +232,7 @@ export default function SignIn() {
 
                     <Input
                       pr="4.5rem"
-                      type={showPass ? "text" : "password"}
+                      type={showConfirmSignUp ? "text" : "password"}
                       placeholder="Confirm password"
                       className="outline-none shadow-lg"
                       variant="outline"
@@ -234,8 +240,8 @@ export default function SignIn() {
                     />
 
                     <InputRightElement width="4.5rem">
-                      <button h="1.75rem" size="sm" onClick={handlePass}>
-                        {showPass ? (
+                      <button h="1.75rem" size="sm" type="button" onClick={handleConfirmSignUp}>
+                        {showConfirmSignUp ? (
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
@@ -341,19 +347,16 @@ export default function SignIn() {
                 </InputLeftAddon>
                 <Input
                   pr="4.5rem"
-                  type={showPass ? "text" : "password"}
+                  type={showPassSignIn ? "text" : "password"}
                   placeholder="Enter password"
                   className="outline-none shadow-lg"
                   variant="outline"
                   {...signIn("password")}
                 />
                 <InputRightElement width="4.5rem">
-                  {/* <Button h="1.75rem" size="sm" onClick={handlePass}>
-                      {showPass ? "Hide" : "Show"}
-                    </Button> */}
 
-                  <button h="1.75rem" size="sm" onClick={handlePass}>
-                    {showPass ? (
+                  <button h="1.75rem" size="sm" type="button" onClick={handlePassSignIn}>
+                    {showPassSignIn ? (
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
