@@ -68,6 +68,13 @@ export default {
       fontFamily: {
         mooli: ["Mooli", "sans-serif"],
       },
+      screens: {
+        sm: '480px',
+        md: '960px',
+        lg: '1366px',
+        xl: '1600px',
+        "2xl": '1920px',
+      },
     },
   },
   plugins: [],
