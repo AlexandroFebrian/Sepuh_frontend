@@ -87,7 +87,7 @@ export default function SignIn() {
   return (
     <>
       {/* SCREEN DIV */}
-      <div className="container-signInSignUp bg-ghostwhite h-screen md:flex">
+      <div className="container-signInSignUp h-screen md:flex">
         
         <Jumbo />
 
@@ -194,7 +194,7 @@ export default function SignIn() {
                     />
 
                     <InputRightElement width="4.5rem">
-                      <button h="1.75rem" size="sm" type="button" onClick={handlePassSignUp}>
+                      <button h="1.75rem" size="sm" type="button" onMouseDown={handlePassSignUp} onMouseUp={handlePassSignUp}>
                         {showPassSignUp ? (
                           <svg
                             xmlns="http://www.w3.org/2000/svg"

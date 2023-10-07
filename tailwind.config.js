@@ -33,7 +33,8 @@ export default {
           100: "#b8bbfd",
           200: "#8a8ef6",
           300: "#5b60f0",
-          400: "#2e33eb",
+          350: '#5358D2',
+          400: "#5358D2",
           500: "#161ad2",
           600: "#0f14a4",
           700: "#080e76",
@@ -76,6 +77,9 @@ export default {
         "2xl": '1920px',
       },
     },
+  },
+  corePlugins: {
+    preflight: false
   },
   plugins: [],
 };
