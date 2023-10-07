@@ -8,7 +8,7 @@ export default function Navbar() {
     <>
       <nav className='w-full h-[80px] bg-navyblue-800 flex justify-between px-7 py-4'>
         <div>
-          <img src="/Logo Putih.png" alt="Logo" className='h-full'/>
+          <img src="/logo/Logo Putih.png" alt="Logo" className='h-full'/>
 
         </div>
         <div className='flex items-center w-1/3'>

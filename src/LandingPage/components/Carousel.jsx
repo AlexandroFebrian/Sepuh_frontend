@@ -27,7 +27,7 @@ export default function Carousel({photos}) {
           {
             photos.map((photo, idx) => {
               return (
-                <div key={idx} style={{ backgroundImage:  `url("${photo}")`, backgroundPositionY: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover"}} className='w-full h-full flex-none'>
+                <div key={"carous_" + idx} style={{ backgroundImage:  `url("${photo}")`, backgroundPositionY: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover"}} className='w-full h-full flex-none'>
                   
                 </div>
                 // <img src={photo} key={idx} className='w-full h-full flex-none'/>
@@ -47,9 +47,9 @@ export default function Carousel({photos}) {
               return (
                 <div
                   onClick={() => {
-                    setCurrent(i);
+                    setCurrent(idx);
                   }}
-                  key={"circle" + idx}
+                  key={"page_" + idx}
                   className={` rounded-sm w-10 h-1 cursor-pointer ${
                     idx == current ? "bg-white" : "bg-gray-500"
                   }`}
