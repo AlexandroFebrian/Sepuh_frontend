@@ -36,9 +36,9 @@ export default function Carousel({photos}) {
           }
         </div>
 
-        <div className="absolute top-0 h-full w-full justify-between items-center flex text-white px-10 text-3xl">
-          <Button onClick={previousSlide}>{"<"}</Button>
-          <Button onClick={nextSlide}>{">"}</Button>
+        <div className="absolute top-0 h-full w-full justify-between items-center flex text-white px-10 text-2xl">
+          <button className=' h-[50px] w-[50px] rounded-[50px] bg-navyblue-800 hover:bg-navyblue-500 transition-colors' onClick={previousSlide}><div className=' -mt-1 -ms-1'>{"<"}</div></button>
+          <button className=' h-[50px] w-[50px] rounded-[50px] bg-navyblue-800 hover:bg-navyblue-500 transition-colors' onClick={nextSlide}><div className=' -mt-1'>{">"}</div></button>
         </div>
 
         <div className="absolute bottom-0 py-2 flex justify-center gap-3 w-full">
