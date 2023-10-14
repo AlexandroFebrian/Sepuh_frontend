@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './index.css'
+import './style/index.css'
 import { RouterProvider } from 'react-router-dom'
 import Router from './router.jsx'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'

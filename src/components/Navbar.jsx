@@ -1,5 +1,6 @@
 import { Button, Input, InputGroup, InputLeftElement, InputRightElement } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Navbar() {
   const [logedIn, setLogedIn] = useState("false")
@@ -30,15 +31,18 @@ export default function Navbar() {
           {
             logedIn
             ?
-              <Button color='ghostwhite.50' borderColor='indigo.300' borderWidth='2px' _hover={{bg: "whiteAlpha.200"}} _active={{bg: "whiteAlpha.300"}} variant='outline' width='135px'>
-                Sign In
-              </Button>
+              <Link to={"/signin"}>
+                <Button color='ghostwhite.50' borderColor='indigo.300' borderWidth='2px' _hover={{bg: "whiteAlpha.200"}} _active={{bg: "whiteAlpha.300"}} variant='outline' width='135px' transitionDuration={"300ms"}>
+                  Sign In
+                </Button>
+              
+              </Link>
             :
             <>
-              <Button color='ghostwhite.50' _hover={{bg: "transparent"}} width='135px' className=' me-6' variant='ghost'>
+              <Button color='ghostwhite.50' _hover={{bg: "transparent"}} width='135px' className=' me-6' variant='ghost' transitionDuration={"300ms"}>
                 Notifications
               </Button>
-              <Button color='ghostwhite.50' bg='indigo.300' _hover={{bg: "indigo.350"}} width='135px'>
+              <Button color='ghostwhite.50' bg='indigo.300' _hover={{bg: "indigo.350"}} width='135px' transitionDuration={"300ms"}>
                 My Profile
               </Button>
             </>
