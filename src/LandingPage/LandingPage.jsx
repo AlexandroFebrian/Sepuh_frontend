@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
+import Navbar from '../components/Navbar/Navbar'
 import Carousel from './components/Carousel'
 import {photos_url} from "./CarouselPhotos.json"
 import Categories from './Categories'
 import About from './About'
-import Footer from '../components/Footer'
+import Footer from '../components/Footer/Footer'
 
 export default function LandingPage() {
 

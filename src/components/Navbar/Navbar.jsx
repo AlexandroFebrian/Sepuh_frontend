@@ -1,28 +1,32 @@
+import { SearchIcon } from '@chakra-ui/icons'
 import { Button, Input, InputGroup, InputLeftElement, InputRightElement } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { FaMagnifyingGlass, FaFilter } from "react-icons/fa6";
 
 export default function Navbar() {
   const [logedIn, setLogedIn] = useState("false")
 
   return (
     <>
-      <nav className='w-full h-[80px] bg-navyblue-800 flex justify-between px-7 py-4'>
+      
+      <nav className='w-full h-20 bg-navyblue-800 flex justify-between px-7 py-4 fixed top-0 z-20'>
         <div>
-          <img src="/logo/Logo Putih.png" alt="Logo" className='h-full'/>
-
+          <Link to={"/"}>
+            <img src="/logo/Logo Putih.png" alt="Logo" className='h-full'/>
+          </Link>
         </div>
         <div className='flex items-center w-1/3'>
           <InputGroup background={'ghostwhite.100'} rounded={'md'}>
             <InputLeftElement>
-            Logo search
+              <FaMagnifyingGlass />
             </InputLeftElement>
 
             <Input placeholder='Search'>
             </Input>
 
             <InputRightElement>
-            Logo filter
+             <FaFilter />
             </InputRightElement>
           </InputGroup>
 
