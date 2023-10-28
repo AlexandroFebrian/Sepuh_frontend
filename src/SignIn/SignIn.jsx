@@ -6,10 +6,10 @@ import { useNavigate } from "react-router-dom";
 
 import { useSpring, useSpringRef, animated } from "@react-spring/web";
 import "animate.css";
-import {ArrowBackIcon} from '@chakra-ui/icons'
+import { ArrowBackIcon } from "@chakra-ui/icons";
 
 export default function SignIn() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const api = useSpringRef();
   const jumbo = useSpring({
@@ -18,7 +18,7 @@ export default function SignIn() {
   });
 
   let move = false;
-  
+
   const handleClick = () => {
     if (move == false) {
       move = true;
@@ -87,12 +87,23 @@ export default function SignIn() {
     <>
       {/* SCREEN DIV */}
       <div className="container-signInSignUp h-screen md:flex bg-ghostwhite-50">
-        
         <Jumbo jumbo={jumbo} handleClick={handleClick} api={api}>
           <div className="w-full h-full p-7">
             <div className="flex items-center">
-              <ArrowBackIcon color={"white"} _hover={{color: "ghostwhite.100"}} boxSize={"3rem"} className="mr-5 cursor-pointer" transitionDuration={"300ms"} onClick={() => navigate(-1)}/>
-              <img src="/logo/Logo Putih.png" alt="Logo" className='h-[4rem]'/>
+              <ArrowBackIcon
+                color={"white"}
+                _hover={{ color: "ghostwhite.100" }}
+                boxSize={"3rem"}
+                className="mr-5 cursor-pointer"
+                transitionDuration={"300ms"}
+                onClick={() => navigate(-1)}
+              />
+              <img
+                src="/logo/Logo Putih.png"
+                alt="Logo"
+                className="h-[4rem]"
+                draggable="false"
+              />
             </div>
             <div className="w-full h-full flex justify-center items-center text-6xl text-ghostwhite-50">
               <p className="-mt-32 text-center">
@@ -100,13 +111,13 @@ export default function SignIn() {
               </p>
             </div>
           </div>
-        </Jumbo >
+        </Jumbo>
 
         {/* LEFT SCREEN DIV SIGN UP */}
-        <SignUpBox handleClick={handleClick}/>
+        <SignUpBox handleClick={handleClick} />
 
         {/* RIGHT SCREEN DIV SIGN IN */}
-        <SignInBox handleClick={handleClick}/>
+        <SignInBox handleClick={handleClick} />
       </div>
     </>
   );
