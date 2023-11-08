@@ -17,7 +17,7 @@ const Router = createBrowserRouter([
     element: <HomePage />,
   },
   // {
-  //   path: "*",
+  //   path:   "*",
   //   element: <NotFound />,
   // },
 ]);
