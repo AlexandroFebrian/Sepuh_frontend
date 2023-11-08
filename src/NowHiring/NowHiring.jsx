@@ -3,11 +3,13 @@ export default function NowHiring() {
   return (
     <div className="h-[calc(100vh-5rem)] w-full sticky top-[5rem] py-10 px-2">
       <div className="w-full top-0 transition-colors duration-300 flex flex-col items-center justify-start p-4 shadow-xl bg-ghostwhite-100">
-        <div className="title border-b-2 border-navyblue-600 w-full">
+        <div className="title border-navyblue-600 w-full">
           <h1 className="text-3xl w-full">Now Hiring</h1>
         </div>
 
-        <div className="content w-full mt-4 flex flex-col gap-4">
+        <hr className=" bg-navyblue-800 w-full h-[0.1rem] my-3" />
+
+        <div className="content w-full flex flex-col gap-4">
           {/* card1 */}
           <div className="card flex justify-between  w-full h-full font-semibold bg-ghostwhite-50 p-3 rounded-md shadow-lg">
             <div className="left flex items-center justify-start gap-3">

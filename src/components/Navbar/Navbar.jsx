@@ -1,4 +1,4 @@
-import { SearchIcon } from "@chakra-ui/icons";
+import 'animate.css';
 import {
   Button,
   Input,
@@ -9,12 +9,25 @@ import {
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaMagnifyingGlass, FaFilter } from "react-icons/fa6";
+import { set } from "react-hook-form";
+import Filter from './Filter';
 
 export default function Navbar() {
   const [logedIn, setLogedIn] = useState("false");
+  const [showFilter, setShowFilter] = useState(false);
 
   return (
     <>
+      {
+        showFilter
+        &&
+        <div 
+          className="fixed w-[100vw] h-[100vh] bg-black/50 z-20 animate__animated animate__fadeIn duration-0"
+          onClick={() => {setShowFilter(!showFilter)}}
+        >
+        </div>
+      }
+
       <nav className="w-full h-20 bg-navyblue-800 flex justify-between px-7 py-4 fixed top-0 z-20">
         <div>
           <Link to={"/"}>
@@ -26,8 +39,8 @@ export default function Navbar() {
             />
           </Link>
         </div>
-        <div className="flex items-center w-1/3">
-          <InputGroup background={"ghostwhite.100"} rounded={"md"}>
+        <div className="flex items-center w-1/3 relative">
+          <InputGroup background={"ghostwhite.100"} rounded={"md"} className=" border-b-0 border-navyblue-800">
             <InputLeftElement>
               <FaMagnifyingGlass />
             </InputLeftElement>
@@ -35,9 +48,17 @@ export default function Navbar() {
             <Input placeholder="Search"></Input>
 
             <InputRightElement>
-              <FaFilter />
+              <FaFilter 
+                className=" cursor-pointer"
+                onClick={() => {setShowFilter(!showFilter)}}
+              />
             </InputRightElement>
           </InputGroup>
+          {
+            showFilter
+            &&
+            <Filter setShowFilter={setShowFilter} />
+          }
         </div>
         <div className="flex items-center">
           {logedIn ? (

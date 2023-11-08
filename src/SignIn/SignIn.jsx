@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useSpring, useSpringRef, animated } from "@react-spring/web";
 import "animate.css";
-import { ArrowBackIcon } from "@chakra-ui/icons";
+import {FaArrowLeft} from "react-icons/fa6";
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -90,12 +90,8 @@ export default function SignIn() {
         <Jumbo jumbo={jumbo} handleClick={handleClick} api={api}>
           <div className="w-full h-full p-7">
             <div className="flex items-center">
-              <ArrowBackIcon
-                color={"white"}
-                _hover={{ color: "ghostwhite.100" }}
-                boxSize={"3rem"}
-                className="mr-5 cursor-pointer"
-                transitionDuration={"300ms"}
+              <FaArrowLeft 
+                className=" text-white w-10 h-10 mr-5 cursor-pointer hover:text-ghostwhite-100 transition-colors duration-300"
                 onClick={() => navigate(-1)}
               />
               <img
