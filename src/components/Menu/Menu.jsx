@@ -28,9 +28,9 @@ export default function Menu() {
             Post
           </button>
         </div>
-        <div className="absolute bottom-0 w-full pb-10">
+        <div className="absolute bottom-0 w-full">
           <button className="w-full h-10 hover:bg-ghostwhite-100 top-0 transition-colors duration-300 text-3xl flex items-center justify-start p-10">
-            <FaGear className="mr-3" size={25} />
+            <FaGear className="mr-3" size={25} /> 
             Setting
           </button>
         </div>

@@ -6,6 +6,7 @@ import {
   InputLeftElement,
   InputRightElement,
 } from "@chakra-ui/react";
+import {FaSliders} from 'react-icons/fa6';
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaMagnifyingGlass, FaFilter } from "react-icons/fa6";
@@ -13,7 +14,7 @@ import { set } from "react-hook-form";
 import Filter from './Filter';
 
 export default function Navbar() {
-  const [logedIn, setLogedIn] = useState("false");
+  const [logedIn, setLogedIn] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
 
   return (
@@ -48,7 +49,7 @@ export default function Navbar() {
             <Input placeholder="Search"></Input>
 
             <InputRightElement>
-              <FaFilter 
+              <FaSliders 
                 className=" cursor-pointer"
                 onClick={() => {setShowFilter(!showFilter)}}
               />
@@ -62,21 +63,6 @@ export default function Navbar() {
         </div>
         <div className="flex items-center">
           {logedIn ? (
-            <Link to={"/signin"}>
-              <Button
-                color="ghostwhite.50"
-                borderColor="indigo.300"
-                borderWidth="2px"
-                _hover={{ bg: "whiteAlpha.200" }}
-                _active={{ bg: "whiteAlpha.300" }}
-                variant="outline"
-                width="135px"
-                transitionDuration={"300ms"}
-              >
-                Sign In
-              </Button>
-            </Link>
-          ) : (
             <>
               <Button
                 color="ghostwhite.50"
@@ -92,11 +78,42 @@ export default function Navbar() {
                 color="ghostwhite.50"
                 bg="indigo.300"
                 _hover={{ bg: "indigo.350" }}
+                _active={{ bg: "indigo.400" }}
                 width="135px"
                 transitionDuration={"300ms"}
               >
                 My Profile
               </Button>
+            </>
+          ) : (
+            <>
+              <Link to={"/signin?signup=true"} className='me-6'>
+                <Button
+                  color="ghostwhite.50"
+                  bg="indigo.300"
+                  _hover={{ bg: "indigo.350" }}
+                  _active={{ bg: "indigo.400" }}
+                  width="135px"
+                  transitionDuration={"300ms"}
+                >
+                  Sign Up
+                </Button>
+              </Link>
+              <Link to={"/signin"}>
+                <Button
+                  color="ghostwhite.50"
+                  borderColor="indigo.300"
+                  borderWidth="2px"
+                  _hover={{ bg: "whiteAlpha.200" }}
+                  _active={{ bg: "whiteAlpha.300" }}
+                  variant="outline"
+                  width="135px"
+                  transitionDuration={"300ms"}
+                >
+                  Sign In
+                </Button>
+              </Link>
+              
             </>
           )}
         </div>

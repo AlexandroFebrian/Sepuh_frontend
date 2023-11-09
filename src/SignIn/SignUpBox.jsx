@@ -177,6 +177,11 @@ export default function SignUpBox({handleClick}) {
                     <option value='1' className=' text-black '>Freelancer</option>
                     <option value='2' className=' text-black '>Company</option>
                   </Select>
+                  {/* <select name="" id="" className=' w-44 text-ghostwhite-50 bg-navyblue-500 hover:bg-navyblue-600 transition-colors duration-300 cursor-pointer rounded p-2'>
+                    <option value='1' className=' text-black '>Freelancer</option>
+                    <option value='2' className=' text-black '>Company</option>
+
+                  </select> */}
                 </div>
 
                 <div className="flex w-full justify-center mb-2">

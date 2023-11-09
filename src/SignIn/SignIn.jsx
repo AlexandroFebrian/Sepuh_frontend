@@ -2,19 +2,26 @@ import Jumbo from "./components/jumbo";
 import SignUpBox from "./SignUpBox";
 import SignInBox from "./SignInBox";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { useSpring, useSpringRef, animated } from "@react-spring/web";
 import "animate.css";
 import {FaArrowLeft} from "react-icons/fa6";
+import { useRef } from "react";
 
 export default function SignIn() {
   const navigate = useNavigate();
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const signup = useRef()
+  signup.current = searchParams.get("signup") == "true" ? window.innerWidth / 2 : 0;
+
   const api = useSpringRef();
   const jumbo = useSpring({
     ref: api,
-    from: { x: 0 },
+    from: { 
+      x: signup.current 
+    },
   });
 
   let move = false;
