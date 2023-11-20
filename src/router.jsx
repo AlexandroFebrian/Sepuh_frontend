@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import LandingPage from "./Views/LandingPage/LandingPage";
 import SignIn from "./Views/SignIn/SignIn";
 import HomePage from "./Views/HomePage/HomePage";
-import MainLayout from "./Views/MainLayout/MainLayout";
+import MainLayout from "./Views/Layout/MainLayout";
 
 const Router = createBrowserRouter([
   {
@@ -20,6 +20,10 @@ const Router = createBrowserRouter([
       {
         path: "/home",
         element: <HomePage />,
+      },
+      {
+        path: "/guest"
+        
       }
     ]
   },
