@@ -1,5 +1,5 @@
-import { Button, Img } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
 export default function Carousel({photos}) {
 
@@ -37,8 +37,12 @@ export default function Carousel({photos}) {
         </div>
 
         <div className="absolute top-0 h-full w-full justify-between items-center flex text-white px-10 text-2xl">
-          <button className=' h-[50px] w-[50px] rounded-[50px] bg-navyblue-800 hover:bg-navyblue-500 transition-colors duration-300' onClick={previousSlide}><div className=' -mt-1 -ms-1'>{"<"}</div></button>
-          <button className=' h-[50px] w-[50px] rounded-[50px] bg-navyblue-800 hover:bg-navyblue-500 transition-colors duration-300' onClick={nextSlide}><div className=' -mt-1'>{">"}</div></button>
+          <button className=' h-[50px] w-[50px] rounded-[50px] bg-navyblue-800 hover:bg-navyblue-500 transition-colors duration-300 p-0 flex items-center justify-center' onClick={previousSlide}>
+            <FaAngleLeft />
+          </button>
+          <button className=' h-[50px] w-[50px] rounded-[50px] bg-navyblue-800 hover:bg-navyblue-500 transition-colors duration-300 p-0 flex items-center justify-center' onClick={nextSlide}>
+            <FaAngleRight />
+          </button>
         </div>
 
         <div className="absolute bottom-0 py-2 flex justify-center gap-3 w-full">

@@ -12,10 +12,28 @@ import { Link } from "react-router-dom";
 import { FaMagnifyingGlass, FaFilter } from "react-icons/fa6";
 import { set } from "react-hook-form";
 import Filter from './Filter';
+import { useEffect } from 'react';
 
 export default function Navbar() {
   const [logedIn, setLogedIn] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
+  const [closeFilter, setCloseFilter] = useState(false)
+
+  function close(){
+    setCloseFilter(true); 
+    setTimeout(() => {
+      setShowFilter(false); 
+      setCloseFilter(false)
+    }, 1000)
+  }
+
+  function open(){
+    if(!showFilter){
+      setShowFilter(true)
+    }else{
+      close()
+    }
+  }
 
   return (
     <>
@@ -23,8 +41,8 @@ export default function Navbar() {
         showFilter
         &&
         <div 
-          className="fixed w-[100vw] h-[100vh] bg-black/50 z-20 animate__animated animate__fadeIn duration-0"
-          onClick={() => {setShowFilter(!showFilter)}}
+          className={`fixed w-[100vw] h-[100vh] bg-black/50 z-20 animate__animated ${closeFilter ? "animate__fadeOut" : "animate__fadeIn"}`}
+          onClick={() => {close()}}
         >
         </div>
       }
@@ -51,14 +69,14 @@ export default function Navbar() {
             <InputRightElement>
               <FaSliders 
                 className=" cursor-pointer"
-                onClick={() => {setShowFilter(!showFilter)}}
+                onClick={() => {open()}}
               />
             </InputRightElement>
           </InputGroup>
           {
             showFilter
             &&
-            <Filter setShowFilter={setShowFilter} />
+            <Filter setShowFilter={setShowFilter} closeFilter={closeFilter} close={close} />
           }
         </div>
         <div className="flex items-center">

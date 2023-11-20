@@ -1,6 +1,5 @@
 import React from 'react'
 import CategoriesCard from './components/CategoriesCard'
-import "../style/scrollbar.css"
 
 export default function Categories() {
   const categories = [

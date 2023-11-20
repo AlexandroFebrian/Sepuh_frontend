@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 
-export default function Filter({setShowFilter}) {
+export default function Filter({setShowFilter, close, closeFilter}) {
   const [sort, setSort] = useState(0)
   const [order, setOrder] = useState(0)
   const [date, setDate] = useState(0)
@@ -14,7 +14,7 @@ export default function Filter({setShowFilter}) {
 
   return (
     <>
-      <div className="absolute top-10 w-full h-fit bg-ghostwhite-100 border border-navyblue-800 px-10 py-2 rounded-b animate__animated animate__fadeInDown duration-0">
+      <div className={`absolute top-10 w-full h-fit bg-ghostwhite-100 border border-navyblue-800 px-10 py-2 rounded-b animate__animated ${closeFilter ? "animate__fadeOutUp" : "animate__fadeInDown"}`}>
         <p className="text-2xl">Filters</p>
         
         <div className='flex'>
@@ -87,7 +87,7 @@ export default function Filter({setShowFilter}) {
         <div className=' h-12 relative'>
           <button 
             className=' bg-navyblue-700 hover:bg-navyblue-800 text-ghostwhite-50 py-1 px-5 rounded transition-colors duration-300 absolute bottom-0 right-0'
-            onClick={() => {setShowFilter(false)}}
+            onClick={() => {close()}}
           >
             Apply
           </button>
