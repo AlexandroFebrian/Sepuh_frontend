@@ -13,14 +13,14 @@ import { FaLock, FaEnvelope, FaEye, FaEyeSlash } from "react-icons/fa6";
 
 export default function SignInBox({handleClick}) {
   const {
-    signIn,
+    signInForm,
+    signInError,
     handleSignIn,
     submitSignIn,
   } = SignInViewModel()
 
   const [showPassSignIn, setShowPassSignIn] = useState(false);
   const handlePassSignIn = () => setShowPassSignIn(!showPassSignIn);
-
   return (
     <>
       <div className="right w-1/2 h-screen flex justify-center items-center text-navyblue-800">
@@ -47,15 +47,16 @@ export default function SignInBox({handleClick}) {
                   </InputLeftAddon>
                   <Input
                     variant="outline"
-                    type="text"
+                    type="email"
                     id="EmailInputSignIn"
                     className="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5  outline-none"
                     placeholder="Email"
 
-                    {...signIn("email")}
+                    {...signInForm("email")}
                   />
                 
                 </InputGroup>
+                <p>{signInError?.email?.message}</p>
               </div>
 
               {/* SIGN IN PASSWORD */}
@@ -74,7 +75,7 @@ export default function SignInBox({handleClick}) {
                   className="outline-none"
                   variant="outline"
 
-                  {...signIn("password")}
+                  {...signInForm("password")}
                 />
                 <InputRightElement width="4.5rem">
 
@@ -87,6 +88,7 @@ export default function SignInBox({handleClick}) {
                   </button>
                 </InputRightElement>
               </InputGroup>
+              <p>{signInError?.password?.message}</p>
 
               <div className="flex w-full justify-center">
                 <div className="w-full mt-10">

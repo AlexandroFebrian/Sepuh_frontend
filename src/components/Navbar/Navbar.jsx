@@ -13,11 +13,16 @@ import { FaMagnifyingGlass, FaFilter } from "react-icons/fa6";
 import { set } from "react-hook-form";
 import Filter from './Filter';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 export default function Navbar() {
-  const [logedIn, setLogedIn] = useState(false);
+  const isLogin = useSelector((state) => state.user.isLogin)
+
   const [showFilter, setShowFilter] = useState(false);
-  const [closeFilter, setCloseFilter] = useState(false)
+  const [closeFilter, setCloseFilter] = useState(false);
+
+  const [showProfile, setShowProfile] = useState(false);
+  const [closeProfile, setCloseProfile] = useState(false);
 
   function close(){
     setCloseFilter(true); 
@@ -80,11 +85,12 @@ export default function Navbar() {
           }
         </div>
         <div className="flex items-center">
-          {logedIn ? (
+          {isLogin ? (
             <>
               <Button
                 color="ghostwhite.50"
-                _hover={{ bg: "transparent" }}
+                _hover={{ bg: "whiteAlpha.200" }}
+                _active={{ bg: "whiteAlpha.300" }}
                 width="135px"
                 className=" me-6"
                 variant="ghost"
@@ -99,6 +105,7 @@ export default function Navbar() {
                 _active={{ bg: "indigo.400" }}
                 width="135px"
                 transitionDuration={"300ms"}
+                onClick={() => {}}
               >
                 My Profile
               </Button>

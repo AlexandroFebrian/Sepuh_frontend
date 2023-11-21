@@ -16,7 +16,8 @@ import { FaLock, FaEnvelope, FaUser, FaEye, FaEyeSlash } from "react-icons/fa6";
 
 export default function SignUpBox({handleClick}) {
   const {
-    signUp,
+    signUpForm,
+    signUpError,
     handleSignUp,
     submitSignUp,
   } = SignInViewModel()
@@ -58,16 +59,17 @@ export default function SignUpBox({handleClick}) {
                     className="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5  outline-none"
                     placeholder="Email"
 
-                    {...signUp("email")}
+                    {...signUpForm("email")}
                   />
                 
                 </InputGroup>
+                <p>{signUpError?.email?.message}</p>
               </div>
 
               {/* SIGN UP USERNAME */}
-              <label htmlFor="Username SignUp" className="text-gray-900">
+              <label htmlFor="Name SignUp" className="text-gray-900">
                 <span>
-                  Username
+                  Name
                 </span>
               </label>
 
@@ -79,14 +81,15 @@ export default function SignUpBox({handleClick}) {
                   <Input
                     variant="outline"
                     type="text"
-                    id="UsernameInputSignUp"
+                    id="NamemeInputSignUp"
                     className="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5  outline-none"
-                    placeholder="Username"
+                    placeholder="Name"
 
-                    {...signUp("username")}
+                    {...signUpForm("name")}
                   />
                 
                 </InputGroup>
+                <p>{signUpError?.name?.message}</p>
               </div>
 
 
@@ -111,7 +114,7 @@ export default function SignUpBox({handleClick}) {
                       className="outline-none"
                       variant="outline"
 
-                      {...signUp("password")}
+                      {...signUpForm("password")}
                     />
 
                     <InputRightElement width="4.5rem">
@@ -124,6 +127,7 @@ export default function SignUpBox({handleClick}) {
                       </button>
                     </InputRightElement>
                   </InputGroup>
+                  <p>{signUpError?.password?.message}</p>
                 </div>
 
                 <div className=" lg:w-1/2 lg:ml-2">
@@ -144,7 +148,7 @@ export default function SignUpBox({handleClick}) {
                       className="outline-none"
                       variant="outline"
 
-                      {...signUp("confirm")}
+                      {...signUpForm("confirm")}
                     />
 
                     <InputRightElement width="4.5rem">
@@ -157,6 +161,7 @@ export default function SignUpBox({handleClick}) {
                       </button>
                     </InputRightElement>
                   </InputGroup>
+                  <p>{signUpError?.confirm?.message}</p>
                 </div>
               </div>
 
@@ -164,7 +169,7 @@ export default function SignUpBox({handleClick}) {
                 <div className="flex w-full justify-center items-center mb-2">
                   <span className='mr-3'>Sign up as: </span>
                   <Select 
-                    defaultValue={"1"} 
+                    defaultValue={"Freelancer"} 
                     width={"11rem"}
                     bg={"navyblue.500"}
                     color={"ghostwhite"}
@@ -172,11 +177,12 @@ export default function SignUpBox({handleClick}) {
                     transitionDuration={"300ms"}
                     className='cursor-pointer'
 
-                    {...signUp("role")}
+                    {...signUpForm("role")}
                   >
-                    <option value='1' className=' text-black '>Freelancer</option>
-                    <option value='2' className=' text-black '>Company</option>
+                    <option value='Freelancer' className=' text-black '>Freelancer</option>
+                    <option value='Company' className=' text-black '>Company</option>
                   </Select>
+                  <p>{signUpError?.role?.message}</p>
                   {/* <select name="" id="" className=' w-44 text-ghostwhite-50 bg-navyblue-500 hover:bg-navyblue-600 transition-colors duration-300 cursor-pointer rounded p-2'>
                     <option value='1' className=' text-black '>Freelancer</option>
                     <option value='2' className=' text-black '>Company</option>
@@ -185,10 +191,14 @@ export default function SignUpBox({handleClick}) {
                 </div>
 
                 <div className="flex w-full justify-center mb-2">
-                  <Checkbox {...signUp("terms")}>
-                    I agree to the <Link to={"#"} className=' underline hover:text-indigo-300'>Terms and Conditions</Link>.
-                    <span className="text-red-500">*</span>
-                  </Checkbox>
+                  <div>
+                    <Checkbox {...signUpForm("terms")}>
+                      I agree to the <Link to={"#"} className=' underline hover:text-indigo-300'>Terms and Conditions</Link>.
+                      <span className="text-red-500">*</span>
+                    </Checkbox>
+                    <p className='text-center'>{signUpError?.terms?.message}</p>
+
+                  </div>
                 </div>
                 
                 <div className="flex w-full justify-center">
