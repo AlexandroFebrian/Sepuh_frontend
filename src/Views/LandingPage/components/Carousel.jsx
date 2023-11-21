@@ -17,7 +17,7 @@ export default function Carousel({photos}) {
 
   return (
     <>
-      <div className="overflow-x-hidden relative h-1/2">
+      <div className="overflow-x-hidden relative h-[35rem]">
         <div
           className={`h-full flex transition ease-in-out duration-1000` }
           style={{

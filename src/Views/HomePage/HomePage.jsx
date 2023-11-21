@@ -8,7 +8,7 @@ export default function HomePage() {
 
   return (
     <>
-      <div className=" h-fit mt-20 relative flex">
+      <div className=" h-fit relative flex">
         <div className="left w-1/5 ">
           {
             isLogin

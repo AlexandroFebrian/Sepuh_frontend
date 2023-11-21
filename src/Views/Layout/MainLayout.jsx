@@ -8,7 +8,9 @@ export default function MainLayout() {
     <>
       <div className='bg-ghostwhite-50 h-screen'>
         <Navbar />
+        <div className='mt-20'>
 
+        </div>
         <Outlet />
 
         <Footer />
