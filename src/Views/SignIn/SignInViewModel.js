@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { setIsLogin } from "../../redux/UserSlice";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,12 @@ export default function SignInViewModel(){
   const navigate = useNavigate()
 
   const [wait, setWait] = useState(false)
+  const [popup, setPopup] = useState(false)
+  const [popupTitle, setPopupTitle] = useState("")
+  const [popupMessage, setPopupMessage] = useState("")
+  const [popupLink, setPopupLink] = useState("")
+  const [popupButtonMessage, setPopupButtonMessage] = useState("")
+  const [popupType, setPopupType] = useState(null)
 
   /**
    * SCHEMA
@@ -61,10 +67,10 @@ export default function SignInViewModel(){
   /**
    * FORM
    */
-  const {register: signUpForm, handleSubmit: handleSignUp, formState: {errors: signUpError}} = useForm({
+  const {register: signUpForm, handleSubmit: handleSignUp, reset: resetSignUp, formState: {errors: signUpError}} = useForm({
     resolver: joiResolver(signUpSchema)
   });
-  const {register: signInForm, handleSubmit: handleSignIn, formState: {errors: signInError}} = useForm({
+  const {register: signInForm, handleSubmit: handleSignIn, reset: resetSignIn, formState: {errors: signInError}} = useForm({
     resolver: joiResolver(signInSchema)
   });
 
@@ -81,18 +87,37 @@ export default function SignInViewModel(){
 
     setWait(true)
 
-    const result = await signUp(data)
+    const result = await signUp(data, setWait, setPopup)
 
-    console.log(result)
+    if(result.status != 200){
+      // console.log(result)
+      setPopupTitle(result.data.message)
+      setPopupButtonMessage("Try Again")
+      return
+    }
+
+    setPopupTitle("Sign Up Success")
+    setPopupMessage("Please verify your email address")
+    setPopupLink(result.data.verify_link)
+    setPopupButtonMessage("Sign In")
   }
 
   async function submitSignIn(data){
     // data.email
     // data.password
 
-    // const result = await signIn(data)
+    setWait(true)
 
-    console.log(data)
+    const result = await signIn(data, setWait, setPopup)
+
+    if(result.status != 200){
+      setPopupTitle(result.data.message)
+      setPopupButtonMessage("Try Again")
+      return
+    }
+
+    
+
     dispatch(setIsLogin(true))
     navigate("/home")
 
@@ -105,9 +130,18 @@ export default function SignInViewModel(){
     signInError,
     handleSignUp,
     handleSignIn,
+    resetSignUp,
+    resetSignIn,
     submitSignUp,
     submitSignIn,
-    wait
+    wait,
+    setWait,
+    popup,
+    setPopup,
+    popupTitle,
+    popupLink,
+    popupMessage,
+    popupButtonMessage
   }
 }
 

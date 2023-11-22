@@ -12,7 +12,7 @@ import { useRef } from "react";
 export default function SignIn() {
   const navigate = useNavigate();
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const signup = useRef()
   signup.current = searchParams.get("signup") == "true" ? window.innerWidth / 2 : 0;
 

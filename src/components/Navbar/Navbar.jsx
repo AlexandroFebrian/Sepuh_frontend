@@ -63,7 +63,7 @@ export default function Navbar() {
         showFilter
         &&
         <div 
-          className={`fixed w-[100vw] h-[100vh] bg-black/50 z-20 animate__animated ${closeFilter ? "animate__fadeOut" : "animate__fadeIn"}`}
+          className={`fixed w-[100vw] h-[100vh] bg-black/50 z-20 animate__animated ${closeFilter ? "animate__fadeOut" : "animate__fadeIn"} animate__faster`}
           onClick={() => {close()}}
         >
         </div>
@@ -120,7 +120,7 @@ export default function Navbar() {
                 <PopoverTrigger className=" text-ghostwhite-50 font-semibold bg-indigo-300 w-[8.5rem] h-[2.5rem] rounded-md hover:bg-indigo-350 active:bg-indigo-400 transition-colors duration-300">
                   My Profile
                 </PopoverTrigger>
-                <PopoverContent className="mt-6 mr-7 bg-navyblue-800 rounded-lg border-0 ">
+                <PopoverContent className="mt-6 mr-7 bg-navyblue-800 rounded-lg border-0">
                   <div className='w-full h-fit bg-ghostwhite-50 rounded-md p-2'>
                     <div className='w-full flex justify-center'>
                       <Avatar bg="ghostwhite.400" />

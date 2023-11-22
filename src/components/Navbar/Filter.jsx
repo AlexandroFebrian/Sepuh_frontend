@@ -26,7 +26,7 @@ export default function Filter({setShowFilter, close, closeFilter}) {
 
   return (
     <>
-      <div className={`absolute top-10 w-full h-fit bg-ghostwhite-100 border border-navyblue-800 px-10 py-2 rounded-b animate__animated ${closeFilter ? "animate__fadeOutUp" : "animate__fadeInDown"}`}>
+      <div className={`absolute top-10 w-full h-fit bg-ghostwhite-100 border border-navyblue-800 px-10 py-2 rounded-b animate__animated ${closeFilter ? "animate__fadeOutUp" : "animate__fadeInDown"} animate__faster`}>
         <p className="text-2xl">Filters</p>
         
         <div className='flex'>

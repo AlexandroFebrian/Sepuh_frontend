@@ -16,26 +16,32 @@ export default function fetch(){
     }
   })
 
-  async function signIn(data){
+  async function signIn(data, setWait, setPopup){
     try {
-      client.post('users/login', data).then((res) => {
-        console.log(res)
+      return client.post('users/login', data).then((res) => {
+        setPopup(true)
+        return res
       }).catch((err) => {
-        console.log(err)
+        setPopup(true)
+        return err.response
       })
     } catch (error) {
+      setWait(false)
       alert("error")
     }
   }
 
-  async function signUp(data){
+  async function signUp(data, setWait, setPopup){
     try {
-      client.post('users/register', data).then((res) => {
-        console.log(res)
+      return client.post('users/register', data).then((res) => {
+        setPopup(true)
+        return res
       }).catch((err) => {
-        console.log(err)
+        setPopup(true)
+        return err.response
       })
     } catch (error) {
+      setWait(false)
       alert("error")
     }
   }

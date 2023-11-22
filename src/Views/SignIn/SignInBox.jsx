@@ -7,9 +7,11 @@ import {
   InputRightElement,
   Button,
   Checkbox,
-  InputLeftAddon
+  InputLeftAddon,
+  CircularProgress
 } from "@chakra-ui/react";
 import { FaLock, FaEnvelope, FaEye, FaEyeSlash } from "react-icons/fa6";
+import Popup from '../../components/Popup/Popup';
 
 export default function SignInBox({handleClick}) {
   const {
@@ -17,13 +19,38 @@ export default function SignInBox({handleClick}) {
     signInError,
     handleSignIn,
     submitSignIn,
+    wait,
+    setWait,
+    popup,
+    setPopup,
+    popupTitle,
+    popupMessage,
+    popupButtonMessage
   } = SignInViewModel()
 
   const [showPassSignIn, setShowPassSignIn] = useState(false);
   const handlePassSignIn = () => setShowPassSignIn(!showPassSignIn);
   return (
     <>
-      <div className="right w-1/2 h-screen flex justify-center items-center text-navyblue-800">
+      <div className="right w-1/2 h-screen flex justify-center items-center text-navyblue-800 relative">
+        {
+          wait
+          &&
+          <div 
+          className={`absolute w-[100%] h-[100%] bg-black/30 z-20 flex items-center justify-center animate__animated animate__fadeIn animate__faster`}>
+            {
+              popup
+              ?
+              <Popup setPopup={setPopup} setWait={setWait} popupTitle={popupTitle} popupMessage={popupMessage} popupButtonMessage={popupButtonMessage}/>
+              :
+              <CircularProgress 
+              isIndeterminate 
+              color='navyblue.800'
+              size={"7rem"}
+              />
+            }
+          </div>
+        }
         <div id="right" className=' w-4/6 h-fit'>
 
           {/* RIGHT BOX */}
@@ -108,7 +135,7 @@ export default function SignInBox({handleClick}) {
           
           {/* DONT HAVE ACCOUNT */}
           <div className='w-full flex bg-white mt-10 border rounded-xl shadow-lg py-5 justify-center'>
-            <p>Don't have account? <span className=' underline hover:text-indigo-300 cursor-pointer' onClick={handleClick}>Sign Up</span></p>
+            <p>Don't have account? <span className=' underline text-indigo-300 hover:text-indigo-400 cursor-pointer' onClick={handleClick}>Sign Up</span></p>
           </div>
         </div>
         

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import {
   Input,
@@ -14,14 +14,23 @@ import {
 import SignInViewModel from './SignInViewModel';
 import { Link } from 'react-router-dom';
 import { FaLock, FaEnvelope, FaUser, FaEye, FaEyeSlash } from "react-icons/fa6";
+import Popup from '../../components/Popup/Popup';
 
 export default function SignUpBox({handleClick}) {
   const {
     signUpForm,
     signUpError,
     handleSignUp,
+    resetSignUp,
     submitSignUp,
-    wait
+    wait,
+    setWait,
+    popup,
+    setPopup,
+    popupTitle,
+    popupLink,
+    popupMessage,
+    popupButtonMessage
   } = SignInViewModel()
 
   const [showPassSignUp, setShowPassSignUp] = useState(false);
@@ -37,14 +46,22 @@ export default function SignUpBox({handleClick}) {
         {
           wait
           &&
-          <div 
-          className={`absolute w-[100%] h-[100%] bg-black/30 z-20 flex items-center justify-center animate__animated animate__fadeIn`}>
-            <CircularProgress 
-            isIndeterminate 
-            color='navyblue.800'
-            size={"7rem"}
-            />
-          </div>
+          <>
+            <div className={`absolute w-[100%] h-[100%] bg-black/30 z-20 animate__animated animate__fadeIn animate__faster`} />
+            <div className='absolute w-[100%] h-[100%] z-30 flex items-center justify-center'>
+              {
+                popup
+                ?
+                <Popup setPopup={setPopup} setWait={setWait} popupTitle={popupTitle} popupMessage={popupMessage} popupButtonMessage={popupButtonMessage} resetSignUp={resetSignUp} popupLink={popupLink} handleClick={handleClick}/>
+                :
+                <CircularProgress 
+                isIndeterminate 
+                color='navyblue.800'
+                size={"7rem"}
+                />
+              }
+            </div>
+          </>
         }
         <div id="left" className=' w-5/6 h-fit'>
           {/* LEFT BOX */}
@@ -207,7 +224,7 @@ export default function SignUpBox({handleClick}) {
                 <div className="flex w-full justify-center mb-2">
                   <div>
                     <Checkbox {...signUpForm("terms")}>
-                      I agree to the <Link to={"#"} className=' underline hover:text-indigo-300'>Terms and Conditions</Link>.
+                      I agree to the <Link to={"#"} className=' underline text-indigo-300 hover:text-indigo-400'>Terms and Conditions</Link>.
                       <span className="text-red-500">*</span>
                     </Checkbox>
                     <p className='text-center'>{signUpError?.terms?.message}</p>
@@ -233,7 +250,7 @@ export default function SignUpBox({handleClick}) {
           
           {/* HAVE ACCOUNT */}
           <div className='w-full flex bg-white mt-10 border rounded-xl py-5 justify-center shadow-lg'>
-            <p>Already have account? <span className=' underline hover:text-indigo-300 cursor-pointer' onClick={handleClick}>Sign In</span></p>
+            <p>Already have account? <span className=' underline text-indigo-300 hover:text-indigo-400 cursor-pointer' onClick={handleClick}>Sign In</span></p>
           </div>
           
         </div>  
