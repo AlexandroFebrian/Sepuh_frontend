@@ -16,12 +16,28 @@ export default function fetch(){
     }
   })
 
-  async function signIn(){
-
+  async function signIn(data){
+    try {
+      client.post('users/login', data).then((res) => {
+        console.log(res)
+      }).catch((err) => {
+        console.log(err)
+      })
+    } catch (error) {
+      alert("error")
+    }
   }
 
-  async function signUp(){
-
+  async function signUp(data){
+    try {
+      client.post('users/register', data).then((res) => {
+        console.log(res)
+      }).catch((err) => {
+        console.log(err)
+      })
+    } catch (error) {
+      alert("error")
+    }
   }
 
   async function checkToken(){

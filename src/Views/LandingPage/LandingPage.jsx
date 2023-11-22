@@ -9,7 +9,7 @@ export default function LandingPage() {
   return (
     <>
       <Carousel photos={photos_url} />
-      <div className='px-16 my-16 text-navyblue-800'>
+      <div className='px-16 my-16 text-navyblue-800 custom-scrollbar'>
         <Categories />
         <hr className=' border-black' />
         <About />

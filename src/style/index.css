@@ -1,11 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Mooli&family=Roboto&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 .custom-scrollbar::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 10px;
+  height: 10px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
@@ -14,7 +13,6 @@
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: #888;
-  border-radius: 7px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {

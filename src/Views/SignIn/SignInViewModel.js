@@ -5,12 +5,15 @@ import { useNavigate } from "react-router-dom";
 import fetch from "../../Client/fetch";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi"
+import { useState } from "react";
 
 export default function SignInViewModel(){
   const { signIn, signUp } = fetch()
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  const [wait, setWait] = useState(false)
 
   /**
    * SCHEMA
@@ -23,12 +26,16 @@ export default function SignInViewModel(){
     name: Joi.string().required().messages({
       "string.empty": "Name can not be empty"
     }),
-    password: Joi.string().required().messages({
-      "string.empty": "Password can not be empty"
+    password: Joi.string().min(8).max(16).required().messages({
+      "string.empty": "Password can not be empty",
+      "string.min": "Password must be at least 8 characters",
+      "string.max": "Password must be at most 16 characters"
     }),
-    confirm: Joi.string().required().valid(Joi.ref("password")).messages({
+    confirm: Joi.string().min(8).max(16).required().valid(Joi.ref("password")).messages({
       "string.empty": "Confirm Password can not be empty",
-      "any.only": "Confirm Password does not match"
+      "any.only": "Confirm Password does not match",
+      "string.min": "Confirm Password must be at least 8 characters",
+      "string.max": "Confirm Password must be at most 16 characters"
     }),
     role: Joi.string().valid("Freelancer", "Company").required().messages({
       "string.empty": "Role can not be empty",
@@ -44,8 +51,10 @@ export default function SignInViewModel(){
       "string.empty": "Username can not be empty",
       "string.email": "Invalid email format"
     }),
-    password: Joi.string().required().messages({
-      "string.empty": "Password can not be empty"
+    password: Joi.string().min(8).max(16).required().messages({
+      "string.empty": "Password can not be empty",
+      "string.min": "Password must be at least 8 characters",
+      "string.max": "Password must be at most 16 characters"
     }),
   })
 
@@ -67,16 +76,21 @@ export default function SignInViewModel(){
     // data.name
     // data.password
     // data.confirm
+    // data.role
+    // data.terms
+
+    setWait(true)
+
     const result = await signUp(data)
 
-    console.log(data)
+    console.log(result)
   }
 
   async function submitSignIn(data){
     // data.email
     // data.password
 
-    const result = await signIn(data)
+    // const result = await signIn(data)
 
     console.log(data)
     dispatch(setIsLogin(true))
@@ -93,6 +107,7 @@ export default function SignInViewModel(){
     handleSignIn,
     submitSignUp,
     submitSignIn,
+    wait
   }
 }
 

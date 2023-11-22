@@ -8,7 +8,8 @@ import {
   Checkbox,
   InputLeftAddon,
   Select,
-  Avatar
+  Avatar,
+  CircularProgress
 } from "@chakra-ui/react";
 import SignInViewModel from './SignInViewModel';
 import { Link } from 'react-router-dom';
@@ -20,6 +21,7 @@ export default function SignUpBox({handleClick}) {
     signUpError,
     handleSignUp,
     submitSignUp,
+    wait
   } = SignInViewModel()
 
   const [showPassSignUp, setShowPassSignUp] = useState(false);
@@ -31,7 +33,19 @@ export default function SignUpBox({handleClick}) {
   return (
     <>
       
-      <div className="left w-1/2 h-screen flex justify-center items-center text-navyblue-800">
+      <div className="left w-1/2 h-screen flex justify-center items-center text-navyblue-800 relative">
+        {
+          wait
+          &&
+          <div 
+          className={`absolute w-[100%] h-[100%] bg-black/30 z-20 flex items-center justify-center animate__animated animate__fadeIn`}>
+            <CircularProgress 
+            isIndeterminate 
+            color='navyblue.800'
+            size={"7rem"}
+            />
+          </div>
+        }
         <div id="left" className=' w-5/6 h-fit'>
           {/* LEFT BOX */}
           <div className=" w-full h-fit border p-10 shadow-lg rounded-xl bg-white">
