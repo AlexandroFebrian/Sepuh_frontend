@@ -25,6 +25,7 @@ export default function SignInBox({handleClick}) {
     setPopup,
     popupTitle,
     popupMessage,
+    popupType,
     popupButtonMessage
   } = SignInViewModel()
 
@@ -33,24 +34,7 @@ export default function SignInBox({handleClick}) {
   return (
     <>
       <div className="right w-1/2 h-screen flex justify-center items-center text-navyblue-800 relative">
-        {
-          wait
-          &&
-          <div 
-          className={`absolute w-[100%] h-[100%] bg-black/30 z-20 flex items-center justify-center animate__animated animate__fadeIn animate__faster`}>
-            {
-              popup
-              ?
-              <Popup setPopup={setPopup} setWait={setWait} popupTitle={popupTitle} popupMessage={popupMessage} popupButtonMessage={popupButtonMessage}/>
-              :
-              <CircularProgress 
-              isIndeterminate 
-              color='navyblue.800'
-              size={"7rem"}
-              />
-            }
-          </div>
-        }
+        <Popup wait={wait} popup={popup} setPopup={setPopup} setWait={setWait} popupType={popupType} popupTitle={popupTitle} popupMessage={popupMessage} popupButtonMessage={popupButtonMessage} handleClick={handleClick}/>
         <div id="right" className=' w-4/6 h-fit'>
 
           {/* RIGHT BOX */}

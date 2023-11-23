@@ -17,9 +17,10 @@ export default function SignInViewModel(){
   const [popup, setPopup] = useState(false)
   const [popupTitle, setPopupTitle] = useState("")
   const [popupMessage, setPopupMessage] = useState("")
-  const [popupLink, setPopupLink] = useState("")
+  // const [popupLink, setPopupLink] = useState("")
+  const [popupSubMessage, setPopupSubMessage] = useState("")
   const [popupButtonMessage, setPopupButtonMessage] = useState("")
-  const [popupType, setPopupType] = useState(null)
+  const [popupType, setPopupType] = useState(false)
 
   /**
    * SCHEMA
@@ -99,13 +100,15 @@ export default function SignInViewModel(){
       // console.log(result)
       setPopupTitle(result.data.message)
       setPopupButtonMessage("Try Again")
+      setPopupType(false)
       return
     }
 
     setPopupTitle("Sign Up Success")
     setPopupMessage("Please verify your email address")
-    setPopupLink(result.data.verify_link)
+    setPopupSubMessage("We have sent an email to your email address")
     setPopupButtonMessage("Sign In")
+    setPopupType(true)
   }
 
   async function submitSignIn(data){
@@ -119,6 +122,7 @@ export default function SignInViewModel(){
     if(result == undefined){
       setPopupTitle("Network Error!")
       setPopupButtonMessage("Try Again")
+      setPopupType(false)
       return
     }
 
@@ -151,7 +155,8 @@ export default function SignInViewModel(){
     popup,
     setPopup,
     popupTitle,
-    popupLink,
+    popupSubMessage,
+    popupType,
     popupMessage,
     popupButtonMessage
   }

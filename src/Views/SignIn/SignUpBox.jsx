@@ -8,8 +8,6 @@ import {
   Checkbox,
   InputLeftAddon,
   Select,
-  Avatar,
-  CircularProgress
 } from "@chakra-ui/react";
 import SignInViewModel from './SignInViewModel';
 import { Link } from 'react-router-dom';
@@ -28,8 +26,9 @@ export default function SignUpBox({handleClick}) {
     popup,
     setPopup,
     popupTitle,
-    popupLink,
+    popupType,
     popupMessage,
+    popupSubMessage,
     popupButtonMessage
   } = SignInViewModel()
 
@@ -43,26 +42,7 @@ export default function SignUpBox({handleClick}) {
     <>
       
       <div className="left w-1/2 h-screen flex justify-center items-center text-navyblue-800 relative">
-        {
-          wait
-          &&
-          <>
-            <div className={`absolute w-[100%] h-[100%] bg-black/30 z-20 animate__animated animate__fadeIn animate__faster`} />
-            <div className='absolute w-[100%] h-[100%] z-30 flex items-center justify-center'>
-              {
-                popup
-                ?
-                <Popup setPopup={setPopup} setWait={setWait} popupTitle={popupTitle} popupMessage={popupMessage} popupButtonMessage={popupButtonMessage} resetSignUp={resetSignUp} popupLink={popupLink} handleClick={handleClick}/>
-                :
-                <CircularProgress 
-                isIndeterminate 
-                color='navyblue.800'
-                size={"7rem"}
-                />
-              }
-            </div>
-          </>
-        }
+        <Popup wait={wait} popup={popup} setPopup={setPopup} setWait={setWait} popupType={popupType} popupTitle={popupTitle} popupMessage={popupMessage} popupButtonMessage={popupButtonMessage} resetSignUp={resetSignUp} popupSubMessage={popupSubMessage} handleClick={handleClick}/>
         <div id="left" className=' w-5/6 h-fit'>
           {/* LEFT BOX */}
           <div className=" w-full h-fit border p-10 shadow-lg rounded-xl bg-white">
