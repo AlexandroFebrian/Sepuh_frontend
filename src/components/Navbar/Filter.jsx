@@ -26,11 +26,11 @@ export default function Filter({setShowFilter, close, closeFilter}) {
 
   return (
     <>
-      <div className={`absolute top-10 w-full h-fit bg-ghostwhite-100 border border-navyblue-800 px-10 py-2 rounded-b animate__animated ${closeFilter ? "animate__fadeOutUp" : "animate__fadeInDown"} animate__faster`}>
+      <div className={`absolute top-9 w-full h-fit bg-ghostwhite-100 border border-navyblue-800 px-10 py-5 rounded-b animate__animated ${closeFilter ? "animate__fadeOutUp" : "animate__fadeInDown"} animate__faster`}>
         <p className="text-2xl">Filters</p>
         
         <div className='flex'>
-          <div className='w-[80%]'>
+          <div className='w-[90%]'>
             <p className='mt-3'>Sort by</p>
             <div className='w-full flex flex-wrap'>
               {
@@ -38,7 +38,7 @@ export default function Filter({setShowFilter, close, closeFilter}) {
                   return (
                     <button 
                       key={i} 
-                      className={`bg-ghostwhite-50 hover:bg-ghostwhite-100 mt-1 py-1 px-3 text-sm ${sort == i && "border border-navyblue-800"} rounded-sm me-2`}
+                      className={`bg-ghostwhite-50 hover:bg-ghostwhite-100 mt-3 py-1 px-3 text-sm ${sort == i && "border border-navyblue-800"} rounded-sm me-3`}
                       onClick={() => {setSort(i)}}  
                     >
                       {item}
@@ -55,7 +55,7 @@ export default function Filter({setShowFilter, close, closeFilter}) {
                   return (
                     <button 
                       key={i} 
-                      className={`bg-ghostwhite-50 hover:bg-ghostwhite-100 mt-1 py-1 px-3 text-sm ${order == i && "border border-navyblue-800"} rounded-sm me-2`}
+                      className={`bg-ghostwhite-50 hover:bg-ghostwhite-100 mt-3 py-1 px-3 text-sm ${order == i && "border border-navyblue-800"} rounded-sm me-3`}
                       onClick={() => {setOrder(i)}}  
                     >
                       {item}
@@ -72,7 +72,7 @@ export default function Filter({setShowFilter, close, closeFilter}) {
                   return (
                     <button 
                       key={i} 
-                      className={`bg-ghostwhite-50 hover:bg-ghostwhite-100 mt-1 py-1 px-3 text-sm ${date == i && "border border-navyblue-800"} rounded-sm me-2`}
+                      className={`bg-ghostwhite-50 hover:bg-ghostwhite-100 mt-3 py-1 px-3 text-sm ${date == i && "border border-navyblue-800"} rounded-sm me-3`}
                       onClick={() => {setDate(i)}}  
                     >
                       {item}
@@ -84,7 +84,7 @@ export default function Filter({setShowFilter, close, closeFilter}) {
 
           </div>
 
-          <div className='w-[20%] relative'>
+          <div className='w-[10%] relative'>
             
           </div>
 

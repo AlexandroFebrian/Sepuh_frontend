@@ -80,119 +80,135 @@ export default function Navbar() {
             />
           </Link>
         </div>
-        <div className="flex items-center w-1/3 relative">
-          <InputGroup background={"ghostwhite.100"} rounded={"md"} className=" border-b-0 border-navyblue-800">
-            <InputLeftElement>
-              <FaMagnifyingGlass />
-            </InputLeftElement>
+        
+        <div className="flex items-center justify-between w-10/12 relative ps-6">
+          <div className="flex items-center w-7/12 relative me-6">
+            <InputGroup background={"ghostwhite.100"} rounded={"md"} className=" border-b-0 border-navyblue-800">
+              <InputLeftElement>
+                <FaMagnifyingGlass />
+              </InputLeftElement>
 
-            <Input placeholder="Search"></Input>
+              <Input placeholder="Search"></Input>
 
-            <InputRightElement>
-              <FaSliders 
-                className=" cursor-pointer"
-                onClick={() => {open()}}
-              />
-            </InputRightElement>
-          </InputGroup>
-          {
-            showFilter
-            &&
-            <Filter setShowFilter={setShowFilter} closeFilter={closeFilter} close={close} />
-          }
-        </div>
-        <div className="flex items-center">
-          {isLogin ? (
-            <>
-              <Button
-                color="ghostwhite.50"
-                _hover={{ bg: "whiteAlpha.200" }}
-                _active={{ bg: "whiteAlpha.300" }}
-                width="8.5rem"
-                className=" me-6"
-                variant="ghost"
-                transitionDuration={"300ms"}
-              >
-                Notifications
-              </Button>
-              
-              <Popover>
-                <PopoverTrigger className=" text-ghostwhite-50 font-semibold bg-indigo-300 w-[8.5rem] h-[2.5rem] rounded-md hover:bg-indigo-350 active:bg-indigo-400 transition-colors duration-300">
-                  My Profile
-                </PopoverTrigger>
-                <PopoverContent className="mt-6 mr-7 bg-navyblue-800 rounded-lg border-0">
-                  <div className='w-full h-fit bg-ghostwhite-50 rounded-md p-2'>
-                    <div className='w-full flex justify-center'>
-                      <Avatar bg="ghostwhite.400" />
+              <InputRightElement>
+                <FaSliders 
+                  className=" cursor-pointer"
+                  onClick={() => {open()}}
+                />
+              </InputRightElement>
+            </InputGroup>
+            {
+              showFilter
+              &&
+              <Filter setShowFilter={setShowFilter} closeFilter={closeFilter} close={close} />
+            }
+          </div>
+          <div className='w-5/12 flex items-center justify-end'>
+            {isLogin ? (
+              <>
+                <Button
+                  color="ghostwhite.50"
+                  _hover={{ bg: "whiteAlpha.200" }}
+                  _active={{ bg: "whiteAlpha.300" }}
+                  width="8.5rem"
+                  className=" me-6"
+                  variant="ghost"
+                  transitionDuration={"300ms"}
+                >
+                  My Activity
+                </Button>
+
+                <Button
+                  color="ghostwhite.50"
+                  _hover={{ bg: "whiteAlpha.200" }}
+                  _active={{ bg: "whiteAlpha.300" }}
+                  width="8.5rem"
+                  className=" me-6"
+                  variant="ghost"
+                  transitionDuration={"300ms"}
+                >
+                  Notifications
+                </Button>
+                
+                <Popover>
+                  <PopoverTrigger className=" text-ghostwhite-50 font-semibold bg-indigo-300 w-[8.5rem] h-[2.5rem] rounded-md hover:bg-indigo-350 active:bg-indigo-400 transition-colors duration-300">
+                    My Profile
+                  </PopoverTrigger>
+                  <PopoverContent className="mt-6 mr-7 bg-navyblue-800 rounded-lg border-0">
+                    <div className='w-full h-fit bg-ghostwhite-50 rounded-md p-2'>
+                      <div className='w-full flex justify-center'>
+                        <Avatar bg="ghostwhite.400" />
+                      </div>
+                      <h1 className='text-center font-semibold mt-1'>INI DISPLAY NAME</h1>
                     </div>
-                    <h1 className='text-center font-semibold mt-1'>INI DISPLAY NAME</h1>
-                  </div>
-                  <Link to={""}>
+                    <Link to={""}>
+                      <Button
+                        color="ghostwhite.50"
+                        borderColor="indigo.300"
+                        borderWidth="2px"
+                        _hover={{ bg: "whiteAlpha.200" }}
+                        _active={{ bg: "whiteAlpha.300" }}
+                        variant="outline"
+                        width="100%"
+                        height={"2rem"}
+                        transitionDuration={"300ms"}
+                        marginTop={"0.5rem"}
+                        rounded={"3xl"}
+                      >
+                        View Profile
+                      </Button>
+                    </Link>
                     <Button
                       color="ghostwhite.50"
-                      borderColor="indigo.300"
-                      borderWidth="2px"
-                      _hover={{ bg: "whiteAlpha.200" }}
-                      _active={{ bg: "whiteAlpha.300" }}
-                      variant="outline"
+                      bg="red.500"
+                      _hover={{ bg: "red.600" }}
+                      _active={{ bg: "red.700" }}
                       width="100%"
                       height={"2rem"}
                       transitionDuration={"300ms"}
                       marginTop={"0.5rem"}
                       rounded={"3xl"}
+                      onClick={() => {logout()}}
                     >
-                      View Profile
+                      Logout
                     </Button>
-                  </Link>
+                  </PopoverContent>
+                </Popover>
+
+              </>
+            ) : (
+              <>
+                <Link to={"/signin?signup=true"} className='me-6'>
                   <Button
                     color="ghostwhite.50"
-                    bg="red.500"
-                    _hover={{ bg: "red.600" }}
-                    _active={{ bg: "red.700" }}
-                    width="100%"
-                    height={"2rem"}
+                    bg="indigo.300"
+                    _hover={{ bg: "indigo.350" }}
+                    _active={{ bg: "indigo.400" }}
+                    width="8.5rem"
                     transitionDuration={"300ms"}
-                    marginTop={"0.5rem"}
-                    rounded={"3xl"}
-                    onClick={() => {logout()}}
                   >
-                    Logout
+                    Sign Up
                   </Button>
-                </PopoverContent>
-              </Popover>
+                </Link>
+                <Link to={"/signin"}>
+                  <Button
+                    color="ghostwhite.50"
+                    borderColor="indigo.300"
+                    borderWidth="2px"
+                    _hover={{ bg: "whiteAlpha.200" }}
+                    _active={{ bg: "whiteAlpha.300" }}
+                    variant="outline"
+                    width="8.5rem"
+                    transitionDuration={"300ms"}
+                  >
+                    Sign In
+                  </Button>
+                </Link>
+                
+              </>
+            )}
 
-            </>
-          ) : (
-            <>
-              <Link to={"/signin?signup=true"} className='me-6'>
-                <Button
-                  color="ghostwhite.50"
-                  bg="indigo.300"
-                  _hover={{ bg: "indigo.350" }}
-                  _active={{ bg: "indigo.400" }}
-                  width="8.5rem"
-                  transitionDuration={"300ms"}
-                >
-                  Sign Up
-                </Button>
-              </Link>
-              <Link to={"/signin"}>
-                <Button
-                  color="ghostwhite.50"
-                  borderColor="indigo.300"
-                  borderWidth="2px"
-                  _hover={{ bg: "whiteAlpha.200" }}
-                  _active={{ bg: "whiteAlpha.300" }}
-                  variant="outline"
-                  width="8.5rem"
-                  transitionDuration={"300ms"}
-                >
-                  Sign In
-                </Button>
-              </Link>
-              
-            </>
-          )}
+          </div>
         </div>
       </nav>
     </>

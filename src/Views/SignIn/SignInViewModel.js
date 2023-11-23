@@ -89,6 +89,12 @@ export default function SignInViewModel(){
 
     const result = await signUp(data, setWait, setPopup)
 
+    if(result == undefined){
+      setPopupTitle("Network Error!")
+      setPopupButtonMessage("Try Again")
+      return
+    }
+
     if(result.status != 200){
       // console.log(result)
       setPopupTitle(result.data.message)
@@ -109,6 +115,12 @@ export default function SignInViewModel(){
     setWait(true)
 
     const result = await signIn(data, setWait, setPopup)
+
+    if(result == undefined){
+      setPopupTitle("Network Error!")
+      setPopupButtonMessage("Try Again")
+      return
+    }
 
     if(result.status != 200){
       setPopupTitle(result.data.message)
