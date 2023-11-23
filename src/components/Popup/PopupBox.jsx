@@ -1,7 +1,7 @@
 import { Button } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 
-export default function PopupBox({setPopup, setWait, popupType, popupTitle, popupMessage, popupButtonMessage, popupLink, popupSubMessage, resetSignUp, handleClick, setClose}) {
+export default function PopupBox({setPopup, setWait, popupType, popupTitle, popupMessage, popupButtonMessage, popupLink, popupSubMessage, resetForm, handleClick, setClose}) {
   const [closeBox, setCloseBox] = useState(false)
   
   function close(){
@@ -18,7 +18,7 @@ export default function PopupBox({setPopup, setWait, popupType, popupTitle, popu
     }, 500)
     
     if(popupButtonMessage == "Sign In"){
-      resetSignUp()
+      resetForm()
       handleClick()
     }
     if(handleClick && popupButtonMessage != "Try Again"){

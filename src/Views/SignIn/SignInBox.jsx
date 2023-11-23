@@ -34,7 +34,18 @@ export default function SignInBox({handleClick}) {
   return (
     <>
       <div className="right w-1/2 h-screen flex justify-center items-center text-navyblue-800 relative">
-        <Popup wait={wait} popup={popup} setPopup={setPopup} setWait={setWait} popupType={popupType} popupTitle={popupTitle} popupMessage={popupMessage} popupButtonMessage={popupButtonMessage} handleClick={handleClick}/>
+        <Popup 
+          wait={wait} 
+          popup={popup} 
+          setPopup={setPopup} 
+          setWait={setWait} 
+          popupType={popupType} 
+          popupTitle={popupTitle} 
+          popupMessage={popupMessage} 
+          popupButtonMessage={popupButtonMessage} 
+          handleClick={handleClick}
+        />
+        
         <div id="right" className=' w-4/6 h-fit'>
 
           {/* RIGHT BOX */}
