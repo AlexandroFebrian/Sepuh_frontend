@@ -68,7 +68,7 @@ export default function Navbar() {
         </div>
       }
 
-      <nav className="w-full h-20 bg-navyblue-800 flex justify-between px-7 py-4 fixed top-0 z-20">
+      <nav className="w-full h-20 bg-navyblue-800 flex justify-between px-7 py-4 fixed top-0 z-[60]">
         <div>
           <Link to={"/"}>
             <img
