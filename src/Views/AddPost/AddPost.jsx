@@ -7,8 +7,11 @@ import Typography from '@mui/joy/Typography';
 import InputFileButton from '../../components/InputFileButton/InputFileButton';
 import { FaPaperclip } from 'react-icons/fa6';
 import { useSelector } from 'react-redux';
+import fetch from '../../Client/fetch';
 
 export default function AddPost() {
+  const { checkToken } = fetch();
+
   const user = useSelector((state) => state.user.userDetail)
 
   const [text, setText] = useState('');
@@ -28,6 +31,7 @@ export default function AddPost() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    checkToken();
   }, [])
 
   return (

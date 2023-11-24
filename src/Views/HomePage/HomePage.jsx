@@ -4,9 +4,17 @@ import MenuGuest from "../../components/SidebarMenu/MenuGuest/MenuGuest";
 import MenuLogin from "../../components/SidebarMenu/MenuLogin/MenuLogin";
 import { Combobox } from "../../components/ui/Combobox";
 import NowHiring from "../../components/NowHiring/NowHiring";
+import { useEffect } from "react";
+import fetch from "../../Client/fetch";
 
 export default function HomePage() {
+  const { checkToken } = fetch();
+
   const isLogin = useSelector((state) => state.user.isLogin);
+
+  useEffect(() => {
+    checkToken();
+  }, [])
 
   return (
     <>
