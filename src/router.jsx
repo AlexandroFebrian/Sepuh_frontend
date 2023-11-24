@@ -5,6 +5,9 @@ import HomePage from "./Views/HomePage/HomePage";
 import MainLayout from "./Views/Layout/MainLayout";
 import AddPost from "./Views/AddPost/AddPost";
 
+// ADMIN
+import AdminLogin from "./Admin/AdminLogin";
+
 const Router = createBrowserRouter([
   {
     path: "/signin",
@@ -28,6 +31,11 @@ const Router = createBrowserRouter([
       }
     ]
   },
+  {
+    path: "/admin",
+    element: <AdminLogin />,
+  },
+
   // {
   //   path:   "*",
   //   element: <NotFound />,
