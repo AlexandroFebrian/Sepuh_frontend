@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MenuLogin from "../../components/SidebarMenu/MenuLogin/MenuLogin";
 import NowHiring from '../../components/NowHiring/NowHiring'
 import { Avatar } from '@chakra-ui/react';
@@ -6,8 +6,11 @@ import Textarea from '@mui/joy/Textarea';
 import Typography from '@mui/joy/Typography';
 import InputFileButton from '../../components/InputFileButton/InputFileButton';
 import { FaPaperclip } from 'react-icons/fa6';
+import { useSelector } from 'react-redux';
 
 export default function AddPost() {
+  const user = useSelector((state) => state.user.userDetail)
+
   const [text, setText] = useState('');
   const [file, setFile] = useState([]);
   const [imageSrcs, setImageSrcs] = useState([]);
@@ -22,6 +25,10 @@ export default function AddPost() {
       setText(inputText);
     }
   };
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [])
 
   return (
     <>
@@ -38,7 +45,7 @@ export default function AddPost() {
               <div className='w-full flex items-center'>
                 <Avatar bg="ghostwhite.400" size={"lg"}/>
                 <div className=' ml-5'>
-                  <h1 className='font-semibold text-xl'>Ini nama</h1>
+                  <h1 className='font-semibold text-xl'>{user.name}</h1>
                   <h2>Ini Headline</h2>
                 </div>
 

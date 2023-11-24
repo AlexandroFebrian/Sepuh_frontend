@@ -74,9 +74,32 @@ export default function fetch(){
     }
   }
 
+  async function getCategory(setCategory){
+    try {
+      return client.get('category').then((res) => {
+        setCategory(res.data)
+      }).catch((err) => {
+        alert("error fetching category")
+        navigate("/")
+      })
+    } catch (error) {
+      alert("error")
+      navigate("/")
+    }
+  }
+
+  async function getCompanyPost(setCompanyPost){
+
+  }
+
+  async function getFreelancerPost(setFreelancerPost){
+    
+  }
+
   return {
     signIn,
     signUp,
     checkToken,
+    getCategory,
   }
 }

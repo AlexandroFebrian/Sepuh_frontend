@@ -7,7 +7,7 @@ export default function InputFileButton({className, children, file, setFile, ima
     setFile([...file, ...files]);
 
     if(!showImage) return;
-    
+
     // Read and display images
     const imagePromises = Array.from(files).map(file => {
       return new Promise((resolve) => {
@@ -28,7 +28,7 @@ export default function InputFileButton({className, children, file, setFile, ima
     <>
       <div className={`w-10 h-10 ${className}`}>
         <label htmlFor="coba" >
-          <div className={`w-10 h-10 p-[0.6rem] bg-navyblue-800 hover:bg-navyblue-700 transition-colors cursor-pointer rounded-full flex justify-center items-center ${className}`}>
+          <div className={`w-10 h-10 p-[0.6rem] bg-navyblue-800 hover:bg-navyblue-700 transition-colors duration-300 cursor-pointer rounded-full flex justify-center items-center ${className}`}>
             {children}
           </div>
         </label>

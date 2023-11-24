@@ -9,6 +9,7 @@ export default function MainLayout() {
 
   useEffect(() => {
     checkToken()
+    
   }, [])
 
   return (
