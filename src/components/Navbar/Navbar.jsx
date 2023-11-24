@@ -19,15 +19,17 @@ import { FaMagnifyingGlass, FaFilter } from "react-icons/fa6";
 import { set } from "react-hook-form";
 import Filter from './Filter';
 import { useEffect } from 'react';
+
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { setIsLogin } from '../../redux/UserSlice';
+import { setIsLogin, setUserDetail } from '../../redux/UserSlice';
 
 
 export default function Navbar() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const isLogin = useSelector((state) => state.user.isLogin)
+  const user = useSelector((state) => state.user.userDetail)
 
   const [showFilter, setShowFilter] = useState(false);
   const [closeFilter, setCloseFilter] = useState(false);
@@ -53,6 +55,8 @@ export default function Navbar() {
 
   function logout(){
     dispatch(setIsLogin(false))
+    dispatch(setUserDetail({}))
+    localStorage.removeItem("token")
     navigate("/")
   }
 
@@ -138,7 +142,7 @@ export default function Navbar() {
                       <div className='w-full flex justify-center'>
                         <Avatar bg="ghostwhite.400" />
                       </div>
-                      <h1 className='text-center font-semibold mt-1'>INI DISPLAY NAME</h1>
+                      <h1 className='text-center font-semibold mt-1'>{user.name}</h1>
                     </div>
                     <Link to={""}>
                       <Button

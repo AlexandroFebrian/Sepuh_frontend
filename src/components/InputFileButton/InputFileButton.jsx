@@ -1,11 +1,13 @@
 import * as React from 'react';
 
-export default function InputFileButton({className, children, file, setFile, imageSrcs, setImageSrcs, multiple}) {
+export default function InputFileButton({className, children, file, setFile, imageSrcs, setImageSrcs, multiple, showImage}) {
 
   const handleFileChange = (event) => {
     const files = event.target.files;
     setFile([...file, ...files]);
 
+    if(!showImage) return;
+    
     // Read and display images
     const imagePromises = Array.from(files).map(file => {
       return new Promise((resolve) => {

@@ -1,6 +1,14 @@
 import axios from 'axios';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { setIsLogin, setUserDetail } from '../redux/UserSlice';
+import { useDispatch } from 'react-redux';
 
 export default function fetch(){
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const dispatch = useDispatch()
+
   const baseURL = import.meta.env.VITE_BACKEND_URL
   const client = axios.create({
     baseURL,
@@ -48,7 +56,22 @@ export default function fetch(){
   }
 
   async function checkToken(){
-
+    const token = localStorage.getItem('token')
+    
+    try {
+      return client.post('cekToken', {token: token}).then((res) => {
+        dispatch(setIsLogin(true))
+        dispatch(setUserDetail(res.data.data))
+      }).catch((err) => {
+        if(location.pathname == "/" || location.pathname == "/home"){
+        }else{
+          navigate("/")
+        }
+      })
+    } catch (error) {
+      alert("error")
+      navigate("/")
+    }
   }
 
   return {

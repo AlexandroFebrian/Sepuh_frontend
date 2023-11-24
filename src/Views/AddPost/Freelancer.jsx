@@ -12,10 +12,6 @@ export default function Freelancer() {
   const [file, setFile] = useState([]);
   const [imageSrcs, setImageSrcs] = useState([]);
 
-  useEffect(() => {
-    console.log(file)
-  }, [file])
-
   const handleChange = (event) => {
     const inputText = event.target.value;
     // Remove extra spaces and count words
@@ -58,7 +54,7 @@ export default function Freelancer() {
       />
       
       <div className=' mt-5'>
-        <InputFileButton file={file} setFile={setFile} imageSrcs={imageSrcs} setImageSrcs={setImageSrcs} multiple={true} >
+        <InputFileButton file={file} setFile={setFile} imageSrcs={imageSrcs} setImageSrcs={setImageSrcs} multiple={true} showImage={true} >
           <FaPaperclip className='text-ghostwhite-50 w-full h-full -rotate-[44deg]' />
         </InputFileButton>
       </div>
