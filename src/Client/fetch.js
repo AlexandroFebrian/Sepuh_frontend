@@ -35,6 +35,7 @@ export default function fetch(){
     try {
       return client.post('users/register', data).then((res) => {
         setPopup(true)
+        console.log(res)
         return res
       }).catch((err) => {
         setPopup(true)

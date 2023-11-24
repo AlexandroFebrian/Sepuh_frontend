@@ -88,17 +88,17 @@ export default function SignInViewModel(){
 
     setWait(true)
 
-    const result = await signUp(data, setWait, setPopup)
+    const response = await signUp(data, setWait, setPopup)
 
-    if(result == undefined){
+    if(response == undefined){
       setPopupTitle("Network Error!")
       setPopupButtonMessage("Try Again")
       return
     }
 
-    if(result.status != 200){
-      // console.log(result)
-      setPopupTitle(result.data.message)
+    if(response.status.toString()[0] != 2){
+      // console.log(response)
+      setPopupTitle(response.data.message)
       setPopupButtonMessage("Try Again")
       setPopupType(false)
       return
@@ -117,23 +117,22 @@ export default function SignInViewModel(){
 
     setWait(true)
 
-    const result = await signIn(data, setWait, setPopup)
+    const response = await signIn(data, setWait, setPopup)
 
-    if(result == undefined){
+    if(response == undefined){
       setPopupTitle("Network Error!")
       setPopupButtonMessage("Try Again")
       setPopupType(false)
       return
     }
 
-    if(result.status != 200){
-      setPopupTitle(result.data.message)
+    if(response.status.toString()[0] != 2){
+      setPopupTitle(response.data.message)
       setPopupButtonMessage("Try Again")
       return
     }
 
-    
-
+    localStorage.setItem('token', response.data.token)
     dispatch(setIsLogin(true))
     navigate("/home")
 

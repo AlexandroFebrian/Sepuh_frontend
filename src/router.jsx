@@ -3,6 +3,7 @@ import LandingPage from "./Views/LandingPage/LandingPage";
 import SignIn from "./Views/SignIn/SignIn";
 import HomePage from "./Views/HomePage/HomePage";
 import MainLayout from "./Views/Layout/MainLayout";
+import AddPost from "./Views/AddPost/AddPost";
 
 const Router = createBrowserRouter([
   {
@@ -22,8 +23,8 @@ const Router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "/guest"
-        
+        path: "/addpost",
+        element: <AddPost />
       }
     ]
   },
