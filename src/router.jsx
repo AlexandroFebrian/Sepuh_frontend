@@ -8,6 +8,8 @@ import AddPost from "./Views/AddPost/AddPost";
 // ADMIN
 import AdminLogin from "./Views/Admin/AdminLogin/AdminLogin";
 import MasterUser from "./Views/Admin/MasterUser/MasterUser";
+import MasterPost from "./Views/Admin/MasterPost/MasterPost";
+import UserReports from "./Views/Admin/UserReports/UserReports";
 
 const Router = createBrowserRouter([
   {
@@ -33,6 +35,14 @@ const Router = createBrowserRouter([
       {
         path: "/admin/masteruser",
         element: <MasterUser />,
+      },
+      {
+        path: "/admin/masterpost",
+        element: <MasterPost />,
+      },
+      {
+        path: "/admin/userreports",
+        element: <UserReports />,
       },
     ],
   },
