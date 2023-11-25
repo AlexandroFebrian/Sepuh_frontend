@@ -6,7 +6,8 @@ import MainLayout from "./Views/Layout/MainLayout";
 import AddPost from "./Views/AddPost/AddPost";
 
 // ADMIN
-import AdminLogin from "./Admin/AdminLogin";
+import AdminLogin from "./Views/Admin/AdminLogin/AdminLogin";
+import MasterUser from "./Views/Admin/MasterUser/MasterUser";
 
 const Router = createBrowserRouter([
   {
@@ -27,9 +28,13 @@ const Router = createBrowserRouter([
       },
       {
         path: "/addpost",
-        element: <AddPost />
-      }
-    ]
+        element: <AddPost />,
+      },
+      {
+        path: "/admin/masteruser",
+        element: <MasterUser />,
+      },
+    ],
   },
   {
     path: "/admin",
