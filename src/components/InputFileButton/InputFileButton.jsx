@@ -1,15 +1,22 @@
 import * as React from 'react';
 
-export default function InputFileButton({className, children, file, setFile, imageSrcs, setImageSrcs, multiple, showImage}) {
+export default function InputFileButton({className, index, children, file, setFile, imageSrcs, setImageSrcs, multipleInput, showImage, multipleImage}) {
 
   const handleFileChange = (event) => {
+    console.log(index)
     const files = event.target.files;
-    setFile([...file, ...files]);
+    if(multipleImage){
+      setFile([...file, ...files]);
+
+    }else{
+      setFile([...files]);
+    }
 
     if(!showImage) return;
 
     // Read and display images
     const imagePromises = Array.from(files).map(file => {
+      
       return new Promise((resolve) => {
         const reader = new FileReader();
         reader.onload = (e) => {
@@ -19,22 +26,28 @@ export default function InputFileButton({className, children, file, setFile, ima
       });
     });
 
-    Promise.all(imagePromises).then((srcs) => {
-      setImageSrcs([...imageSrcs, ...srcs]);
-    });
+    if(multipleImage){
+      Promise.all(imagePromises).then((srcs) => {
+        setImageSrcs([...imageSrcs, ...srcs]);
+      });
+    }else{
+      Promise.all(imagePromises).then((srcs) => {
+        setImageSrcs([...srcs]);
+      });
+    }
   };
 
   return (
     <>
-      <div className={`w-10 h-10 ${className}`}>
-        <label htmlFor="coba" >
-          <div className={`w-10 h-10 p-[0.6rem] bg-navyblue-800 hover:bg-navyblue-700 transition-colors duration-300 cursor-pointer rounded-full flex justify-center items-center ${className}`}>
+      <div className={`w-fit h-fit`}>
+        <label htmlFor={`custom${index}`} >
+          <div className={`w-10 h-10 transition-colors duration-300 cursor-pointer flex justify-center items-center ${className}`}>
             {children}
           </div>
         </label>
 
       </div>
-      <input type="file" id="coba" className='hidden' onChange={handleFileChange} multiple={multiple || false} />
+      <input type="file" id={`custom${index}`} className='hidden' onChange={handleFileChange} multiple={multipleInput || false} />
     </>
   );
 }

@@ -12,6 +12,7 @@ import AdminLogin from "./Views/Admin/AdminLogin/AdminLogin";
 import MasterUser from "./Views/Admin/MasterUser/MasterUser";
 import MasterPost from "./Views/Admin/MasterPost/MasterPost";
 import UserReports from "./Views/Admin/UserReports/UserReports";
+import Profile from "./Views/User/Profile/Profile";
 
 const Router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const Router = createBrowserRouter([
       {
         path: "/addpost",
         element: <AddPost />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />
       },
       {
         path: "/admin/masteruser",

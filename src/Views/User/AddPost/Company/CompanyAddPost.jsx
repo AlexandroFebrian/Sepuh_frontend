@@ -77,7 +77,7 @@ export default function CompanyAddPost() {
         />
         
         <div className=' mt-5'>
-          <InputFileButton file={file} setFile={setFile} imageSrcs={imageSrcs} setImageSrcs={setImageSrcs} multiple={true} showImage={true} >
+          <InputFileButton className=" p-2 bg-navyblue-800 hover:bg-navyblue-700 rounded-full " file={file} setFile={setFile} imageSrcs={imageSrcs} setImageSrcs={setImageSrcs} multipleInput={true} showImage={true} multipleImage={true}>
             <FaPaperclip className='text-ghostwhite-50 w-full h-full -rotate-[44deg]' />
           </InputFileButton>
         </div>

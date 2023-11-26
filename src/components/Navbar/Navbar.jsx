@@ -144,7 +144,7 @@ export default function Navbar() {
                       </div>
                       <h1 className='text-center font-semibold mt-1'>{user.name}</h1>
                     </div>
-                    <Link to={""}>
+                    <Link to={"/profile"}>
                       <Button
                         color="ghostwhite.50"
                         borderColor="indigo.300"

@@ -27,7 +27,7 @@ export default function fetch(){
 
   async function signIn(data, setWait, setPopup){
     try {
-      return client.post('users/login', data).then((res) => {
+      return await client.post('users/login', data).then((res) => {
         setPopup(true)
         return res
       }).catch((err) => {
@@ -42,9 +42,8 @@ export default function fetch(){
 
   async function signUp(data, setWait, setPopup){
     try {
-      return client.post('users/register', data).then((res) => {
+      return await client.post('users/register', data).then((res) => {
         setPopup(true)
-        console.log(res)
         return res
       }).catch((err) => {
         setPopup(true)
@@ -60,7 +59,7 @@ export default function fetch(){
     const token = localStorage.getItem('token')
     
     try {
-      return client.post('cekToken', {token: token}).then((res) => {
+      return await client.post('cekToken', {token: token}).then((res) => {
         dispatch(setIsLogin(true))
         dispatch(setUserDetail(res.data.data))
       }).catch((err) => {
@@ -75,9 +74,51 @@ export default function fetch(){
     }
   }
 
+  async function getUserProfile(setProfile){
+    const token = localStorage.getItem('token')
+
+    try {
+      return await client.get('users/profile', {
+        headers:{
+          "Authorization": `Bearer ${token}`
+        }
+      }).then((res) => {
+        setProfile(res.data)
+        return res.data
+      }).catch((err) => {
+        alert("error fetching user profile")
+      
+      })
+    } catch (error) {
+      alert("error")
+      navigate("/")
+    }
+  }
+
+  async function updateUserProfile(data, setWait, setPopup){
+    const token = localStorage.getItem('token')
+
+    try {
+      return await clientFile.put('users/profile', data, {
+        headers:{
+          "Authorization": `Bearer ${token}`
+        }
+      }).then((res) => {
+        setPopup(true)
+        return res
+      }).catch((err) => {
+        setPopup(true)
+        return err.response
+      })
+    } catch (error) {
+      alert("error")
+      navigate("/")
+    }
+  }
+
   async function getCategory(){
     try {
-      return client.get('category').then((res) => {
+      return await client.get('category').then((res) => {
         dispatch(setCategory(res.data))
       }).catch((err) => {
         alert("error fetching category")
@@ -102,5 +143,7 @@ export default function fetch(){
     signUp,
     checkToken,
     getCategory,
+    getUserProfile,
+    updateUserProfile
   }
 }

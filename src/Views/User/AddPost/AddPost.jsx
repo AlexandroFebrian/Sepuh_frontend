@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import MenuLogin from "../../../components/SidebarMenu/MenuLogin/MenuLogin";
+import MenuLogin from "../../../components/SidebarMenu/Freelancer/FreelancerDefaultMenu/FreelancerDefaultMenu";
 import NowHiring from '../../../components/NowHiring/NowHiring'
 import FreelancerAddPost from './Freelancer/FreelancerAddPost';
 import CompanyAddPost from './Company/CompanyAddPost';

@@ -1,11 +1,11 @@
 import Content from "../../../components/Content/Content";
 import MenuGuest from "../../../components/SidebarMenu/MenuGuest/MenuGuest";
-import MenuLogin from "../../../components/SidebarMenu/MenuLogin/MenuLogin";
+import FreelancerDefaultMenu from "../../../components/SidebarMenu/Freelancer/FreelancerDefaultMenu/FreelancerDefaultMenu";
 import NowHiring from "../../../components/NowHiring/NowHiring";
 import HomePageViewModel from "./HomePageViewModel";
 
 export default function HomePage() {
-  const { isLogin } = HomePageViewModel()
+  const { isLogin, user } = HomePageViewModel()
 
   return (
     <>
@@ -13,10 +13,13 @@ export default function HomePage() {
         <div className="left w-1/5 ">
           <div className="h-[calc(100vh-5rem)] w-full sticky top-[5rem]">
             {
-              isLogin
-              ?
-              <MenuLogin />
-              :
+              isLogin && user.role == "Freelancer"
+              &&
+              <FreelancerDefaultMenu />
+            }
+            {
+              !isLogin
+              &&
               <MenuGuest />
             }
             
