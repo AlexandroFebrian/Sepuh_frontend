@@ -12,13 +12,10 @@ import AdminLogin from "./Views/Admin/AdminLogin/AdminLogin";
 import MasterUser from "./Views/Admin/MasterUser/MasterUser";
 import MasterPost from "./Views/Admin/MasterPost/MasterPost";
 import UserReports from "./Views/Admin/UserReports/UserReports";
-<<<<<<< HEAD
 import PostingReports from "./Views/Admin/PostingReports/PostingReports";
 import IncomeReports from "./Views/Admin/IncomeReports/IncomeReports";
 import PaymentReports from "./Views/Admin/PaymentReports/PaymentReports";
-=======
 import Profile from "./Views/User/Profile/Profile";
->>>>>>> e26c90697518f73547af4da3edb4fe1cfdf1a52c
 
 const Router = createBrowserRouter([
   {
@@ -43,7 +40,7 @@ const Router = createBrowserRouter([
       },
       {
         path: "user/profile",
-        element: <Profile />
+        element: <Profile />,
       },
       {
         path: "/admin/masteruser",
