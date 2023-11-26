@@ -3,17 +3,24 @@ import fetch from "../../../../Client/fetch";
 import { useEffect, useState } from "react";
 
 export default function AddPostViewModel(){
-  const { checkToken } = fetch();
+  const { checkToken, postFreelancerPost } = fetch();
 
   const user = useSelector((state) => state.user.userDetail)
   const category = useSelector((state) => state.post.category)
 
+  const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [file, setFile] = useState([]);
   const [imageSrcs, setImageSrcs] = useState([]);
   const [hashtag, setHashtag] = useState([]);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
+
+  const [wait, setWait] = useState(false)
+  const [popup, setPopup] = useState(false)
+  const [popupTitle, setPopupTitle] = useState("")
+  const [popupButtonMessage, setPopupButtonMessage] = useState("")
+  const [popupType, setPopupType] = useState(false)
 
   function descChange (event) {
     const inputText = event.target.value;
@@ -43,15 +50,52 @@ export default function AddPostViewModel(){
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [])
 
+  async function submit(){
+    const data = {
+      description: text,
+      image: file,
+      hashtag: hashtag,
+      min_price: minPrice,
+      max_price: maxPrice,
+    }
+
+    setWait(true)
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // const response = await postFreelancerPost(data, setWait, setPopup)
+
+    // if(response == undefined){
+    //   setPopupTitle("Network Error!")
+    //   setPopupButtonMessage("Try Again")
+    //   setPopupType(false)
+    //   return
+    // }
+
+    // if(response.status.toString()[0] != 2){
+    //   // console.log(response)
+    //   setPopupTitle(response.data.message)
+    //   setPopupButtonMessage("Try Again")
+    //   setPopupType(false)
+    //   return
+    // }
+
+    // setPopupTitle("Success Update Profile")
+    // setPopupButtonMessage("Close")
+    // setPopupType(true)
+  }
+
   return {
     user,
     category,
+    title,
     text,
     file,
     imageSrcs,
     hashtag,
     minPrice,
     maxPrice,
+    setTitle,
     setFile,
     setImageSrcs,
     setMinPrice,
@@ -59,5 +103,13 @@ export default function AddPostViewModel(){
     addHashtag,
     descChange,
     hashtagChange,
+    submit,
+    wait,
+    popup,
+    popupTitle,
+    popupButtonMessage,
+    popupType,
+    setWait,
+    setPopup,
   }
 }

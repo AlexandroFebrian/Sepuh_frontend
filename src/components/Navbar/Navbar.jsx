@@ -74,7 +74,7 @@ export default function Navbar() {
 
       <nav className="w-full h-20 bg-navyblue-800 flex justify-between px-7 py-4 fixed top-0 z-[60]">
         <div>
-          <Link to={"/"}>
+          <Link to={`${isLogin ? "/home" : ""}`}>
             <img
               src="/logo/Logo Putih.png"
               alt="Logo"
@@ -140,7 +140,7 @@ export default function Navbar() {
                   <PopoverContent className="mt-6 mr-7 bg-navyblue-800 rounded-lg border-0">
                     <div className='w-full h-fit bg-ghostwhite-50 rounded-md p-2'>
                       <div className='w-full flex justify-center'>
-                        <Avatar bg="ghostwhite.400" />
+                        <Avatar bg="ghostwhite.400" src={user.profile_picture} />
                       </div>
                       <h1 className='text-center font-semibold mt-1'>{user.name}</h1>
                     </div>

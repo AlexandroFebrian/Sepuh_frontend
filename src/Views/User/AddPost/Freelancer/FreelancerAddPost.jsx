@@ -6,9 +6,11 @@ import InputFileButton from '../../../../components/InputFileButton/InputFileBut
 import { FaPaperclip } from 'react-icons/fa6';
 import { Combobox } from '../../../../components/ui/Combobox';
 import FreelancerAddPostViewModel from './FreelancerAddPostViewModel';
+import Popup from '../../../../components/Popup/Popup';
 
 export default function FreelancerAddPost() {
   const {
+    title,
     text,
     category,
     file,
@@ -17,17 +19,37 @@ export default function FreelancerAddPost() {
     hashtag,
     minPrice,
     maxPrice,
+    setTitle,
     setImageSrcs,
     setMinPrice,
     setMaxPrice,
     descChange,
     user,
     addHashtag,
-    hashtagChange
+    hashtagChange,
+    submit,
+    wait,
+    setWait,
+    popup,
+    setPopup,
+    popupType,
+    popupTitle,
+    popupButtonMessage
   } = FreelancerAddPostViewModel()
 
   return (
     <>
+      <Popup 
+        wait={wait} 
+        popup={popup} 
+        setPopup={setPopup} 
+        setWait={setWait} 
+        popupType={popupType} 
+        popupTitle={popupTitle} 
+        popupButtonMessage={popupButtonMessage}
+        className={"fixed top-0 left-0"}
+      />
+
       <div className='w-full flex items-center'>
         <Avatar bg="ghostwhite.400" size={"lg"} src={user.profile_picture}/>
         <div className=' ml-5'>
@@ -37,6 +59,11 @@ export default function FreelancerAddPost() {
       </div>
 
       <div className='mt-5'>
+        <div className='flex items-center mb-4'>
+          <h1 className='font-semibold text-xl'>Title: </h1>
+          <input type="text" placeholder='Title' defaultValue={title} className='w-80 h-9 px-3 ml-3 border-2 border-navyblue-800 rounded-md' onChange={(e) => {setTitle(e.target.value)}}/>
+        </div>
+
         <Textarea
           placeholder="Description…"
           value={text}
@@ -145,6 +172,7 @@ export default function FreelancerAddPost() {
             rounded={"full"}
             paddingX={"2.25rem"}
             fontSize={"lg"}
+            onClick={() => {submit()}}
           >
             Post
           </Button>
