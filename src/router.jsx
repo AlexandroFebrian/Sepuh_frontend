@@ -36,7 +36,7 @@ const Router = createBrowserRouter([
         element: <AddPost />,
       },
       {
-        path: "/profile",
+        path: "user/profile",
         element: <Profile />
       },
       {

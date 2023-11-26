@@ -22,7 +22,7 @@ export default function FreelancerProfileMenu() {
             <FaHouseChimney className="mr-3" size={"100%"} />
           </div>
           <div className="pl-3 text-2xl">
-            Home
+            Profile
           </div>
         </NavLink>
         <NavLink 
@@ -33,7 +33,7 @@ export default function FreelancerProfileMenu() {
             <FaEnvelope className="mr-3" size={"100%"} />
           </div>
           <div className="pl-3 text-2xl">
-            Messages
+            Document Completion
           </div>
         </NavLink>
         <NavLink 
@@ -44,7 +44,7 @@ export default function FreelancerProfileMenu() {
             <FaListUl className="mr-3" size={"100%"} />
           </div>
           <div className="pl-3 text-2xl">
-            Lists
+            Change Password
           </div>
         </NavLink>
         <NavLink 
@@ -55,7 +55,40 @@ export default function FreelancerProfileMenu() {
             <FaPenToSquare className="mr-3" size={"100%"} />
           </div>
           <div className="pl-3 text-2xl">
-            Posts
+            Work History
+          </div>
+        </NavLink>
+        <NavLink 
+          to={"/posts"} 
+          className={`w-full h-9 ${location.pathname == "/posts" && "bg-ghostwhite-200"} hover:bg-ghostwhite-100 top-0 transition-colors duration-300 flex items-center justify-start p-9`}
+        >
+          <div className=" min-w-[2rem] max-w-[2rem]">
+            <FaPenToSquare className="mr-3" size={"100%"} />
+          </div>
+          <div className="pl-3 text-2xl">
+            Income Reports
+          </div>
+        </NavLink>
+        <NavLink 
+          to={"/posts"} 
+          className={`w-full h-9 ${location.pathname == "/posts" && "bg-ghostwhite-200"} hover:bg-ghostwhite-100 top-0 transition-colors duration-300 flex items-center justify-start p-9`}
+        >
+          <div className=" min-w-[2rem] max-w-[2rem]">
+            <FaPenToSquare className="mr-3" size={"100%"} />
+          </div>
+          <div className="pl-3 text-2xl">
+            Bank Account
+          </div>
+        </NavLink>
+        <NavLink 
+          to={"/posts"} 
+          className={`w-full h-9 ${location.pathname == "/posts" && "bg-ghostwhite-200"} hover:bg-ghostwhite-100 top-0 transition-colors duration-300 flex items-center justify-start p-9`}
+        >
+          <div className=" min-w-[2rem] max-w-[2rem]">
+            <FaPenToSquare className="mr-3" size={"100%"} />
+          </div>
+          <div className="pl-3 text-2xl">
+            Logout
           </div>
         </NavLink>
       </div>

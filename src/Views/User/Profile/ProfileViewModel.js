@@ -34,8 +34,6 @@ export default function ProfileViewModel(){
   const [wait, setWait] = useState(false)
   const [popup, setPopup] = useState(false)
   const [popupTitle, setPopupTitle] = useState("")
-  const [popupMessage, setPopupMessage] = useState("")
-  const [popupSubMessage, setPopupSubMessage] = useState("")
   const [popupButtonMessage, setPopupButtonMessage] = useState("")
   const [popupType, setPopupType] = useState(false)
 

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import FreelancerDefaultMenu from '../../../components/SidebarMenu/Freelancer/FreelancerDefaultMenu/FreelancerDefaultMenu'
 import InputFileButton from '../../../components/InputFileButton/InputFileButton'
 import ProfileViewModel from './ProfileViewModel'
 import { Avatar, Button, Input } from '@chakra-ui/react'
 import Popup from '../../../components/Popup/Popup'
+import FreelancerProfileMenu from '../../../components/SidebarMenu/Freelancer/FreelancerProfileMenu/FreelancerProfileMenu'
 
 export default function Profile() {
   const { 
@@ -72,7 +72,7 @@ export default function Profile() {
             {
               isLogin && user.role == "Freelancer"
               &&
-              <FreelancerDefaultMenu />
+              <FreelancerProfileMenu />
             }
             
           </div>
@@ -103,11 +103,11 @@ export default function Profile() {
                 <div className='w-full '>
                   <div className='w-full flex justify-between items-center'>
                     <div className='flex items-center'>
-                      <Avatar size="lg" src={profileImageSrc[0]} className='mr-4' border={"1px"} color={"blackAlpha.800"} />
+                      <Avatar size="lg" src={profileImageSrc[0]} className='mr-4' border={"1px"} color={"blackAlpha.800"}/>
                       <InputFileButton 
                         key={2}
                         index={2}
-                        className=" px-10 bg-ghostwhite-50 hover:bg-ghostwhite-100 rounded"
+                        className=" px-10 bg-ghostwhite-50 hover:bg-ghostwhite-200 rounded"
                         file={profileFile}
                         setFile={setProfileFile}
                         imageSrcs={profileImageSrc}
@@ -164,6 +164,7 @@ export default function Profile() {
                         defaultValue={profileHeadline} 
                         className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
                         backgroundColor={"white"}
+                        onChange={(e) => {setProfileHeadline(e.target.value)}}
                       />
                     </div>
 
@@ -182,6 +183,7 @@ export default function Profile() {
                         defaultValue={profileCity} 
                         className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
                         backgroundColor={"white"}
+                        onChange={(e) => {setProfileCity(e.target.value)}}
                       />
                     </div>
 
@@ -193,6 +195,7 @@ export default function Profile() {
                         defaultValue={profileCountry} 
                         className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
                         backgroundColor={"white"}
+                        onChange={(e) => {setProfileCountry(e.target.value)}}
                       />
                     </div>
                   </div>
@@ -213,6 +216,7 @@ export default function Profile() {
                       defaultValue={profileLastEducation} 
                       className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
                       backgroundColor={"white"}
+                      onChange={(e) => {setProfileLastEducation(e.target.value)}}
                     />
                   </div>
                 </div>
@@ -226,6 +230,7 @@ export default function Profile() {
                       defaultValue={profileCurrentEducation}
                       className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
                       backgroundColor={"white"}
+                      onChange={(e) => {setProfileCurrentEducation(e.target.value)}}
                     />
                   </div>
                 </div>
@@ -239,6 +244,7 @@ export default function Profile() {
                       defaultValue={profileFieldOfStudy} 
                       className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
                       backgroundColor={"white"}
+                      onChange={(e) => {setProfileFieldOfStudy(e.target.value)}}
                     />
                   </div>
                 </div>
@@ -254,6 +260,7 @@ export default function Profile() {
                       defaultValue={profileYearofStudy}
                       className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
                       backgroundColor={"white"}
+                      onChange={(e) => {setProfileYearofStudy(e.target.value)}}
                     />
                   </div>
                 </div>
