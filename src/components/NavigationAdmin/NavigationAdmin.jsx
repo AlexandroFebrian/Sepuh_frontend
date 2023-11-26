@@ -31,7 +31,7 @@ export default function NavigationAdmin() {
           </NavLink>
 
           <NavLink
-            to="/admin/postreports"
+            to="/admin/postingreports"
             className="text-3xl font-sarabun hover:underline hover:underline-offset-8"
           >
             Post Reports

@@ -29,10 +29,10 @@ export default function FreelancerAddPost() {
   return (
     <>
       <div className='w-full flex items-center'>
-        <Avatar bg="ghostwhite.400" size={"lg"}/>
+        <Avatar bg="ghostwhite.400" size={"lg"} src={user.profile_picture}/>
         <div className=' ml-5'>
           <h1 className='font-semibold text-xl'>{user.name}</h1>
-          <h2>Ini Headline</h2>
+          <h2>{user.headline}</h2>
         </div>
       </div>
 
@@ -66,7 +66,7 @@ export default function FreelancerAddPost() {
         />
         
         <div className=' mt-5'>
-          <InputFileButton file={file} setFile={setFile} imageSrcs={imageSrcs} setImageSrcs={setImageSrcs} multiple={true} showImage={true} >
+          <InputFileButton className=" p-2 bg-navyblue-800 hover:bg-navyblue-700 rounded-full " file={file} setFile={setFile} imageSrcs={imageSrcs} setImageSrcs={setImageSrcs} multipleInput={true} showImage={true}>
             <FaPaperclip className='text-ghostwhite-50 w-full h-full -rotate-[44deg]' />
           </InputFileButton>
         </div>

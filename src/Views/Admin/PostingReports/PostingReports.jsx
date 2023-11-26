@@ -14,11 +14,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-export default function UserReports() {
+export default function PostingReports() {
   return (
     <>
       <NavigationAdmin />
-      <div className="container-userReports mb-10 min-h-[calc(100vh-5rem)] px-10 pb-10">
+      <div className="container-postingReports mb-10 min-h-[calc(100vh-5rem)] px-10 pb-10">
         <div className="container m-7 mx-auto">
           <div className="top flex justify-between items-center w-full my-10">
             <div className="left w-1/4">
@@ -34,7 +34,7 @@ export default function UserReports() {
             </div>
             <div className="center w-1/2">
               <h2 className="text-4xl font-semibold text-center">
-                Top 5 Most Popular Freelancer October 2023
+                Top 5 Most Popular Posting October 2023
               </h2>
             </div>
             <div className="right w-1/4 flex justify-end">
