@@ -4,11 +4,13 @@ import { Combobox } from '../ui/Combobox'
 import ContentViewModel from './ContentViewModel'
 import { FaPlus } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function Content() {
   const navigate = useNavigate()
+  const category = useSelector((state) => state.post.category)
 
-  const { isLogin, category, setCategoryFilter } = ContentViewModel()
+  const { isLogin, setCategoryFilter } = ContentViewModel()
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -27,7 +29,7 @@ export default function Content() {
             items={category} 
             headerClassName={"w-72"}
             contentClassName={" pt-1 border-0"}
-            setFilter={setCategoryFilter}
+            onSelect={(value) => setCategoryFilter(value)}
           />
         }
       </div>

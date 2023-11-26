@@ -39,7 +39,7 @@ const frameworks = [
   }
 ]
 
-export function Combobox({title, placeholder, empty, items, headerClassName, contentClassName, setFilter}) {
+export function Combobox({title, placeholder, empty, items, headerClassName, contentClassName, onSelect}) {
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
 
@@ -50,7 +50,7 @@ export function Combobox({title, placeholder, empty, items, headerClassName, con
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className={` ${headerClassName} h-14 justify-between bg-navyblue-800 text-ghostwhite-50 hover:bg-navyblue-700 hover:text-ghostwhite-50 transition-colors duration-300`}
+          className={` h-14 justify-between bg-navyblue-800 text-ghostwhite-50 hover:bg-navyblue-700 hover:text-ghostwhite-50 transition-colors duration-300 ${headerClassName}`}
         >
           {
             value
@@ -62,20 +62,22 @@ export function Combobox({title, placeholder, empty, items, headerClassName, con
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className={` ${contentClassName} bg-navyblue-800`}>
+      <PopoverContent className={`bg-navyblue-800 ${contentClassName}`}>
         <Command className="bg-navyblue-800 text-ghostwhite-50 rounded-none">
           <CommandInput placeholder={placeholder} className="placeholder:text-ghostwhite-200"/>
           <CommandEmpty>{empty}</CommandEmpty>
           <CommandGroup className="max-h-96 mt-1 overflow-y-auto custom-scrollbar">
-            {items.map((item) => (
+            {items.map((item, i) => (
               <CommandItem
-                key={item.value}
+                key={i}
                 value={item.value}
                 onSelect={(currentValue) => {
-                  setValue(currentValue === value ? "" : currentValue)
-                  if(setFilter){
-                    setFilter(currentValue === value ? "all" : currentValue)
+                  const valueChange = currentValue === value ? "" : currentValue
+                  if(onSelect){
+                    const value = valueChange
+                    onSelect(value)
                   }
+                  setValue(valueChange)
                   setOpen(false)
                 }}
                 className="text-ghostwhite-50 transition-colors"

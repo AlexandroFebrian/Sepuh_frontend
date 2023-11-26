@@ -1,8 +1,8 @@
 import { set, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { setIsLogin } from "../../redux/UserSlice";
+import { setIsLogin } from "../../../redux/UserSlice";
 import { useNavigate } from "react-router-dom";
-import fetch from "../../Client/fetch";
+import fetch from "../../../Client/fetch";
 import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi"
 import { useState } from "react";

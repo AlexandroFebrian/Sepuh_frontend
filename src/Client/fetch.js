@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { setIsLogin, setUserDetail } from '../redux/UserSlice';
+import { setCategory } from '../redux/PostSlice';
 import { useDispatch } from 'react-redux';
 
 export default function fetch(){
@@ -74,10 +75,10 @@ export default function fetch(){
     }
   }
 
-  async function getCategory(setCategory){
+  async function getCategory(){
     try {
       return client.get('category').then((res) => {
-        setCategory(res.data)
+        dispatch(setCategory(res.data))
       }).catch((err) => {
         alert("error fetching category")
         navigate("/")

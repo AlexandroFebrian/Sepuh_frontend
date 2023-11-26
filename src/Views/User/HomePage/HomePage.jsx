@@ -1,20 +1,11 @@
-import { useSelector } from "react-redux";
-import Content from "../../components/Content/Content";
-import MenuGuest from "../../components/SidebarMenu/MenuGuest/MenuGuest";
-import MenuLogin from "../../components/SidebarMenu/MenuLogin/MenuLogin";
-import { Combobox } from "../../components/ui/Combobox";
-import NowHiring from "../../components/NowHiring/NowHiring";
-import { useEffect } from "react";
-import fetch from "../../Client/fetch";
+import Content from "../../../components/Content/Content";
+import MenuGuest from "../../../components/SidebarMenu/MenuGuest/MenuGuest";
+import MenuLogin from "../../../components/SidebarMenu/MenuLogin/MenuLogin";
+import NowHiring from "../../../components/NowHiring/NowHiring";
+import HomePageViewModel from "./HomePageViewModel";
 
 export default function HomePage() {
-  const { checkToken } = fetch();
-
-  const isLogin = useSelector((state) => state.user.isLogin);
-
-  useEffect(() => {
-    checkToken();
-  }, [])
+  const { isLogin } = HomePageViewModel()
 
   return (
     <>

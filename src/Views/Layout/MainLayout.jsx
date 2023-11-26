@@ -5,12 +5,12 @@ import { Outlet } from "react-router-dom";
 import fetch from "../../Client/fetch";
 
 export default function MainLayout() {
-  // const { checkToken } = fetch()
+  const { checkToken, getCategory } = fetch()
 
-  // useEffect(() => {
-  //   checkToken()
-
-  // }, [])
+  useEffect(() => {
+    // checkToken()
+    getCategory()
+  }, [])
 
   return (
     <>

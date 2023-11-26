@@ -11,7 +11,7 @@ import {
   CircularProgress
 } from "@chakra-ui/react";
 import { FaLock, FaEnvelope, FaEye, FaEyeSlash } from "react-icons/fa6";
-import Popup from '../../components/Popup/Popup';
+import Popup from '../../../components/Popup/Popup';
 
 export default function SignInBox({handleClick}) {
   const {

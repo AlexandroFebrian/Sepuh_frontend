@@ -12,7 +12,7 @@ import {
 import SignInViewModel from './SignInViewModel';
 import { Link } from 'react-router-dom';
 import { FaLock, FaEnvelope, FaUser, FaEye, FaEyeSlash } from "react-icons/fa6";
-import Popup from '../../components/Popup/Popup';
+import Popup from '../../../components/Popup/Popup';
 
 export default function SignUpBox({handleClick}) {
   const {

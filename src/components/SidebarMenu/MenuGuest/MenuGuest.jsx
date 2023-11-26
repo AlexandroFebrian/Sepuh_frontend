@@ -1,31 +1,11 @@
 import { Select } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { Combobox } from '../../ui/Combobox'
+import { useSelector } from 'react-redux'
 
 export default function MenuGuest() {
-  const [category, setCategory] = useState([])
-  const [categoryFilter, setCategoryFilter] = useState("all")
-
-  useEffect(() => {
-    setCategory([
-      {
-        value: "machine learning",
-        label: "Machine Learning"
-      },
-      {
-        value: "data science",
-        label: "Data Science"
-      },
-      {
-        value: "web development",
-        label: "Web Development"
-      },
-      {
-        value: "mobile development",
-        label: "Mobile Development"
-      }
-    ])
-  }, [])
+  const category = useSelector((state) => state.post.category)
+  const [categoryFilter, setCategoryFilter] = useState("")
 
   return (
     <>
@@ -57,7 +37,7 @@ export default function MenuGuest() {
           items={category} 
           headerClassName={"min-w-full"}
           contentClassName={"mx-5 pt-1 border-0"}
-          setFilter={setCategoryFilter}
+          onSelect={(value) => setCategoryFilter(value)}
         />
       </div>
     </>

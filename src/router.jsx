@@ -1,9 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
-import LandingPage from "./Views/LandingPage/LandingPage";
-import SignIn from "./Views/SignIn/SignIn";
-import HomePage from "./Views/HomePage/HomePage";
+
 import MainLayout from "./Views/Layout/MainLayout";
-import AddPost from "./Views/AddPost/AddPost";
+// USER
+import LandingPage from "./Views/User/LandingPage/LandingPage";
+import SignIn from "./Views/User/SignIn/SignIn";
+import HomePage from "./Views/User/HomePage/HomePage";
+import AddPost from "./Views/User/AddPost/AddPost";
 
 // ADMIN
 import AdminLogin from "./Views/Admin/AdminLogin/AdminLogin";
