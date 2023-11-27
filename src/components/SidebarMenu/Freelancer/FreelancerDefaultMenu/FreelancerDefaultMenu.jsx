@@ -55,7 +55,7 @@ export default function FreelancerDefaultMenu() {
             <FaPenToSquare className="mr-3" size={"100%"} />
           </div>
           <div className="pl-3 text-2xl">
-            Posts
+            My Posts
           </div>
         </NavLink>
       </div>

@@ -137,12 +137,13 @@ export default function Navbar() {
                   <PopoverTrigger className=" text-ghostwhite-50 font-semibold bg-indigo-300 w-[8.5rem] h-[2.5rem] rounded-md hover:bg-indigo-350 active:bg-indigo-400 transition-colors duration-300">
                     My Profile
                   </PopoverTrigger>
-                  <PopoverContent className="mt-6 mr-7 bg-navyblue-800 rounded-lg border-0">
+                  <PopoverContent className=" mt-6 mr-7 bg-navyblue-800 rounded-lg border-0">
                     <div className='w-full h-fit bg-ghostwhite-50 rounded-md p-2'>
                       <div className='w-full flex justify-center'>
-                        <Avatar bg="ghostwhite.400" src={user?.profile_picture} />
+                        <Avatar bg="ghostwhite.400" src={user?.profile_picture} size={"lg"} />
                       </div>
-                      <h1 className='text-center font-semibold mt-1'>{user?.name}</h1>
+                      <h1 className='text-center font-semibold mt-1 text-lg'>{user?.name}</h1>
+                      <p>Balance: Rp.</p>
                     </div>
                     <Link to={"user/profile"}>
                       <Button

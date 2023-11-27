@@ -6,7 +6,7 @@ export default function Filter({setShowFilter, close, closeFilter}) {
   const [order, setOrder] = useState(0)
   const [date, setDate] = useState(0)
 
-  const sorts = ["Relevance", "Duration", "Salary", "Name", "Rating"]
+  const sorts = ["Uploaded", "Duration", "Salary", "Name", "Rating"]
   const orders = ["Ascending", "Descending"]
   const dates = ["All", "Past 24 hours", "This week", "This month", "Last Month", "Last 3 months", "Last 6 months"]
 
