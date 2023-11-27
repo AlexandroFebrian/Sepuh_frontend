@@ -3,7 +3,7 @@ import fetch from "../../../../Client/fetch";
 import { useEffect, useState } from "react";
 
 export default function AddPostViewModel(){
-  const { checkToken, postFreelancerPost } = fetch();
+  const { checkToken, addPost } = fetch();
 
   const user = useSelector((state) => state.user.userDetail)
   const category = useSelector((state) => state.post.category)
@@ -65,7 +65,7 @@ export default function AddPostViewModel(){
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    const response = await postFreelancerPost(data, setWait, setPopup)
+    const response = await addPost(data, setWait, setPopup)
 
     if(response == undefined){
       setPopupTitle("Network Error!")
@@ -81,7 +81,7 @@ export default function AddPostViewModel(){
       return
     }
 
-    setPopupTitle("Success Update Profile")
+    setPopupTitle("Add Post Success")
     setPopupButtonMessage("Close")
     setPopupType(true)
   }

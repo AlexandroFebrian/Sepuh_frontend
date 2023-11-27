@@ -6,6 +6,7 @@ import InputFileButton from '../../../../components/InputFileButton/InputFileBut
 import { FaPaperclip } from 'react-icons/fa6';
 import { Combobox } from '../../../../components/ui/Combobox';
 import CompanyAddPostViewModel from './CompanyAddPostViewModel';
+import Popup from '../../../../components/Popup/Popup';
 
 export default function CompanyAddPost() {
   const {
@@ -29,16 +30,34 @@ export default function CompanyAddPost() {
     descChange,
     user,
     addHashtag,
-    hashtagChange
+    hashtagChange,
+    submit,
+    wait,
+    popup,
+    popupTitle,
+    popupButtonMessage,
+    popupType,
+    setWait,
+    setPopup,
   } = CompanyAddPostViewModel()
 
   return (
     <>
+      <Popup 
+        wait={wait} 
+        popup={popup} 
+        setPopup={setPopup} 
+        setWait={setWait} 
+        popupType={popupType} 
+        popupTitle={popupTitle} 
+        popupButtonMessage={popupButtonMessage}
+        className={"fixed top-0 left-0"}
+      />
+
       <div className='w-full flex items-center'>
         <Avatar bg="ghostwhite.400" size={"lg"}/>
         <div className=' ml-5'>
           <h1 className='font-semibold text-xl'>{user.name}</h1>
-          <h2>Ini Headline</h2>
         </div>
       </div>
 
@@ -122,7 +141,7 @@ export default function CompanyAddPost() {
         </div>
         
 
-        <div className='mt-5 flex items-baseline h-16'>
+        <div className='mt-5 flex items-baseline h-22'>
           <h1 className='font-semibold text-xl'>Starting rate Rp</h1>
           <div className=' ml-4'>
             <div className='flex'>
@@ -132,8 +151,8 @@ export default function CompanyAddPost() {
 
             </div>
             <div>
-              {
-                minPrice > maxPrice && maxPrice != 0
+            {
+                minPrice >= maxPrice
                 &&
                 <p className='text-red-600'>Min Price cannot be greater than Max Price</p>
               }
@@ -168,6 +187,7 @@ export default function CompanyAddPost() {
             rounded={"full"}
             paddingX={"2.25rem"}
             fontSize={"lg"}
+            onClick={() => {submit()}}
           >
             Post
           </Button>

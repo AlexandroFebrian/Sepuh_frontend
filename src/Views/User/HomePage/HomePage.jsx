@@ -3,6 +3,7 @@ import MenuGuest from "../../../components/SidebarMenu/MenuGuest/MenuGuest";
 import FreelancerDefaultMenu from "../../../components/SidebarMenu/Freelancer/FreelancerDefaultMenu/FreelancerDefaultMenu";
 import NowHiring from "../../../components/NowHiring/NowHiring";
 import HomePageViewModel from "./HomePageViewModel";
+import CompanyDefaultMenu from "../../../components/SidebarMenu/Company/CompanyDefaultMenu/CompanyDefaultMenu";
 
 export default function HomePage() {
   const { isLogin, user } = HomePageViewModel()
@@ -16,6 +17,11 @@ export default function HomePage() {
               isLogin && user.role == "Freelancer"
               &&
               <FreelancerDefaultMenu />
+            }
+            {
+              isLogin && user.role == "Company"
+              &&
+              <CompanyDefaultMenu />
             }
             {
               !isLogin

@@ -130,27 +130,7 @@ export default function fetch(){
     }
   }
 
-  async function postCompanyPost(data, setWait, setPopup){
-    const token = localStorage.getItem('token')
-
-    try {
-      return await clientFile.post('posts/add', data, {
-        headers:{
-          "Authorization": `Bearer ${token}`
-        }
-      }).then((res) => {
-        setPopup(true)
-        return res
-      }).catch((err) => {
-        setPopup(true)
-        return err.response
-      })
-    } catch (error) {
-      alert("error")
-    }
-  }
-
-  async function postFreelancerPost(data, setWait, setPopup){
+  async function addPost(data, setWait, setPopup){
     const token = localStorage.getItem('token')
 
     try {
@@ -186,7 +166,6 @@ export default function fetch(){
     getCategory,
     getUserProfile,
     updateUserProfile,
-    postCompanyPost,
-    postFreelancerPost,
+    addPost
   }
 }

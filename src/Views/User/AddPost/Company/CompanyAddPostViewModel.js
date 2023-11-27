@@ -3,7 +3,7 @@ import fetch from "../../../../Client/fetch";
 import { useEffect, useState } from "react";
 
 export default function AddPostViewModel(){
-  const { checkToken } = fetch();
+  const { checkToken, addPost } = fetch();
 
   const user = useSelector((state) => state.user.userDetail)
   const category = useSelector((state) => state.post.category)
@@ -17,6 +17,12 @@ export default function AddPostViewModel(){
   const [maxPrice, setMaxPrice] = useState(0);
   const [duration, setDuration] = useState(1);
   const [durationType, setDurationType] = useState("Days");
+
+  const [wait, setWait] = useState(false)
+  const [popup, setPopup] = useState(false)
+  const [popupTitle, setPopupTitle] = useState("")
+  const [popupButtonMessage, setPopupButtonMessage] = useState("")
+  const [popupType, setPopupType] = useState(false)
 
   function descChange (event) {
     const inputText = event.target.value;
@@ -46,6 +52,44 @@ export default function AddPostViewModel(){
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [])
 
+  async function submit(){
+    const data = {
+      title: projectName,
+      description: text,
+      image: file,
+      hashtag: hashtag,
+      min_price: minPrice,
+      max_price: maxPrice,
+      duration: duration,
+      duration_type: durationType
+    }
+    console.log(data)
+
+    setWait(true)
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    const response = await addPost(data, setWait, setPopup)
+
+    if(response == undefined){
+      setPopupTitle("Network Error!")
+      setPopupButtonMessage("Try Again")
+      setPopupType(false)
+      return
+    }
+
+    if(response.status.toString()[0] != 2){
+      setPopupTitle(response.data.message)
+      setPopupButtonMessage("Try Again")
+      setPopupType(false)
+      return
+    }
+
+    setPopupTitle("Add Post Success")
+    setPopupButtonMessage("Close")
+    setPopupType(true)
+  }
+
   return {
     projectName,
     user,
@@ -68,5 +112,13 @@ export default function AddPostViewModel(){
     addHashtag,
     descChange,
     hashtagChange,
+    submit,
+    wait,
+    popup,
+    popupTitle,
+    popupButtonMessage,
+    popupType,
+    setWait,
+    setPopup,
   }
 }

@@ -4,6 +4,7 @@ import ProfileViewModel from './ProfileViewModel'
 import { Avatar, Button, Input } from '@chakra-ui/react'
 import Popup from '../../../components/Popup/Popup'
 import FreelancerProfileMenu from '../../../components/SidebarMenu/Freelancer/FreelancerProfileMenu/FreelancerProfileMenu'
+import CompanyProfileMenu from '../../../components/SidebarMenu/Company/CompanyProfileMenu/CompanyProfileMenu'
 
 export default function Profile() {
   const { 
@@ -73,6 +74,11 @@ export default function Profile() {
               isLogin && user.role == "Freelancer"
               &&
               <FreelancerProfileMenu />
+            }
+            {
+              isLogin && user.role == "Company"
+              &&
+              <CompanyProfileMenu />
             }
             
           </div>

@@ -123,7 +123,7 @@ export default function ProfileViewModel(){
       return
     }
 
-    setPopupTitle("Success Update Profile")
+    setPopupTitle("Update Profile Success")
     setPopupButtonMessage("Close")
     setPopupType(true)
   }
