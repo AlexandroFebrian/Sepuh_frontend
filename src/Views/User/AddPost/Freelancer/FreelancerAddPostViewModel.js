@@ -52,37 +52,39 @@ export default function AddPostViewModel(){
 
   async function submit(){
     const data = {
+      title: title,
       description: text,
       image: file,
       hashtag: hashtag,
       min_price: minPrice,
       max_price: maxPrice,
     }
+    console.log(data)
 
     setWait(true)
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // const response = await postFreelancerPost(data, setWait, setPopup)
+    const response = await postFreelancerPost(data, setWait, setPopup)
 
-    // if(response == undefined){
-    //   setPopupTitle("Network Error!")
-    //   setPopupButtonMessage("Try Again")
-    //   setPopupType(false)
-    //   return
-    // }
+    if(response == undefined){
+      setPopupTitle("Network Error!")
+      setPopupButtonMessage("Try Again")
+      setPopupType(false)
+      return
+    }
 
-    // if(response.status.toString()[0] != 2){
-    //   // console.log(response)
-    //   setPopupTitle(response.data.message)
-    //   setPopupButtonMessage("Try Again")
-    //   setPopupType(false)
-    //   return
-    // }
+    if(response.status.toString()[0] != 2){
+      // console.log(response)
+      setPopupTitle(response.data.message)
+      setPopupButtonMessage("Try Again")
+      setPopupType(false)
+      return
+    }
 
-    // setPopupTitle("Success Update Profile")
-    // setPopupButtonMessage("Close")
-    // setPopupType(true)
+    setPopupTitle("Success Update Profile")
+    setPopupButtonMessage("Close")
+    setPopupType(true)
   }
 
   return {

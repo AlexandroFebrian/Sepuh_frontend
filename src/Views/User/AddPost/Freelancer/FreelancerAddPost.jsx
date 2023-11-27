@@ -149,7 +149,7 @@ export default function FreelancerAddPost() {
             </div>
             <div>
               {
-                minPrice > maxPrice && maxPrice != 0
+                minPrice >= maxPrice
                 &&
                 <p className='text-red-600'>Min Price cannot be greater than Max Price</p>
               }

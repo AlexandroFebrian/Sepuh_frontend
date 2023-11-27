@@ -150,8 +150,25 @@ export default function fetch(){
     }
   }
 
-  async function postFreelancerPost(){
-    
+  async function postFreelancerPost(data, setWait, setPopup){
+    const token = localStorage.getItem('token')
+
+    try {
+      return await clientFile.post('posts/add', data, {
+        headers:{
+          "Authorization": `Bearer ${token}`
+        }
+      }).then((res) => {
+        setPopup(true)
+        return res
+      }).catch((err) => {
+        setPopup(true)
+        return err.response
+      })
+    } catch (error) {
+      alert("error")
+      navigate("/")
+    }
   }
 
   async function getCompanyPost(setCompanyPost){
