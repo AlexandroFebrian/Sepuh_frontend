@@ -54,7 +54,7 @@ export default function ProfileViewModel(){
       setProfileMemberSince(new Date(profile.create_at))
       setProfileName(profile.name)
       setProfileEmail(profile.email)
-      setProfileDateOfBirth(new Date(profile.date_of_birth))
+      setProfileDateOfBirth(profile.date_of_birth != null && new Date(profile.date_of_birth))
       setProfileHeadline(profile.headline)
       setProfileBio(profile.bio)
       setProfileCity(profile.city)
@@ -73,13 +73,13 @@ export default function ProfileViewModel(){
   const [reRender, setReRender] = useState(false)
 
   useEffect(() => {
-    if(profileDateOfBirth){
+    if(profileDateOfBirth && profileDateOfBirth != null){
       setReRender(!reRender)
     }
   }, [profileDateOfBirth])
 
   useEffect(() => {
-    if(profileDateOfBirth){
+    if(profileDateOfBirth && profileDateOfBirth != null){
       setDD(String(profileDateOfBirth.getDate()).padStart(2, '0'))
       setMM(String(profileDateOfBirth.getMonth() + 1).padStart(2, '0'))
       setYYYY(String(profileDateOfBirth.getFullYear()))

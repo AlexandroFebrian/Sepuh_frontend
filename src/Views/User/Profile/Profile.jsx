@@ -149,12 +149,16 @@ export default function Profile() {
                       />
                     </div>
 
-                    <div className='mt-3'>
-                      Date of Birth*:
-                      <input type="date" name="" id="" className='ml-3 py-1 px-2 rounded' 
-                        value={(profileDateOfBirth && profileDateOfBirth != "Invalid Date" && formattedDate != "--") ? formattedDate : ""} onChange={(e) => {setProfileDateOfBirth(new Date(e.target.value))}} 
-                      />
-                    </div>
+                    {
+                      user.role == "Freelancer"
+                      &&
+                      <div className='mt-3'>
+                        Date of Birth*:
+                        <input type="date" name="" id="" className='ml-3 py-1 px-2 rounded' 
+                          value={(profileDateOfBirth && profileDateOfBirth != null && profileDateOfBirth != "Invalid Date" && formattedDate != "--") ? formattedDate : ""} onChange={(e) => {setProfileDateOfBirth(new Date(e.target.value))}} 
+                        />
+                      </div>
+                    }
 
                     <div className='mt-3'>
                       Headline*:
@@ -170,7 +174,7 @@ export default function Profile() {
 
                     <div className='mt-3'>
                       Bio:
-                      <textarea name="" id="" placeholder='About me' className='w-full h-40 py-2 px-3 resize-none rounded-md' defaultValue={profileBio}>
+                      <textarea name="" id="" placeholder='About me' className='w-full h-40 py-2 px-3 resize-none rounded-md' defaultValue={profileBio} onChange={(e) => {setProfileBio(e.target.value)}}>
                         
                       </textarea>
                     </div>
@@ -204,67 +208,71 @@ export default function Profile() {
 
               </div>
 
-              <div className='w-full mt-10'>
-                <h1 className='font-semibold text-xl'>Education</h1>
+              {
+                user.role == "Freelancer"
+                &&
+                <div className='w-full mt-10'>
+                  <h1 className='font-semibold text-xl'>Education</h1>
 
-                <div className='w-full mt-4 pl-8 pr-20'>
-                  <div className='mt-3'>
-                    Last Education:
-                    <Input 
-                      placeholder="Last Education" 
-                      variant={"outline"}
-                      defaultValue={profileLastEducation} 
-                      className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
-                      backgroundColor={"white"}
-                      onChange={(e) => {setProfileLastEducation(e.target.value)}}
-                    />
+                  <div className='w-full mt-4 pl-8 pr-20'>
+                    <div className='mt-3'>
+                      Last Education:
+                      <Input 
+                        placeholder="Last Education" 
+                        variant={"outline"}
+                        defaultValue={profileLastEducation} 
+                        className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
+                        backgroundColor={"white"}
+                        onChange={(e) => {setProfileLastEducation(e.target.value)}}
+                      />
+                    </div>
+                  </div>
+
+                  <div className='w-full mt-4 pl-8 pr-20'>
+                    <div className='mt-3'>
+                      Current Education:
+                      <Input 
+                        placeholder="Current Education" 
+                        variant={"outline"}
+                        defaultValue={profileCurrentEducation}
+                        className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
+                        backgroundColor={"white"}
+                        onChange={(e) => {setProfileCurrentEducation(e.target.value)}}
+                      />
+                    </div>
+                  </div>
+
+                  <div className='w-full mt-4 pl-8 pr-20'>
+                    <div className='mt-3'>
+                      Field of Study:
+                      <Input 
+                        placeholder="Field of Study" 
+                        variant={"outline"}
+                        defaultValue={profileFieldOfStudy} 
+                        className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
+                        backgroundColor={"white"}
+                        onChange={(e) => {setProfileFieldOfStudy(e.target.value)}}
+                      />
+                    </div>
+                  </div>
+
+                  <div className='w-full mt-4 pl-8 pr-20'>
+                    <div className='mt-3'>
+                      Year of Study:
+                      <Input 
+                        type='number'
+                        min={0}
+                        placeholder="Year of Study" 
+                        variant={"outline"}
+                        defaultValue={profileYearofStudy}
+                        className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
+                        backgroundColor={"white"}
+                        onChange={(e) => {setProfileYearofStudy(e.target.value)}}
+                      />
+                    </div>
                   </div>
                 </div>
-
-                <div className='w-full mt-4 pl-8 pr-20'>
-                  <div className='mt-3'>
-                    Current Education:
-                    <Input 
-                      placeholder="Current Education" 
-                      variant={"outline"}
-                      defaultValue={profileCurrentEducation}
-                      className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
-                      backgroundColor={"white"}
-                      onChange={(e) => {setProfileCurrentEducation(e.target.value)}}
-                    />
-                  </div>
-                </div>
-
-                <div className='w-full mt-4 pl-8 pr-20'>
-                  <div className='mt-3'>
-                    Field of Study:
-                    <Input 
-                      placeholder="Field of Study" 
-                      variant={"outline"}
-                      defaultValue={profileFieldOfStudy} 
-                      className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
-                      backgroundColor={"white"}
-                      onChange={(e) => {setProfileFieldOfStudy(e.target.value)}}
-                    />
-                  </div>
-                </div>
-
-                <div className='w-full mt-4 pl-8 pr-20'>
-                  <div className='mt-3'>
-                    Year of Study:
-                    <Input 
-                      type='number'
-                      min={0}
-                      placeholder="Year of Study" 
-                      variant={"outline"}
-                      defaultValue={profileYearofStudy}
-                      className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
-                      backgroundColor={"white"}
-                      onChange={(e) => {setProfileYearofStudy(e.target.value)}}
-                    />
-                  </div>
-                </div>
-              </div>
+              }
 
               <div className='w-full flex justify-end items-center mt-8'>
                 <Button 

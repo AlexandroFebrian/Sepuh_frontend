@@ -75,7 +75,6 @@ export default function AddPostViewModel(){
     }
 
     if(response.status.toString()[0] != 2){
-      // console.log(response)
       setPopupTitle(response.data.message)
       setPopupButtonMessage("Try Again")
       setPopupType(false)
