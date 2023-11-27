@@ -151,12 +151,30 @@ export default function fetch(){
     }
   }
 
-  async function getCompanyPost(setCompanyPost){
-
+  async function fetchCompanyPost(setCompanyPost){
+    try {
+      return await client.get("posts/company").then((res) => {
+        console.log(res.data)
+        setCompanyPost(res.data)
+      }).catch((err) => {
+        alert("error")
+      })
+    } catch (error) {
+      alert("error")
+    }
   }
 
-  async function getFreelancerPost(setFreelancerPost){
-    
+  async function fetchFreelancerPost(setFreelancerPost){
+    try {
+      return await client.get("posts/freelancer").then((res) => {
+        console.log(res)
+        setFreelancerPost(res.data)
+      }).catch((err) => {
+        alert("error")
+      })
+    } catch (error) {
+      alert("error")
+    }
   }
 
   return {
@@ -166,6 +184,8 @@ export default function fetch(){
     getCategory,
     getUserProfile,
     updateUserProfile,
-    addPost
+    addPost,
+    fetchCompanyPost,
+    fetchFreelancerPost
   }
 }

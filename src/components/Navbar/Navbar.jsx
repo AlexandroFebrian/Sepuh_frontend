@@ -73,7 +73,7 @@ export default function Navbar() {
       }
 
       <nav className="w-full h-20 bg-navyblue-800 flex justify-between px-7 py-4 fixed top-0 z-[60]">
-        <div>
+        <div className="w-1/5">
           <Link to={`${isLogin ? "/home" : ""}`}>
             <img
               src="/logo/Logo Putih.png"
@@ -84,7 +84,7 @@ export default function Navbar() {
           </Link>
         </div>
         
-        <div className="flex items-center justify-between w-10/12 relative ps-6">
+        <div className="flex items-center justify-between w-10/12 relative ps-9">
           <div className="flex items-center w-7/12 relative me-6">
             <InputGroup background={"ghostwhite.100"} rounded={"md"} className=" border-b-0 border-navyblue-800">
               <InputLeftElement>
@@ -106,7 +106,7 @@ export default function Navbar() {
               <Filter setShowFilter={setShowFilter} closeFilter={closeFilter} close={close} />
             }
           </div>
-          <div className='w-5/12 flex items-center justify-end'>
+          <div className='w-4/12 flex items-center justify-end'>
             {isLogin ? (
               <>
                 <Button
@@ -140,9 +140,9 @@ export default function Navbar() {
                   <PopoverContent className="mt-6 mr-7 bg-navyblue-800 rounded-lg border-0">
                     <div className='w-full h-fit bg-ghostwhite-50 rounded-md p-2'>
                       <div className='w-full flex justify-center'>
-                        <Avatar bg="ghostwhite.400" src={user.profile_picture} />
+                        <Avatar bg="ghostwhite.400" src={user?.profile_picture} />
                       </div>
-                      <h1 className='text-center font-semibold mt-1'>{user.name}</h1>
+                      <h1 className='text-center font-semibold mt-1'>{user?.name}</h1>
                     </div>
                     <Link to={"user/profile"}>
                       <Button

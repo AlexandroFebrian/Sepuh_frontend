@@ -83,7 +83,7 @@ export default function Profile() {
             
           </div>
         </div>
-        <div className="mid w-3/4">
+        <div className="mid w-3/5">
           <div className=" min-h-[calc(100vh-5rem)] h-fit border-l-2 border-navyblue-600 z-0 px-10 py-10">
             <div className='w-full bg-ghostwhite-100 rounded py-6 px-10'>
               <h1 className='font-semibold text-xl'>Personal Information</h1>
@@ -299,7 +299,7 @@ export default function Profile() {
             </div>
           </div>
         </div>
-        <div className="right w-1/4">
+        <div className="right w-1/5">
           
         </div>
       </div>

@@ -14,12 +14,12 @@ export default function HomePage() {
         <div className="left w-1/5 ">
           <div className="h-[calc(100vh-5rem)] w-full sticky top-[5rem]">
             {
-              isLogin && user.role == "Freelancer"
+              isLogin && user && user.role == "Freelancer"
               &&
               <FreelancerDefaultMenu />
             }
             {
-              isLogin && user.role == "Company"
+              isLogin && user && user.role == "Company"
               &&
               <CompanyDefaultMenu />
             }
@@ -31,12 +31,12 @@ export default function HomePage() {
             
           </div>
         </div>
-        <div className="mid w-3/4">
+        <div className="mid w-3/5 h-full">
           <div className=" min-h-[calc(100vh-5rem)] h-fit border-l-2 border-navyblue-600 z-0 px-10 py-10">
             <Content />
           </div>
         </div>
-        <div className="right w-1/4">
+        <div className="right w-1/5">
           <NowHiring />
         </div>
       </div>

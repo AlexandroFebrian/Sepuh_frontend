@@ -5,12 +5,13 @@ import ContentViewModel from './ContentViewModel'
 import { FaPlus } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import ContentBox from '../ContentBox/ContentBox';
 
 export default function Content() {
   const navigate = useNavigate()
   const category = useSelector((state) => state.post.category)
 
-  const { isLogin, setCategoryFilter } = ContentViewModel()
+  const { isLogin, setCategoryFilter, freelancerPost, companyPost } = ContentViewModel()
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -18,7 +19,7 @@ export default function Content() {
 
   return (
     <>
-      <div className='w-full'>
+      <div className='w-full h-16'>
         {
           isLogin
           &&
@@ -27,18 +28,30 @@ export default function Content() {
             placeholder={"Search Category"} 
             empty={"No category found"} 
             items={category} 
-            headerClassName={"w-72"}
+            headerClassName={"w-72 shadow-lg"}
             contentClassName={" pt-1 border-0"}
             onSelect={(value) => setCategoryFilter(value)}
           />
         }
       </div>
-      <div className='w-full flex justify-between relative'>
+      
+      <div className='w-full pt-3 flex justify-between relative min-h-[calc(100vh-15rem)] h-fit'>
         <div className='w-[calc(100%-5rem)] mr-10'>
-          <div className=" h-[400px] w-full bg-slate-400 mt-5 rounded shadow-lg"></div>
-          <div className=" h-[400px] w-full bg-slate-400 mt-5"></div>
-          <div className=" h-[400px] w-full bg-slate-400 mt-5"></div>
-          <div className=" h-[400px] w-full bg-slate-400 mt-5"></div>
+          {
+            freelancerPost.length == 0 && companyPost.length == 0
+          }
+          {
+            freelancerPost.map((item, idx) => {
+              // console.log(item)
+              return <ContentBox item={item} key={idx} />
+            })
+          }
+          {
+            companyPost.map((item, idx) => {
+              // console.log(item)
+              return <ContentBox item={item} key={idx} />
+            })
+          }
         </div>
 
         <div className='relative'>

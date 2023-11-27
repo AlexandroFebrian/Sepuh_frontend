@@ -6,6 +6,7 @@ import LandingPage from "./Views/User/LandingPage/LandingPage";
 import SignIn from "./Views/User/SignIn/SignIn";
 import HomePage from "./Views/User/HomePage/HomePage";
 import AddPost from "./Views/User/AddPost/AddPost";
+import Messages from "./Views/User/Messages/Messages";
 
 // ADMIN
 import AdminLogin from "./Views/Admin/AdminLogin/AdminLogin";
@@ -37,6 +38,10 @@ const Router = createBrowserRouter([
       {
         path: "/addpost",
         element: <AddPost />,
+      },
+      {
+        path: "messages",
+        element: <Messages />
       },
       {
         path: "user/profile",

@@ -8,7 +8,7 @@ import { joiResolver } from "@hookform/resolvers/joi"
 import { useState } from "react";
 
 export default function SignInViewModel(){
-  const { signIn, signUp } = fetch()
+  const { signIn, signUp, checkToken } = fetch()
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -133,6 +133,7 @@ export default function SignInViewModel(){
     }
 
     localStorage.setItem('token', response.data.token)
+    checkToken()
     dispatch(setIsLogin(true))
     navigate("/home")
 
