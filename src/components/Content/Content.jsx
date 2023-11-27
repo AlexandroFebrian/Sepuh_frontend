@@ -54,7 +54,7 @@ export default function Content() {
           }
         </div>
 
-        <div className='relative'>
+        <div className=' w-20 relative'>
           <button className='w-20 h-20 p-[0.4rem] bg-navyblue-800 hover:bg-navyblue-700 transition-colors duration-300 rounded-full flex justify-center items-center sticky top-[90%]' onClick={() => (navigate("/addpost"))}>
             <div className='w-full h-full rounded-full border-[0.15rem] border-ghostwhite-50 flex justify-center items-center'>
               <FaPlus className=' text-ghostwhite-50 w-10 h-10'/>

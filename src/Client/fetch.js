@@ -154,7 +154,6 @@ export default function fetch(){
   async function fetchCompanyPost(setCompanyPost){
     try {
       return await client.get("posts/company").then((res) => {
-        console.log(res.data)
         setCompanyPost(res.data)
       }).catch((err) => {
         alert("error")
@@ -167,7 +166,6 @@ export default function fetch(){
   async function fetchFreelancerPost(setFreelancerPost){
     try {
       return await client.get("posts/freelancer").then((res) => {
-        console.log(res)
         setFreelancerPost(res.data)
       }).catch((err) => {
         alert("error")

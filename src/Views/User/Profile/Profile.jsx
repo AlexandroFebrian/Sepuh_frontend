@@ -71,12 +71,12 @@ export default function Profile() {
         <div className="left w-1/5 ">
           <div className="h-[calc(100vh-5rem)] w-full sticky top-[5rem]">
             {
-              isLogin && user.role == "Freelancer"
+              isLogin && user?.role == "Freelancer"
               &&
               <FreelancerProfileMenu />
             }
             {
-              isLogin && user.role == "Company"
+              isLogin && user?.role == "Company"
               &&
               <CompanyProfileMenu />
             }
@@ -156,7 +156,7 @@ export default function Profile() {
                     </div>
 
                     {
-                      user.role == "Freelancer"
+                      user?.role == "Freelancer"
                       &&
                       <div className='mt-3'>
                         Date of Birth*:
@@ -215,7 +215,7 @@ export default function Profile() {
               </div>
 
               {
-                user.role == "Freelancer"
+                user?.role == "Freelancer"
                 &&
                 <div className='w-full mt-10'>
                   <h1 className='font-semibold text-xl'>Education</h1>

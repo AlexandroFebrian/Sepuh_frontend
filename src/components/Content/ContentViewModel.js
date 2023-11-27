@@ -21,7 +21,7 @@ export default function ContentViewModel(){
     if(user){
       if(user.role == "Freelancer"){
         fetchCompanyPost(setCompanyPost)
-      }else{
+      }else if(user.role == "Company"){
         fetchFreelancerPost(setFreelancerPost)
       }
 

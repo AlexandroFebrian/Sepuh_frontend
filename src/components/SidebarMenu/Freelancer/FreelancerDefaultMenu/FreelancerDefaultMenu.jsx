@@ -48,8 +48,8 @@ export default function FreelancerDefaultMenu() {
           </div>
         </NavLink>
         <NavLink 
-          to={"/posts"} 
-          className={`w-full h-9 ${location.pathname == "/posts" && "bg-ghostwhite-200"} hover:bg-ghostwhite-100 top-0 transition-colors duration-300 flex items-center justify-start p-9`}
+          to={"/myposts"} 
+          className={`w-full h-9 ${location.pathname == "/myposts" && "bg-ghostwhite-200"} hover:bg-ghostwhite-100 top-0 transition-colors duration-300 flex items-center justify-start p-9`}
         >
           <div className=" min-w-[2rem] max-w-[2rem]">
             <FaPenToSquare className="mr-3" size={"100%"} />

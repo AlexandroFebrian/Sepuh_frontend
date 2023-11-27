@@ -4,12 +4,28 @@ import {
   FaEnvelope,
   FaListUl,
   FaGear,
+  FaUsersLine,
+  FaFileInvoiceDollar,
+  FaRightFromBracket,
+  FaBuilding
 } from "react-icons/fa6";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { setIsLogin, setUserDetail } from "../../../../redux/UserSlice";
+import { useDispatch } from "react-redux";
+
 
 export default function CompanyProfileMenu() {
   const location = useLocation();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  function logout(){
+    dispatch(setIsLogin(false))
+    dispatch(setUserDetail({}))
+    localStorage.removeItem("token")
+    navigate("/")
+  }
   
   return (
     <>
@@ -22,48 +38,48 @@ export default function CompanyProfileMenu() {
             <FaHouseChimney className="mr-3" size={"100%"} />
           </div>
           <div className="pl-3 text-2xl">
+            Home
+          </div>
+        </NavLink>
+        <NavLink 
+          to={"/user/profile"} 
+          className={`w-full h-9 ${location.pathname == "/user/profile" && "bg-ghostwhite-200"} hover:bg-ghostwhite-100 top-0 transition-colors duration-300 flex items-center justify-start p-9`}
+        >
+          <div className=" min-w-[2rem] max-w-[2rem]">
+            <FaBuilding className="mr-3" size={"90%"} />
+          </div>
+          <div className="pl-3 text-2xl">
             Profile
           </div>
         </NavLink>
         <NavLink 
-          to={"/lists"} 
-          className={`w-full h-9 ${location.pathname == "/lists" && "bg-ghostwhite-200"} hover:bg-ghostwhite-100 top-0 transition-colors duration-300 flex items-center justify-start p-9`}
+          to={"/user/employeereports"} 
+          className={`w-full h-9 ${location.pathname == "/user/employeereports" && "bg-ghostwhite-200"} hover:bg-ghostwhite-100 top-0 transition-colors duration-300 flex items-center justify-start p-9`}
         >
           <div className=" min-w-[2rem] max-w-[2rem]">
-            <FaListUl className="mr-3" size={"100%"} />
-          </div>
-          <div className="pl-3 text-2xl">
-            Change Password
-          </div>
-        </NavLink>
-        <NavLink 
-          to={"/posts"} 
-          className={`w-full h-9 ${location.pathname == "/posts" && "bg-ghostwhite-200"} hover:bg-ghostwhite-100 top-0 transition-colors duration-300 flex items-center justify-start p-9`}
-        >
-          <div className=" min-w-[2rem] max-w-[2rem]">
-            <FaPenToSquare className="mr-3" size={"100%"} />
+            <FaUsersLine className="mr-3" size={"100%"} />
           </div>
           <div className="pl-3 text-2xl">
             Employee Reports
           </div>
         </NavLink>
         <NavLink 
-          to={"/posts"} 
-          className={`w-full h-9 ${location.pathname == "/posts" && "bg-ghostwhite-200"} hover:bg-ghostwhite-100 top-0 transition-colors duration-300 flex items-center justify-start p-9`}
+          to={"/user/paymentreports"} 
+          className={`w-full h-9 ${location.pathname == "/user/paymentreports" && "bg-ghostwhite-200"} hover:bg-ghostwhite-100 top-0 transition-colors duration-300 flex items-center justify-start p-9`}
         >
           <div className=" min-w-[2rem] max-w-[2rem]">
-            <FaPenToSquare className="mr-3" size={"100%"} />
+            <FaFileInvoiceDollar className="mr-3" size={"90%"} />
           </div>
           <div className="pl-3 text-2xl">
             Payment Reports
           </div>
         </NavLink>
-        <NavLink 
-          to={"/posts"} 
-          className={`w-full h-9 ${location.pathname == "/posts" && "bg-ghostwhite-200"} hover:bg-ghostwhite-100 top-0 transition-colors duration-300 flex items-center justify-start p-9`}
+        <NavLink
+          className={`w-full h-9  hover:bg-ghostwhite-100 top-0 transition-colors duration-300 flex items-center justify-start p-9`}
+          onClick={logout}
         >
           <div className=" min-w-[2rem] max-w-[2rem]">
-            <FaPenToSquare className="mr-3" size={"100%"} />
+            <FaRightFromBracket className="mr-3" size={"100%"} />
           </div>
           <div className="pl-3 text-2xl">
             Logout

@@ -23,9 +23,9 @@ export default function ContentBox({item}) {
       <div className='pr-5'>
         <Avatar src={item.posted_by.profile_picture} size={"lg"} />
       </div>
-      <div className='w-full relative'>
-        <div className='w-full mt-1'>
-          <h2 className='font-semibold text-lg text-navyblue-500'>{item.title}</h2>
+      <div className='w-full relative truncate'>
+        <div className='w-full mt-1 relative'>
+          <h2 className='w-full font-semibold text-lg text-navyblue-500 '>{item.title}</h2>
           <div className='h-fit flex justify-between items-center w-full'>
             <div className='text-sm flex items-center h-full'>
               {item.posted_by.name} &#x2022; <FaRegClock className='mx-1 mt-[0.18rem]'/> {item.duration} {item.duration_type}
@@ -37,7 +37,7 @@ export default function ContentBox({item}) {
 
         </div>
         <hr className=' my-4 border-navyblue-800' />
-        <div className='w-full h-36 text-sm relative overflow-y-auto'>
+        <div className='w-full h-36 text-sm relative overflow-y-auto whitespace-normal'>
           <div dangerouslySetInnerHTML={displayFormattedText()} />
         </div>
         

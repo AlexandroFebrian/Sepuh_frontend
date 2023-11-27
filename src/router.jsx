@@ -40,11 +40,43 @@ const Router = createBrowserRouter([
         element: <AddPost />,
       },
       {
-        path: "messages",
+        path: "/messages",
+        element: <Messages />
+      },
+      {
+        path: "/lists",
+        element: <Messages />
+      },
+      {
+        path: "/myposts",
+        element: <Messages />
+      },
+      {
+        path: "/dashboard",
+        element: <Messages />
+      },
+      {
+        path: "/employee",
         element: <Messages />
       },
       {
         path: "user/profile",
+        element: <Profile />,
+      },
+      {
+        path: "user/document",
+        element: <Profile />,
+      },
+      {
+        path: "user/history",
+        element: <Profile />,
+      },
+      {
+        path: "user/income",
+        element: <Profile />,
+      },
+      {
+        path: "user/bank",
         element: <Profile />,
       },
       {

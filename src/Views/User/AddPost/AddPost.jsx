@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import MenuLogin from "../../../components/SidebarMenu/Freelancer/FreelancerDefaultMenu/FreelancerDefaultMenu";
 import NowHiring from '../../../components/NowHiring/NowHiring'
 import FreelancerAddPost from './Freelancer/FreelancerAddPost';
 import CompanyAddPost from './Company/CompanyAddPost';
 import { useSelector } from 'react-redux';
+import FreelancerDefaultMenu from '../../../components/SidebarMenu/Freelancer/FreelancerDefaultMenu/FreelancerDefaultMenu';
+import CompanyDefaultMenu from '../../../components/SidebarMenu/Company/CompanyDefaultMenu/CompanyDefaultMenu';
 
 export default function AddPost() {
   const user = useSelector((state) => state.user.userDetail)
@@ -13,7 +14,16 @@ export default function AddPost() {
       <div className=" h-fit relative flex">
         <div className="left w-1/5 ">
           <div className="h-[calc(100vh-5rem)] w-full sticky top-[5rem]">
-            <MenuLogin />
+            {
+              user && user?.role == "Freelancer"
+              &&
+              <FreelancerDefaultMenu />
+            }
+            {
+              user && user?.role == "Company"
+              &&
+              <CompanyDefaultMenu />
+            }
           </div>
         </div>
         <div className="mid w-3/5">
@@ -21,7 +31,7 @@ export default function AddPost() {
             <h1 className='font-bold text-3xl'>New Post</h1>
             <div className='w-full bg-ghostwhite-100 mt-5 p-7 rounded shadow-lg'>
               {
-                user.role == "Freelancer"
+                user?.role == "Freelancer"
                 ?
                 <FreelancerAddPost />
                 :

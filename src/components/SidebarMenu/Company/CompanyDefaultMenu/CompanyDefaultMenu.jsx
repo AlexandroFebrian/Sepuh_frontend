@@ -5,7 +5,9 @@ import {
   FaEnvelope,
   FaListUl,
   FaGear,
+  FaUserGroup,
 } from "react-icons/fa6";
+import { MdSpaceDashboard } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
@@ -31,7 +33,7 @@ export default function CompanyDefaultMenu() {
           className={`w-full h-9 ${location.pathname == "/dashboard" && "bg-ghostwhite-200"} hover:bg-ghostwhite-100 top-0 transition-colors duration-300 flex items-center justify-start p-9`}
         >
           <div className=" min-w-[2rem] max-w-[2rem]">
-            <FaEnvelope className="mr-3" size={"100%"} />
+            <MdSpaceDashboard className="mr-3" size={"100%"} />
           </div>
           <div className="pl-3 text-2xl">
             Dashboard
@@ -42,7 +44,7 @@ export default function CompanyDefaultMenu() {
           className={`w-full h-9 ${location.pathname == "/messages" && "bg-ghostwhite-200"} hover:bg-ghostwhite-100 top-0 transition-colors duration-300 flex items-center justify-start p-9`}
         >
           <div className=" min-w-[2rem] max-w-[2rem]">
-            <FaListUl className="mr-3" size={"100%"} />
+            <FaEnvelope className="mr-3" size={"100%"} />
           </div>
           <div className="pl-3 text-2xl">
             Messages
@@ -53,21 +55,21 @@ export default function CompanyDefaultMenu() {
           className={`w-full h-9 ${location.pathname == "/employeelists" && "bg-ghostwhite-200"} hover:bg-ghostwhite-100 top-0 transition-colors duration-300 flex items-center justify-start p-9`}
         >
           <div className=" min-w-[2rem] max-w-[2rem]">
-            <FaPenToSquare className="mr-3" size={"100%"} />
+            <FaUserGroup className="mr-3" size={"100%"} />
           </div>
           <div className="pl-3 text-2xl">
             Employee Lists
           </div>
         </NavLink>
         <NavLink 
-          to={"/posts"} 
-          className={`w-full h-9 ${location.pathname == "/posts" && "bg-ghostwhite-200"} hover:bg-ghostwhite-100 top-0 transition-colors duration-300 flex items-center justify-start p-9`}
+          to={"/myposts"} 
+          className={`w-full h-9 ${location.pathname == "/myposts" && "bg-ghostwhite-200"} hover:bg-ghostwhite-100 top-0 transition-colors duration-300 flex items-center justify-start p-9`}
         >
           <div className=" min-w-[2rem] max-w-[2rem]">
             <FaPenToSquare className="mr-3" size={"100%"} />
           </div>
           <div className="pl-3 text-2xl">
-            Posts
+            My Posts
           </div>
         </NavLink>
       </div>
