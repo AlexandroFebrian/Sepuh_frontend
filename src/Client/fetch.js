@@ -2,13 +2,15 @@ import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { setIsLogin, setUserDetail } from '../redux/UserSlice';
 import { setCategory } from '../redux/PostSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function fetch(){
   const navigate = useNavigate()
   const location = useLocation()
 
   const dispatch = useDispatch()
+
+  const user = useSelector((state) => state.user.userDetail)
 
   const baseURL = import.meta.env.VITE_BACKEND_URL
   const client = axios.create({
@@ -151,6 +153,25 @@ export default function fetch(){
     }
   }
 
+  async function myPost(email, setMyPost){
+    const token = localStorage.getItem('token')
+
+    try {
+      return await client.get(`posts/${email}`, {
+        headers:{
+          "Authorization": `Bearer ${token}`
+        }
+      }).then((res) => {
+        console.log(res.data)
+        setMyPost(res.data)
+      }).catch((err) => {
+        alert("error")
+      })
+    } catch (error) {
+      alert("error")
+    }
+  }
+
   async function fetchCompanyPost(setCompanyPost){
     try {
       return await client.get("posts/company").then((res) => {
@@ -183,6 +204,7 @@ export default function fetch(){
     getUserProfile,
     updateUserProfile,
     addPost,
+    myPost,
     fetchCompanyPost,
     fetchFreelancerPost
   }

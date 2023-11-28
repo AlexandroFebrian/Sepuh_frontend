@@ -27,10 +27,14 @@ export default function Carousel({photos, className}) {
           {
             photos.map((photo, idx) => {
               return (
-                <div key={"carous_" + idx} style={{ backgroundImage:  `url("${photo}")`, backgroundPositionY: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover"}} className='w-full h-full flex-none'>
+                // <div key={"carous_" + idx} style={{ backgroundImage:  `url("${photo}")`, backgroundPositionY: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover"}} className='w-full h-full flex-none'>
                   
+                // </div>
+                
+                <div className='w-full h-full flex-none flex items-center justify-center'>
+                  <img src={photo} key={idx} className='w-fit h-fit flex-none'/>
+
                 </div>
-                // <img src={photo} key={idx} className='w-full h-full flex-none'/>
               )
             })
           }

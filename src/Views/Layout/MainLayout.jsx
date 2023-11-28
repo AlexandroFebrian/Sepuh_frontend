@@ -16,7 +16,7 @@ export default function MainLayout() {
     <>
       <div className="bg-ghostwhite-50 h-screen">
         <Navbar />
-        <div className="pt-20">
+        <div className="pt-20 ">
           <Outlet />
         </div>
 
