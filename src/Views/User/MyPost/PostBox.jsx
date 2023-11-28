@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 import { FaRegClock, FaChartSimple, FaRegEye } from 'react-icons/fa6';
 import OpenImage from '../../../components/OpenImage/OpenImage';
 
-export default function PostBox({post, setOpen, setImages}) {
-  setImages(post.image)
+export default function PostBox({post, setOpen, setImages, setImageIdx}) {
+
 
   const displayFormattedText = () => {
     // Replace newline characters with HTML line break tags
@@ -26,6 +26,12 @@ export default function PostBox({post, setOpen, setImages}) {
   ];
 
   const posted_at = new Date(post.posted_at)
+
+  function openImage(idx){
+    setImages(post.image)
+    setImageIdx(idx)
+    setOpen(true)
+  }
 
   return (
     <>
@@ -62,7 +68,7 @@ export default function PostBox({post, setOpen, setImages}) {
                 <div key={idx} style={{ backgroundImage: `url('${img}')`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}} className='w-52 h-44 mr-1 rounded'>
                   <div 
                     className='w-full h-full hover:bg-black/40 cursor-pointer rounded hover:after:content-["See_photo"] flex items-center justify-center text-ghostwhite-50 transition-all'
-                    onClick={() => {setOpen(true)}}
+                    onClick={() => {openImage(idx)}}
                   >
                     
                   </div>

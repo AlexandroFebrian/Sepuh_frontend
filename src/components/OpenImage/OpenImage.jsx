@@ -1,15 +1,31 @@
 import React, { useState } from 'react'
 import Carousel from '../Carousel/Carousel'
+import { FaX } from "react-icons/fa6";
 
-export default function OpenImage({className, photos, style}) {
+export default function OpenImage({className, photos, setOpen, imageIdx, setImageIdx, style}) {
   const [close, setClose] = useState(false)
+
+  function handleClose() {
+    setClose(true)
+    setTimeout(() => {
+      setImageIdx(-1)
+      setClose(false)
+      setOpen(false)
+    }, 500);
+  }
   
   return (
     <>
-      <div className={`absolute w-[100%] h-[100%] bg-black/30 z-20 animate__animated ${close ? "animate__fadeOut" : "animate__fadeIn"} animate__faster ${className}`}  style={style}/>
+      <div className={`absolute w-[100%] h-[100%] bg-black/30 z-20 animate__animated ${close ? "animate__fadeOut" : "animate__fadeIn"} animate__faster ${className}`}  style={style}>
+      </div>
       
-      <div className={`absolute w-[100%] h-[100%] z-30 flex items-center justify-center ${className} p-10`} style={style}>
-        <Carousel photos={photos} className="h-full w-full" />
+      <div className={`absolute w-[100%] h-[100%] z-30 flex items-center justify-center p-20 animate__animated ${close ? "animate__fadeOut" : "animate__fadeIn"} animate__faster ${className}`} style={style}>
+        <div className='w-full h-full relative'>
+          <Carousel photos={photos} className="h-full w-full" imageIdx={imageIdx} />
+          <button className='absolute top-0 right-12 cursor-pointer w-10 h-10 hover:bg-white/30 p-1 rounded transition-colors duration-300 ' onClick={() => {handleClose()}}>
+            <FaX className='text-white' size={"100%"}/>
+          </button>
+        </div>
       </div>
     </>
   )

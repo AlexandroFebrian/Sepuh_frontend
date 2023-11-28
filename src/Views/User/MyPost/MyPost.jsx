@@ -11,9 +11,12 @@ export default function MyPost() {
   const [open, setOpen] = useState(false)
   const [images, setImages] = useState([])
   const [position, setPosition] = useState(0);
+  const [imageIdx, setImageIdx] = useState(-1)
 
   useEffect(() => {
     if (open) {
+      
+      setPosition(window.scrollY);
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
@@ -25,7 +28,7 @@ export default function MyPost() {
       {
         open
         &&
-        <OpenImage photos={images} className={`fixed top-0 left-0 z-[60]`} />
+        <OpenImage photos={images} className={`fixed left-0 z-[60]`} setOpen={setOpen} imageIdx={imageIdx} setImageIdx={setImageIdx} style={{ top: `${position}px`}} />
       }
       <div className=" h-fit flex">
         <div className="left w-1/5 ">
@@ -51,7 +54,7 @@ export default function MyPost() {
             </div>
             {
               posts.map((post, idx) => {
-                return <PostBox key={idx} post={post} setOpen={setOpen} setImages={setImages} />
+                return <PostBox key={idx} post={post} setOpen={setOpen} setImages={setImages} setImageIdx={setImageIdx} />
               })
             }
           </div>

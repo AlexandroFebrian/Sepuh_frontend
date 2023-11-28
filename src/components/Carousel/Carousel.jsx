@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
-export default function Carousel({photos, className}) {
+export default function Carousel({photos, imageIdx, className}) {
 
-  const [current, setCurrent] = useState(0);
+  const [current, setCurrent] = useState(imageIdx);
 
   const previousSlide = () => {
     if (current === 0) setCurrent(photos.length - 1);
@@ -31,8 +31,8 @@ export default function Carousel({photos, className}) {
                   
                 // </div>
                 
-                <div className='w-full h-full flex-none flex items-center justify-center'>
-                  <img src={photo} key={idx} className='w-fit h-fit flex-none'/>
+                <div className='w-full h-full flex-none flex items-center justify-center relative'>
+                  <img src={photo} key={idx} className='w-fit h-fit max-w-full max-h-full flex-none'/>
 
                 </div>
               )
