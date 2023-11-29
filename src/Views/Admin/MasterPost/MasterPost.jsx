@@ -53,9 +53,7 @@ export default function MasterPost() {
                 </TableCell>
                 <TableCell className="font-medium text-lg">
                   <div className="buttonAction flex gap-2 items-center justify-center">
-                    <button className="bg-red-500 text-white rounded-md px-3 py-2 hover:bg-red-700 w-20">
-                      Ban
-                    </button>
+                    
                     <button className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-600 w-24">
                       Suspend
                     </button>
@@ -76,9 +74,7 @@ export default function MasterPost() {
                 </TableCell>
                 <TableCell className="font-medium text-lg">
                   <div className="buttonAction flex gap-2 items-center justify-center">
-                    <button className="bg-navyblue-500 text-white rounded-md px-3 py-2 hover:bg-navyblue-600 w-20">
-                      Unban
-                    </button>
+                    
                     <button className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-600 w-24">
                       Suspend
                     </button>
@@ -99,9 +95,6 @@ export default function MasterPost() {
                 </TableCell>
                 <TableCell className="font-medium text-lg">
                   <div className="buttonAction flex gap-2 items-center justify-center">
-                    <button className="bg-navyblue-500 text-white rounded-md px-3 py-2 hover:bg-navyblue-600 w-20">
-                      Unban
-                    </button>
                     <button className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-600 w-24">
                       Suspend
                     </button>
@@ -122,9 +115,7 @@ export default function MasterPost() {
                 </TableCell>
                 <TableCell className="font-medium text-lg">
                   <div className="buttonAction flex gap-2 items-center justify-center">
-                    <button className="bg-navyblue-500 text-white rounded-md px-3 py-2 hover:bg-navyblue-600 w-20">
-                      Unban
-                    </button>
+                    
                     <button className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-600 w-24">
                       Suspend
                     </button>

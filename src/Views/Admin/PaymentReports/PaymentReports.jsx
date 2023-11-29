@@ -19,7 +19,7 @@ export default function PaymentReports() {
       }
       amountFormatted += amountString[i];
     }
-    amountFormatted = "Rp. " + amountFormatted;
+    amountFormatted = "Rp. " + amountFormatted + ",00";
     return amountFormatted;
   };
 

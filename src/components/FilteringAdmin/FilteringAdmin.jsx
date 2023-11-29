@@ -11,12 +11,6 @@ import {
 } from "@/components/ui/select";
 
 export default function FilteringAdmin() {
-  {
-    console.log(
-      "FilteringAdmin.jsx jangan lupa dibenerin value select dan desainnya"
-    );
-  }
-
   return (
     <>
       <div className="container-filterAdmin  h-fit relative flex my-5">

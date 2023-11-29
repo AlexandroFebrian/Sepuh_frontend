@@ -1,14 +1,5 @@
 import NavigationAdmin from "../../../components/NavigationAdmin/NavigationAdmin";
 import FilteringAdmin from "../../../components/FilteringAdmin/FilteringAdmin";
-// import {
-//   Table,
-//   Thead,
-//   Tbody,
-//   Tr,
-//   Th,
-//   Td,
-//   TableContainer,
-// } from "@chakra-ui/react";
 
 import {
   Table,
@@ -18,8 +9,38 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import MasterUserViewModel from "./MasterUserViewModel";
+import { useEffect } from "react";
 
 export default function MasterUser() {
+  const dateFormat = (date) => {
+    const dateObj = new Date(date);
+    const month = dateObj.toLocaleString("default", { month: "long" });
+    const day = dateObj.getDate();
+    const year = dateObj.getFullYear();
+    return `${day} ${month} ${year}`;
+  };
+
+  // const Users = MasterUserViewModel();
+  // const banUserVM = MasterUserViewModel();
+  // const unbanUserVM = MasterUserViewModel();
+  // const Status = MasterUserViewModel();
+
+  const { Users, BanUserVM, UnbanUserVM, Status, SetStatus } =
+    MasterUserViewModel();
+  const banUser = (email) => {
+    // AKU GATAU KENAPA BENTUKNYA GINI HEHEHEHE
+    BanUserVM(email);
+  };
+
+  const unbanUser = (email) => {
+    UnbanUserVM(email);
+  };
+
+  useEffect(() => {
+    document.title = "Master User - Sepuh";
+  }, []);
+
   return (
     <>
       <NavigationAdmin />
@@ -50,7 +71,7 @@ export default function MasterUser() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow>
+              {/* <TableRow>
                 <TableCell className="font-medium text-lg">1</TableCell>
                 <TableCell className="font-medium text-lg">
                   Febrian Alexandro
@@ -157,7 +178,62 @@ export default function MasterUser() {
                     </button>
                   </div>
                 </TableCell>
-              </TableRow>
+              </TableRow> */}
+
+              {Users.map((user, index) => (
+                <TableRow key={index}>
+                  <TableCell className="font-medium text-lg">
+                    {index + 1}
+                  </TableCell>
+                  <TableCell className="font-medium text-lg">
+                    {user.name}
+                  </TableCell>
+                  <TableCell className="font-medium text-lg">
+                    <a href={`mailto:${user.email}`}>{user.email}</a>
+                  </TableCell>
+                  <TableCell className="font-medium text-lg">
+                    {dateFormat(user.create_at)}
+                  </TableCell>
+                  <TableCell className="font-medium text-lg">
+                    {user.history.length > 0
+                      ? `Banned on ${dateFormat(user.history)}`
+                      : "Not banned"}
+                  </TableCell>
+                  <TableCell className="font-medium text-lg">
+                    <div className="buttonAction flex gap-2 items-center justify-center">
+                      {Status[index] === -1 && (
+                        <button
+                          className=" bg-navyblue-500 text-white rounded-md px-3 py-2 hover:bg-navyblue-600  w-20"
+                          onClick={() => {
+                            unbanUser(user.email);
+                            Status[index] = 1;
+                            SetStatus([...Status]);
+                          }}
+                        >
+                          Unban
+                        </button>
+                      )}
+
+                      {Status[index] === 1 && (
+                        <button
+                          className="bg-red-500 text-white rounded-md px-3 py-2 hover:bg-red-700 w-20"
+                          onClick={() => {
+                            banUser(user.email);
+                            Status[index] = -1;
+                            SetStatus([...Status]);
+                          }}
+                        >
+                          Ban
+                        </button>
+                      )}
+
+                      <button className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-600 w-20">
+                        Edit
+                      </button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </div>

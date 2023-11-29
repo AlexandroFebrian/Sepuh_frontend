@@ -27,7 +27,7 @@ export default function IncomeReports() {
       }
       amountFormatted += amountString[i];
     }
-    amountFormatted = "Rp. " + amountFormatted;
+    amountFormatted = "Rp. " + amountFormatted + ",00";
     return amountFormatted;
   };
 
