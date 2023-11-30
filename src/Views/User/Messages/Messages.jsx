@@ -17,7 +17,14 @@ export default function Messages() {
         search,
         setSearch,
         selectedChat,
-        selectContactHandler
+        selectContactHandler,
+        height,
+        setHeight,
+        scrollToBottom,
+        chatRef,
+        sendMessageHandler,
+        message,
+        setMessage
     } = MessagesViewModel();
 
     return (
@@ -109,30 +116,45 @@ export default function Messages() {
                                     <h1 className="font-semibold text-3xl ms-6">{ selectedChat.users.find((u) => u.user.email != user.email).user.name }</h1>
                                 </div>
                             </div>
-                            <div className="absolute bottom-3 w-full h-fit">
-                                <div className="w-full h-[calc(100vh-11rem)] px-5 pb-10 pt-44 overflow-y-auto z-0 bg-slate-200">
-                                    INI TEMPAT MESSAGE
+                            <div className="absolute bottom-0 w-full h-[calc(100vh-11rem)]">
+                                <div ref={chatRef} className={"relative flex flex-col items-start w-full px-5 pb-5 overflow-y-auto h-[calc(100vh-" + (15.8 + ((height - 8) * 1.68 / 8)).toString() + "rem)]"}>
+                                    { selectedChat.messages.map((m, i) => <div key={ i } className={"w-full flex flex-wrap justify-" + (m.sender.email == user.email ? "end" : "start")}>
+                                        <div className={"border border-black p-5 max-w-[40%] mt-5 " + (m.sender.email == user.email ? "rounded-l-lg rounded-br-lg" : "rounded-r-lg rounded-bl-lg")}>
+                                            { m.value } 
+                                        </div>
+                                    </div>)}
                                 </div>
-                                <div className="w-full max-h-40 min-h-fit px-5 py-3 border-t-2 border-navyblue-800 flex bg-red-700 items-end">
-                                    <div className="w-1/12">
-                                        
-                                    </div>
-                                    <div className="w-10/12">
-                                        <Textarea 
-                                            variant="plain"
-                                            minRows={1} 
-                                            maxRows={4}
-                                            placeholder="Type a message…"
-                                            size="lg"
-                                        />
-                                    </div>
-                                    <div className="w-1/12 flex justify-center">
-                                        <Button 
-                                            bg="ghostwhite.50"
-                                            height="3.1rem"
-                                        >
-                                        <FaRegPaperPlane />
-                                        </Button>
+                                <div className="w-full bg-white z-10 max-h-40 min-h-fit px-5 py-3 border-t-2 border-navyblue-800 absolute bottom-0">
+                                    <div className="flex items-end">
+                                        <div className="w-1/12">
+                                            {/* Harusnya isinya send file or idk */}
+                                        </div>
+                                        <div className="w-10/12">
+                                            <Textarea 
+                                                variant="plain"
+                                                minRows={1} 
+                                                maxRows={4}
+                                                onChange={(e) => {
+                                                    setHeight(parseInt(e.currentTarget.style.height.split("px")[0]) / 27 * 8);
+                                                    setMessage(e.target.value);
+                                                }}
+                                                onKeyUp={(e) => setHeight(parseInt(e.currentTarget.style.height.split("px")[0]) / 27 * 8)}
+                                                placeholder="Type a message…"
+                                                size="lg"
+                                                value={message}
+                                            />
+                                            {}
+                                        </div>
+                                        <div className="w-1/12 flex justify-center">
+                                            <Button 
+                                                bg="ghostwhite.50"
+                                                height="3.1rem"
+                                                onClick={() => sendMessageHandler(selectedChat.users.find((u) => u.user.email != user.email).user._id)}
+                                            >
+                                                <FaRegPaperPlane />
+                                            </Button>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>

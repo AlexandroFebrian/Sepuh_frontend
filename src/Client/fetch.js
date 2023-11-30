@@ -329,6 +329,34 @@ export default function fetch() {
           }
         )
         .then((res) => {
+          setContacts(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  async function sendMessage(receiver_id, message) {
+    const token = localStorage.getItem("token");
+
+    try {
+      client
+        .post(
+          `/chats/message`,
+          {
+            receiver_id,
+            message
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((res) => {
           console.log(res.data);
           setContacts(res.data);
         })
@@ -355,6 +383,7 @@ export default function fetch() {
     getAllUser,
     BanUser,
     UnbanUser,
-    getAllChats
+    getAllChats,
+    sendMessage
   };
 }
