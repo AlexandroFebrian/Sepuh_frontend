@@ -315,6 +315,31 @@ export default function fetch() {
     }
   }
 
+  async function getAllChats(setContacts) {
+    const token = localStorage.getItem("token");
+
+    try {
+      client
+        .get(
+          `/chats`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.data);
+          setContacts(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   return {
     signIn,
     signUp,
@@ -330,5 +355,6 @@ export default function fetch() {
     getAllUser,
     BanUser,
     UnbanUser,
+    getAllChats
   };
 }
