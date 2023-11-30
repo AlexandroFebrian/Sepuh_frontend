@@ -23,8 +23,10 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setIsLogin, setUserDetail } from "../../redux/UserSlice";
+import fetch from "../../Client/fetch";
 
 export default function Navbar() {
+  const { checkToken } = fetch();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -35,6 +37,8 @@ export default function Navbar() {
 
   const [showProfile, setShowProfile] = useState(false);
   const [closeProfile, setCloseProfile] = useState(false);
+
+  const [formatedBalance, setFormatedBalance] = useState(null);
 
   function close() {
     setCloseFilter(true);
@@ -54,25 +58,40 @@ export default function Navbar() {
 
   function logout() {
     dispatch(setIsLogin(false));
-    dispatch(setUserDetail({}));
+    dispatch(setUserDetail(null));
     localStorage.removeItem("token");
     navigate("/");
   }
 
-  const formatAmount = (amount) => {
-    console.log(amount);
-    const amountString = amount.toString();
+  useEffect(() => {
+    if (!user) return;
+    const amountString = user.balance.toString();
     const amountLength = amountString.length;
     let amountFormatted = "";
     for (let i = 0; i < amountLength; i++) {
-      if ((amountLength - i) % 3 === 0 && i !== 0) {
+        if ((amountLength - i) % 3 === 0 && i !== 0) {
         amountFormatted += ".";
-      }
-      amountFormatted += amountString[i];
+        }
+        amountFormatted += amountString[i];
     }
     amountFormatted = "Rp. " + amountFormatted + ",00";
-    return amountFormatted;
-  };
+    setFormatedBalance(amountFormatted);
+  }, [user]);
+
+//   const formatAmount = (amount) => {
+//     console.log(amount);
+//     const amountString = amount.toString();
+//     const amountLength = amountString.length;
+//     let amountFormatted = "";
+//     for (let i = 0; i < amountLength; i++) {
+//       if ((amountLength - i) % 3 === 0 && i !== 0) {
+//         amountFormatted += ".";
+//       }
+//       amountFormatted += amountString[i];
+//     }
+//     amountFormatted = "Rp. " + amountFormatted + ",00";
+//     return amountFormatted;
+//   };
 
   return (
     <>
@@ -174,7 +193,7 @@ export default function Navbar() {
                       </h1>
 
                       <h2 className="text-center font-semibold text-lg">
-                        {formatAmount(user.balance)}
+                        {formatedBalance && formatedBalance}
                         {/* {formatAmount(999999999999999)} */}
                       </h2>
                     </div>
