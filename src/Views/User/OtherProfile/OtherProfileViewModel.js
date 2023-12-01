@@ -5,7 +5,7 @@ import { useLocation, useParams } from "react-router-dom";
 
 
 export default function OtherProfileViewModel(){
-  const { checkToken, getUserProfileByEmail, getUserPostByEmail } = fetch();
+  const { checkToken, getUserProfileByEmail, getUserPostsByEmail } = fetch();
 
   const isLogin = useSelector((state) => state.user.isLogin);
   const user = useSelector((state) => state.user.userDetail);
@@ -15,20 +15,20 @@ export default function OtherProfileViewModel(){
   const email = params.get('email');
 
   const [profile, setProfile] = useState(null);
-  const [post, setPost] = useState(null);
+  const [posts, setPosts] = useState(null);
   
 
   useEffect(() => {
     checkToken();
     getUserProfileByEmail(email, setProfile)
-    getUserPostByEmail(email, setPost)
+    getUserPostsByEmail(email, setPosts)
   }, [])
 
   return {
     isLogin,
     user,
     profile,
-    post,
+    posts,
   }
 
 }

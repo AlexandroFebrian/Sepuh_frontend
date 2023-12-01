@@ -26,11 +26,11 @@ export default function ContentBox({item}) {
   const email = encodeURIComponent(item.posted_by.email)
 
   return (
-    <div className='w-full h-fit mb-5 rounded shadow-lg bg-lightblue-50 flex p-5 relative'>
+    <div className='w-full h-fit mb-5 rounded shadow-lg bg-lightblue-50 flex p-5 relative border border-navyblue-800'>
       <div className='pr-5'>
         <Avatar src={item.posted_by.profile_picture} size={"lg"} />
       </div>
-      <div className='w-full relative truncate'>
+      <div className='w-full relative'>
         <div className='w-full mt-1 relative'>
           <h2 className='w-full font-semibold text-lg text-navyblue-500 '>{item.title}</h2>
           <div className='h-fit flex justify-between items-center w-full'>
@@ -58,8 +58,9 @@ export default function ContentBox({item}) {
         </div>
 
         <hr className=' my-4 border-navyblue-800' />
-        <div className='w-full h-36 text-sm relative overflow-y-auto whitespace-normal'>
-          <div dangerouslySetInnerHTML={displayFormattedText()} />
+
+        <div className='w-full h-36 text-md overflow-y-hidden line-clamp-6'>
+          {item.description}
         </div>
         
         <hr className=' my-4 border-navyblue-800' />

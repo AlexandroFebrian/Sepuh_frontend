@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import ProfileBox from "./ProfileBox";
 
 export default function OtherProfile() {
-  const { isLogin, user, profile, post } = OtherProfileViewModel()
+  const { isLogin, user, profile, posts } = OtherProfileViewModel()
 
   return (
     <>
@@ -33,7 +33,7 @@ export default function OtherProfile() {
             {
               profile
               &&
-              <ProfileBox profile={profile} post={post} />
+              <ProfileBox profile={profile} posts={posts} />
             }
           </div>
         </div>

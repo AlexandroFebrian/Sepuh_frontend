@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { Avatar } from "@chakra-ui/react";
-import { FaStar } from "react-icons/fa6";
+import { FaStar, FaRegUser } from "react-icons/fa6";
+import ContentBox from '../../../components/ContentBox/ContentBox';
 
-export default function ProfileBox({profile, post}) {
+export default function ProfileBox({profile, posts}) {
   const [content, setContent] = useState("Description")
 
   const member = new Date(profile?.create_at)
@@ -36,8 +37,8 @@ export default function ProfileBox({profile, post}) {
             <div className="flex items-center">
               {profile?.country} &#x2022; <FaStar className="ml-2 text-yellow-500" /> {profile?.rating}
             </div>
-            <div>
-              Member since {monthNames[member?.getMonth()]} {member?.getFullYear()}
+            <div className='flex items-center'>
+              <FaRegUser /> &nbsp; Member since {monthNames[member?.getMonth()]} {member?.getFullYear()}
             </div>
 
           </div>
@@ -72,9 +73,9 @@ export default function ProfileBox({profile, post}) {
         {
           content == "Posts"
           &&
-          <div className=''>
-            
-          </div>
+          posts.map((post, idx) => {
+            return <ContentBox item={post} key={idx} />
+          })
         }
       </div>
     </div>

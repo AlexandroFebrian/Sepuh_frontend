@@ -150,12 +150,11 @@ export default function fetch() {
     }
   }
 
-  async function getUserPostByEmail(email, setPost){
+  async function getUserPostsByEmail(email, setPosts){
     try {
-      client.get(`users/posts/${email}`)
+      client.get(`posts/${email}`)
       .then((res) => {
-        console.log(res.data)
-        setPost(res.data);
+        setPosts(res.data);
       })
       .catch((err) => {
         alert("error")
@@ -404,7 +403,7 @@ export default function fetch() {
     getCategory,
     getUserProfile,
     getUserProfileByEmail,
-    getUserPostByEmail,
+    getUserPostsByEmail,
     updateUserProfile,
     addPost,
     myPost,

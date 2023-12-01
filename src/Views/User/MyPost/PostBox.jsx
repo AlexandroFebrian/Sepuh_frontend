@@ -38,8 +38,8 @@ export default function PostBox({post, setOpen, setImages, setImageIdx}) {
     <>
       
 
-      <div className='w-full h-fit mb-5 rounded shadow-lg bg-lightblue-50 p-5  border border-navyblue-800 truncate'>
-        <div className='flex truncate'>
+      <div className='w-full h-fit mb-5 rounded shadow-lg bg-lightblue-50 p-5  border border-navyblue-800'>
+        <div className='flex'>
           <Avatar src={post.posted_by.profile_picture} size={"lg"} />
           <div className='w-full ml-3 relative'>
             <h2 className='w-full font-semibold text-lg '>{post.title}</h2>
@@ -69,10 +69,8 @@ export default function PostBox({post, setOpen, setImages, setImageIdx}) {
 
         <hr className=' my-4 border-navyblue-800' />
         
-        <div className='w-full relative truncate'>
-          <div className='w-full h-36 text-sm relative overflow-y-auto whitespace-normal'>
-            <div dangerouslySetInnerHTML={displayFormattedText()} />
-          </div>
+        <div className='w-full h-36 text-md overflow-y-hidden line-clamp-6'>
+          {post.description}
         </div>
 
         <div className='w-full flex mt-4 overflow-x-auto'>

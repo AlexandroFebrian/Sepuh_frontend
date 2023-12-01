@@ -5,6 +5,7 @@ import NowHiring from '../../../components/NowHiring/NowHiring'
 import MyPostViewModel from './MyPostViewModel'
 import PostBox from './PostBox'
 import OpenImage from '../../../components/OpenImage/OpenImage'
+import { FaPlus } from 'react-icons/fa6'
 
 export default function MyPost() {
   const { isLogin, user, posts } = MyPostViewModel()
@@ -46,19 +47,34 @@ export default function MyPost() {
             
           </div>
         </div>
+
         <div className="mid w-3/5 h-full">
           <div className=" min-h-[calc(100vh-5rem)] h-fit border-l-2 border-navyblue-600 z-0 px-10 py-10">
             <h1 className='text-3xl font-bold'>My Posts</h1>
-            <div className='mt-5'>
-
+            <div className='w-full pt-3 flex justify-between relative min-h-[calc(100vh-15rem)] h-fit mt-4'>
+              <div className='w-[calc(100%-5rem)] mr-10'>
+              {
+                posts.map((post, idx) => {
+                  return <PostBox key={idx} post={post} setOpen={setOpen} setImages={setImages} setImageIdx={setImageIdx} />
+                })
+              }
+              </div>
+              
+              {
+                isLogin
+                &&
+                <div className=' w-20 relative'>
+                  <button className='w-20 h-20 p-[0.4rem] bg-navyblue-800 hover:bg-navyblue-700 transition-colors duration-300 rounded-full flex justify-center items-center sticky top-[90%]' onClick={() => (navigate("/addpost"))}>
+                    <div className='w-full h-full rounded-full border-[0.15rem] border-ghostwhite-50 flex justify-center items-center'>
+                      <FaPlus className=' text-ghostwhite-50 w-10 h-10'/>
+                    </div>
+                  </button>
+                </div>
+              }
             </div>
-            {
-              posts.map((post, idx) => {
-                return <PostBox key={idx} post={post} setOpen={setOpen} setImages={setImages} setImageIdx={setImageIdx} />
-              })
-            }
           </div>
         </div>
+        
         <div className="right w-1/5">
           <NowHiring />
         </div>
