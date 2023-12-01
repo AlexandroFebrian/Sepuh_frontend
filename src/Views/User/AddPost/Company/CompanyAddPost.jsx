@@ -55,9 +55,9 @@ export default function CompanyAddPost() {
       />
 
       <div className='w-full flex items-center'>
-        <Avatar bg="ghostwhite.400" size={"lg"}/>
+        <Avatar bg="ghostwhite.400" size={"lg"} src={user && user.profile_picture}/>
         <div className=' ml-5'>
-          <h1 className='font-semibold text-xl'>{user.name}</h1>
+          <h1 className='font-semibold text-xl'>{user && user.name}</h1>
         </div>
       </div>
 
@@ -75,25 +75,22 @@ export default function CompanyAddPost() {
           maxRows={10}
           style={{ width: '100%', minHeight: '100px' }}
           endDecorator={
-            <div className='w-full px-3 py-2'>
-              <Typography variant="body-xs" sx={{ ml: "auto", color: text.length > 1000 ? 'red' : 'inherit', textAlign: "right" }}>
-                {text.trim().split(/\s+/).filter(Boolean).length} / 1000
-              </Typography>
-              <div className='w-full flex flex-wrap items-center'>
-                {imageSrcs.map((src, index) => (
-                  <img
-                    key={index}
-                    src={src}
-                    alt={`Uploaded File ${index + 1}`}
-                    className="w-auto h-64 mt-2 object-cover rounded-md mr-2"
-                    draggable="false"
-                  />
-                ))}
-              </div>
-
-            </div>
+            <Typography variant="body-xs" sx={{ ml: "auto", color: text.length > 1000 ? 'red' : 'inherit', textAlign: "right" }}>
+              {text.trim().split(/\s+/).filter(Boolean).length} / 1000
+            </Typography>
           }
         />
+        <div className='w-full flex flex-wrap items-center'>
+          {imageSrcs.map((src, index) => (
+            <img
+              key={index}
+              src={src}
+              alt={`Uploaded File ${index + 1}`}
+              className="w-auto h-64 mt-2 object-cover rounded-md mr-2"
+              draggable="false"
+            />
+          ))}
+        </div>
         
         <div className=' mt-5'>
           <InputFileButton className=" p-2 bg-navyblue-800 hover:bg-navyblue-700 rounded-full " file={file} setFile={setFile} imageSrcs={imageSrcs} setImageSrcs={setImageSrcs} multipleInput={true} showImage={true} multipleImage={true}>

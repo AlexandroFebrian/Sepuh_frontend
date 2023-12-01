@@ -134,6 +134,20 @@ export default function fetch() {
     }
   }
 
+  async function getUserProfileByEmail(email){
+    try {
+      // client.get()
+      // .then((res) => {
+
+      // })
+      // .catch((err) => {
+      //   alert("error")
+      // })
+    } catch (error) {
+      alert("error")
+    }
+  }
+
   async function getCategory() {
     try {
       return await client
@@ -374,6 +388,7 @@ export default function fetch() {
     checkToken,
     getCategory,
     getUserProfile,
+    getUserProfileByEmail,
     updateUserProfile,
     addPost,
     myPost,

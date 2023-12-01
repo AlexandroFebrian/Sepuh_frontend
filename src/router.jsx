@@ -8,6 +8,8 @@ import HomePage from "./Views/User/HomePage/HomePage";
 import AddPost from "./Views/User/AddPost/AddPost";
 import Messages from "./Views/User/Messages/Messages";
 import MyPost from "./Views/User/MyPost/MyPost";
+import Profile from "./Views/User/Profile/Profile";
+import OtherProfile from "./Views/User/OtherProfile/OtherProfile";
 
 // ADMIN
 import AdminLogin from "./Views/Admin/AdminLogin/AdminLogin";
@@ -17,7 +19,6 @@ import UserReports from "./Views/Admin/UserReports/UserReports";
 import PostingReports from "./Views/Admin/PostingReports/PostingReports";
 import IncomeReports from "./Views/Admin/IncomeReports/IncomeReports";
 import PaymentReports from "./Views/Admin/PaymentReports/PaymentReports";
-import Profile from "./Views/User/Profile/Profile";
 
 const Router = createBrowserRouter([
   {
@@ -79,6 +80,10 @@ const Router = createBrowserRouter([
       {
         path: "user/bank",
         element: <Profile />,
+      },
+      {
+        path: "user",
+        element: <OtherProfile />
       },
       {
         path: "/admin/masteruser",

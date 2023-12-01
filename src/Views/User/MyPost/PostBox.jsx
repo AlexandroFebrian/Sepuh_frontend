@@ -61,11 +61,11 @@ export default function PostBox({post, setOpen, setImages, setImageIdx}) {
           </div>
         </div>
 
-        <div className='w-fit flex mt-4'>
+        <div className='w-full flex mt-4 overflow-x-auto'>
           {
             post.image.map((img, idx) => {
               return (
-                <div key={idx} style={{ backgroundImage: `url('${img}')`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}} className='w-52 h-44 mr-1 rounded'>
+                <div key={idx} style={{ backgroundImage: `url('${img}')`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}} className='w-52 h-44 mr-1 rounded flex-none'>
                   <div 
                     className='w-full h-full hover:bg-black/40 cursor-pointer rounded hover:after:content-["See_photo"] flex items-center justify-center text-ghostwhite-50 transition-all'
                     onClick={() => {openImage(idx)}}

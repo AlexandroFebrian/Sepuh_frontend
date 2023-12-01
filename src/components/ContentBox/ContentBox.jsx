@@ -2,6 +2,7 @@ import { Avatar, Button } from '@chakra-ui/react'
 import React from 'react'
 import { FaRegClock } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
 export default function ContentBox({item}) {
   const displayFormattedText = () => {
@@ -18,6 +19,9 @@ export default function ContentBox({item}) {
     minimumFractionDigits: 2,
   }).format(item.max_price);
 
+  // const email = item.posted_by.email.replace(/\./g, "%dot%")
+  const email = encodeURIComponent(item.posted_by.email)
+
   return (
     <div className='w-full h-[21rem] mb-5 rounded shadow-lg bg-lightblue-50 flex p-5 relative'>
       <div className='pr-5'>
@@ -27,8 +31,8 @@ export default function ContentBox({item}) {
         <div className='w-full mt-1 relative'>
           <h2 className='w-full font-semibold text-lg text-navyblue-500 '>{item.title}</h2>
           <div className='h-fit flex justify-between items-center w-full'>
-            <div className='text-sm flex items-center h-full'>
-              {item.posted_by.name} &#x2022; <FaRegClock className='mx-1 mt-[0.18rem]'/> {item.duration} {item.duration_type}
+            <div className='text-sm flex items-center h-full font-semibold'>
+              <Link to={`/user?email=${email}`} className=' hover:underline' >{item.posted_by.name}</Link> &nbsp; &#x2022; &nbsp; <FaRegClock className='mt-[0.18rem] mr-1'/>  {item.duration} {item.duration_type}
             </div>
             <div className='text-md h-full'>
               ⭐ {item.avg_rating}
