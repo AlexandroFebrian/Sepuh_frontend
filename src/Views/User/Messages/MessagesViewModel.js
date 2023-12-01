@@ -22,7 +22,7 @@ export default function MessagesViewModel(){
         checkToken();
         scrollToBottom();
         
-        const newSocket = io("http://localhost:5000");
+        const newSocket = io(import.meta.env.VITE_SOCKET_URL);
         setSocket(newSocket);
         
         return () => {
