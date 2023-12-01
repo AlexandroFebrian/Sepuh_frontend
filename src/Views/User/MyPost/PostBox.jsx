@@ -1,10 +1,11 @@
-import { Avatar, Button } from '@chakra-ui/react';
+import { Avatar, Button, Tag } from '@chakra-ui/react';
 import React, { useState } from 'react'
 import { FaRegClock, FaChartSimple, FaRegEye } from 'react-icons/fa6';
 import OpenImage from '../../../components/OpenImage/OpenImage';
+import { useSelector } from 'react-redux';
 
 export default function PostBox({post, setOpen, setImages, setImageIdx}) {
-
+  const categories = useSelector((state) => state.post.category)
 
   const displayFormattedText = () => {
     // Replace newline characters with HTML line break tags
@@ -50,12 +51,25 @@ export default function PostBox({post, setOpen, setImages, setImageIdx}) {
               </div>
             </div>
 
+            <div className='mt-2'>
+              {
+                post.hashtag.map((tag, idx) => {
+                  return (
+                    <Tag key={idx} colorScheme='navyblue' className='mr-1' >
+                      {categories.find(category => category.value == tag).label}
+                    </Tag>
+                  )
+                })
+              }
+            </div>
           </div>
+
 
         </div>
 
+        <hr className=' my-4 border-navyblue-800' />
+        
         <div className='w-full relative truncate'>
-          <hr className=' my-4 border-navyblue-800' />
           <div className='w-full h-36 text-sm relative overflow-y-auto whitespace-normal'>
             <div dangerouslySetInnerHTML={displayFormattedText()} />
           </div>

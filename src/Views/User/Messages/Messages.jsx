@@ -134,7 +134,7 @@ export default function Messages() {
                                         </p>}
                                     </div>)}
                                 </div>
-                                <div className="w-full bg-white z-10 max-h-40 min-h-fit px-5 py-3 border-t-2 border-navyblue-800">
+                                <div className="w-full bg-white z-10 max-h-40 min-h-fit px-5 py-3 border-t-2 border-navyblue-800 transition-all duration-300">
                                     <div className="flex items-end">
                                         <div className="w-1/12">
                                             {/* Harusnya isinya send file or idk */}
@@ -152,6 +152,7 @@ export default function Messages() {
                                                 placeholder="Type a message…"
                                                 size="lg"
                                                 value={message}
+                                                
                                             />
                                             {}
                                         </div>

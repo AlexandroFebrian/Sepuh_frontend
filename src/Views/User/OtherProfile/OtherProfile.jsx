@@ -3,8 +3,11 @@ import NowHiring from "../../../components/NowHiring/NowHiring";
 import CompanyDefaultMenu from "../../../components/SidebarMenu/Company/CompanyDefaultMenu/CompanyDefaultMenu";
 import OtherProfileViewModel from "./OtherProfileViewModel";
 
+import { useEffect, useState } from "react";
+import ProfileBox from "./ProfileBox";
+
 export default function OtherProfile() {
-  const { isLogin, user } = OtherProfileViewModel()
+  const { isLogin, user, profile, post } = OtherProfileViewModel()
 
   return (
     <>
@@ -25,8 +28,13 @@ export default function OtherProfile() {
           </div>
         </div>
         <div className="mid w-3/5 h-full">
-          <div className=" min-h-[calc(100vh-5rem)] h-fit border-l-2 border-navyblue-600 z-0 px-10 py-10">
-            <h1 className="font-bold text-3xl">View Profile</h1>
+          <div className=" min-h-[calc(100vh-5rem)] max-h-[calc(100vh-5rem)] border-l-2 border-navyblue-600 z-0 px-10 py-10 relative">
+            <h1 className="font-bold text-3xl">View Profile {profile?.name}</h1>
+            {
+              profile
+              &&
+              <ProfileBox profile={profile} post={post} />
+            }
           </div>
         </div>
         <div className="right w-1/5">

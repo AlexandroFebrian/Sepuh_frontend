@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 
 export default function HomePageViewModel(){
-  const { checkToken, fetchCompanyPost, fetchFreelancerPost } = fetch();
+  const { checkToken } = fetch();
 
   const isLogin = useSelector((state) => state.user.isLogin);
   const user = useSelector((state) => state.user.userDetail);

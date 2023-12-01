@@ -134,15 +134,32 @@ export default function fetch() {
     }
   }
 
-  async function getUserProfileByEmail(email){
-    try {
-      // client.get()
-      // .then((res) => {
+  async function getUserProfileByEmail(email, setProfile){
 
-      // })
-      // .catch((err) => {
-      //   alert("error")
-      // })
+    try {
+      client.get(`users/profile/${email}`)
+      .then((res) => {
+        console.log(res.data)
+        setProfile(res.data);
+      })
+      .catch((err) => {
+        alert("error")
+      })
+    } catch (error) {
+      alert("error")
+    }
+  }
+
+  async function getUserPostByEmail(email, setPost){
+    try {
+      client.get(`users/posts/${email}`)
+      .then((res) => {
+        console.log(res.data)
+        setPost(res.data);
+      })
+      .catch((err) => {
+        alert("error")
+      })
     } catch (error) {
       alert("error")
     }
@@ -200,7 +217,6 @@ export default function fetch() {
           },
         })
         .then((res) => {
-          console.log(res.data);
           setMyPost(res.data);
         })
         .catch((err) => {
@@ -388,6 +404,7 @@ export default function fetch() {
     getCategory,
     getUserProfile,
     getUserProfileByEmail,
+    getUserPostByEmail,
     updateUserProfile,
     addPost,
     myPost,
