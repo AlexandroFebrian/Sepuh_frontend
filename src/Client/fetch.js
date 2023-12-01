@@ -353,7 +353,7 @@ export default function fetch() {
     }
   }
 
-  async function sendMessage(receiver_id, message) {
+  async function sendMessage(receiver_id, message, setContacts) {
     const token = localStorage.getItem("token");
 
     try {
@@ -371,7 +371,6 @@ export default function fetch() {
           }
         )
         .then((res) => {
-          console.log(res.data);
           setContacts(res.data);
         })
         .catch((err) => {

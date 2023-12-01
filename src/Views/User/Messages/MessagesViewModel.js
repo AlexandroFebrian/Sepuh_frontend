@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import fetch from "../../../Client/fetch";
 import { useEffect, useRef, useState } from "react";
+import { io } from "socket.io-client";
 
 export default function MessagesViewModel(){
     const { checkToken, getAllChats, sendMessage } = fetch();
@@ -14,11 +15,37 @@ export default function MessagesViewModel(){
     const [height, setHeight] = useState(8);
     const [selectedChat, setSelectedChat] = useState(null);
     const chatRef = useRef(null);
+    const [socket, setSocket] = useState(null);
+    const [onlineUsers, setOnlineUsers] = useState([]);
 
     useEffect(() => {
         checkToken();
         scrollToBottom();
+        
+        const newSocket = io("http://localhost:5000");
+        setSocket(newSocket);
+        
+        return () => {
+            newSocket.disconnect();
+        }
     }, []);
+    
+    console.log("onlineUsers: ", onlineUsers);
+
+    useEffect(() => {
+        if (socket === null) return;
+
+        if (user) {
+            socket.emit("addNewUser", user._id);
+            socket.on("getOnlineUsers", (res) => {
+                setOnlineUsers(res);
+            });
+    
+            return () => {
+                socket.off("getOnlineUsers");
+            }
+        }
+    }, [socket, user]);
 
     useEffect(() => {
         if (!user) return;
@@ -28,7 +55,31 @@ export default function MessagesViewModel(){
 
     useEffect(() => {
         scrollToBottom();
-    }, [height, selectedChat]);
+        if (selectedChat){
+            setSelectedChat(contacts.find((c) => c._id == selectedChat._id));
+        }
+    }, [contacts, height, selectedChat]);
+
+    useEffect(() => {
+        if (socket === null || contacts === null) return;
+
+        socket.on("getMessage", (res) => {
+            const currentDate = new Date();
+            const chat = contacts.find((c) => c._id == res.chat_id);
+            const sender = chat.users.find((u) => u.user._id == res.receiver_id);
+            
+            chat.messages.push({
+                value: res.message,
+                sender: sender,
+                time: currentDate
+            });
+            setContacts([ ...contacts ]);
+
+            return () => {
+                socket.off("getMessage");
+            }
+        });
+    }, [socket, contacts]);
 
     function selectContactHandler(index) {
         setSelectedChat(contacts[index]);
@@ -40,10 +91,17 @@ export default function MessagesViewModel(){
         }
     }
 
-    async function sendMessageHandler(receiver_id) {
+    async function sendMessageHandler(chat_id, receiver_id) {
         if (message != "") {
-            sendMessage(receiver_id, message);
-            window.location.reload();
+            sendMessage(receiver_id, message, setContacts);
+            if (socket !== null) {
+                socket.emit("sendMessage", {
+                    message: message,
+                    chat_id: chat_id,
+                    receiver_id: receiver_id
+                });
+            }
+            setMessage("");
         }
     }
 
@@ -62,6 +120,7 @@ export default function MessagesViewModel(){
         chatRef,
         sendMessageHandler,
         message,
-        setMessage
+        setMessage,
+        onlineUsers
     }
 }
