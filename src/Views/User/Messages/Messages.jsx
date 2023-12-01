@@ -120,8 +120,8 @@ export default function Messages() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="absolute bottom-0 w-full h-[calc(100vh-11rem)]">
-                                <div ref={chatRef} className={"relative w-full overflow-y-auto px-5 pb-5 h-[calc(100vh-" + (15.8 + ((height - 8) * 1.68 / 8)).toString() + "rem)]"}>
+                            <div className="absolute bottom-0 w-full h-[calc(100vh-11rem)] flex flex-col">
+                                <div ref={chatRef} className={"relative h-full w-full overflow-y-auto px-5 pb-5"}>
                                     { selectedChat.messages.map((m, i) => <div key={ i } className={"w-full flex flex-wrap items-end justify-" + (m.sender.email == user.email ? "end" : "start")}>
                                         {m.sender.email == user.email && <p className="me-2">
                                             { new Date(m.time).getHours().toString().padStart(2, "0") + ":" + new Date(m.time).getMinutes().toString().padStart(2, "0") }
@@ -134,7 +134,7 @@ export default function Messages() {
                                         </p>}
                                     </div>)}
                                 </div>
-                                <div className="w-full bg-white z-10 max-h-40 min-h-fit px-5 py-3 border-t-2 border-navyblue-800 absolute bottom-0">
+                                <div className="w-full bg-white z-10 max-h-40 min-h-fit px-5 py-3 border-t-2 border-navyblue-800">
                                     <div className="flex items-end">
                                         <div className="w-1/12">
                                             {/* Harusnya isinya send file or idk */}
