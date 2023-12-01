@@ -23,6 +23,8 @@ export default function ContentViewModel(){
         fetchCompanyPost(setCompanyPost)
       }else if(user.role == "Company"){
         fetchFreelancerPost(setFreelancerPost)
+      }else{
+        
       }
 
     }

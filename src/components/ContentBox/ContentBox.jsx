@@ -1,10 +1,13 @@
-import { Avatar, Button } from '@chakra-ui/react'
+import { Avatar, Button, Tag } from '@chakra-ui/react'
 import React from 'react'
 import { FaRegClock } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 export default function ContentBox({item}) {
+  const categories = useSelector((state) => state.post.category)
+
   const displayFormattedText = () => {
     // Replace newline characters with HTML line break tags
     const formattedText = item.description.replace(/\n/g, '<br>');
@@ -23,7 +26,7 @@ export default function ContentBox({item}) {
   const email = encodeURIComponent(item.posted_by.email)
 
   return (
-    <div className='w-full h-[21rem] mb-5 rounded shadow-lg bg-lightblue-50 flex p-5 relative'>
+    <div className='w-full h-fit mb-5 rounded shadow-lg bg-lightblue-50 flex p-5 relative'>
       <div className='pr-5'>
         <Avatar src={item.posted_by.profile_picture} size={"lg"} />
       </div>
@@ -40,6 +43,20 @@ export default function ContentBox({item}) {
           </div>
 
         </div>
+
+        <div className='flex items-center mt-1'>
+          {
+            item.hashtag.map((tag, idx) => {
+              return (
+                // <div key={idx} className='bg-navyblue-800 text-white rounded-full px-2 py-1 text-xs mr-2'>
+                //   {tag}
+                // </div>
+                <Tag key={idx} colorScheme='navyblue' className='mr-1' >{categories.find(category => category.value == tag).label}</Tag>
+              )
+            })
+          }
+        </div>
+
         <hr className=' my-4 border-navyblue-800' />
         <div className='w-full h-36 text-sm relative overflow-y-auto whitespace-normal'>
           <div dangerouslySetInnerHTML={displayFormattedText()} />
@@ -47,7 +64,7 @@ export default function ContentBox({item}) {
         
         <hr className=' my-4 border-navyblue-800' />
 
-        <div className='absolute bottom-0 w-full flex justify-between items-center'>
+        <div className=' w-full flex justify-between items-center'>
           <div className='font-semibold'>
             Rp {min_price} - Rp {max_price}
           </div>

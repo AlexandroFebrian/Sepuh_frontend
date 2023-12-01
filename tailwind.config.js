@@ -16,6 +16,14 @@ module.exports = {
       },
     },
     extend: {
+      variants: {
+        height: ['responsive', 'hover', 'focus']
+      },
+      transitionProperty: {
+        'height': 'height',
+        'spacing': 'margin, padding',
+        'max-height': 'max-height',
+      },
       colors: {
         ghostwhite: {
           50: "#f8f8ff",

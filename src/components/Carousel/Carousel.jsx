@@ -31,7 +31,7 @@ export default function Carousel({photos, imageIdx, className}) {
                   
                 // </div>
                 
-                <div className='w-full h-full flex-none flex items-center justify-center relative'>
+                <div key={idx} className='w-full h-full flex-none flex items-center justify-center relative'>
                   <img src={photo} key={idx} className='w-fit h-fit max-w-full max-h-full flex-none'/>
 
                 </div>

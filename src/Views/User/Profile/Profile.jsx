@@ -88,7 +88,7 @@ export default function Profile() {
             <div className='w-full bg-ghostwhite-100 rounded py-6 px-10'>
               <h1 className='font-semibold text-xl'>Personal Information</h1>
               <div 
-                className='mt-5 w-full h-64 px-10 bg-stone-300 flex items-center justify-end '
+                className='mt-5 w-full h-36 px-10 bg-stone-300 flex items-center justify-end '
                 style={{ backgroundImage: `url(${bannerImageSrc[0]})`, backgroundSize: "cover", backgroundPosition: "center" }}
               >
                 <InputFileButton 
