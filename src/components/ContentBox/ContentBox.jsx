@@ -3,16 +3,11 @@ import React from 'react'
 import { FaRegClock } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function ContentBox({item}) {
-  const categories = useSelector((state) => state.post.category)
 
-  const displayFormattedText = () => {
-    // Replace newline characters with HTML line break tags
-    const formattedText = item.description.replace(/\n/g, '<br>');
-    return { __html: formattedText };
-  };
+  const categories = useSelector((state) => state.post.category)
 
   const min_price = new Intl.NumberFormat('en-US', {
     minimumFractionDigits: 2,
@@ -22,7 +17,6 @@ export default function ContentBox({item}) {
     minimumFractionDigits: 2,
   }).format(item.max_price);
 
-  // const email = item.posted_by.email.replace(/\./g, "%dot%")
   const email = encodeURIComponent(item.posted_by.email)
 
   return (
@@ -32,10 +26,15 @@ export default function ContentBox({item}) {
       </div>
       <div className='w-full relative'>
         <div className='w-full mt-1 relative'>
-          <h2 className='w-full font-semibold text-lg text-navyblue-500 '>{item.title}</h2>
+          <Link to={`/post/${item._id}`} className=' hover:underline'>
+            <h2 className='w-full font-semibold text-lg text-navyblue-500 '>{item.title}</h2>
+          </Link>
           <div className='h-fit flex justify-between items-center w-full'>
             <div className='text-sm flex items-center h-full font-semibold'>
-              <Link to={`/user?email=${email}`} className=' hover:underline' >{item.posted_by.name}</Link> &nbsp; &#x2022; &nbsp; <FaRegClock className='mt-[0.18rem] mr-1'/>  {item.duration} {item.duration_type}
+              <Link to={`/user?email=${email}`} className=' hover:underline' >
+                {item.posted_by.name}
+              </Link> 
+              &nbsp; &#x2022; &nbsp; <FaRegClock className='mt-[0.18rem] mr-1'/>  {item.duration} {item.duration_type}
             </div>
             <div className='text-md h-full'>
               ⭐ {item.avg_rating}
@@ -70,20 +69,23 @@ export default function ContentBox({item}) {
             Rp {min_price} - Rp {max_price}
           </div>
           <div>
-            <Button 
-              color="ghostwhite.50"
-              bg="indigo.300"
-              _hover={{ bg: "indigo.350" }}
-              _active={{ bg: "indigo.400" }}
-              width="auto"
-              height="2rem"
-              className=" me-2"
-              variant="solid"
-              transitionDuration={"300ms"}
-              fontSize={"sm"}
-            >
-              See Details
-            </Button>
+            <Link to={`/post/${item._id}`} className=' hover:underline'>
+              <Button 
+                color="ghostwhite.50"
+                bg="indigo.300"
+                _hover={{ bg: "indigo.350" }}
+                _active={{ bg: "indigo.400" }}
+                width="auto"
+                height="2rem"
+                className=" me-2"
+                variant="solid"
+                transitionDuration={"300ms"}
+                fontSize={"sm"}
+              >
+                See Details
+              </Button>
+
+            </Link>
             <Button 
               color="navyblue.800"
               bg="yellow.300"

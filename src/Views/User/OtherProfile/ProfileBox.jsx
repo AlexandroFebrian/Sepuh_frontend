@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Avatar } from "@chakra-ui/react";
+import { Avatar, Button } from "@chakra-ui/react";
 import { FaStar, FaRegUser } from "react-icons/fa6";
 import ContentBox from '../../../components/ContentBox/ContentBox';
+import { Link } from 'react-router-dom';
 
 export default function ProfileBox({profile, posts}) {
   const [content, setContent] = useState("Description")
@@ -31,7 +32,31 @@ export default function ProfileBox({profile, posts}) {
         </div>
         
         <div className="w-full px-8 mt-5">
-          <h1 className="font-bold text-3xl">{profile.name}</h1>
+          <div className='w-full flex justify-between items-center'>
+            <h1 className="font-bold text-3xl">{profile.name}</h1>
+            <div>
+              <Link className='mr-2'>
+                <Button
+                  variant={"outline"}
+                  borderColor={"navyblue.800"}
+                  color={"navyblue.800"}
+                >
+                  Message
+                </Button>
+              </Link>
+
+              <Link>
+                <Button
+                  color={"white"}
+                  bg={"navyblue.800"}
+                  _hover={{ bg: "navyblue.700" }}
+                  _active={{ bg: "navyblue.600" }}
+                >
+                  Apply
+                </Button>
+              </Link>
+            </div>
+          </div>
           <p className="text-md">{profile.headline}</p>
           <div className="flex items-center justify-between">
             <div className="flex items-center">
