@@ -412,14 +412,46 @@ export default function fetch() {
     }
   }
 
-  async function applyJob(setWait, setPopup) {
+  async function addToList(postId,setWait, setPopup){
+    const token = localStorage.getItem("token");
+
+    try {
+      return await client
+        .post(
+          `posts/addtolist`,
+          {
+            postId: postId
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((res) => {
+          setPopup(true);
+          return res;
+        })
+        .catch((err) => {
+          setPopup(true);
+          return err.response;
+        });
+    } catch (error) {
+      alert("error");
+      navigate("/");
+    }
+  }
+
+  async function applyJob(postId,setWait, setPopup) {
     const token = localStorage.getItem("token");
 
     try {
       return await client
         .post(
           `posts/apply`,
-          {},
+          {
+            postId: postId
+          },
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -460,6 +492,7 @@ export default function fetch() {
     UnbanUser,
     getAllChats,
     sendMessage,
+    addToList,
     applyJob
   };
 }

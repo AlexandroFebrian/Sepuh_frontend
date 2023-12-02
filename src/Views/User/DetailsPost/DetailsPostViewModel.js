@@ -27,7 +27,7 @@ export default function DetailsPostViewModel(){
   async function applyHandler(){
     setWait(true)
 
-    const response = await applyJob(setWait, setPopup)
+    const response = await applyJob(postId, setWait, setPopup)
 
     if(response == undefined){
       setPopupTitle("Network Error!")

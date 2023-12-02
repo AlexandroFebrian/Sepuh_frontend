@@ -35,7 +35,7 @@ export default function Content() {
         }
       </div>
       
-      <div className='w-full pt-3 flex justify-between relative min-h-[calc(100vh-15rem)] h-fit'>
+      <div className='w-full pt-3 flex justify-between min-h-[calc(100vh-15rem)] h-fit'>
         <div className='w-[calc(100%-5rem)] mr-10'>
           {
             freelancerPost.length == 0 && companyPost.length == 0
