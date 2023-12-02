@@ -200,6 +200,7 @@ export default function DetailsPost() {
                             rounded={"full"}
                             margin={0}
                             height={"2rem"}
+                            marginRight={"0.5rem"}
                             onClick={() => {hashtagHandler(tag)}}
                           >{categories.find(category => category.value == tag).label}</Button>
                         )
@@ -308,6 +309,7 @@ export default function DetailsPost() {
                             rounded={"full"}
                             margin={0}
                             height={"2rem"}
+                            marginRight={"0.5rem"}
                             onClick={() => {hashtagHandler(tag)}}
                           >{categories.find(category => category.value == tag).label}</Button>
                         )
