@@ -1,14 +1,14 @@
 import { Avatar, Button, Tag } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { FaRegClock, FaStar } from "react-icons/fa6";
-import { FaPlus } from "react-icons/fa6";
+import { FaPlus, FaRegTrashCan } from "react-icons/fa6";
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Popup from '../../Popup/Popup';
 import fetch from '../../../Client/fetch';
 
-export default function CompanyContentBox({item}) {
-  const { addToList } = fetch()
+export default function ListContentBox({item, setList, setWait, setPopup, setPopupTitle, setPopupButtonMessage, setPopupType}) {
+  const { removeFromList } = fetch()
 
   const categories = useSelector((state) => state.post.category)
 
@@ -22,28 +22,10 @@ export default function CompanyContentBox({item}) {
 
   const email = encodeURIComponent(item.posted_by.email)
 
-  const [wait, setWait] = useState(false)
-  const [popup, setPopup] = useState(false)
-  const [popupTitle, setPopupTitle] = useState("")
-  const [popupButtonMessage, setPopupButtonMessage] = useState("")
-  const [popupType, setPopupType] = useState(false)
-
-  const [position, setPosition] = useState(0);
-
-  useEffect(() => {
-    if (wait) {
-      
-      setPosition(window.scrollY);
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-  }, [wait]);
-
-  async function addToListHandler() {
+  async function removeFromListHandler() {
     setWait(true)
 
-    const response = await addToList(item._id, setWait, setPopup)
+    const response = await removeFromList(item._id, setWait, setPopup, setList)
 
     if(response == undefined){
       setPopupTitle("Network Error!")
@@ -55,29 +37,20 @@ export default function CompanyContentBox({item}) {
     if(response.status.toString()[0] != 2){
       // console.log(response)
       setPopupTitle(response.data.message)
-      setPopupButtonMessage("Close")
+      setPopupButtonMessage("Try Again")
       setPopupType(false)
       return
     }
 
-    setPopupTitle("Add to List Success")
+    setPopupTitle("Remove From List Success")
     setPopupButtonMessage("Close")
     setPopupType(true)
+    
+    setList(prev => prev.filter(list => list._id != item._id))
   }
 
   return (
     <>
-      <Popup 
-        wait={wait} 
-        popup={popup} 
-        setPopup={setPopup} 
-        setWait={setWait} 
-        popupType={popupType} 
-        popupTitle={popupTitle} 
-        popupButtonMessage={popupButtonMessage}
-        className={`fixed w-screen h-screen left-0`}
-        style={{ top: `${position}px` }}
-      />
       <div className='w-full h-fit mb-5 rounded shadow-lg bg-indigo-50 flex p-5 relative z-0 border border-navyblue-800 hover:bg-indigo-100/50 transition-colors duration-300'>
 
         <div className='pr-5'>
@@ -157,9 +130,9 @@ export default function CompanyContentBox({item}) {
                 variant="solid"
                 transitionDuration={"300ms"}
                 fontSize={"sm"}
-                onClick={() => {addToListHandler()}}
+                onClick={() => {removeFromListHandler()}}
               >
-                <FaPlus className='mr-1' /> Add to List
+                <FaRegTrashCan className='mr-1' /> Remove from list
               </Button>
             </div>
           </div>

@@ -20,6 +20,7 @@ import PostingReports from "./Views/Admin/PostingReports/PostingReports";
 import IncomeReports from "./Views/Admin/IncomeReports/IncomeReports";
 import PaymentReports from "./Views/Admin/PaymentReports/PaymentReports";
 import DetailsPost from "./Views/User/DetailsPost/DetailsPost";
+import List from "./Views/User/List/List";
 
 const Router = createBrowserRouter([
   {
@@ -48,7 +49,7 @@ const Router = createBrowserRouter([
       },
       {
         path: "/lists",
-        element: <Messages />
+        element: <List />
       },
       {
         path: "/myposts",

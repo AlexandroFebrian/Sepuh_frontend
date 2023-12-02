@@ -412,15 +412,15 @@ export default function fetch() {
     }
   }
 
-  async function addToList(postId,setWait, setPopup){
+  async function addToList(postId, setWait, setPopup){
     const token = localStorage.getItem("token");
 
     try {
       return await client
         .post(
-          `posts/addtolist`,
+          `users/list`,
           {
-            postId: postId
+            post_id: postId
           },
           {
             headers: {
@@ -435,6 +435,61 @@ export default function fetch() {
         .catch((err) => {
           setPopup(true);
           return err.response;
+        });
+    } catch (error) {
+      alert("error");
+      navigate("/");
+    }
+  }
+
+  async function removeFromList(postId, setWait, setPopup){
+    const token = localStorage.getItem("token");
+
+    try {
+      return await client
+        .put(
+          `users/list`,
+          {
+            post_id: postId
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((res) => {
+          setPopup(true);
+          return res;
+        })
+        .catch((err) => {
+          setPopup(true);
+          return err.response;
+        });
+    } catch (error) {
+      alert("error");
+      navigate("/");
+    }
+  }
+
+  async function getList(setList){
+    const token = localStorage.getItem("token");
+
+    try {
+      return await client
+        .get(
+          `users/list`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((res) => {
+          setList(res.data)
+        })
+        .catch((err) => {
+          alert("error");
         });
     } catch (error) {
       alert("error");
@@ -493,6 +548,8 @@ export default function fetch() {
     getAllChats,
     sendMessage,
     addToList,
+    removeFromList,
+    getList,
     applyJob
   };
 }
