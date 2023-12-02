@@ -12,11 +12,15 @@ export default function Content() {
   const navigate = useNavigate()
   const category = useSelector((state) => state.post.category)
 
-  const { isLogin, setCategoryFilter, freelancerPost, companyPost } = ContentViewModel()
+  const { isLogin, categoryFilter, setCategoryFilter, freelancerPost, companyPost, searchs } = ContentViewModel()
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [])
+
+  useEffect(() => {
+    console.log(categoryFilter)
+  }, [categoryFilter])
 
   return (
     <>
@@ -43,13 +47,21 @@ export default function Content() {
           }
           {
             freelancerPost.map((item, idx) => {
-              // console.log(item)
+              if(
+                item.title.toLowerCase().includes(searchs.toLowerCase())
+                &&
+                item.hashtag.find(tag => tag.toLowerCase().includes(categoryFilter.toLowerCase()))
+              )
               return <FreelancerContentBox item={item} key={idx} />
             })
           }
           {
             companyPost.map((item, idx) => {
-              // console.log(item)
+              if(
+                item.title.toLowerCase().includes(searchs.toLowerCase())
+                &&
+                item.hashtag.find(tag => tag.toLowerCase().includes(categoryFilter.toLowerCase()))
+              )
               return <CompanyContentBox item={item} key={idx} />
             })
           }

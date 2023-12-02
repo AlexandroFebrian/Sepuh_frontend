@@ -78,7 +78,7 @@ export default function CompanyContentBox({item}) {
         className={`fixed w-screen h-screen left-0`}
         style={{ top: `${position}px` }}
       />
-      <div className='w-full h-fit mb-5 rounded shadow-lg bg-lightblue-50 flex p-5 relative z-0 border border-navyblue-800 hover:bg-indigo-50'>
+      <div className='w-full h-fit mb-5 rounded shadow-lg bg-indigo-50 flex p-5 relative z-0 border border-navyblue-800 hover:bg-indigo-100/50 transition-colors duration-300'>
 
         <div className='pr-5'>
           <Avatar src={item.posted_by.profile_picture} size={"lg"} />

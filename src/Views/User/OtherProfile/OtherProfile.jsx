@@ -33,7 +33,7 @@ export default function OtherProfile() {
             {
               profile
               &&
-              <ProfileBox profile={profile} posts={posts} />
+              <ProfileBox user={user} profile={profile} posts={posts} />
             }
           </div>
         </div>

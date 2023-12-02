@@ -27,6 +27,10 @@ export default function DetailsPost() {
     setWait,
     applyHandler,
   } = DetailsPostViewModel()
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [])
   
   const [minPrice, setMinPrice] = useState(0)
   const [maxPrice, setMaxPrice] = useState(0)

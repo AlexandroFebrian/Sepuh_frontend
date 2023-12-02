@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { Avatar, Button } from "@chakra-ui/react";
 import { FaStar, FaRegUser } from "react-icons/fa6";
-import ContentBox from '../../../components/ContentBox/CompanyContentBox/CompanyContentBox';
 import { Link } from 'react-router-dom';
+import FreelancerContentBox from '../../../components/ContentBox/FreelancerContentBox/FreelancerContentBox';
+import CompanyContentBox from '../../../components/ContentBox/CompanyContentBox/CompanyContentBox';
 
-export default function ProfileBox({profile, posts}) {
+export default function ProfileBox({user, profile, posts}) {
   const [content, setContent] = useState("Description")
 
   const member = new Date(profile?.create_at)
@@ -33,8 +34,8 @@ export default function ProfileBox({profile, posts}) {
         
         <div className="w-full px-8 mt-5">
           <div className='w-full flex justify-between items-center'>
-            <h1 className="font-bold text-3xl">{profile.name} &#x2022; {profile.role}</h1>
-            <div>
+            <h1 className="font-bold text-2xl">{profile.name} &#x2022; {profile.role}</h1>
+            <div className='flex items-center'>
               <Link className='mr-2'>
                 <Button
                   variant={"outline"}
@@ -45,7 +46,20 @@ export default function ProfileBox({profile, posts}) {
                 </Button>
               </Link>
 
-              <Link>
+              {
+                profile?.role == "Freelancer" && user?.role == "Company"
+                &&
+                <Button
+                  color={"white"}
+                  bg={"navyblue.800"}
+                  _hover={{ bg: "navyblue.700" }}
+                  _active={{ bg: "navyblue.600" }}
+                >
+                  Hire
+                </Button>
+              }
+              {
+                profile?.role == "Company" && user?.role == "Freelancer" &&
                 <Button
                   color={"white"}
                   bg={"navyblue.800"}
@@ -54,7 +68,7 @@ export default function ProfileBox({profile, posts}) {
                 >
                   Apply
                 </Button>
-              </Link>
+              }
             </div>
           </div>
           <p className="text-md">{profile.headline}</p>
@@ -98,9 +112,17 @@ export default function ProfileBox({profile, posts}) {
         {
           content == "Posts"
           &&
-          posts.map((post, idx) => {
-            return <ContentBox item={post} key={idx} />
-          })
+          (
+            profile.role == "Freelancer"
+            ?
+            posts.map((post, idx) => {
+              return <FreelancerContentBox item={post} key={idx} />
+            })
+            :
+            posts.map((post, idx) => {
+              return <CompanyContentBox item={post} key={idx} />
+            })
+          )
         }
       </div>
     </div>

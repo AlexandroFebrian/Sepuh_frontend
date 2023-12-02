@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import fetch from "../../../Client/fetch";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 
 export default function HomePageViewModel(){
@@ -8,8 +9,6 @@ export default function HomePageViewModel(){
 
   const isLogin = useSelector((state) => state.user.isLogin);
   const user = useSelector((state) => state.user.userDetail);
-
-  
 
   useEffect(() => {
     checkToken();

@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux'
 import fetch from '../../Client/fetch'
 import { useEffect, useState } from 'react'
 import { set } from 'react-hook-form'
+import { useLocation } from 'react-router-dom'
 
 export default function ContentViewModel(){
   const { getCompanyPost, fetchCompanyPost, fetchFreelancerPost } = fetch()
@@ -31,11 +32,18 @@ export default function ContentViewModel(){
 
   }, [user])
 
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);
+  let searchs = params.get('search');
+  if(!searchs) searchs = ""
+
   return {
     isLogin,
     user,
+    categoryFilter,
     setCategoryFilter,
     companyPost,
     freelancerPost,
+    searchs
   }
 }

@@ -14,7 +14,7 @@ import {
 
 import { FaSliders } from "react-icons/fa6";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaMagnifyingGlass, FaFilter } from "react-icons/fa6";
 import { set } from "react-hook-form";
 import Filter from "./Filter";
@@ -93,6 +93,13 @@ export default function Navbar() {
 //     return amountFormatted;
 //   };
 
+  function searchHandler(e) {
+    if (e.key === "Enter") {
+      navigate(`/home?search=${e.target.value}`);
+    }
+  }
+
+
   return (
     <>
       {showFilter && (
@@ -129,7 +136,7 @@ export default function Navbar() {
                 <FaMagnifyingGlass />
               </InputLeftElement>
 
-              <Input placeholder="Search"></Input>
+              <Input placeholder="Search" onKeyDown={(e) => {searchHandler(e)}}></Input>
 
               <InputRightElement>
                 <FaSliders
