@@ -39,9 +39,15 @@ const frameworks = [
   }
 ]
 
-export function Combobox({title, placeholder, empty, items, headerClassName, contentClassName, onSelect}) {
+export function Combobox({title, placeholder, empty, items, headerClassName, contentClassName, item, onSelect}) {
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
+
+  React.useEffect(() => {
+    if(item){
+      setValue(item)
+    }
+  }, [item])
 
   return (
     <Popover open={open} onOpenChange={setOpen}>

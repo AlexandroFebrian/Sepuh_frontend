@@ -4,7 +4,7 @@ import FreelancerDefaultMenu from '../../../components/SidebarMenu/Freelancer/Fr
 import CompanyDefaultMenu from '../../../components/SidebarMenu/Company/CompanyDefaultMenu/CompanyDefaultMenu'
 import NowHiring from '../../../components/NowHiring/NowHiring'
 import { Avatar, Button, Tag } from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FaStar, FaRegClock, FaRegFileLines } from "react-icons/fa6";
 import { IoChatboxEllipsesOutline } from "react-icons/io5";
 import { useSelector } from 'react-redux'
@@ -12,6 +12,8 @@ import Popup from '../../../components/Popup/Popup'
 import OpenImage from '../../../components/OpenImage/OpenImage'
 
 export default function DetailsPost() {
+  const navigate = useNavigate()
+
   const categories = useSelector((state) => state.post.category)
 
   const { 
@@ -81,6 +83,11 @@ export default function DetailsPost() {
 
   async function continueHandler() {
     window.snap.pay('TRANSACTION_TOKEN_HERE');
+  }
+
+  function hashtagHandler(tag){
+    sessionStorage.setItem("category", tag)
+    navigate("/home")
   }
 
 
@@ -193,7 +200,7 @@ export default function DetailsPost() {
                             rounded={"full"}
                             margin={0}
                             height={"2rem"}
-                            onClick={() => {addHashtag()}}
+                            onClick={() => {hashtagHandler(tag)}}
                           >{categories.find(category => category.value == tag).label}</Button>
                         )
                       })
@@ -301,7 +308,7 @@ export default function DetailsPost() {
                             rounded={"full"}
                             margin={0}
                             height={"2rem"}
-                            onClick={() => {addHashtag()}}
+                            onClick={() => {hashtagHandler(tag)}}
                           >{categories.find(category => category.value == tag).label}</Button>
                         )
                       })

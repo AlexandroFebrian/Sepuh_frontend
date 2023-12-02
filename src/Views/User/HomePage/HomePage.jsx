@@ -36,9 +36,13 @@ export default function HomePage() {
             <Content />
           </div>
         </div>
-        <div className="right w-1/5">
-          <NowHiring />
-        </div>
+        {
+          isLogin && user && user.role == "Freelancer"
+          &&
+          <div className="right w-1/5">
+            <NowHiring />
+          </div>
+        }
       </div>
     </>
   );

@@ -1,6 +1,6 @@
 import { Avatar, Button, Tag } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
-import { FaRegClock } from "react-icons/fa6";
+import { FaRegClock, FaStar } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
@@ -93,11 +93,7 @@ export default function FreelancerContentBox({item}) {
               <div className='text-sm flex items-center h-full font-semibold'>
                 <Link to={`/user?email=${email}`} className=' hover:underline' >
                   {item.posted_by.name}
-                </Link> 
-                &nbsp; &#x2022; &nbsp; <FaRegClock className='mt-[0.18rem] mr-1'/>  {item.duration} {item.duration_type}
-              </div>
-              <div className='text-md h-full'>
-                ⭐ {item.avg_rating}
+                </Link> <FaStar className=' text-yellow-500 mx-1' />  {item.avg_rating}
               </div>
             </div>
 
@@ -116,17 +112,17 @@ export default function FreelancerContentBox({item}) {
             }
           </div>
 
-          <hr className=' my-4 border-navyblue-800' />
+          <hr className=' my-4 border-ghostwhite-50' />
 
           <div className='w-full h-36 text-md overflow-y-hidden line-clamp-6'>
             {item.description}
           </div>
           
-          <hr className=' my-4 border-navyblue-800' />
+          <hr className=' my-4 border-ghostwhite-50' />
 
           <div className=' w-full flex justify-between items-center relative z-50'>
             <div className='font-semibold'>
-              Rp {min_price} - Rp {max_price}
+              Rp {min_price} - {max_price}
             </div>
             <div>
               <Link to={`/post/${item._id}`} className=' hover:underline'>
@@ -146,20 +142,6 @@ export default function FreelancerContentBox({item}) {
                 </Button>
 
               </Link>
-              <Button 
-                color="navyblue.800"
-                bg="yellow.300"
-                _hover={{ bg: "yellow.400" }}
-                _active={{ bg: "yellow.500" }}
-                width="auto"
-                height="2rem"
-                variant="solid"
-                transitionDuration={"300ms"}
-                fontSize={"sm"}
-                onClick={() => {addToListHandler()}}
-              >
-                <FaPlus className='mr-1' /> Add to List
-              </Button>
             </div>
           </div>
         </div>

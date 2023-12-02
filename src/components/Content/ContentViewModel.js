@@ -37,6 +37,13 @@ export default function ContentViewModel(){
   let searchs = params.get('search');
   if(!searchs) searchs = ""
 
+  useEffect(() => {
+    if(sessionStorage.getItem("category")) {
+      setCategoryFilter(sessionStorage.getItem("category"))
+    }
+
+  }, [])
+
   return {
     isLogin,
     user,

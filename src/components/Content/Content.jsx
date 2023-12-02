@@ -18,9 +18,10 @@ export default function Content() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [])
 
-  useEffect(() => {
-    console.log(categoryFilter)
-  }, [categoryFilter])
+  function comboBoxSelect(value){
+    sessionStorage.setItem("category", value)
+    setCategoryFilter(value)
+  }
 
   return (
     <>
@@ -35,7 +36,8 @@ export default function Content() {
             items={category} 
             headerClassName={"w-72 shadow-lg"}
             contentClassName={" pt-1 border-0"}
-            onSelect={(value) => setCategoryFilter(value)}
+            item={categoryFilter}
+            onSelect={(value) => {comboBoxSelect(value)}}
           />
         }
       </div>

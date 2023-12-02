@@ -1,6 +1,6 @@
 import { Avatar, Button, Tag } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
-import { FaRegClock } from "react-icons/fa6";
+import { FaRegClock, FaStar } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
@@ -96,8 +96,9 @@ export default function CompanyContentBox({item}) {
                 </Link> 
                 &nbsp; &#x2022; &nbsp; <FaRegClock className='mt-[0.18rem] mr-1'/>  {item.duration} {item.duration_type}
               </div>
-              <div className='text-md h-full'>
-                ⭐ {item.avg_rating}
+              <div className='text-md h-full flex items-center'>
+                <FaStar className=' text-yellow-500 mx-1' /> {item.avg_rating}
+                
               </div>
             </div>
 
@@ -126,7 +127,7 @@ export default function CompanyContentBox({item}) {
 
           <div className=' w-full flex justify-between items-center relative z-50'>
             <div className='font-semibold'>
-              Rp {min_price} - Rp {max_price}
+              Rp {min_price} - {max_price}
             </div>
             <div>
               <Link to={`/post/${item._id}`} className=' hover:underline'>
