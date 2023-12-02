@@ -4,10 +4,10 @@ import { FaRegClock } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import Popup from '../Popup/Popup';
-import fetch from '../../Client/fetch';
+import Popup from '../../Popup/Popup';
+import fetch from '../../../Client/fetch';
 
-export default function ContentBox({item}) {
+export default function FreelancerContentBox({item}) {
   const { addToList } = fetch()
 
   const categories = useSelector((state) => state.post.category)
@@ -78,7 +78,7 @@ export default function ContentBox({item}) {
         className={`fixed w-screen h-screen left-0`}
         style={{ top: `${position}px` }}
       />
-      <div className='w-full h-fit mb-5 rounded shadow-lg bg-lightblue-50 flex p-5 relative z-0 border border-navyblue-800 hover:bg-indigo-50'>
+      <div className='w-full h-fit mb-5 rounded shadow-lg bg-navyblue-800 flex p-5 relative z-0 text-ghostwhite-50 hover:bg-navyblue-700 transition-colors duration-300'>
 
         <div className='pr-5'>
           <Avatar src={item.posted_by.profile_picture} size={"lg"} />
@@ -87,7 +87,7 @@ export default function ContentBox({item}) {
         <div className='w-full relative'>
           <div className='w-full mt-1 relative'>
             <Link to={`/post/${item._id}`} className=' hover:underline'>
-              <h2 className='w-full font-semibold text-lg text-navyblue-500 '>{item.title}</h2>
+              <h2 className='w-full font-semibold text-lg text-indigo-200 '>{item.title}</h2>
             </Link>
             <div className='h-fit flex justify-between items-center w-full'>
               <div className='text-sm flex items-center h-full font-semibold'>

@@ -5,7 +5,8 @@ import ContentViewModel from './ContentViewModel'
 import { FaPlus } from "react-icons/fa6";
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import ContentBox from '../ContentBox/ContentBox';
+import CompanyContentBox from '../ContentBox/CompanyContentBox/CompanyContentBox';
+import FreelancerContentBox from '../ContentBox/FreelancerContentBox/FreelancerContentBox';
 
 export default function Content() {
   const navigate = useNavigate()
@@ -43,13 +44,13 @@ export default function Content() {
           {
             freelancerPost.map((item, idx) => {
               // console.log(item)
-              return <ContentBox item={item} key={idx} />
+              return <FreelancerContentBox item={item} key={idx} />
             })
           }
           {
             companyPost.map((item, idx) => {
               // console.log(item)
-              return <ContentBox item={item} key={idx} />
+              return <CompanyContentBox item={item} key={idx} />
             })
           }
         </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Avatar, Button } from "@chakra-ui/react";
 import { FaStar, FaRegUser } from "react-icons/fa6";
-import ContentBox from '../../../components/ContentBox/ContentBox';
+import ContentBox from '../../../components/ContentBox/CompanyContentBox/CompanyContentBox';
 import { Link } from 'react-router-dom';
 
 export default function ProfileBox({profile, posts}) {
