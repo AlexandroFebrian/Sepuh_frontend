@@ -31,7 +31,7 @@ export default function MyPost() {
         &&
         <OpenImage photos={images} className={`fixed left-0 z-[60]`} setOpen={setOpen} imageIdx={imageIdx} setImageIdx={setImageIdx} style={{ top: `${position}px`}} />
       }
-      <div className=" h-fit flex">
+      <div className=" h-fit relative flex">
         <div className="left w-1/5 ">
           <div className="h-[calc(100vh-5rem)] w-full sticky top-[5rem]">
             {
@@ -51,13 +51,14 @@ export default function MyPost() {
         <div className="mid w-3/5 h-full">
           <div className=" min-h-[calc(100vh-5rem)] h-fit border-l-2 border-navyblue-600 z-0 px-10 py-10">
             <h1 className='text-3xl font-bold'>My Posts</h1>
-            <div className='w-full pt-3 flex justify-between relative min-h-[calc(100vh-15rem)] h-fit mt-4'>
-              <div className='w-[calc(100%-5rem)] mr-10'>
-              {
-                posts.map((post, idx) => {
-                  return <PostBox key={idx} post={post} setOpen={setOpen} setImages={setImages} setImageIdx={setImageIdx} />
-                })
-              }
+            
+            <div className='w-full pt-3 flex justify-between relative min-h-[calc(100vh-15rem)] h-fit mt-3'>
+              <div className='w-[calc(100%-5rem)] mr-5'>
+                {
+                  posts.map((post, idx) => {
+                    return <PostBox key={idx} post={post} setOpen={setOpen} setImages={setImages} setImageIdx={setImageIdx} />
+                  })
+                }
               </div>
               
               {

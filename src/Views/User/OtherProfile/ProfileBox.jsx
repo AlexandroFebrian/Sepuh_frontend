@@ -33,7 +33,7 @@ export default function ProfileBox({profile, posts}) {
         
         <div className="w-full px-8 mt-5">
           <div className='w-full flex justify-between items-center'>
-            <h1 className="font-bold text-3xl">{profile.name}</h1>
+            <h1 className="font-bold text-3xl">{profile.name} &#x2022; {profile.role}</h1>
             <div>
               <Link className='mr-2'>
                 <Button
@@ -93,7 +93,7 @@ export default function ProfileBox({profile, posts}) {
         {
           content == "Description"
           &&
-          <div dangerouslySetInnerHTML={displayFormattedText()} />
+          <div className='w-full h-fit bg-ghostwhite-50 rounded px-4 py-4' dangerouslySetInnerHTML={displayFormattedText()} />
         }
         {
           content == "Posts"

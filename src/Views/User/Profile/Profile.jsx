@@ -55,6 +55,18 @@ export default function Profile() {
     "July", "August", "September", "October", "November", "December"
   ];
 
+  const [position, setPosition] = useState(0);
+
+  useEffect(() => {
+    if (wait) {
+      
+      setPosition(window.scrollY);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [wait]);
+
 
   return (
     <>
@@ -67,6 +79,8 @@ export default function Profile() {
           popupType={popupType} 
           popupTitle={popupTitle} 
           popupButtonMessage={popupButtonMessage}
+          className="fixed w-screen h-screen"
+          style={{ top: `${position}px` }}
         />
         <div className="left w-1/5 ">
           <div className="h-[calc(100vh-5rem)] w-full sticky top-[5rem]">

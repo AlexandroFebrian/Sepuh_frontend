@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {CircularProgress} from '@chakra-ui/react'
 import PopupBox from './PopupBox'
 
-export default function Popup({wait, popup, setPopup, setWait, popupType, popupTitle, popupMessage, popupSubMessage, popupButtonMessage, popupLink, resetForm, handleClick, className}) {
+export default function Popup({wait, popup, setPopup, setWait, popupType, popupTitle, popupMessage, popupSubMessage, popupButtonMessage, popupLink, resetForm, handleClick, className, style}) {
   const [close, setClose] = useState(false)
 
   return (
@@ -11,8 +11,8 @@ export default function Popup({wait, popup, setPopup, setWait, popupType, popupT
         wait
         &&
         <>
-          <div className={`absolute w-[100%] h-[100%] bg-black/30 z-20 animate__animated ${close ? "animate__fadeOut" : "animate__fadeIn"} animate__faster ${className}`} />
-          <div className={`absolute w-[100%] h-[100%] z-30 flex items-center justify-center ${className}`}>
+          <div className={`absolute w-[100%] h-[100%] bg-black/30 z-20 animate__animated ${close ? "animate__fadeOut" : "animate__fadeIn"} animate__faster ${className}`} style={style} />
+          <div className={`absolute w-[100%] h-[100%] z-30 flex items-center justify-center ${className}`} style={style}>
             {
               popup
               ?

@@ -226,6 +226,22 @@ export default function fetch() {
     }
   }
 
+  async function getPostById(id, setPost) {
+    try {
+      return await client
+        .get(`posts/details/${id}`)
+        .then((res) => {
+          console.log(res.data[0])
+          setPost(res.data[0]);
+        })
+        .catch((err) => {
+          alert("error");
+        });
+    } catch (error) {
+      alert("error");
+    }
+  }
+
   async function fetchCompanyPost(setCompanyPost) {
     try {
       return await client
@@ -396,6 +412,34 @@ export default function fetch() {
     }
   }
 
+  async function applyJob(setWait, setPopup) {
+    const token = localStorage.getItem("token");
+
+    try {
+      return await client
+        .post(
+          `posts/apply`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((res) => {
+          setPopup(true);
+          return res;
+        })
+        .catch((err) => {
+          setPopup(true);
+          return err.response;
+        });
+    } catch (error) {
+      alert("error");
+      navigate("/");
+    }
+  }
+
   return {
     signIn,
     signUp,
@@ -407,6 +451,7 @@ export default function fetch() {
     updateUserProfile,
     addPost,
     myPost,
+    getPostById,
     fetchCompanyPost,
     fetchFreelancerPost,
     handleAdminLogin,
@@ -414,6 +459,7 @@ export default function fetch() {
     BanUser,
     UnbanUser,
     getAllChats,
-    sendMessage
+    sendMessage,
+    applyJob
   };
 }

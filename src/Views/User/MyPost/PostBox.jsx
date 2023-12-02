@@ -42,7 +42,7 @@ export default function PostBox({post, setOpen, setImages, setImageIdx}) {
         <div className='flex'>
           <Avatar src={post.posted_by.profile_picture} size={"lg"} />
           <div className='w-full ml-3 relative'>
-            <h2 className='w-full font-semibold text-lg '>{post.title}</h2>
+            <h2 className='w-full font-semibold text-lg text-navyblue-500'>{post.title}</h2>
             <p className=' text-sm'>{post.posted_by.name} &#x2022; {post.posted_by.headline} </p>
             <div className='flex justify-between items-center text-xs'>
               <p>{posted_at.getDate()} {monthNames[posted_at.getMonth()]} {posted_at.getFullYear()}</p>
@@ -73,7 +73,7 @@ export default function PostBox({post, setOpen, setImages, setImageIdx}) {
           {post.description}
         </div>
 
-        <div className='w-full flex mt-4 overflow-x-auto'>
+        <div className='max-w-full flex mt-4 overflow-x-auto'>
           {
             post.image.map((img, idx) => {
               return (

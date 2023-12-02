@@ -19,6 +19,7 @@ import UserReports from "./Views/Admin/UserReports/UserReports";
 import PostingReports from "./Views/Admin/PostingReports/PostingReports";
 import IncomeReports from "./Views/Admin/IncomeReports/IncomeReports";
 import PaymentReports from "./Views/Admin/PaymentReports/PaymentReports";
+import DetailsPost from "./Views/User/DetailsPost/DetailsPost";
 
 const Router = createBrowserRouter([
   {
@@ -62,27 +63,31 @@ const Router = createBrowserRouter([
         element: <Messages />
       },
       {
-        path: "user/profile",
+        path: "/post/:postId",
+        element: <DetailsPost />
+      },
+      {
+        path: "/user/profile",
         element: <Profile />,
       },
       {
-        path: "user/document",
+        path: "/user/document",
         element: <Profile />,
       },
       {
-        path: "user/history",
+        path: "/user/history",
         element: <Profile />,
       },
       {
-        path: "user/income",
+        path: "/user/income",
         element: <Profile />,
       },
       {
-        path: "user/bank",
+        path: "/user/bank",
         element: <Profile />,
       },
       {
-        path: "user",
+        path: "/user",
         element: <OtherProfile />
       },
       {

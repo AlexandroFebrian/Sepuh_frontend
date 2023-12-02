@@ -6,24 +6,26 @@ import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function ContentBox({item}) {
+  const navigate = useNavigate()
 
   const categories = useSelector((state) => state.post.category)
 
-  const min_price = new Intl.NumberFormat('en-US', {
+  const min_price = new Intl.NumberFormat('id-ID', {
     minimumFractionDigits: 2,
   }).format(item.min_price);
 
-  const max_price = new Intl.NumberFormat('en-US', {
+  const max_price = new Intl.NumberFormat('id-ID', {
     minimumFractionDigits: 2,
   }).format(item.max_price);
 
   const email = encodeURIComponent(item.posted_by.email)
 
   return (
-    <div className='w-full h-fit mb-5 rounded shadow-lg bg-lightblue-50 flex p-5 relative border border-navyblue-800'>
+    <div className='w-full h-fit mb-5 rounded shadow-lg bg-lightblue-50 flex p-5 relative z-0 border border-navyblue-800 hover:bg-indigo-50'>
       <div className='pr-5'>
         <Avatar src={item.posted_by.profile_picture} size={"lg"} />
       </div>
+      
       <div className='w-full relative'>
         <div className='w-full mt-1 relative'>
           <Link to={`/post/${item._id}`} className=' hover:underline'>
@@ -64,7 +66,7 @@ export default function ContentBox({item}) {
         
         <hr className=' my-4 border-navyblue-800' />
 
-        <div className=' w-full flex justify-between items-center'>
+        <div className=' w-full flex justify-between items-center relative z-50'>
           <div className='font-semibold'>
             Rp {min_price} - Rp {max_price}
           </div>
@@ -96,6 +98,7 @@ export default function ContentBox({item}) {
               variant="solid"
               transitionDuration={"300ms"}
               fontSize={"sm"}
+              onClick={() => {console.log("lol")}}
             >
               <FaPlus className='mr-1' /> Add to List
             </Button>

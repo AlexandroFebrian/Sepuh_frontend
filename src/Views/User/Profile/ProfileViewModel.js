@@ -104,8 +104,6 @@ export default function ProfileViewModel(){
 
     setWait(true)
 
-    window.scrollTo({ top: document.body.scrollHeight/4, behavior: 'smooth' });
-
     const response = await updateUserProfile(data, setWait, setPopup)
 
     if(response == undefined){
