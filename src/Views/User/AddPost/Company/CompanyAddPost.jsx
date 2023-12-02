@@ -62,11 +62,13 @@ export default function CompanyAddPost() {
       </div>
 
       <div className='mt-5 flex items-center'>
-        <p className='text-lg'>Name of the project: </p>
+        <p className='text-xl font-semibold'>Name of the project: </p>
         <input type="text" placeholder='Name of the project' defaultValue={projectName} className='ml-3 w-[40%] h-9 px-3 border-2 border-navyblue-800 rounded-md' onChange={(e) => {setProjectName(e.target.value)}}/>
       </div>
 
-      <div className='mt-5'>
+      <h1 className='font-semibold text-xl mt-5'>Description: <span className='font-bold'>(min. 100)</span></h1>
+
+      <div className='mt-2'>
         <Textarea
           placeholder="Description…"
           value={text}
@@ -75,7 +77,7 @@ export default function CompanyAddPost() {
           maxRows={10}
           style={{ width: '100%', minHeight: '100px' }}
           endDecorator={
-            <Typography variant="body-xs" sx={{ ml: "auto", color: text.length > 1000 ? 'red' : 'inherit', textAlign: "right" }}>
+            <Typography variant="body-xs" sx={{ ml: "auto", color: text.trim().split(/\s+/).filter(Boolean).length >= 1000 ? 'red' : 'inherit', textAlign: "right" }}>
               {text.trim().split(/\s+/).filter(Boolean).length} / 1000
             </Typography>
           }

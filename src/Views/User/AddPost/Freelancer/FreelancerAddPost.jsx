@@ -64,19 +64,25 @@ export default function FreelancerAddPost() {
           <input type="text" placeholder='Title' defaultValue={title} className='w-80 h-9 px-3 ml-3 border-2 border-navyblue-800 rounded-md' onChange={(e) => {setTitle(e.target.value)}}/>
         </div>
 
-        <Textarea
-          placeholder="Description…"
-          value={text}
-          onChange={descChange}
-          minRows={10}
-          maxRows={10}
-          style={{ width: '100%', minHeight: '100px' }}
-          endDecorator={
-            <Typography variant="body-xs" sx={{ ml: "auto", color: text.length > 1000 ? 'red' : 'inherit', textAlign: "right" }}>
-              {text.trim().split(/\s+/).filter(Boolean).length} / 1000
-            </Typography>
-          }
-        />
+        <h1 className='font-semibold text-xl'>Description: <span className='font-bold'>(min. 100)</span></h1>
+
+        <div className='mt-2'>
+          <Textarea
+            placeholder="Description…"
+            value={text}
+            onChange={descChange}
+            minRows={10}
+            maxRows={10}
+            style={{ width: '100%', minHeight: '100px' }}
+            endDecorator={
+              <Typography variant="body-xs" sx={{ ml: "auto", color: text.trim().split(/\s+/).filter(Boolean).length >= 1000 ? 'red' : 'inherit', textAlign: "right" }}>
+                {text.trim().split(/\s+/).filter(Boolean).length} / 1000
+              </Typography>
+            }
+          />
+
+        </div>
+
         <div className='w-full flex flex-wrap items-center'>
           {imageSrcs.map((src, index) => (
             <img
