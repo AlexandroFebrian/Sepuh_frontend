@@ -240,7 +240,7 @@ export default function DetailsPost() {
                     paddingY={"0.5rem"}
                     onClick={() => {applyHandler()}}
                   >
-                     <FaRegFileLines size="1.3rem" className='mr-2' /> Apply Now
+                     <FaRegFileLines size="1.3rem" className='mr-2' /> Continue
                   </Button>
                 </div>
               </div>
