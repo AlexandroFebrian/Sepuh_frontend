@@ -2,6 +2,9 @@ import DocumentCompletionViewModel from "./DocumentCompletionViewModel";
 import FreelancerProfileMenu from "../../../components/SidebarMenu/Freelancer/FreelancerProfileMenu/FreelancerProfileMenu";
 import CompanyProfileMenu from "../../../components/SidebarMenu/Company/CompanyProfileMenu/CompanyProfileMenu";
 
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { FaCircleExclamation } from "react-icons/fa6";
+
 export default function DocumentCompletion() {
   const { isLogin, user } = DocumentCompletionViewModel();
 
@@ -18,12 +21,22 @@ export default function DocumentCompletion() {
           <div className=" min-h-[calc(100vh-5rem)] h-fit border-l-2 border-navyblue-600 z-0 px-10 py-10">
             <div className="w-full rounded py-6 px-10">
               <h1 className="font-semibold text-xl">Document Completion</h1>
-              <div className="warningMessage w-full bg-yellow-500 py-6 px-3 mt-5 rounded-md">
-                <p className="text-red-500 font-semibold text-lg">
-                  Complete your profile and documents to enroll in the program.
-                  Your Information will be securely stored. Please ensure that
-                  the documents you submit are accurate and up to date.
-                </p>
+              <div className="warningMessage">
+                <Alert className="w-full bg-yellow-500 py-5 px-3 mt-5 rounded-md flex items-center gap-3">
+                  <div className="left">
+                    <FaCircleExclamation className="text-3xl " />
+                  </div>
+                  <div className="right">
+                    <AlertTitle>
+                      Complete your profile and documents to enroll in the
+                      program.
+                    </AlertTitle>
+                    <AlertDescription>
+                      Your Information will be securely stored. Please ensure
+                      that the documents you submit are accurate and up to date.
+                    </AlertDescription>
+                  </div>
+                </Alert>
               </div>
 
               <div className="w-full mt-5 bg-ghostwhite-100 h-full rounded-md">

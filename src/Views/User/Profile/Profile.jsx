@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import InputFileButton from '../../../components/InputFileButton/InputFileButton'
-import ProfileViewModel from './ProfileViewModel'
-import { Avatar, Button, Input } from '@chakra-ui/react'
-import Popup from '../../../components/Popup/Popup'
-import FreelancerProfileMenu from '../../../components/SidebarMenu/Freelancer/FreelancerProfileMenu/FreelancerProfileMenu'
-import CompanyProfileMenu from '../../../components/SidebarMenu/Company/CompanyProfileMenu/CompanyProfileMenu'
+import { useEffect, useState } from "react";
+import InputFileButton from "../../../components/InputFileButton/InputFileButton";
+import ProfileViewModel from "./ProfileViewModel";
+import { Avatar, Button, Input } from "@chakra-ui/react";
+import Popup from "../../../components/Popup/Popup";
+import FreelancerProfileMenu from "../../../components/SidebarMenu/Freelancer/FreelancerProfileMenu/FreelancerProfileMenu";
+import CompanyProfileMenu from "../../../components/SidebarMenu/Company/CompanyProfileMenu/CompanyProfileMenu";
 
 export default function Profile() {
-  const { 
-    isLogin, 
+  const {
+    isLogin,
     user,
     bannerFile,
     bannerImageSrc,
@@ -47,19 +47,28 @@ export default function Profile() {
     setPopup,
     popupType,
     popupTitle,
-    popupButtonMessage
-  } = ProfileViewModel()
+    popupButtonMessage,
+  } = ProfileViewModel();
 
   const monthNames = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
   const [position, setPosition] = useState(0);
 
   useEffect(() => {
     if (wait) {
-      
       setPosition(window.scrollY);
       document.body.style.overflow = "hidden";
     } else {
@@ -67,45 +76,39 @@ export default function Profile() {
     }
   }, [wait]);
 
-
   return (
     <>
       <div className=" h-fit relative flex">
-        <Popup 
-          wait={wait} 
-          popup={popup} 
-          setPopup={setPopup} 
-          setWait={setWait} 
-          popupType={popupType} 
-          popupTitle={popupTitle} 
+        <Popup
+          wait={wait}
+          popup={popup}
+          setPopup={setPopup}
+          setWait={setWait}
+          popupType={popupType}
+          popupTitle={popupTitle}
           popupButtonMessage={popupButtonMessage}
           className="fixed w-screen h-screen"
           style={{ top: `${position}px` }}
         />
         <div className="left w-1/5 ">
           <div className="h-[calc(100vh-5rem)] w-full sticky top-[5rem]">
-            {
-              isLogin && user?.role == "Freelancer"
-              &&
-              <FreelancerProfileMenu />
-            }
-            {
-              isLogin && user?.role == "Company"
-              &&
-              <CompanyProfileMenu />
-            }
-            
+            {isLogin && user?.role == "Freelancer" && <FreelancerProfileMenu />}
+            {isLogin && user?.role == "Company" && <CompanyProfileMenu />}
           </div>
         </div>
         <div className="mid w-3/5">
           <div className=" min-h-[calc(100vh-5rem)] h-fit border-l-2 border-navyblue-600 z-0 px-10 py-10">
-            <div className='w-full bg-ghostwhite-100 rounded py-6 px-10'>
-              <h1 className='font-semibold text-xl'>Personal Information</h1>
-              <div 
-                className='mt-5 w-full h-36 px-10 bg-stone-300 flex items-center justify-end '
-                style={{ backgroundImage: `url(${bannerImageSrc[0]})`, backgroundSize: "cover", backgroundPosition: "center" }}
+            <div className="w-full bg-ghostwhite-100 rounded py-6 px-10">
+              <h1 className="font-semibold text-xl">Personal Information</h1>
+              <div
+                className="mt-5 w-full h-36 px-10 bg-stone-300 flex items-center justify-end "
+                style={{
+                  backgroundImage: `url(${bannerImageSrc[0]})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
               >
-                <InputFileButton 
+                <InputFileButton
                   key={1}
                   index={1}
                   className=" px-4 w-auto bg-ghostwhite-50 hover:bg-ghostwhite-100 rounded"
@@ -114,17 +117,23 @@ export default function Profile() {
                   imageSrcs={bannerImageSrc}
                   setImageSrcs={setBannerImageSrc}
                   showImage={true}
-                > 
+                >
                   Upload
                 </InputFileButton>
               </div>
 
-              <div className='w-full mt-5 px-20'>
-                <div className='w-full '>
-                  <div className='w-full flex justify-between items-center'>
-                    <div className='flex items-center'>
-                      <Avatar size="lg" src={profileImageSrc[0]} className='mr-4' border={"1px"} color={"blackAlpha.800"}/>
-                      <InputFileButton 
+              <div className="w-full mt-5 px-20">
+                <div className="w-full ">
+                  <div className="w-full flex justify-between items-center">
+                    <div className="flex items-center">
+                      <Avatar
+                        size="lg"
+                        src={profileImageSrc[0]}
+                        className="mr-4"
+                        border={"1px"}
+                        color={"blackAlpha.800"}
+                      />
+                      <InputFileButton
                         key={2}
                         index={2}
                         className=" px-10 bg-ghostwhite-50 hover:bg-ghostwhite-200 rounded"
@@ -133,169 +142,202 @@ export default function Profile() {
                         imageSrcs={profileImageSrc}
                         setImageSrcs={setProfileImageSrc}
                         showImage={true}
-                      > 
+                      >
                         Upload
                       </InputFileButton>
                     </div>
                     <div>
                       <p>
-                        Member since {profileMemberSince && profileMemberSince.getDate()} {profileMemberSince && monthNames[profileMemberSince.getMonth()]} {profileMemberSince && profileMemberSince.getFullYear()}
+                        Member since{" "}
+                        {profileMemberSince && profileMemberSince.getDate()}{" "}
+                        {profileMemberSince &&
+                          monthNames[profileMemberSince.getMonth()]}{" "}
+                        {profileMemberSince && profileMemberSince.getFullYear()}
                       </p>
                     </div>
                   </div>
 
-                  <div className='mt-5'>
+                  <div className="mt-5">
                     <div>
                       Name:
-                      <Input 
-                        placeholder="Name" 
+                      <Input
+                        placeholder="Name"
                         variant={"outline"}
-                        defaultValue={profileName} 
+                        defaultValue={profileName}
                         disabled={true}
-                        className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
+                        className="mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm"
                         backgroundColor={"white"}
                       />
                     </div>
 
-                    <div className='mt-3'>
+                    <div className="mt-3">
                       Email:
-                      <Input 
-                        placeholder="Email" 
+                      <Input
+                        placeholder="Email"
                         variant={"outline"}
-                        defaultValue={profileEmail} 
+                        defaultValue={profileEmail}
                         disabled={true}
-                        className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
+                        className="mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm"
                         backgroundColor={"white"}
                       />
                     </div>
 
-                    {
-                      user?.role == "Freelancer"
-                      &&
-                      <div className='mt-3'>
+                    {user?.role == "Freelancer" && (
+                      <div className="mt-3">
                         Date of Birth*:
-                        <input type="date" name="" id="" className='ml-3 py-1 px-2 rounded' 
-                          value={(profileDateOfBirth && profileDateOfBirth != null && profileDateOfBirth != "Invalid Date" && formattedDate != "--") ? formattedDate : ""} onChange={(e) => {setProfileDateOfBirth(new Date(e.target.value))}} 
+                        <input
+                          type="date"
+                          name=""
+                          id=""
+                          className="ml-3 py-1 px-2 rounded"
+                          value={
+                            profileDateOfBirth &&
+                            profileDateOfBirth != null &&
+                            profileDateOfBirth != "Invalid Date" &&
+                            formattedDate != "--"
+                              ? formattedDate
+                              : ""
+                          }
+                          onChange={(e) => {
+                            setProfileDateOfBirth(new Date(e.target.value));
+                          }}
                         />
                       </div>
-                    }
+                    )}
 
-                    <div className='mt-3'>
+                    <div className="mt-3">
                       Headline*:
-                      <Input 
-                        placeholder="Headline" 
+                      <Input
+                        placeholder="Headline"
                         variant={"outline"}
-                        defaultValue={profileHeadline} 
-                        className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
+                        defaultValue={profileHeadline}
+                        className="mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm"
                         backgroundColor={"white"}
-                        onChange={(e) => {setProfileHeadline(e.target.value)}}
+                        onChange={(e) => {
+                          setProfileHeadline(e.target.value);
+                        }}
                       />
                     </div>
 
-                    <div className='mt-3'>
+                    <div className="mt-3">
                       Bio:
-                      <textarea name="" id="" placeholder='About me' className='w-full h-40 py-2 px-3 resize-none rounded-md' defaultValue={profileBio} onChange={(e) => {setProfileBio(e.target.value)}}>
-                        
-                      </textarea>
+                      <textarea
+                        name=""
+                        id=""
+                        placeholder="About me"
+                        className="w-full h-40 py-2 px-3 resize-none rounded-md"
+                        defaultValue={profileBio}
+                        onChange={(e) => {
+                          setProfileBio(e.target.value);
+                        }}
+                      ></textarea>
                     </div>
 
-                    <div className='mt-3'>
+                    <div className="mt-3">
                       City:
-                      <Input 
-                        placeholder="City" 
+                      <Input
+                        placeholder="City"
                         variant={"outline"}
-                        defaultValue={profileCity} 
-                        className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
+                        defaultValue={profileCity}
+                        className="mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm"
                         backgroundColor={"white"}
-                        onChange={(e) => {setProfileCity(e.target.value)}}
+                        onChange={(e) => {
+                          setProfileCity(e.target.value);
+                        }}
                       />
                     </div>
 
-                    <div className='mt-3'>
+                    <div className="mt-3">
                       Country:
-                      <Input 
-                        placeholder="Country" 
+                      <Input
+                        placeholder="Country"
                         variant={"outline"}
-                        defaultValue={profileCountry} 
-                        className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
+                        defaultValue={profileCountry}
+                        className="mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm"
                         backgroundColor={"white"}
-                        onChange={(e) => {setProfileCountry(e.target.value)}}
+                        onChange={(e) => {
+                          setProfileCountry(e.target.value);
+                        }}
                       />
                     </div>
                   </div>
-
                 </div>
-
               </div>
 
-              {
-                user?.role == "Freelancer"
-                &&
-                <div className='w-full mt-10'>
-                  <h1 className='font-semibold text-xl'>Education</h1>
+              {user?.role == "Freelancer" && (
+                <div className="w-full mt-10">
+                  <h1 className="font-semibold text-xl">Education</h1>
 
-                  <div className='w-full mt-4 pl-8 pr-20'>
-                    <div className='mt-3'>
+                  <div className="w-full mt-4 pl-8 pr-20">
+                    <div className="mt-3">
                       Last Education:
-                      <Input 
-                        placeholder="Last Education" 
+                      <Input
+                        placeholder="Last Education"
                         variant={"outline"}
-                        defaultValue={profileLastEducation} 
-                        className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
+                        defaultValue={profileLastEducation}
+                        className="mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm"
                         backgroundColor={"white"}
-                        onChange={(e) => {setProfileLastEducation(e.target.value)}}
+                        onChange={(e) => {
+                          setProfileLastEducation(e.target.value);
+                        }}
                       />
                     </div>
                   </div>
 
-                  <div className='w-full mt-4 pl-8 pr-20'>
-                    <div className='mt-3'>
+                  <div className="w-full mt-4 pl-8 pr-20">
+                    <div className="mt-3">
                       Current Education:
-                      <Input 
-                        placeholder="Current Education" 
+                      <Input
+                        placeholder="Current Education"
                         variant={"outline"}
                         defaultValue={profileCurrentEducation}
-                        className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
+                        className="mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm"
                         backgroundColor={"white"}
-                        onChange={(e) => {setProfileCurrentEducation(e.target.value)}}
+                        onChange={(e) => {
+                          setProfileCurrentEducation(e.target.value);
+                        }}
                       />
                     </div>
                   </div>
 
-                  <div className='w-full mt-4 pl-8 pr-20'>
-                    <div className='mt-3'>
+                  <div className="w-full mt-4 pl-8 pr-20">
+                    <div className="mt-3">
                       Field of Study:
-                      <Input 
-                        placeholder="Field of Study" 
+                      <Input
+                        placeholder="Field of Study"
                         variant={"outline"}
-                        defaultValue={profileFieldOfStudy} 
-                        className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
+                        defaultValue={profileFieldOfStudy}
+                        className="mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm"
                         backgroundColor={"white"}
-                        onChange={(e) => {setProfileFieldOfStudy(e.target.value)}}
+                        onChange={(e) => {
+                          setProfileFieldOfStudy(e.target.value);
+                        }}
                       />
                     </div>
                   </div>
 
-                  <div className='w-full mt-4 pl-8 pr-20'>
-                    <div className='mt-3'>
+                  <div className="w-full mt-4 pl-8 pr-20">
+                    <div className="mt-3">
                       Year of Study:
-                      <Input 
-                        type='number'
+                      <Input
+                        type="number"
                         min={0}
-                        placeholder="Year of Study" 
+                        placeholder="Year of Study"
                         variant={"outline"}
                         defaultValue={profileYearofStudy}
-                        className='mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm' 
+                        className="mt-1 border border-gray-800 text-gray-900 block flex-1 min-w-0 w-full text-sm"
                         backgroundColor={"white"}
-                        onChange={(e) => {setProfileYearofStudy(e.target.value)}}
+                        onChange={(e) => {
+                          setProfileYearofStudy(e.target.value);
+                        }}
                       />
                     </div>
                   </div>
                 </div>
-              }
+              )}
 
-              <div className='w-full flex justify-end items-center mt-8'>
-                <Button 
+              <div className="w-full flex justify-end items-center mt-8">
+                <Button
                   variant={"solid"}
                   color={"ghostwhite.50"}
                   bgColor={"navyblue.800"}
@@ -304,19 +346,18 @@ export default function Profile() {
                   paddingX={"2rem"}
                   paddingY={"1.5rem"}
                   fontSize={"lg"}
-                  onClick={() => {saveProfile()}}
+                  onClick={() => {
+                    saveProfile();
+                  }}
                 >
                   Save
                 </Button>
               </div>
-
             </div>
           </div>
         </div>
-        <div className="right w-1/5">
-          
-        </div>
+        <div className="right w-1/5"></div>
       </div>
     </>
-  )
+  );
 }

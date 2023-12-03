@@ -11,6 +11,7 @@ import MyPost from "./Views/User/MyPost/MyPost";
 import Profile from "./Views/User/Profile/Profile";
 import OtherProfile from "./Views/User/OtherProfile/OtherProfile";
 import DocumentCompletion from "./Views/User/DocumentCompletion/DocumentCompletion";
+import WorkHistory from "./Views/User/WorkHistory/WorkHistory";
 
 // ADMIN
 import AdminLogin from "./Views/Admin/AdminLogin/AdminLogin";
@@ -78,7 +79,7 @@ const Router = createBrowserRouter([
       },
       {
         path: "/user/history",
-        element: <Profile />,
+        element: <WorkHistory />,
       },
       {
         path: "/user/income",

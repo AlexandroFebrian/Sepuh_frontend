@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import fetch from "../../../Client/fetch";
 
-export default function DocumentCompletionViewModel() {
+export default function WorkHistoryViewModel() {
   const { checkToken, getUserProfile } = fetch();
 
   const isLogin = useSelector((state) => state.user.isLogin);
