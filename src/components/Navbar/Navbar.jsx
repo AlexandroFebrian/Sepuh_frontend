@@ -16,7 +16,7 @@ import {
 import { FaSliders } from "react-icons/fa6";
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaMagnifyingGlass, FaFilter } from "react-icons/fa6";
+import { FaMagnifyingGlass, FaFilter, FaRegBell } from "react-icons/fa6";
 import { set } from "react-hook-form";
 import Filter from "./Filter";
 import { useEffect } from "react";
@@ -164,6 +164,7 @@ export default function Navbar() {
             {isLogin ? (
               <>
                 <Button
+                  leftIcon={<FaRegBell />}
                   color="ghostwhite.50"
                   _hover={{ bg: "whiteAlpha.200" }}
                   _active={{ bg: "whiteAlpha.300" }}
@@ -174,8 +175,8 @@ export default function Navbar() {
                 >
                   My Activity
                 </Button>
-
                 <Button
+                  leftIcon={<FaRegBell />}
                   color="ghostwhite.50"
                   _hover={{ bg: "whiteAlpha.200" }}
                   _active={{ bg: "whiteAlpha.300" }}
@@ -186,6 +187,18 @@ export default function Navbar() {
                 >
                   Notifications
                 </Button>
+
+                {/* <Button
+                  color="ghostwhite.50"
+                  _hover={{ bg: "whiteAlpha.200" }}
+                  _active={{ bg: "whiteAlpha.300" }}
+                  width="8.5rem"
+                  className=" me-6"
+                  variant="ghost"
+                  transitionDuration={"300ms"}
+                >
+                  Notifications
+                </Button> */}
 
                 <Popover>
                   <PopoverTrigger className=" text-ghostwhite-50 font-semibold bg-indigo-300 w-[8.5rem] h-[2.5rem] rounded-md hover:bg-indigo-350 active:bg-indigo-400 transition-colors duration-300">

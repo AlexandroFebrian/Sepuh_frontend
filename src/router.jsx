@@ -12,6 +12,7 @@ import Profile from "./Views/User/Profile/Profile";
 import OtherProfile from "./Views/User/OtherProfile/OtherProfile";
 import DocumentCompletion from "./Views/User/DocumentCompletion/DocumentCompletion";
 import WorkHistory from "./Views/User/WorkHistory/WorkHistory";
+import BankAccount from "./Views/User/BankAccount/BankAccount";
 
 // ADMIN
 import AdminLogin from "./Views/Admin/AdminLogin/AdminLogin";
@@ -87,7 +88,7 @@ const Router = createBrowserRouter([
       },
       {
         path: "/user/bank",
-        element: <Profile />,
+        element: <BankAccount />,
       },
       {
         path: "/user",

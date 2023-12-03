@@ -131,7 +131,6 @@ export default function WorkHistory() {
                   );
                 })}
 
-                {/* pagination button */}
                 <div className="flex justify-end my-2 mr-5">
                   {/* < page > */}
                   <div className="flex gap-2">
