@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 
 export default function DetailsPostViewModel(){
-  const { checkToken, getPostById, applyJob } = fetch();
+  const { checkToken, getPostById, createAgreements } = fetch();
 
   const isLogin = useSelector((state) => state.user.isLogin);
   const user = useSelector((state) => state.user.userDetail);
@@ -24,10 +24,12 @@ export default function DetailsPostViewModel(){
     getPostById(postId, setPost);
   }, [])
 
-  async function applyHandler(){
+  async function agreementsHandler(){
     setWait(true)
 
-    const response = await applyJob(postId, setWait, setPopup)
+    const email = post.posted_by.email
+
+    const response = await createAgreements(email, postId, setWait, setPopup)
 
     if(response == undefined){
       setPopupTitle("Network Error!")
@@ -47,6 +49,9 @@ export default function DetailsPostViewModel(){
     setPopupTitle("Apply Success")
     setPopupButtonMessage("Close")
     setPopupType(true)
+
+    const id = response.data.id
+    console.log(id)
   }
 
   return {
@@ -60,6 +65,6 @@ export default function DetailsPostViewModel(){
     popupType,
     setPopup,
     setWait,
-    applyHandler
+    agreementsHandler
   }
 }

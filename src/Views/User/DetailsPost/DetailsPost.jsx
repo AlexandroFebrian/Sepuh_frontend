@@ -27,7 +27,7 @@ export default function DetailsPost() {
     popupType,
     setPopup,
     setWait,
-    applyHandler,
+    agreementsHandler,
   } = DetailsPostViewModel()
 
   useEffect(() => {
@@ -80,10 +80,6 @@ export default function DetailsPost() {
       document.body.style.overflow = "unset";
     }
   }, [open]);
-
-  async function continueHandler() {
-    window.snap.pay('TRANSACTION_TOKEN_HERE');
-  }
 
   function hashtagHandler(tag){
     sessionStorage.setItem("category", tag)
@@ -238,7 +234,7 @@ export default function DetailsPost() {
                     transitionDuration={"300ms"}
                     fontSize={"sm"}
                     paddingY={"0.5rem"}
-                    onClick={() => {applyHandler()}}
+                    onClick={() => {agreementsHandler()}}
                   >
                      <FaRegFileLines size="1.3rem" className='mr-2' /> Continue
                   </Button>
@@ -347,7 +343,7 @@ export default function DetailsPost() {
                     transitionDuration={"300ms"}
                     fontSize={"sm"}
                     paddingY={"0.5rem"}
-                    onClick={() => {continueHandler()}}
+                    onClick={() => {agreementsHandler()}}
                   >
                      <FaRegFileLines size="1.3rem" className='mr-2' /> Continue
                   </Button>

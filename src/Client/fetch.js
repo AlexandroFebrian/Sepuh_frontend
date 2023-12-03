@@ -233,7 +233,6 @@ export default function fetch() {
       return await client
         .get(`posts/details/${id}`)
         .then((res) => {
-          console.log(res.data[0])
           setPost(res.data[0]);
         })
         .catch((err) => {
@@ -495,19 +494,19 @@ export default function fetch() {
         });
     } catch (error) {
       alert("error");
-      navigate("/");
     }
   }
 
-  async function applyJob(postId,setWait, setPopup) {
+  async function createAgreements(email, postId, setWait, setPopup) {
     const token = localStorage.getItem("token");
 
     try {
       return await client
         .post(
-          `posts/apply`,
+          `agreements`,
           {
-            postId: postId
+            email: email,
+            post_id: postId
           },
           {
             headers: {
@@ -525,7 +524,6 @@ export default function fetch() {
         });
     } catch (error) {
       alert("error");
-      navigate("/");
     }
   }
 
@@ -552,6 +550,6 @@ export default function fetch() {
     addToList,
     removeFromList,
     getList,
-    applyJob
+    createAgreements
   };
 }
