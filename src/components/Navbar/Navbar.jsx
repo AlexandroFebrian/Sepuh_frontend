@@ -199,7 +199,7 @@ export default function Navbar() {
                         {user?.name}
                       </h1>
 
-                      <h2 className="text-center font-semibold text-lg">
+                      <h2 className="text-center">
                         {formatedBalance && formatedBalance}
                         {/* {formatAmount(999999999999999)} */}
                       </h2>

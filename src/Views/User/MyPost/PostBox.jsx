@@ -92,7 +92,7 @@ export default function PostBox({post, setOpen, setImages, setImageIdx}) {
         
         <div className=' mt-4 w-full flex justify-between items-center'>
           <div className='font-semibold'>
-            Rp {min_price} - Rp {max_price}
+            Rp {min_price} - {max_price}
           </div>
           <div>
             <Button 

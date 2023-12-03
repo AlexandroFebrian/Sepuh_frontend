@@ -190,6 +190,7 @@ export default function DetailsPost() {
 
                   <div className='mt-3 flex items-baseline'>
                     {
+                      categories.length > 0 &&
                       post?.hashtag.map((tag, idx) => {
                         return (
                           <Button
