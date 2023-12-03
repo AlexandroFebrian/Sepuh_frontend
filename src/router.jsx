@@ -10,6 +10,7 @@ import Messages from "./Views/User/Messages/Messages";
 import MyPost from "./Views/User/MyPost/MyPost";
 import Profile from "./Views/User/Profile/Profile";
 import OtherProfile from "./Views/User/OtherProfile/OtherProfile";
+import DocumentCompletion from "./Views/User/DocumentCompletion/DocumentCompletion";
 
 // ADMIN
 import AdminLogin from "./Views/Admin/AdminLogin/AdminLogin";
@@ -45,27 +46,27 @@ const Router = createBrowserRouter([
       },
       {
         path: "/messages",
-        element: <Messages />
+        element: <Messages />,
       },
       {
         path: "/lists",
-        element: <List />
+        element: <List />,
       },
       {
         path: "/myposts",
-        element: <MyPost />
+        element: <MyPost />,
       },
       {
         path: "/dashboard",
-        element: <Messages />
+        element: <Messages />,
       },
       {
         path: "/employee",
-        element: <Messages />
+        element: <Messages />,
       },
       {
         path: "/post/:postId",
-        element: <DetailsPost />
+        element: <DetailsPost />,
       },
       {
         path: "/user/profile",
@@ -73,7 +74,7 @@ const Router = createBrowserRouter([
       },
       {
         path: "/user/document",
-        element: <Profile />,
+        element: <DocumentCompletion />,
       },
       {
         path: "/user/history",
@@ -89,7 +90,7 @@ const Router = createBrowserRouter([
       },
       {
         path: "/user",
-        element: <OtherProfile />
+        element: <OtherProfile />,
       },
       {
         path: "/admin/masteruser",

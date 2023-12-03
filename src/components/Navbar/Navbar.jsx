@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   Avatar,
   Button,
@@ -69,36 +70,35 @@ export default function Navbar() {
     const amountLength = amountString.length;
     let amountFormatted = "";
     for (let i = 0; i < amountLength; i++) {
-        if ((amountLength - i) % 3 === 0 && i !== 0) {
+      if ((amountLength - i) % 3 === 0 && i !== 0) {
         amountFormatted += ".";
-        }
-        amountFormatted += amountString[i];
+      }
+      amountFormatted += amountString[i];
     }
     amountFormatted = "Rp. " + amountFormatted + ",00";
     setFormatedBalance(amountFormatted);
   }, [user]);
 
-//   const formatAmount = (amount) => {
-//     console.log(amount);
-//     const amountString = amount.toString();
-//     const amountLength = amountString.length;
-//     let amountFormatted = "";
-//     for (let i = 0; i < amountLength; i++) {
-//       if ((amountLength - i) % 3 === 0 && i !== 0) {
-//         amountFormatted += ".";
-//       }
-//       amountFormatted += amountString[i];
-//     }
-//     amountFormatted = "Rp. " + amountFormatted + ",00";
-//     return amountFormatted;
-//   };
+  //   const formatAmount = (amount) => {
+  //     console.log(amount);
+  //     const amountString = amount.toString();
+  //     const amountLength = amountString.length;
+  //     let amountFormatted = "";
+  //     for (let i = 0; i < amountLength; i++) {
+  //       if ((amountLength - i) % 3 === 0 && i !== 0) {
+  //         amountFormatted += ".";
+  //       }
+  //       amountFormatted += amountString[i];
+  //     }
+  //     amountFormatted = "Rp. " + amountFormatted + ",00";
+  //     return amountFormatted;
+  //   };
 
   function searchHandler(e) {
     if (e.key === "Enter") {
       navigate(`/home?search=${e.target.value}`);
     }
   }
-
 
   return (
     <>
@@ -136,7 +136,12 @@ export default function Navbar() {
                 <FaMagnifyingGlass />
               </InputLeftElement>
 
-              <Input placeholder="Search" onKeyDown={(e) => {searchHandler(e)}}></Input>
+              <Input
+                placeholder="Search"
+                onKeyDown={(e) => {
+                  searchHandler(e);
+                }}
+              ></Input>
 
               <InputRightElement>
                 <FaSliders
