@@ -12,7 +12,7 @@ export default function Content() {
   const navigate = useNavigate()
   const category = useSelector((state) => state.post.category)
 
-  const { isLogin, categoryFilter, setCategoryFilter, freelancerPost, companyPost, searchs } = ContentViewModel()
+  const { isLogin, categoryFilter, setCategoryFilter, freelancerPost, companyPost, searchs, searchBy, setSearchBy } = ContentViewModel()
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -23,9 +23,20 @@ export default function Content() {
     setCategoryFilter(value)
   }
 
+  const searchByFilter = [
+    {
+      value: "freelancer",
+      label : "Freelancer"
+    },
+    {
+      value: "company",
+      label : "Company"
+    },
+  ]
+
   return (
     <>
-      <div className='w-full h-16'>
+      <div className='w-full h-16 flex items-center'>
         {
           isLogin
           &&
@@ -40,10 +51,40 @@ export default function Content() {
             onSelect={(value) => {comboBoxSelect(value)}}
           />
         }
+        {
+          isLogin === false
+          &&
+          <>
+            <p className='mr-3 text-lg font-semibold'>Search by: </p>
+            <div className='mr-3'>
+              <Combobox 
+                title={"Search by"} 
+                placeholder={"Search by"} 
+                empty={"No category found"} 
+                items={searchByFilter} 
+                headerClassName={"w-72 shadow-lg"}
+                contentClassName={" pt-1 border-0"}
+                item={searchBy}
+                onSelect={(value) => {setSearchBy(value)}}
+              />
+
+            </div>
+            <Combobox 
+              title={"Select Category"} 
+              placeholder={"Search Category"} 
+              empty={"No category found"} 
+              items={category} 
+              headerClassName={"w-72 shadow-lg"}
+              contentClassName={" pt-1 border-0"}
+              item={categoryFilter}
+              onSelect={(value) => {comboBoxSelect(value)}}
+            />
+          </>
+        }
       </div>
       
       <div className='w-full pt-3 flex justify-between min-h-[calc(100vh-15rem)] h-fit'>
-        <div className='w-[calc(100%-5rem)] mr-10'>
+        <div className={`${isLogin ? "w-[calc(100%-5rem)] mr-10" : "w-full"}`}>
           {
             freelancerPost.length == 0 && companyPost.length == 0
           }

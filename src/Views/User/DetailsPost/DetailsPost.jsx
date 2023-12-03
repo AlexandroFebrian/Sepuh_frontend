@@ -96,7 +96,7 @@ export default function DetailsPost() {
       {
         open
         &&
-        <OpenImage photos={post?.image} className={`fixed left-0 z-[60] w-screen h-screen`} setOpen={setOpen} imageIdx={imageIdx} setImageIdx={setImageIdx} style={{ top: `${position}px`}} />
+        <OpenImage photos={post?.image} className={`fixed left-0 z-[60]`} setOpen={setOpen} imageIdx={imageIdx} setImageIdx={setImageIdx} style={{ top: `${position}px`}} />
       }
 
       <div className=" h-fit relative flex">

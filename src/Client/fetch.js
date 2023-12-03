@@ -76,12 +76,14 @@ export default function fetch() {
           dispatch(setUserDetail(res.data.data));
         })
         .catch((err) => {
+          dispatch(setIsLogin(false));
           if (location.pathname == "/" || location.pathname == "/home") {
           } else {
             navigate("/");
           }
         });
     } catch (error) {
+      dispatch(setIsLogin(false));
       alert("error");
       navigate("/");
     }

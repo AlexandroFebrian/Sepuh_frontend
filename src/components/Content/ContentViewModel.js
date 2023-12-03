@@ -15,6 +15,8 @@ export default function ContentViewModel(){
   const [companyPost, setCompanyPost] = useState([])
   const [freelancerPost, setFreelancerPost] = useState([])
 
+  const [searchBy, setSearchBy] = useState("")
+
   useEffect(() => {
     setCompanyPost([])
     setFreelancerPost([])
@@ -31,6 +33,23 @@ export default function ContentViewModel(){
     }
 
   }, [user])
+
+  useEffect(() => {
+    if(isLogin === false){
+      if(!searchBy) setSearchBy("freelancer")
+
+      setCompanyPost([])
+      setFreelancerPost([])
+
+      if(searchBy == "freelancer"){
+        fetchFreelancerPost(setFreelancerPost)
+      }else if(searchBy == "company"){
+        fetchCompanyPost(setCompanyPost)
+      }
+    }
+  }, [isLogin, searchBy])
+
+
 
   const { search } = useLocation();
   const params = new URLSearchParams(search);
@@ -51,6 +70,8 @@ export default function ContentViewModel(){
     setCategoryFilter,
     companyPost,
     freelancerPost,
-    searchs
+    searchs,
+    searchBy,
+    setSearchBy
   }
 }

@@ -16,10 +16,10 @@ export default function OpenImage({className, photos, setOpen, imageIdx, setImag
   
   return (
     <>
-      <div className={`absolute w-[100%] h-[100%] bg-black/30 z-20 animate__animated ${close ? "animate__fadeOut" : "animate__fadeIn"} animate__faster ${className}`}  style={style}>
+      <div className={`absolute w-[100%] h-[100%] bg-black/30 z-20 animate__animated ${close ? "animate__fadeOut" : "animate__fadeIn"} animate__faster w-screen h-screen ${className}`}  style={style}>
       </div>
       
-      <div className={`absolute w-[100%] h-[100%] z-30 flex items-center justify-center p-20 animate__animated ${close ? "animate__fadeOut" : "animate__fadeIn"} animate__faster ${className}`} style={style}>
+      <div className={`absolute w-[100%] h-[100%] z-30 flex items-center justify-center p-20 animate__animated ${close ? "animate__fadeOut" : "animate__fadeIn"} animate__faster w-screen h-screen ${className}`} style={style}>
         <div className='w-full h-full relative'>
           <Carousel photos={photos} className="h-full w-full" imageIdx={imageIdx} />
         </div>

@@ -23,16 +23,16 @@ export default function HomePage() {
               &&
               <CompanyDefaultMenu />
             }
-            {
+            {/* {
               !isLogin
               &&
               <MenuGuest />
-            }
+            } */}
             
           </div>
         </div>
         <div className="mid w-3/5 h-full">
-          <div className=" min-h-[calc(100vh-5rem)] h-fit border-l-2 border-navyblue-600 z-0 px-10 py-10">
+          <div className={`min-h-[calc(100vh-5rem)] h-fit ${isLogin && "border-l-2 border-navyblue-600"} z-0 px-10 py-10`}>
             <Content />
           </div>
         </div>
