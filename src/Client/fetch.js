@@ -560,9 +560,31 @@ export default function fetch() {
       alert("Server Error");
       navigate("/");
     }
-
   }
-  
+
+  async function updateDocument(data) {
+    const token = localStorage.getItem("token");
+
+    try {
+      console.log(data);
+      return await client
+        .put("users/documents", data, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          alert("Document Updated");
+          return res;
+        })
+        .catch((err) => {
+          return err.response;
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return {
     signIn,
     signUp,
@@ -589,5 +611,6 @@ export default function fetch() {
     createAgreements,
     fetchActivity,
     getAllBankName,
+    updateDocument,
   };
 }

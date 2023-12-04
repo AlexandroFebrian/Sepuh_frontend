@@ -17,6 +17,7 @@ import OtherProfile from "./Views/User/OtherProfile/OtherProfile";
 import DocumentCompletion from "./Views/User/DocumentCompletion/DocumentCompletion";
 import WorkHistory from "./Views/User/WorkHistory/WorkHistory";
 import BankAccount from "./Views/User/BankAccount/BankAccount";
+import IncomeReportsUser from "./Views/User/IncomeReports/IncomeReports";
 
 // ADMIN
 import AdminLogin from "./Views/Admin/AdminLogin/AdminLogin";
@@ -24,7 +25,7 @@ import MasterUser from "./Views/Admin/MasterUser/MasterUser";
 import MasterPost from "./Views/Admin/MasterPost/MasterPost";
 import UserReports from "./Views/Admin/UserReports/UserReports";
 import PostingReports from "./Views/Admin/PostingReports/PostingReports";
-import IncomeReports from "./Views/Admin/IncomeReports/IncomeReports";
+import IncomeReportsAdmin from "./Views/Admin/IncomeReports/IncomeReports";
 import PaymentReports from "./Views/Admin/PaymentReports/PaymentReports";
 import Finished from "./Views/User/MyActivity/Finished/Finished";
 
@@ -79,17 +80,17 @@ const Router = createBrowserRouter([
         children: [
           {
             path: "ongoing",
-            element: <Ongoing />
+            element: <Ongoing />,
           },
           {
             path: "finished",
-            element: <Finished />
+            element: <Finished />,
           },
           {
             path: ":id",
-            element: "a"
+            element: "a",
           },
-        ]
+        ],
       },
       {
         path: "user",
@@ -112,13 +113,17 @@ const Router = createBrowserRouter([
           },
           {
             path: "income",
-            element: <Profile />,
+            element: <IncomeReportsUser />,
           },
           {
             path: "bank",
             element: <BankAccount />,
           },
-        ]
+        ],
+      },
+      {
+        path: "/admin",
+        element: <AdminLogin />,
       },
       {
         path: "admin",
@@ -141,17 +146,13 @@ const Router = createBrowserRouter([
           },
           {
             path: "incomereports",
-            element: <IncomeReports />,
+            element: <IncomeReportsAdmin />,
           },
           {
             path: "paymentreports",
             element: <PaymentReports />,
           },
-        ]
-      },
-      {
-        path: "/admin",
-        element: <AdminLogin />,
+        ],
       },
     ],
   },

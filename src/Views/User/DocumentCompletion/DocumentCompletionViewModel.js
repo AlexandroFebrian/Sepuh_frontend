@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import fetch from "../../../Client/fetch";
 
 export default function DocumentCompletionViewModel() {
-  const { checkToken, getUserProfile } = fetch();
+  const { checkToken, getUserProfile, updateDocument } = fetch();
 
   const isLogin = useSelector((state) => state.user.isLogin);
   const user = useSelector((state) => state.user.userDetail);
@@ -25,5 +25,6 @@ export default function DocumentCompletionViewModel() {
     isLogin,
     user,
     profile,
+    updateDocument,
   };
 }
