@@ -8,6 +8,10 @@ import HomePage from "./Views/User/HomePage/HomePage";
 import AddPost from "./Views/User/AddPost/AddPost";
 import Messages from "./Views/User/Messages/Messages";
 import MyPost from "./Views/User/MyPost/MyPost";
+import DetailsPost from "./Views/User/DetailsPost/DetailsPost";
+import List from "./Views/User/List/List";
+import MyActivity from "./Views/User/MyActivity/MyActivity";
+import Ongoing from "./Views/User/MyActivity/Ongoing/Ongoing";
 import Profile from "./Views/User/Profile/Profile";
 import OtherProfile from "./Views/User/OtherProfile/OtherProfile";
 import DocumentCompletion from "./Views/User/DocumentCompletion/DocumentCompletion";
@@ -22,9 +26,7 @@ import UserReports from "./Views/Admin/UserReports/UserReports";
 import PostingReports from "./Views/Admin/PostingReports/PostingReports";
 import IncomeReports from "./Views/Admin/IncomeReports/IncomeReports";
 import PaymentReports from "./Views/Admin/PaymentReports/PaymentReports";
-import DetailsPost from "./Views/User/DetailsPost/DetailsPost";
-import List from "./Views/User/List/List";
-import MyActivity from "./Views/User/MyActivity/MyActivity";
+import Finished from "./Views/User/MyActivity/Finished/Finished";
 
 const Router = createBrowserRouter([
   {
@@ -77,10 +79,14 @@ const Router = createBrowserRouter([
         children: [
           {
             path: "ongoing",
-            element: 'ongoing'
+            element: <Ongoing />
           },
           {
-            path: "asd",
+            path: "finished",
+            element: <Finished />
+          },
+          {
+            path: ":id",
             element: "a"
           },
         ]
@@ -118,10 +124,6 @@ const Router = createBrowserRouter([
         path: "admin",
         children: [
           {
-            index: true,
-            element: <AdminLogin />,
-          },
-          {
             path: "masteruser",
             element: <MasterUser />,
           },
@@ -146,6 +148,10 @@ const Router = createBrowserRouter([
             element: <PaymentReports />,
           },
         ]
+      },
+      {
+        path: "/admin",
+        element: <AdminLogin />,
       },
     ],
   },
