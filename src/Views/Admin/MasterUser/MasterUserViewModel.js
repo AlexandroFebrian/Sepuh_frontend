@@ -17,7 +17,7 @@ export default function MasterUserViewModel() {
   }
 
   useEffect(() => {
-    checkToken();
+    // checkToken();
     fetchData(true);
   }, []);
 
