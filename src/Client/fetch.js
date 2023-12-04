@@ -136,33 +136,34 @@ export default function fetch() {
     }
   }
 
-  async function getUserProfileByEmail(email, setProfile){
-
+  async function getUserProfileByEmail(email, setProfile) {
     try {
-      client.get(`users/profile/${email}`)
-      .then((res) => {
-        console.log(res.data)
-        setProfile(res.data);
-      })
-      .catch((err) => {
-        alert("error")
-      })
+      client
+        .get(`users/profile/${email}`)
+        .then((res) => {
+          console.log(res.data);
+          setProfile(res.data);
+        })
+        .catch((err) => {
+          alert("error");
+        });
     } catch (error) {
-      alert("error")
+      alert("error");
     }
   }
 
-  async function getUserPostsByEmail(email, setPosts){
+  async function getUserPostsByEmail(email, setPosts) {
     try {
-      client.get(`posts/${email}`)
-      .then((res) => {
-        setPosts(res.data);
-      })
-      .catch((err) => {
-        alert("error")
-      })
+      client
+        .get(`posts/${email}`)
+        .then((res) => {
+          setPosts(res.data);
+        })
+        .catch((err) => {
+          alert("error");
+        });
     } catch (error) {
-      alert("error")
+      alert("error");
     }
   }
 
@@ -366,14 +367,11 @@ export default function fetch() {
 
     try {
       client
-        .get(
-          `/chats`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+        .get(`/chats`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((res) => {
           setContacts(res.data);
         })
@@ -394,7 +392,7 @@ export default function fetch() {
           `/chats/message`,
           {
             receiver_id,
-            message
+            message,
           },
           {
             headers: {
@@ -413,7 +411,7 @@ export default function fetch() {
     }
   }
 
-  async function addToList(postId, setWait, setPopup){
+  async function addToList(postId, setWait, setPopup) {
     const token = localStorage.getItem("token");
 
     try {
@@ -421,7 +419,7 @@ export default function fetch() {
         .post(
           `users/list`,
           {
-            post_id: postId
+            post_id: postId,
           },
           {
             headers: {
@@ -443,7 +441,7 @@ export default function fetch() {
     }
   }
 
-  async function removeFromList(postId, setWait, setPopup){
+  async function removeFromList(postId, setWait, setPopup) {
     const token = localStorage.getItem("token");
 
     try {
@@ -451,7 +449,7 @@ export default function fetch() {
         .put(
           `users/list`,
           {
-            post_id: postId
+            post_id: postId,
           },
           {
             headers: {
@@ -473,21 +471,18 @@ export default function fetch() {
     }
   }
 
-  async function getList(setList){
+  async function getList(setList) {
     const token = localStorage.getItem("token");
 
     try {
       return await client
-        .get(
-          `users/list`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+        .get(`users/list`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((res) => {
-          setList(res.data)
+          setList(res.data);
         })
         .catch((err) => {
           alert("error");
@@ -506,7 +501,7 @@ export default function fetch() {
           `agreements`,
           {
             email: email,
-            post_id: postId
+            post_id: postId,
           },
           {
             headers: {
@@ -527,56 +522,71 @@ export default function fetch() {
     }
   }
 
-  async function fetchActivity(setActivity){
+  async function fetchActivity(setActivity) {
     const token = localStorage.getItem("token");
 
     try {
       return await client
-        .get(
-          'agreements',
-          {
-            headers:{
-              Authorization: `Bearer ${token}`
-            }
-          }
-        )
+        .get("agreements", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((res) => {
-          console.log(res.data)
-          return res
+          console.log(res.data);
+          return res;
         })
         .catch((err) => {
-
-          return err.response
-        })
+          return err.response;
+        });
     } catch (error) {
-      alert("error")
+      alert("error");
     }
   }
 
-  return {
-    signIn,
-    signUp,
-    checkToken,
-    getCategory,
-    getUserProfile,
-    getUserProfileByEmail,
-    getUserPostsByEmail,
-    updateUserProfile,
-    addPost,
-    myPost,
-    getPostById,
-    fetchCompanyPost,
-    fetchFreelancerPost,
-    handleAdminLogin,
-    getAllUser,
-    BanUser,
-    UnbanUser,
-    getAllChats,
-    sendMessage,
-    addToList,
-    removeFromList,
-    getList,
-    createAgreements,
-    fetchActivity
-  };
+  async function getAllBankName(setBankName) {
+    try {
+      return await client
+        .get("bank")
+        .then((res) => {
+          setBankName(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("error fetching bank name");
+          navigate("/");
+        });
+    } catch (error) {
+      alert("Server Error");
+      navigate("/");
+    }
+
+    return {
+      signIn,
+      signUp,
+      checkToken,
+      getCategory,
+      getUserProfile,
+      getUserProfileByEmail,
+      getUserPostsByEmail,
+      updateUserProfile,
+      addPost,
+      myPost,
+      getPostById,
+      fetchCompanyPost,
+      fetchFreelancerPost,
+      handleAdminLogin,
+      getAllUser,
+      BanUser,
+      UnbanUser,
+      getAllChats,
+      sendMessage,
+      addToList,
+      removeFromList,
+      getList,
+      createAgreements,
+      fetchActivity,
+      getAllBankName,
+    };
+  }
 }

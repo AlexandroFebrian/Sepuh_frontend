@@ -13,8 +13,8 @@ import {
 } from "@/components/ui/select";
 
 export default function BankAccount() {
-  const { isLogin, user } = BankAccountViewModel();
-
+  const { isLogin, user, bankName } = BankAccountViewModel();
+  console.log(bankName);
   return (
     <>
       <div className=" h-fit relative flex">
@@ -53,19 +53,16 @@ export default function BankAccount() {
                 >
                   Bank Name <span className="text-red-500">*</span>
                 </label>
-                {/* <input
-                  type="text"
-                  name="bankName"
-                  id="bankName"
-                  className="w-full rounded-md border-2 border-navyblue-600 py-2 px-3 mt-2"
-                /> */}
                 <Select>
                   <SelectTrigger>
                     <SelectValue placeholder="Bank Name" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="bca">BCA</SelectItem>
-                    <SelectItem value="bmb">BankMakanBank</SelectItem>
+                    {bankName.map((item, index) => (
+                      <SelectItem key={index} value={item}>
+                        {item.name}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </div>
