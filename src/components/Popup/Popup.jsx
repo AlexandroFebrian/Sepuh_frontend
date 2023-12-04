@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {CircularProgress} from '@chakra-ui/react'
 import PopupBox from './PopupBox'
 
-export default function Popup({wait, popup, setPopup, setWait, popupType, popupTitle, popupMessage, popupSubMessage, popupButtonMessage, popupLink, resetForm, handleClick, className, style}) {
+export default function Popup({wait, popup, setPopup, setWait, popupType, setPopupType, popupTitle, popupMessage, popupSubMessage, popupButtonMessage, popupButtonMessage2, popupLink, resetForm, handleClick, handleClick2, className, style}) {
   const [close, setClose] = useState(false)
 
   return (
@@ -16,7 +16,7 @@ export default function Popup({wait, popup, setPopup, setWait, popupType, popupT
             {
               popup
               ?
-              <PopupBox setPopup={setPopup} setWait={setWait} popupType={popupType} popupTitle={popupTitle} popupMessage={popupMessage} popupSubMessage={popupSubMessage} popupButtonMessage={popupButtonMessage} resetForm={resetForm} popupLink={popupLink} handleClick={handleClick} setClose={setClose}/>
+              <PopupBox setPopup={setPopup} setWait={setWait} popupType={popupType} setPopupType={setPopupType} popupTitle={popupTitle} popupMessage={popupMessage} popupSubMessage={popupSubMessage} popupButtonMessage={popupButtonMessage} popupButtonMessage2={popupButtonMessage2} resetForm={resetForm} popupLink={popupLink} handleClick={handleClick} handleClick2={handleClick2} setClose={setClose}/>
               :
               <CircularProgress 
               isIndeterminate 

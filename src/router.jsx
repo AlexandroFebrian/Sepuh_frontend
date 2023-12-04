@@ -24,6 +24,7 @@ import IncomeReports from "./Views/Admin/IncomeReports/IncomeReports";
 import PaymentReports from "./Views/Admin/PaymentReports/PaymentReports";
 import DetailsPost from "./Views/User/DetailsPost/DetailsPost";
 import List from "./Views/User/List/List";
+import MyActivity from "./Views/User/MyActivity/MyActivity";
 
 const Router = createBrowserRouter([
   {
@@ -39,90 +40,114 @@ const Router = createBrowserRouter([
         element: <LandingPage />,
       },
       {
-        path: "/home",
+        path: "home",
         element: <HomePage />,
       },
       {
-        path: "/addpost",
+        path: "addpost",
         element: <AddPost />,
       },
       {
-        path: "/messages",
+        path: "messages",
         element: <Messages />,
       },
       {
-        path: "/lists",
+        path: "lists",
         element: <List />,
       },
       {
-        path: "/myposts",
+        path: "myposts",
         element: <MyPost />,
       },
       {
-        path: "/dashboard",
+        path: "dashboard",
         element: <Messages />,
       },
       {
-        path: "/employee",
+        path: "employee",
         element: <Messages />,
       },
       {
-        path: "/post/:postId",
+        path: "post/:postId",
         element: <DetailsPost />,
       },
       {
-        path: "/user/profile",
-        element: <Profile />,
+        path: "activity",
+        element: <MyActivity />,
+        children: [
+          {
+            path: "ongoing",
+            element: 'ongoing'
+          },
+          {
+            path: "asd",
+            element: "a"
+          },
+        ]
       },
       {
-        path: "/user/document",
-        element: <DocumentCompletion />,
+        path: "user",
+        children: [
+          {
+            index: true,
+            element: <OtherProfile />,
+          },
+          {
+            path: "profile",
+            element: <Profile />,
+          },
+          {
+            path: "document",
+            element: <DocumentCompletion />,
+          },
+          {
+            path: "history",
+            element: <WorkHistory />,
+          },
+          {
+            path: "income",
+            element: <Profile />,
+          },
+          {
+            path: "bank",
+            element: <BankAccount />,
+          },
+        ]
       },
       {
-        path: "/user/history",
-        element: <WorkHistory />,
-      },
-      {
-        path: "/user/income",
-        element: <Profile />,
-      },
-      {
-        path: "/user/bank",
-        element: <BankAccount />,
-      },
-      {
-        path: "/user",
-        element: <OtherProfile />,
-      },
-      {
-        path: "/admin/masteruser",
-        element: <MasterUser />,
-      },
-      {
-        path: "/admin/masterpost",
-        element: <MasterPost />,
-      },
-      {
-        path: "/admin/userreports",
-        element: <UserReports />,
-      },
-      {
-        path: "/admin/postingreports",
-        element: <PostingReports />,
-      },
-      {
-        path: "/admin/incomereports",
-        element: <IncomeReports />,
-      },
-      {
-        path: "/admin/paymentreports",
-        element: <PaymentReports />,
+        path: "admin",
+        children: [
+          {
+            index: true,
+            element: <AdminLogin />,
+          },
+          {
+            path: "masteruser",
+            element: <MasterUser />,
+          },
+          {
+            path: "masterpost",
+            element: <MasterPost />,
+          },
+          {
+            path: "userreports",
+            element: <UserReports />,
+          },
+          {
+            path: "postingreports",
+            element: <PostingReports />,
+          },
+          {
+            path: "incomereports",
+            element: <IncomeReports />,
+          },
+          {
+            path: "paymentreports",
+            element: <PaymentReports />,
+          },
+        ]
       },
     ],
-  },
-  {
-    path: "/admin",
-    element: <AdminLogin />,
   },
 
   // {

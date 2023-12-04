@@ -163,18 +163,20 @@ export default function Navbar() {
           <div className="w-4/12 flex items-center justify-end">
             {isLogin ? (
               <>
-                <Button
-                  leftIcon={<FaRegBell />}
-                  color="ghostwhite.50"
-                  _hover={{ bg: "whiteAlpha.200" }}
-                  _active={{ bg: "whiteAlpha.300" }}
-                  width="8.5rem"
-                  className=" me-6"
-                  variant="ghost"
-                  transitionDuration={"300ms"}
-                >
-                  My Activity
-                </Button>
+                <Link to={"/activity"}>
+                  <Button
+                    leftIcon={<FaRegBell />}
+                    color="ghostwhite.50"
+                    _hover={{ bg: "whiteAlpha.200" }}
+                    _active={{ bg: "whiteAlpha.300" }}
+                    width="8.5rem"
+                    className=" me-6"
+                    variant="ghost"
+                    transitionDuration={"300ms"}
+                  >
+                    My Activity
+                  </Button>
+                </Link>
                 <Button
                   leftIcon={<FaRegBell />}
                   color="ghostwhite.50"

@@ -527,6 +527,32 @@ export default function fetch() {
     }
   }
 
+  async function fetchActivity(setActivity){
+    const token = localStorage.getItem("token");
+
+    try {
+      return await client
+        .get(
+          'agreements',
+          {
+            headers:{
+              Authorization: `Bearer ${token}`
+            }
+          }
+        )
+        .then((res) => {
+          console.log(res.data)
+          return res
+        })
+        .catch((err) => {
+
+          return err.response
+        })
+    } catch (error) {
+      alert("error")
+    }
+  }
+
   return {
     signIn,
     signUp,
@@ -550,6 +576,7 @@ export default function fetch() {
     addToList,
     removeFromList,
     getList,
-    createAgreements
+    createAgreements,
+    fetchActivity
   };
 }

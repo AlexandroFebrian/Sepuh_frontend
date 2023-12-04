@@ -1,10 +1,11 @@
 import { useSelector } from "react-redux";
 import fetch from "../../../Client/fetch";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 export default function DetailsPostViewModel(){
+  const navigate = useNavigate()
   const { checkToken, getPostById, createAgreements } = fetch();
 
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -16,8 +17,9 @@ export default function DetailsPostViewModel(){
   const [wait, setWait] = useState(false)
   const [popup, setPopup] = useState(false)
   const [popupTitle, setPopupTitle] = useState("")
+  const [popupType, setPopupType] = useState(undefined)
   const [popupButtonMessage, setPopupButtonMessage] = useState("")
-  const [popupType, setPopupType] = useState(false)
+  const [popupButtonMessage2, setPopupButtonMessage2] = useState("")
 
   useEffect(() => {
     checkToken();
@@ -29,12 +31,42 @@ export default function DetailsPostViewModel(){
 
     const email = post.posted_by.email
 
+    setPopup(true)
+    // const response = await createAgreements(email, postId, setWait, setPopup)
+
+    // if(response == undefined){
+    //   setPopupTitle("Network Error!")
+    //   setPopupButtonMessage("Try Again")
+    //   setPopupType(false)
+    //   return
+    // }
+
+    // if(response.status.toString()[0] != 2){
+    //   // console.log(response)
+    //   setPopupTitle(response.data.message)
+    //   setPopupButtonMessage("Try Again")
+    //   setPopupType(false)
+    //   return
+    // }
+
+    setPopupTitle("Are you sure do you want to apply?")
+    setPopupButtonMessage("Close")
+    setPopupButtonMessage2("Apply")
+    setPopupType("?")
+
+    // const id = response.data.id
+    // console.log(id)
+  }
+
+  async function applyHandler(){
+    const email = post.posted_by.email
     const response = await createAgreements(email, postId, setWait, setPopup)
 
     if(response == undefined){
       setPopupTitle("Network Error!")
       setPopupButtonMessage("Try Again")
       setPopupType(false)
+      setPopupButtonMessage2(undefined)
       return
     }
 
@@ -43,15 +75,13 @@ export default function DetailsPostViewModel(){
       setPopupTitle(response.data.message)
       setPopupButtonMessage("Try Again")
       setPopupType(false)
+      setPopupButtonMessage2(undefined)
       return
     }
 
-    setPopupTitle("Apply Success")
-    setPopupButtonMessage("Close")
-    setPopupType(true)
-
     const id = response.data.id
-    console.log(id)
+
+    navigate(`/activity/${id}`)
   }
 
   return {
@@ -61,10 +91,13 @@ export default function DetailsPostViewModel(){
     wait,
     popup,
     popupTitle,
-    popupButtonMessage,
     popupType,
+    popupButtonMessage,
+    popupButtonMessage2,
     setPopup,
     setWait,
-    agreementsHandler
+    setPopupType,
+    agreementsHandler,
+    applyHandler
   }
 }

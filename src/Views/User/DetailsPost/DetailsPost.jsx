@@ -23,11 +23,14 @@ export default function DetailsPost() {
     wait,
     popup,
     popupTitle,
-    popupButtonMessage,
     popupType,
+    popupButtonMessage,
+    popupButtonMessage2,
     setPopup,
     setWait,
+    setPopupType,
     agreementsHandler,
+    applyHandler
   } = DetailsPostViewModel()
 
   useEffect(() => {
@@ -102,9 +105,12 @@ export default function DetailsPost() {
           popup={popup} 
           setPopup={setPopup} 
           setWait={setWait} 
-          popupType={popupType} 
           popupTitle={popupTitle} 
+          popupType={popupType}
+          setPopupType={setPopupType}
           popupButtonMessage={popupButtonMessage}
+          popupButtonMessage2={popupButtonMessage2}
+          handleClick2={applyHandler}
           className="fixed w-screen h-screen"
           style={{ top: `${position}px` }}
         />

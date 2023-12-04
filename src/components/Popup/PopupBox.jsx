@@ -1,10 +1,10 @@
 import { Button } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 
-export default function PopupBox({setPopup, setWait, popupType, popupTitle, popupMessage, popupButtonMessage, popupLink, popupSubMessage, resetForm, handleClick, setClose}) {
+export default function PopupBox({setPopup, setWait, popupType, setPopupType, popupTitle, popupMessage, popupButtonMessage, popupButtonMessage2, popupLink, popupSubMessage, resetForm, handleClick, handleClick2, setClose}) {
   const [closeBox, setCloseBox] = useState(false)
   
-  function close(){
+  async function close(){
     setClose(true)
     setCloseBox(true)
 
@@ -15,6 +15,8 @@ export default function PopupBox({setPopup, setWait, popupType, popupTitle, popu
       if(setWait){
         setWait(false)
       }
+
+      setPopupType(undefined)
     }, 500)
     
     if(popupButtonMessage == "Sign In"){
@@ -26,6 +28,28 @@ export default function PopupBox({setPopup, setWait, popupType, popupTitle, popu
     }
   }
 
+  async function close2(){
+    // setClose(true)
+    setCloseBox(true)
+    setPopup(false)
+
+    // setTimeout(() => {
+    //   setClose(false)
+      
+    //   setPopup(false)
+    //   if(setWait){
+    //     setWait(false)
+    //   }
+    // }, 500)
+
+    await handleClick2()
+
+    // setTimeout(async () => {
+    //   await handleClick2()
+
+    // }, 500)
+  }
+
   return (
     <div className={` w-[30rem] h-fit bg-white rounded-md p-10 animate__animated ${closeBox ? "animate__fadeOut" : "animate__fadeIn"} animate__faster`}>
       <h1 className='text-center text-2xl font-semibold'>{popupTitle}</h1>
@@ -34,17 +58,46 @@ export default function PopupBox({setPopup, setWait, popupType, popupTitle, popu
 
       <h3 className='text-center text-md'>{popupSubMessage}</h3>
 
-      <div className='w-full flex justify-center items-center'>
+      <div className='w-full flex justify-center items-center mt-2'>
         {
-          popupType
-          ?
+          popupType === true
+          &&
           "Ini Gambar Centang"
-          :
+        }
+        {
+          popupType === false
+          &&
           "Ini Gambar Silang"
+        }
+        {
+          popupType === "?"
+          &&
+          "Ini Gambar tanda tanya"
         }
       </div>
 
       <div className='w-full flex justify-center'>
+        {
+          popupButtonMessage2
+          &&
+          <Button
+            color="navyblue.800"
+            borderColor="navyblue.800"
+            borderWidth="2px"
+            _hover={{ bg: "ghostwhite.50" }}
+            _active={{ bg: "ghostwhite.100" }}
+            variant="outline"
+            width="9rem"
+            height={"2.5rem"}
+            transitionDuration={"300ms"}
+            marginTop={"1rem"}
+            marginRight={"0.5rem"}
+            rounded={"md"}
+            onClick={() => {close2()}}
+          >
+            {popupButtonMessage2}
+          </Button>
+        }
         <Button
           color="navyblue.800"
           borderColor="navyblue.800"
@@ -52,10 +105,10 @@ export default function PopupBox({setPopup, setWait, popupType, popupTitle, popu
           _hover={{ bg: "ghostwhite.50" }}
           _active={{ bg: "ghostwhite.100" }}
           variant="outline"
-          width="10rem"
-          height={"2rem"}
+          width="9rem"
+          height={"2.5rem"}
           transitionDuration={"300ms"}
-          marginTop={"0.5rem"}
+          marginTop={"1rem"}
           rounded={"md"}
           onClick={() => {close()}}
         >
