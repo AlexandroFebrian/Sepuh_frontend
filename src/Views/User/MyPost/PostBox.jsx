@@ -3,8 +3,9 @@ import React, { useState } from 'react'
 import { FaRegClock, FaChartSimple, FaRegEye } from 'react-icons/fa6';
 import OpenImage from '../../../components/OpenImage/OpenImage';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-export default function PostBox({post, setOpen, setImages, setImageIdx}) {
+export default function PostBox({post, setOpen, setImages, setImageIdx, user}) {
   const categories = useSelector((state) => state.post.category)
 
   const displayFormattedText = () => {
@@ -38,14 +39,22 @@ export default function PostBox({post, setOpen, setImages, setImageIdx}) {
     <>
       
 
-      <div className='w-full h-fit mb-5 rounded shadow-lg bg-lightblue-50 p-5  border border-navyblue-800'>
+      <div className={`w-full h-fit mb-5 rounded shadow-lg ${user.role == "Freelancer" && "bg-navyblue-800 text-ghostwhite-50"} ${user.role == "Company" && "bg-lightblue-50"} p-5  border border-navyblue-800`}>
+
         <div className='flex'>
           <Avatar src={post.posted_by.profile_picture} size={"lg"} />
           <div className='w-full ml-3 relative'>
-            <h2 className='w-full font-semibold text-lg text-navyblue-500'>{post.title}</h2>
-            <p className=' text-sm'>{post.posted_by.name} &#x2022; {post.posted_by.headline} </p>
+            <h2 className={`w-full font-semibold text-lg ${user.role == "Freelancer" && "text-indigo-200"} ${user.role == "Company" && "text-navyblue-500"}`}>{post.title}</h2>
+
+            <p className=' text-sm'>
+              {post.posted_by.name} &#x2022; {post.posted_by.headline} 
+            </p>
+
             <div className='flex justify-between items-center text-xs'>
-              <p>{posted_at.getDate()} {monthNames[posted_at.getMonth()]} {posted_at.getFullYear()}</p>
+              <p>
+                {posted_at.getDate()} {monthNames[posted_at.getMonth()]} {posted_at.getFullYear()}
+              </p>
+
               <div className='flex items-center'>
                 ⭐{post.avg_rating} &#x2022; <FaRegEye className='mx-1' /> {post.visitor}
               </div>
@@ -67,7 +76,7 @@ export default function PostBox({post, setOpen, setImages, setImageIdx}) {
 
         </div>
 
-        <hr className=' my-4 border-navyblue-800' />
+        <hr className={` my-4 ${user.role == "Frelancer" && "border-ghostwhite-50"} ${user.role == "Company" && "border-navyblue-800"}`} />
         
         <div className='w-full h-36 text-md overflow-y-hidden line-clamp-6'>
           {post.description}
@@ -95,20 +104,22 @@ export default function PostBox({post, setOpen, setImages, setImageIdx}) {
             Rp {min_price} - {max_price}
           </div>
           <div>
-            <Button 
-              color="ghostwhite.50"
-              bg="indigo.300"
-              _hover={{ bg: "indigo.350" }}
-              _active={{ bg: "indigo.400" }}
-              width="auto"
-              height="2rem"
-              className=" me-2"
-              variant="solid"
-              transitionDuration={"300ms"}
-              fontSize={"sm"}
-            >
-              See Details
-            </Button>
+            <Link to={`/post/${post._id}`}>
+              <Button 
+                color="ghostwhite.50"
+                bg="indigo.300"
+                _hover={{ bg: "indigo.350" }}
+                _active={{ bg: "indigo.400" }}
+                width="auto"
+                height="2rem"
+                className=" me-2"
+                variant="solid"
+                transitionDuration={"300ms"}
+                fontSize={"sm"}
+              >
+                See Details
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

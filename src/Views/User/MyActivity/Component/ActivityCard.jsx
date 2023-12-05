@@ -1,3 +1,4 @@
+import { Avatar } from '@chakra-ui/react';
 import React from 'react'
 import { FaAngleRight } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
@@ -38,20 +39,33 @@ export default function ActivityCard({activity, user}) {
           <h1 className=' text-xl font-semibold text-navyblue-500 truncate'>
             {activity.post.title}
           </h1>
-          <h2 className='truncate'>
+
+          <div className='flex items-center my-2'>
             {
               user.role == "Freelancer"
               &&
-              activity.company.name
+              <Avatar src={activity.company.profile_picture} size={"md"} />
             }
             {
               user.role == "Company"
               &&
-              activity.freelancer.name
+              <Avatar src={activity.freelancer.profile_picture} size={"md"} />
             }
-          </h2>
+            <h2 className='truncate ml-2'>
+              {
+                user.role == "Freelancer"
+                &&
+                activity.company.name
+              }
+              {
+                user.role == "Company"
+                &&
+                activity.freelancer.name
+              }
+            </h2>
+          </div>
 
-          <div className='flex items-center justify-between mt-2 text-xs'>
+          <div className='flex items-center justify-between text-xs'>
             <p className=' text-ghostwhite-600'>
               {date.getDate()} {monthNames[date.getMonth()]} {date.getFullYear()}
             </p>

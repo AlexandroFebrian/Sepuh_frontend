@@ -550,6 +550,27 @@ export default function fetch() {
     }
   }
 
+  async function getActivityById(id, setActivity) {
+    const token = localStorage.getItem("token");
+
+    try {
+      return await client.get(`agreements/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then((res) => {
+        setActivity(res.data)
+        return res
+      }).catch((err) => {
+        //NOT FOUND
+        // console.log(err.response)
+        return err.response
+      })
+    } catch (error) {
+      alert("error")
+    }
+  }
+
   async function getAllBankName(setBankName) {
     try {
       return await client
@@ -616,6 +637,7 @@ export default function fetch() {
     getList,
     createAgreements,
     fetchActivity,
+    getActivityById,
     getAllBankName,
     updateDocument,
   };

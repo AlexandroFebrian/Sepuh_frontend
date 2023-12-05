@@ -28,6 +28,7 @@ import UserReports from "./Views/Admin/UserReports/UserReports";
 import PostingReports from "./Views/Admin/PostingReports/PostingReports";
 import IncomeReportsAdmin from "./Views/Admin/IncomeReports/IncomeReports";
 import PaymentReports from "./Views/Admin/PaymentReports/PaymentReports";
+import DetailActivity from "./Views/User/MyActivity/DetailActivity/DetailActivity";
 
 const Router = createBrowserRouter([
   {
@@ -87,8 +88,8 @@ const Router = createBrowserRouter([
             element: <Finished />,
           },
           {
-            path: ":id",
-            element: "a",
+            path: ":actId",
+            element: <DetailActivity />,
           },
         ],
       },

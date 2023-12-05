@@ -26,36 +26,20 @@ export default function DetailsPostViewModel(){
     getPostById(postId, setPost);
   }, [])
 
+  useEffect(() => {
+    if(post && post.posted_by.email == user.email){
+      console.log("post")
+    }
+  }, [post])
+
   async function agreementsHandler(){
     setWait(true)
-
-    const email = post.posted_by.email
-
     setPopup(true)
-    // const response = await createAgreements(email, postId, setWait, setPopup)
-
-    // if(response == undefined){
-    //   setPopupTitle("Network Error!")
-    //   setPopupButtonMessage("Try Again")
-    //   setPopupType(false)
-    //   return
-    // }
-
-    // if(response.status.toString()[0] != 2){
-    //   // console.log(response)
-    //   setPopupTitle(response.data.message)
-    //   setPopupButtonMessage("Try Again")
-    //   setPopupType(false)
-    //   return
-    // }
 
     setPopupTitle("Are you sure do you want to apply?")
     setPopupButtonMessage("Close")
     setPopupButtonMessage2("Apply")
     setPopupType("?")
-
-    // const id = response.data.id
-    // console.log(id)
   }
 
   async function applyHandler(){

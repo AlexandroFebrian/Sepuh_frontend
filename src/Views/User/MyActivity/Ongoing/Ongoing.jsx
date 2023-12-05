@@ -5,7 +5,6 @@ import ActivityCard from '../Component/ActivityCard'
 
 export default function Ongoing() {
   const [activity] = useOutletContext();
-  console.log(activity)
   
   const {
     user,

@@ -177,10 +177,14 @@ export default function DetailsPost() {
                   <div className='font-semibold text-lg'>
                     Rp {minPrice} - {maxPrice}
                   </div>
-
-                  <div className='flex items-center'>
-                    <FaRegClock className='mr-1 text-yellow-600' /> Duration: {post?.duration} {post?.duration_type}
-                  </div>
+                  
+                  {
+                    post?.posted_by.email != user.email && user.role == "Freelancer"
+                    &&
+                    <div className='flex items-center'>
+                      <FaRegClock className='mr-1 text-yellow-600' /> Duration: {post?.duration} {post?.duration_type}
+                    </div>
+                  }
 
                   <hr className='my-3 border border-navyblue-800' />
 
@@ -211,40 +215,44 @@ export default function DetailsPost() {
                     }
                   </div>
                 </div>
-                <div className='w-full flex justify-evenly mt-8'>
-                  <Button 
-                    shadow={"lg"}
-                    color="ghostwhite.50"
-                    bg="indigo.300"
-                    _hover={{ bg: "indigo.350" }}
-                    _active={{ bg: "indigo.400" }}
-                    width="30%"
-                    height="2.25rem"
-                    className=" me-2"
-                    variant="solid"
-                    transitionDuration={"300ms"}
-                    fontSize={"sm"}
-                    paddingY={"0.5rem"}
-                  >
-                    <IoChatboxEllipsesOutline size="1.5rem" className='mr-2' /> Chat the Company
-                  </Button>
-                  <Button 
-                    shadow={"lg"}
-                    color="navyblue.800"
-                    bg="yellow.300"
-                    _hover={{ bg: "yellow.400" }}
-                    _active={{ bg: "yellow.500" }}
-                    width="30%"
-                    height="2.25rem"
-                    variant="solid"
-                    transitionDuration={"300ms"}
-                    fontSize={"sm"}
-                    paddingY={"0.5rem"}
-                    onClick={() => {agreementsHandler()}}
-                  >
-                     <FaRegFileLines size="1.3rem" className='mr-2' /> Continue
-                  </Button>
-                </div>
+                {
+                  post?.posted_by.email != user.email
+                  &&
+                  <div className='w-full flex justify-evenly mt-8'>
+                    <Button 
+                      shadow={"lg"}
+                      color="ghostwhite.50"
+                      bg="indigo.300"
+                      _hover={{ bg: "indigo.350" }}
+                      _active={{ bg: "indigo.400" }}
+                      width="30%"
+                      height="2.25rem"
+                      className=" me-2"
+                      variant="solid"
+                      transitionDuration={"300ms"}
+                      fontSize={"sm"}
+                      paddingY={"0.5rem"}
+                    >
+                      <IoChatboxEllipsesOutline size="1.5rem" className='mr-2' /> Chat the Company
+                    </Button>
+                    <Button 
+                      shadow={"lg"}
+                      color="navyblue.800"
+                      bg="yellow.300"
+                      _hover={{ bg: "yellow.400" }}
+                      _active={{ bg: "yellow.500" }}
+                      width="30%"
+                      height="2.25rem"
+                      variant="solid"
+                      transitionDuration={"300ms"}
+                      fontSize={"sm"}
+                      paddingY={"0.5rem"}
+                      onClick={() => {agreementsHandler()}}
+                    >
+                      <FaRegFileLines size="1.3rem" className='mr-2' /> Continue
+                    </Button>
+                  </div>
+                }
               </div>
             }
 
@@ -290,6 +298,14 @@ export default function DetailsPost() {
                     Rp {minPrice} - {maxPrice}
                   </div>
 
+                  {
+                    post?.posted_by.email == user.email && user.role == "Company"
+                    &&
+                    <div className='flex items-center'>
+                      <FaRegClock className='mr-1 text-yellow-600' /> Duration: {post?.duration} {post?.duration_type}
+                    </div>
+                  }
+
                   <hr className='my-3 border border-ghostwhite-50' />
 
                   <div className='whitespace-pre-line'>
@@ -320,40 +336,45 @@ export default function DetailsPost() {
                     }
                   </div>
                 </div>
-                <div className='w-full flex justify-evenly mt-8'>
-                  <Button 
-                    shadow={"lg"}
-                    color="ghostwhite.50"
-                    bg="indigo.300"
-                    _hover={{ bg: "indigo.350" }}
-                    _active={{ bg: "indigo.400" }}
-                    width="30%"
-                    height="2.25rem"
-                    className=" me-2"
-                    variant="solid"
-                    transitionDuration={"300ms"}
-                    fontSize={"sm"}
-                    paddingY={"0.5rem"}
-                  >
-                    <IoChatboxEllipsesOutline size="1.5rem" className='mr-2' /> Chat the Freelancer
-                  </Button>
-                  <Button 
-                    shadow={"lg"}
-                    color="navyblue.800"
-                    bg="yellow.300"
-                    _hover={{ bg: "yellow.400" }}
-                    _active={{ bg: "yellow.500" }}
-                    width="30%"
-                    height="2.25rem"
-                    variant="solid"
-                    transitionDuration={"300ms"}
-                    fontSize={"sm"}
-                    paddingY={"0.5rem"}
-                    onClick={() => {agreementsHandler()}}
-                  >
-                     <FaRegFileLines size="1.3rem" className='mr-2' /> Continue
-                  </Button>
-                </div>
+                {
+                  post?.posted_by.email != user.email
+                  &&
+
+                  <div className='w-full flex justify-evenly mt-8'>
+                    <Button 
+                      shadow={"lg"}
+                      color="ghostwhite.50"
+                      bg="indigo.300"
+                      _hover={{ bg: "indigo.350" }}
+                      _active={{ bg: "indigo.400" }}
+                      width="30%"
+                      height="2.25rem"
+                      className=" me-2"
+                      variant="solid"
+                      transitionDuration={"300ms"}
+                      fontSize={"sm"}
+                      paddingY={"0.5rem"}
+                    >
+                      <IoChatboxEllipsesOutline size="1.5rem" className='mr-2' /> Chat the Freelancer
+                    </Button>
+                    <Button 
+                      shadow={"lg"}
+                      color="navyblue.800"
+                      bg="yellow.300"
+                      _hover={{ bg: "yellow.400" }}
+                      _active={{ bg: "yellow.500" }}
+                      width="30%"
+                      height="2.25rem"
+                      variant="solid"
+                      transitionDuration={"300ms"}
+                      fontSize={"sm"}
+                      paddingY={"0.5rem"}
+                      onClick={() => {agreementsHandler()}}
+                    >
+                      <FaRegFileLines size="1.3rem" className='mr-2' /> Continue
+                    </Button>
+                  </div>
+                }
               </div>
             }
           </div>

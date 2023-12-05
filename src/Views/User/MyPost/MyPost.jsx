@@ -56,7 +56,7 @@ export default function MyPost() {
               <div className='w-[calc(100%-5rem)] mr-5'>
                 {
                   posts.map((post, idx) => {
-                    return <PostBox key={idx} post={post} setOpen={setOpen} setImages={setImages} setImageIdx={setImageIdx} />
+                    return <PostBox key={idx} post={post} setOpen={setOpen} setImages={setImages} setImageIdx={setImageIdx} user={user} />
                   })
                 }
               </div>

@@ -1,15 +1,16 @@
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useOutletContext } from 'react-router-dom'
 import FinishedViewModel from './FinishedViewModel'
 
 export default function Finished() {
+  const [activity] = useOutletContext();
+
   const {
     user,
     isLogin
   } = FinishedViewModel()
   
   const location = useLocation()
-  console.log(location.pathname)
 
   return (
     <div className='w-full'>
@@ -33,6 +34,19 @@ export default function Finished() {
           </Link>
 
         </div>
+      </div>
+
+      <div className='w-full grid grid-cols-2 xl:grid-cols-3 gap-5 mt-4 px-5'>
+        {
+          activity.length > 0
+          &&
+          activity.map((item, index) => {
+            if(item.status == 3)
+            return (
+              <ActivityCard key={index} activity={item} user={user} />
+            )
+          })
+        }
       </div>
     </div>
   )
