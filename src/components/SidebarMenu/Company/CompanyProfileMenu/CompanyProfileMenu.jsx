@@ -22,7 +22,7 @@ export default function CompanyProfileMenu() {
 
   function logout(){
     dispatch(setIsLogin(false))
-    dispatch(setUserDetail({}))
+    dispatch(setUserDetail(null))
     localStorage.removeItem("token")
     navigate("/")
   }

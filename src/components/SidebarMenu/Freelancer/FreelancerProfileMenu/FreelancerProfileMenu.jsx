@@ -23,7 +23,7 @@ export default function FreelancerProfileMenu() {
 
   function logout(){
     dispatch(setIsLogin(false))
-    dispatch(setUserDetail({}))
+    dispatch(setUserDetail(null))
     localStorage.removeItem("token")
     navigate("/")
   }
