@@ -19,6 +19,8 @@ export default function DetailActivityViewModel(){
   const [priceBefore, setPriceBefore] = useState(0)
   const [price, setPrice] = useState(0)
 
+  const [file, setFile] = useState([])
+
   useEffect(() => {
     checkToken();
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -57,6 +59,10 @@ export default function DetailActivityViewModel(){
     await acceptAgreement(activity?._id, setActivity)
   }
 
+  useEffect(() => {
+    console.log(file)
+  }, [file])
+
   return {
     isLogin,
     user,
@@ -67,5 +73,7 @@ export default function DetailActivityViewModel(){
     setPrice,
     changeBidHandler,
     acceptBidHandler,
+    file,
+    setFile,
   }
 }

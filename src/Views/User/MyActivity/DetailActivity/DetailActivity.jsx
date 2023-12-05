@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import DetailActivityViewModel from './DetailActivityViewModel'
 import { Avatar, Button, Input } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
+import InputFileButton from '../../../../components/InputFileButton/InputFileButton'
+import { FaCloudArrowUp } from "react-icons/fa6";
 
 export default function DetailActivity() {
   const {
@@ -14,6 +16,8 @@ export default function DetailActivity() {
     setPrice,
     changeBidHandler,
     acceptBidHandler,
+    file,
+    setFile,
   } = DetailActivityViewModel()
 
   const date = new Date(activity?.create_at)
@@ -74,7 +78,7 @@ export default function DetailActivity() {
 
         <div className='w-full mt-5'>
           {
-            activity?.status == 0
+            activity?.status == 1
             &&
             <>
               <h1 className='text-2xl font-bold'>
@@ -202,6 +206,48 @@ export default function DetailActivity() {
 
                 </div>
               </div>
+            </>
+          }
+          {
+            activity?.status == 0 && user.role == "Freelancer"
+            &&
+            <>
+              <div className='flex justify-between h-16'>
+                <h1 className='text-2xl font-bold'>
+                  Works
+                </h1>
+
+                <div className='flex flex-col justify-between h-full'>
+                  <div className='w-full flex'>
+                    <InputFileButton 
+                      className="w-fit border border-indigo-400 rounded px-7 text-indigo-400 hover:bg-white/60 active:bg-white mr-3"
+                      accept={".zip, .rar"}
+                      setFile={setFile}
+                    >
+                      <FaCloudArrowUp className='mr-2' /> Upload
+                    </InputFileButton>
+                    <Button
+                      bg="yellow.300"
+                      _hover={{ bg: "yellow.400", shadow: "lg" }}
+                      _active={{ bg: "yellow.500" }}
+                      transitionDuration={"300ms"}
+                      shadow={"md"}
+                      paddingX={"2rem"}
+                    >
+                      Save
+                    </Button>
+                  </div>
+                  <div className='w-full flex justify-end italic'>
+                    {file[0]?.name}
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                asdsa
+              </div>
+
+
             </>
           }
         </div>

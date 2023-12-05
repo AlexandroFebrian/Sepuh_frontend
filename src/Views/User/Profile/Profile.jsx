@@ -117,6 +117,7 @@ export default function Profile() {
                   imageSrcs={bannerImageSrc}
                   setImageSrcs={setBannerImageSrc}
                   showImage={true}
+                  accept={".png, .jpg, .jpeg"}
                 >
                   Upload
                 </InputFileButton>
@@ -142,6 +143,7 @@ export default function Profile() {
                         imageSrcs={profileImageSrc}
                         setImageSrcs={setProfileImageSrc}
                         showImage={true}
+                        accept={".png, .jpg, .jpeg"}
                       >
                         Upload
                       </InputFileButton>
