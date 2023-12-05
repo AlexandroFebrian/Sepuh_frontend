@@ -249,6 +249,24 @@ export default function fetch() {
     }
   }
 
+  async function addViewPost(id){
+    const token = localStorage.getItem("token");
+
+    try {
+      return await client.put(`posts/${id}`, {}, {
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      }).then((res) => {
+
+      }).catch((err) => {
+        console.log(err)
+      })
+    } catch (error) {
+      alert("error")
+    }
+  }
+
   async function fetchCompanyPost(setCompanyPost) {
     try {
       return await client
@@ -624,6 +642,7 @@ export default function fetch() {
     addPost,
     myPost,
     getPostById,
+    addViewPost,
     fetchCompanyPost,
     fetchFreelancerPost,
     handleAdminLogin,

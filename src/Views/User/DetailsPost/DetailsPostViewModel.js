@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 export default function DetailsPostViewModel(){
   const navigate = useNavigate()
-  const { checkToken, getPostById, createAgreements } = fetch();
+  const { checkToken, getPostById, createAgreements, addViewPost } = fetch();
 
   const isLogin = useSelector((state) => state.user.isLogin);
   const user = useSelector((state) => state.user.userDetail);
@@ -21,16 +21,36 @@ export default function DetailsPostViewModel(){
   const [popupButtonMessage, setPopupButtonMessage] = useState("")
   const [popupButtonMessage2, setPopupButtonMessage2] = useState("")
 
+  const token = localStorage.getItem("token")
+
   useEffect(() => {
-    checkToken();
+    if(token){
+      checkToken()
+    }
     getPostById(postId, setPost);
   }, [])
 
   useEffect(() => {
-    if(post && post.posted_by.email == user.email){
+    if(post && post?.posted_by.email == user?.email){
       console.log("post")
     }
-  }, [post])
+  }, [post, user])
+
+  useEffect(() => {
+    if(isLogin && postId){
+      let i = 0
+      const interv = setInterval(() => {
+        i++
+        if(i == 15){
+          addViewPost(postId)
+        }
+      }, 1000)
+
+      return () => {
+        clearInterval(interv)
+      }
+    }
+  }, [user, isLogin, postId])
 
   async function agreementsHandler(){
     setWait(true)
