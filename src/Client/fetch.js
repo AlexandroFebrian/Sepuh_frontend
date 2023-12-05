@@ -515,7 +515,7 @@ export default function fetch() {
     }
   }
 
-  async function createAgreements(email, postId, setWait, setPopup) {
+  async function createAgreements(email, minPrice, postId, setWait, setPopup) {
     const token = localStorage.getItem("token");
 
     try {
@@ -525,6 +525,7 @@ export default function fetch() {
           {
             email: email,
             post_id: postId,
+            min_price: minPrice
           },
           {
             headers: {
@@ -582,6 +583,52 @@ export default function fetch() {
       }).catch((err) => {
         //NOT FOUND
         // console.log(err.response)
+        return err.response
+      })
+    } catch (error) {
+      alert("error")
+    }
+  }
+
+  async function setDealPrice(agreementId, price, setActivity){
+    const token = localStorage.getItem("token");
+    console.log(agreementId, price)
+
+    try {
+      return await client.put(`agreements/price`, {
+        agreement_id: agreementId,
+        deal_price: price
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then(async (res) => {
+        await getActivityById(agreementId, setActivity)
+        return res
+      }).catch((err) => {
+        alert("error")
+        return err.response
+      })
+    } catch (error) {
+      alert("error")
+    }
+  }
+
+  async function acceptAgreement(agreementId, setActivity){
+    const token = localStorage.getItem("token");
+
+    try {
+      return await client.put(`agreements/accept`, {
+        agreement_id: agreementId,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then(async (res) => {
+        await getActivityById(agreementId, setActivity)
+        return res
+      }).catch((err) => {
+        alert("error")
         return err.response
       })
     } catch (error) {
@@ -657,6 +704,8 @@ export default function fetch() {
     createAgreements,
     fetchActivity,
     getActivityById,
+    setDealPrice,
+    acceptAgreement,
     getAllBankName,
     updateDocument,
   };
