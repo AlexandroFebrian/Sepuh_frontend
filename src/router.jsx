@@ -12,6 +12,7 @@ import DetailsPost from "./Views/User/DetailsPost/DetailsPost";
 import List from "./Views/User/List/List";
 import MyActivity from "./Views/User/MyActivity/MyActivity";
 import Ongoing from "./Views/User/MyActivity/Ongoing/Ongoing";
+import Finished from "./Views/User/MyActivity/Finished/Finished";
 import Profile from "./Views/User/Profile/Profile";
 import OtherProfile from "./Views/User/OtherProfile/OtherProfile";
 import DocumentCompletion from "./Views/User/DocumentCompletion/DocumentCompletion";
@@ -27,7 +28,6 @@ import UserReports from "./Views/Admin/UserReports/UserReports";
 import PostingReports from "./Views/Admin/PostingReports/PostingReports";
 import IncomeReportsAdmin from "./Views/Admin/IncomeReports/IncomeReports";
 import PaymentReports from "./Views/Admin/PaymentReports/PaymentReports";
-import Finished from "./Views/User/MyActivity/Finished/Finished";
 
 const Router = createBrowserRouter([
   {

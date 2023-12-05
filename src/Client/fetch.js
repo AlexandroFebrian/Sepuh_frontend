@@ -234,7 +234,12 @@ export default function fetch() {
       return await client
         .get(`posts/details/${id}`)
         .then((res) => {
-          setPost(res.data[0]);
+          // console.log(res.data[0]);
+          if(setPost){
+            setPost(res.data[0]);
+
+          }
+          return res.data[0]
         })
         .catch((err) => {
           alert("error");
@@ -533,7 +538,8 @@ export default function fetch() {
           },
         })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
+          setActivity(res.data);
           return res;
         })
         .catch((err) => {

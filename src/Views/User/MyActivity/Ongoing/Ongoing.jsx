@@ -1,15 +1,19 @@
 import React from 'react'
 import OngoingViewModel from './OngoingViewModel'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useOutletContext } from 'react-router-dom'
+import ActivityCard from '../Component/ActivityCard'
 
 export default function Ongoing() {
+  const [activity] = useOutletContext();
+  console.log(activity)
+  
   const {
     user,
-    isLogin
+    isLogin,
+    posts
   } = OngoingViewModel()
   
   const location = useLocation()
-  console.log(location.pathname)
 
   return (
     <div className='w-full'>
@@ -33,6 +37,19 @@ export default function Ongoing() {
           </Link>
 
         </div>
+      </div>
+
+      <div className='w-full grid grid-cols-2 xl:grid-cols-3 gap-5 mt-4 px-5'>
+        {
+          activity.length > 0
+          &&
+          activity.map((item, index) => {
+            if(item.status < 3)
+            return (
+              <ActivityCard key={index} activity={item} user={user} />
+            )
+          })
+        }
       </div>
     </div>
   )

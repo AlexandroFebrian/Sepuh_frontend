@@ -22,7 +22,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 const materialTheme = materialExtendTheme();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <MaterialCssVarsProvider theme={{ [MATERIAL_THEME_ID]: materialTheme }}>
         <JoyCssVarsProvider>
@@ -33,5 +33,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </JoyCssVarsProvider>
       </MaterialCssVarsProvider>
     </Provider>
-  </React.StrictMode>,
+  // </React.StrictMode>,
 )

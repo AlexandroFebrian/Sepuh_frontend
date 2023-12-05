@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import fetch from "../../../Client/fetch";
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 export default function MyActivityViewModel(){
@@ -9,11 +10,15 @@ export default function MyActivityViewModel(){
   const isLogin = useSelector((state) => state.user.isLogin);
   const user = useSelector((state) => state.user.userDetail);
   
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [activity, setActivity] = useState([])
 
   useEffect(() => {
     checkToken();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    
   }, [])
 
   useEffect(() => {
@@ -21,9 +26,17 @@ export default function MyActivityViewModel(){
       fetchActivity(setActivity)
     }
   }, [user])
+  
+  useEffect(() => {
+    if(location.pathname == "/activity"){
+      navigate("/activity/ongoing", { replace: true })
+    }
+
+  }, [location])
 
   return {
     isLogin,
     user,
+    activity
   }
 }

@@ -164,7 +164,7 @@ export default function Navbar() {
           <div className="w-4/12 flex items-center justify-end">
             {isLogin ? (
               <>
-                <Link to={"/activity"}>
+                <Link to={"/activity/ongoing"}>
                   <Button
                     leftIcon={<IoIosTimer />}
                     color="ghostwhite.50"
