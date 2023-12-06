@@ -5,7 +5,7 @@ import fetch from "../../../../Client/fetch";
 
 
 export default function DetailActivityViewModel(){
-  const { checkToken, getActivityById, setDealPrice, acceptAgreement, saveFileAgreement, agreementPayment, setPaymentStatus } = fetch();
+  const { checkToken, getActivityById, setDealPrice, acceptAgreement, saveFileAgreement, agreementPayment, setPaymentStatus, rejectAgreement, doneProject } = fetch();
 
   const isLogin = useSelector((state) => state.user.isLogin);
   const user = useSelector((state) => state.user.userDetail);
@@ -41,7 +41,7 @@ export default function DetailActivityViewModel(){
   }, [user, actId])
 
   useEffect(() => {
-    // console.log(activity)
+    console.log(activity)
 
     if(!activity) return
 
@@ -57,6 +57,31 @@ export default function DetailActivityViewModel(){
       minimumFractionDigits: 2,
     }).format(activity?.deal_price));
   }, [activity])
+
+  async function rejectHandler(){
+    setWait(true)
+
+    const response = await rejectAgreement(activity?._id, setActivity, setWait, setPopup)
+
+    if(response == undefined){
+      setPopupTitle("Network Error!")
+      setPopupButtonMessage("Try Again")
+      setPopupType(false)
+      return
+    }
+
+    if(response.status.toString()[0] != 2){
+      // console.log(response)
+      setPopupTitle(response.data.message)
+      setPopupButtonMessage("Try Again")
+      setPopupType(false)
+      return
+    }
+
+    setPopupTitle("Reject Success")
+    setPopupButtonMessage("Close")
+    setPopupType(true)
+  }
 
   async function changeBidHandler(){
     setWait(true)
@@ -134,6 +159,31 @@ export default function DetailActivityViewModel(){
     setPopupType(true)
   }
 
+  async function doneHandler(){
+    setWait(true)
+    
+    const response = await doneProject(activity?._id, setActivity, setWait, setPopup)
+
+    if(response == undefined){
+      setPopupTitle("Network Error!")
+      setPopupButtonMessage("Try Again")
+      setPopupType(false)
+      return
+    }
+
+    if(response.status.toString()[0] != 2){
+      // console.log(response)
+      setPopupTitle(response.data.message)
+      setPopupButtonMessage("Try Again")
+      setPopupType(false)
+      return
+    }
+
+    setPopupTitle("Done Project Success")
+    setPopupButtonMessage("Close")
+    setPopupType(true)
+  }
+
   async function payHandler(){
     const response = await agreementPayment(activity, openSnap, setActivity)
   }
@@ -184,10 +234,12 @@ export default function DetailActivityViewModel(){
     isLogin,
     user,
     activity,
+    setActivity,
     minPrice,
     maxPrice,
     priceBefore,
     setPrice,
+    rejectHandler,
     changeBidHandler,
     acceptBidHandler,
     payHandler,
@@ -201,6 +253,7 @@ export default function DetailActivityViewModel(){
     popupType,
     setPopup,
     setWait,
-    setPopupType
+    setPopupType,
+    doneHandler
   }
 }

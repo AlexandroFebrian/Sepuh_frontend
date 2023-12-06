@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Accordion,
   AccordionItem,
@@ -8,9 +8,10 @@ import {
   Box,
   Button,
 } from '@chakra-ui/react'
+import fetch from '../../../../Client/fetch';
 
-export default function WorkBox({file}) {
-  console.log(file)
+export default function WorkBox({file, user, activity, setActivity}) {
+  // console.log(file)
 
   function downloadHandler(url, time) {
     const filename = time;
@@ -57,6 +58,29 @@ export default function WorkBox({file}) {
   const formattedDate = newTime.toLocaleString(undefined, options);
   
   const time = formattedDate.replace(/(\d+)\/(\d+)\/(\d+), (\d+):(\d+):(\d+)/, "$3/$2/$1 $4:$5:$6");
+
+  const { acceptFile, rejectFile } = fetch()
+
+  const [comment, setComment] = useState("")
+  const [err, setErr] = useState("")
+
+  async function acceptHandler(){
+    if(comment == ""){
+      setErr("Please write your comments")
+      return
+    }
+
+    const response = await acceptFile(activity._id, file._id, comment, setActivity)
+  }
+
+  async function rejectHandler(){
+    if(comment == ""){
+      setErr("Please write your comments")
+      return
+    }
+
+    const response = await rejectFile(activity._id, file._id, comment, setActivity)
+  }
   
   return (
     <>
@@ -68,7 +92,7 @@ export default function WorkBox({file}) {
                 {time}
               </p>
               {
-                file.status == 0
+                file.status == 0 && user?.role == "Freelancer"
                 &&
                 <div className=' border border-yellow-600 text-yellow-600 hover:bg-ghostwhite-50/80 transition-colors duration-300 px-8 rounded-full'>
                   Waiting for Review
@@ -87,6 +111,41 @@ export default function WorkBox({file}) {
                 <div className=' border border-red-600 text-red-600 hover:bg-ghostwhite-50/80 transition-colors duration-300 px-8 rounded-full'>
                   Rejected
                 </div>
+              }
+              {
+                user?.role == "Company" && file.status == 0
+                &&
+                <>
+                  <Button
+                    color="ghostwhite.50"
+                    bg="green.500"
+                    _hover={{ bg: "green.600", shadow: "lg" }}
+                    _active={{ bg: "green.700" }}
+                    paddingX={"2rem"}
+                    height={"2.25rem"}
+                    transitionDuration={"300ms"}
+                    shadow={"md"}
+                    marginRight={"0.5rem"}
+                    onClick={() => {acceptHandler()}}
+                  >
+                    Accept
+                  </Button>
+                  <Button
+                    color="ghostwhite.50"
+                    bg="red.500"
+                    _hover={{ bg: "red.600", shadow: "lg" }}
+                    _active={{ bg: "red.700" }}
+                    paddingX={"2rem"}
+                    height={"2.25rem"}
+                    transitionDuration={"300ms"}
+                    shadow={"md"}
+                    marginRight={"0.5rem"}
+                    onClick={() => {rejectHandler()}}
+                  >
+                    Reject
+                  </Button>
+                  <span className='text-red-500'>{err}</span>
+                </>
               }
             </div>
             <div className='flex h-full items-center'>
@@ -112,10 +171,22 @@ export default function WorkBox({file}) {
           </div>
 
           <AccordionPanel pb={4}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-            commodo consequat.
+            <h2 className='font-semibold'>Review comments:</h2>
+            {
+              user?.role == "Company" && file.status == 0
+              &&
+              <textarea className='w-full h-24 border border-gray-300 rounded-md p-2' placeholder='Write your comments here...' onChange={(e) => {setComment(e.target.value)}}></textarea>
+            }
+            {
+              file.status != 0
+              &&
+              <div className=' whitespace-pre-line'>
+                {
+                  file?.comment
+                }
+              </div>
+
+            }
           </AccordionPanel>
         </AccordionItem>
       </Accordion>

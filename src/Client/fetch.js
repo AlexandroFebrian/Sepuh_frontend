@@ -641,6 +641,54 @@ export default function fetch() {
     }
   }
 
+  async function rejectAgreement(agreementId, setActivity, setWait, setPopup){
+    const token = localStorage.getItem("token");
+
+    try {
+      return await client.put(`agreements/status/reject`, {
+        agreement_id: agreementId,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then(async (res) => {
+        setPopup(true);
+        await getActivityById(agreementId, setActivity)
+        return res
+      }).catch((err) => {
+        setPopup(true);
+        alert("error")
+        return err.response
+      })
+    } catch (error) {
+      alert("error")
+    }
+  }
+
+  async function doneProject(agreementId, setActivity, setWait, setPopup){
+    const token = localStorage.getItem("token")
+
+    try {
+      return await client.put("agreements/status/done", {
+        agreement_id: agreementId,
+      }, {
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      }).then(async (res) => {
+        setPopup(true);
+        await getActivityById(agreementId, setActivity)
+        return res
+      }).catch((err) => {
+        setPopup(true);
+        alert("error")
+        return err.response
+      })
+    } catch (error) {
+      alert("error")
+    }
+  }
+
   async function saveFileAgreement(agreementId, file, setActivity, setWait, setPopup){
     const token = localStorage.getItem("token");
 
@@ -693,6 +741,54 @@ export default function fetch() {
       return await client.post("agreements/dSfbZJgaMxGbGYFsRYDq", {
         transaction_status: "settlement",
         order_id: invoice
+      }).then(async (res) => {
+        await getActivityById(agreementId, setActivity)
+        return res
+      }).catch((err) => {
+        alert("error")
+        return err.response
+      })
+    } catch (error) {
+      alert("error")
+    }
+  }
+
+  async function acceptFile(agreementId, fileId, comment, setActivity){
+    const token = localStorage.getItem("token")
+
+    try {
+      return await client.put("agreements/file/accept", {
+        agreement_id: agreementId,
+        file_id: fileId,
+        comment: comment
+      }, {
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      }).then(async (res) => {
+        await getActivityById(agreementId, setActivity)
+        return res
+      }).catch((err) => {
+        alert("error")
+        return err.response
+      })
+    } catch (error) {
+      alert("error")
+    }
+  }
+
+  async function rejectFile(agreementId, fileId, comment, setActivity){
+    const token = localStorage.getItem("token")
+
+    try {
+      return await client.put("agreements/file/reject", {
+        agreement_id: agreementId,
+        file_id: fileId,
+        comment: comment
+      }, {
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
       }).then(async (res) => {
         await getActivityById(agreementId, setActivity)
         return res
@@ -775,9 +871,13 @@ export default function fetch() {
     getActivityById,
     setDealPrice,
     acceptAgreement,
+    rejectAgreement,
+    doneProject,
     agreementPayment,
     setPaymentStatus,
     saveFileAgreement,
+    acceptFile,
+    rejectFile,
     getAllBankName,
     updateDocument,
   };

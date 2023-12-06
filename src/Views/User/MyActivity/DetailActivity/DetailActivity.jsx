@@ -12,10 +12,12 @@ export default function DetailActivity() {
     user,
     isLogin,
     activity,
+    setActivity,
     minPrice,
     maxPrice,
     priceBefore,
     setPrice,
+    rejectHandler,
     changeBidHandler,
     acceptBidHandler,
     payHandler,
@@ -29,7 +31,8 @@ export default function DetailActivity() {
     popupType,
     setPopup,
     setWait,
-    setPopupType
+    setPopupType,
+    doneHandler
   } = DetailActivityViewModel()
 
   const date = new Date(activity?.create_at)
@@ -59,27 +62,6 @@ export default function DetailActivity() {
       document.body.style.overflow = "unset";
     }
   }, [wait]);
-
-  function open(){
-    window.snap.pay('TRANSACTION_TOKEN_HERE', {
-      onSuccess: function(result){
-        /* You may add your own implementation here */
-        alert("payment success!"); console.log(result);
-      },
-      onPending: function(result){
-        /* You may add your own implementation here */
-        alert("wating your payment!"); console.log(result);
-      },
-      onError: function(result){
-        /* You may add your own implementation here */
-        alert("payment failed!"); console.log(result);
-      },
-      onClose: function(){
-        /* You may add your own implementation here */
-        alert('you closed the popup without finishing the payment');
-      }
-    })
-  }
   
   return (
     <>
@@ -97,43 +79,138 @@ export default function DetailActivity() {
       />
 
       <div className='w-full'>
-        <h1 className='text-2xl font-bold'>Ongoing</h1>
-
-        <div className='w-full bg-ghostwhite-100 rounded my-4 px-5 py-5 flex '>
-          <Avatar src={activity?.post.user_id.profile_picture} size={"xl"} />
-          <div className='ml-3 w-full flex flex-col justify-between'>
-            <div className='flex justify-between items-center'>
-              <h2 className='text-2xl font-semibold text-navyblue-500'>
-                {activity?.post.title}
-              </h2>
-
-              <Link to={`/post/${activity?.post._id}`}>
+        <div className='w-full px-1'>
+          {
+            activity?.status == -1
+            &&
+            <h1 className='text-2xl font-bold'>Rejected</h1>
+          }
+          {
+            activity?.status == 0
+            &&
+            <h1 className='text-2xl font-bold'>Waiting for Bid</h1>
+          }
+          {
+            activity?.status == 1
+            &&
+            <div className='w-full flex justify-between items-center'>
+              <h1 className='text-2xl font-bold'>On Progress</h1>
+              {
+                ((user.role == "Freelancer" && activity?.freelancer_status == 1) || (user.role == "Company" && activity?.company_status == 1))
+                &&
                 <Button
                   color="ghostwhite.50"
-                  bg="indigo.300"
-                  _hover={{ bg: "indigo.350" }}
-                  _active={{ bg: "indigo.400" }}
+                  bg="green.500"
+                  _hover={{ bg: "green.600", shadow: "lg" }}
+                  _active={{ bg: "green.700" }}
                   width="8.5rem"
                   transitionDuration={"300ms"}
+                  shadow={"md"}
+                  marginRight={"1rem"}
+                  onClick={() => {doneHandler()}}
                 >
-                  View Post
+                  Done Project
                 </Button>
-              </Link>
+              }
+              {
+                (user.role == "Freelancer" && activity?.freelancer_status == 2 && activity?.company_status == 1)
+                &&
+                <p className='text-yellow-500 font-semibold'>
+                  Waiting for the company to Done the project!
+                </p>
+              }
+              {
+                (user.role == "Company" && activity?.company_status == 2 && activity?.freelancer_status == 1)
+                &&
+                <p className='text-yellow-500 font-semibold'>
+                  Waiting for the freelancer to Done the project!
+                </p>
+              }
             </div>
+          }
+          {
+            activity?.status == 2
+            &&
+            <h1 className='text-2xl font-bold'>Finished</h1>
+          }
 
-            <Link to={`/user?email=${activity?.post.user_id.email}`}>
-              <h3 className='font-semibold underline hover:text-navyblue-500'>
-                {activity?.post.user_id.name}
-              </h3>
-            </Link>
-            
-            <p className=' text-ghostwhite-500 text-xs'>
-              Started at {date.getDate()} {monthNames[date.getMonth()]} {date.getFullYear()}
-            </p>
+        </div>
+        
+        <div className='w-full bg-ghostwhite-100 rounded my-4 px-5 py-5'>
+          <div className='flex'>
+            {
+              user.role == "Freelancer"
+              &&
+              <Avatar src={activity?.company.profile_picture} size={"xl"} />
+            }
+            {
+              user.role == "Company"
+              &&
+              <Avatar src={activity?.freelancer.profile_picture} size={"xl"} />
+            }
+            <div className='ml-3 w-full flex flex-col justify-between'>
+              <div className='flex justify-between items-center'>
+                <h2 className='text-2xl font-semibold text-navyblue-500'>
+                  {activity?.post.title}
+                </h2>
+
+                <Link to={`/post/${activity?.post._id}`}>
+                  <Button
+                    color="ghostwhite.50"
+                    bg="indigo.300"
+                    _hover={{ bg: "indigo.350" }}
+                    _active={{ bg: "indigo.400" }}
+                    width="8.5rem"
+                    transitionDuration={"300ms"}
+                  >
+                    View Post
+                  </Button>
+                </Link>
+              </div>
+              {
+                user.role == "Freelancer"
+                &&
+                <Link to={`/user?email=${activity?.company.email}`}>
+                  <h3 className='font-semibold underline hover:text-navyblue-500'>
+                    {activity?.company.name}
+                  </h3>
+                </Link>
+              }
+              {
+                user.role == "Company"
+                &&
+                <Link to={`/user?email=${activity?.freelancer.email}`}>
+                  <h3 className='font-semibold underline hover:text-navyblue-500'>
+                    {activity?.freelancer.name}
+                  </h3>
+                </Link>
+              }
+              
+              <p className=' text-ghostwhite-500 text-xs'>
+                Started at {date.getDate()} {monthNames[date.getMonth()]} {date.getFullYear()}
+              </p>
+            </div>
           </div>
+          
+          {
+            activity?.status > 0
+            &&
+            <h3 className='mt-3 text-lg font-semibold'>
+              Final price: Rp {priceBefore}
+            </h3>
+          }
         </div>
 
         <div className='w-full mt-5'>
+          {
+            activity?.status == -1
+            &&
+            <div className='w-full h-96 flex items-center justify-center'>
+              <h1 className='text-3xl font-bold text-red-500'>
+                This work is rejected!
+              </h1>
+            </div>
+          }
           {
             activity?.status == 0
             &&
@@ -158,6 +235,7 @@ export default function DetailActivity() {
                       _active={{ bg: "red.700" }}
                       width="8.5rem"
                       transitionDuration={"300ms"}
+                      onClick={() => {rejectHandler()}}
                     >
                       Reject
                     </Button>
@@ -304,14 +382,40 @@ export default function DetailActivity() {
 
               <div className='w-full'>
                 {
-                  activity?.file.map((item, i) => {
-                    return <WorkBox key={i} file={item} />
+                  activity?.file.reverse().map((item, i) => {
+                    return <WorkBox key={i} file={item} user={user} activity={activity} setActivity={setActivity} />
                   })
                 }
               </div>
 
 
             </>
+          }
+          {
+            activity?.status == 1 && user.role == "Company"
+            &&
+            <>
+              <h1 className='text-2xl font-bold'>
+                Works
+              </h1>
+
+              <div className='w-full'>
+                {
+                  activity?.file.reverse().map((item, i) => {
+                    return <WorkBox key={i} file={item} user={user} activity={activity} setActivity={setActivity} />
+                  })
+                }
+              </div>
+            </>
+          }
+          {
+            activity?.status == 2
+            &&
+            <div className='w-full h-96 flex items-center justify-center'>
+              <h1 className='text-3xl font-bold text-green-600'>
+                This work has been finished!
+              </h1>
+            </div>
           }
         </div>
       </div>
