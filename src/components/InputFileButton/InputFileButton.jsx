@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-export default function InputFileButton({className, index, children, file, setFile, imageSrcs, setImageSrcs, multipleInput, showImage, multipleImage}) {
+export default function InputFileButton({className, index, children, file, setFile, imageSrcs, setImageSrcs, multipleInput, showImage, multipleImage, accept}) {
 
   const handleFileChange = (event) => {
-    console.log(index)
     const files = event.target.files;
+    
     if(multipleImage){
       setFile([...file, ...files]);
-
+      
     }else{
       setFile([...files]);
     }
@@ -47,7 +47,7 @@ export default function InputFileButton({className, index, children, file, setFi
         </label>
 
       </div>
-      <input type="file" id={`custom${index}`} className='hidden' onChange={handleFileChange} multiple={multipleInput || false} />
+      <input type="file" id={`custom${index}`} className='hidden' onChange={handleFileChange} multiple={multipleInput || false} accept={accept || ""} />
     </>
   );
 }

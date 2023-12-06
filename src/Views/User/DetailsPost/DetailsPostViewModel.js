@@ -31,13 +31,7 @@ export default function DetailsPostViewModel(){
   }, [])
 
   useEffect(() => {
-    if(post && post?.posted_by.email == user?.email){
-      console.log("post")
-    }
-  }, [post, user])
-
-  useEffect(() => {
-    if(isLogin && postId){
+    if(isLogin && postId && post && post?.posted_by.email != user?.email){
       let i = 0
       const interv = setInterval(() => {
         i++
@@ -50,7 +44,7 @@ export default function DetailsPostViewModel(){
         clearInterval(interv)
       }
     }
-  }, [user, isLogin, postId])
+  }, [user, isLogin, postId, post])
 
   async function agreementsHandler(){
     setWait(true)
@@ -64,7 +58,9 @@ export default function DetailsPostViewModel(){
 
   async function applyHandler(){
     const email = post.posted_by.email
-    const response = await createAgreements(email, postId, setWait, setPopup)
+    const minPrice = post.min_price
+
+    const response = await createAgreements(email, minPrice, postId, setWait, setPopup)
 
     if(response == undefined){
       setPopupTitle("Network Error!")
