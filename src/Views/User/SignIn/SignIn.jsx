@@ -1,4 +1,4 @@
-import Jumbo from "./components/jumbo";
+import Jumbo from "./components/Jumbo";
 import SignUpBox from "./SignUpBox";
 import SignInBox from "./SignInBox";
 
