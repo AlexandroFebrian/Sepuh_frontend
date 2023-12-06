@@ -13,13 +13,52 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
+import Chart from "react-apexcharts";
+
 export default function IncomeReports() {
   const [selectedDays, setSelectedDays] = useState({
     from: undefined,
     to: undefined,
   });
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([
+    {
+      Januari: 1000000,
+    },
+    {
+      Februari: 2000000,
+    },
+    {
+      Maret: 3000000,
+    },
+    {
+      April: 4000000,
+    },
+    {
+      Mei: 5000000,
+    },
+    {
+      Juni: 6000000,
+    },
+    {
+      Juli: 7000000,
+    },
+    {
+      Agustus: 8000000,
+    },
+    {
+      September: 9000000,
+    },
+    {
+      Oktober: 10000000,
+    },
+    {
+      November: 11000000,
+    },
+    {
+      Desember: 12000000,
+    },
+  ]);
 
   return (
     <>
@@ -88,6 +127,51 @@ export default function IncomeReports() {
                     </PopoverContent>
                   </Popover>
                 </div>
+              </div>
+
+              <div className="chart mt-5">
+                <Chart
+                  options={{
+                    chart: {
+                      id: "basic-bar",
+                    },
+                    xaxis: {
+                      categories: [
+                        "Januari",
+                        "Februari",
+                        "Maret",
+                        "April",
+                        "Mei",
+                        "Juni",
+                        "Juli",
+                        "Agustus",
+                        "September",
+                        "Oktober",
+                        "November",
+                        "Desember",
+                      ],
+                    },
+                  }}
+                  series={[
+                    {
+                      name: "Income",
+                      data: [
+                        9500000, 5500000, 12500000, 3500000, 7500000, 10500000,
+                        1500000, 11500000, 6500000, 8500000, 4500000, 2500000,
+                      ],
+                    },
+                    {
+                      name: "Outcome",
+                      data: [
+                        1500000, 2500000, 3500000, 4500000, 5500000, 6500000,
+                        7500000, 8500000, 9500000, 10500000, 11500000, 12500000,
+                      ],
+                    },
+                  ]}
+                  type="line"
+                  width="100%"
+                  height="100%"
+                />
               </div>
             </div>
           </div>
