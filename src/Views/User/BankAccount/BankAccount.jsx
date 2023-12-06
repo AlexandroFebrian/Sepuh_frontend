@@ -3,6 +3,7 @@ import FreelancerProfileMenu from "../../../components/SidebarMenu/Freelancer/Fr
 import CompanyProfileMenu from "../../../components/SidebarMenu/Company/CompanyProfileMenu/CompanyProfileMenu";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { FaCircleExclamation } from "react-icons/fa6";
+import { Combobox } from "../../../components/ui/Combobox";
 
 import {
   Select,
@@ -53,7 +54,7 @@ export default function BankAccount() {
                 >
                   Bank Name <span className="text-red-500">*</span>
                 </label>
-                <Select>
+                {/* <Select>
                   <SelectTrigger>
                     <SelectValue placeholder="Bank Name" />
                   </SelectTrigger>
@@ -64,7 +65,30 @@ export default function BankAccount() {
                       </SelectItem>
                     ))}
                   </SelectContent>
-                </Select>
+                </Select> */}
+                {/* <Combobox 
+            title={"Select Category"} 
+            placeholder={"Search Category"} 
+            empty={"No category found"} 
+            items={category} 
+            headerClassName={"w-72 shadow-lg"}
+            contentClassName={" pt-1 border-0"}
+            item={categoryFilter}
+            onSelect={(value) => {comboBoxSelect(value)}}
+          /> */}
+                <Combobox
+                  title={"Select Bank Name"}
+                  placeholder={"Select Bank Name"}
+                  empty={"Bank Name not found"}
+                  headerClassName={"w-72 shadow-lg"}
+                  contentClassName={" pt-1 border-0"}
+                  className="w-full rounded-md border-2 border-navyblue-600 py-2 px-3 mt-2"
+                  items={bankName}
+                  item={bankName.name}
+                  onSelect={(value) => {
+                    console.log(value);
+                  }}
+                />
               </div>
 
               <div className="w-full mt-5 ">
