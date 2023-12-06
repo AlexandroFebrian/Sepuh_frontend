@@ -19,42 +19,6 @@ export default function OngoingViewModel(){
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [])
 
-  // useEffect(() => {
-  //   if(user){
-  //     fetchActivity(setActivity)
-  //   }
-  // }, [user])
-
-  // function setPostsLogic(newpost){
-  //   setPosts(prev => [...prev, newpost])
-  // }
-
-  // useEffect(() => {
-  //   if(activity.length > 0){
-  //     // console.log(activity.length)
-  //     const temp = []
-  //     activity.map(async (item) => {
-  //       // temp.push(await getPostById(item.post))
-  //       const post = await getPostById(item.post)
-  //       temp.push(post)
-  //       if(temp.length == activity.length){
-  //         setPosts(temp)
-  //       }
-  //     })
-  //   }
-
-  //   return () => {
-  //     if(posts.length > 0){
-  //       setPosts([])
-
-  //     }
-  //   }
-  // }, [activity])
-
-  // useEffect(() => {
-  //   console.log(posts)
-  // }, [posts])
-
   return {
     isLogin,
     user,

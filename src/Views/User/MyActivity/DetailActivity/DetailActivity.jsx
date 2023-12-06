@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import DetailActivityViewModel from './DetailActivityViewModel'
 import { Avatar, Button, Input } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import InputFileButton from '../../../../components/InputFileButton/InputFileButton'
 import { FaCloudArrowUp } from "react-icons/fa6";
+import Popup from '../../../../components/Popup/Popup'
+import WorkBox from './WorkBox'
 
 export default function DetailActivity() {
   const {
@@ -16,8 +18,18 @@ export default function DetailActivity() {
     setPrice,
     changeBidHandler,
     acceptBidHandler,
+    payHandler,
     file,
     setFile,
+    saveFileHandler,
+    wait,
+    popup,
+    popupTitle,
+    popupButtonMessage,
+    popupType,
+    setPopup,
+    setWait,
+    setPopupType
   } = DetailActivityViewModel()
 
   const date = new Date(activity?.create_at)
@@ -37,8 +49,53 @@ export default function DetailActivity() {
     "December",
   ];
   
+  const [position, setPosition] = useState(0);
+
+  useEffect(() => {
+    if (wait) {
+      setPosition(window.scrollY);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [wait]);
+
+  function open(){
+    window.snap.pay('TRANSACTION_TOKEN_HERE', {
+      onSuccess: function(result){
+        /* You may add your own implementation here */
+        alert("payment success!"); console.log(result);
+      },
+      onPending: function(result){
+        /* You may add your own implementation here */
+        alert("wating your payment!"); console.log(result);
+      },
+      onError: function(result){
+        /* You may add your own implementation here */
+        alert("payment failed!"); console.log(result);
+      },
+      onClose: function(){
+        /* You may add your own implementation here */
+        alert('you closed the popup without finishing the payment');
+      }
+    })
+  }
+  
   return (
     <>
+      <Popup
+        wait={wait}
+        popup={popup}
+        setPopup={setPopup}
+        setWait={setWait}
+        popupType={popupType}
+        setPopupType={setPopupType}
+        popupTitle={popupTitle}
+        popupButtonMessage={popupButtonMessage}
+        className="fixed w-screen h-screen left-0"
+        style={{ top: `${position}px` }}
+      />
+
       <div className='w-full'>
         <h1 className='text-2xl font-bold'>Ongoing</h1>
 
@@ -78,7 +135,7 @@ export default function DetailActivity() {
 
         <div className='w-full mt-5'>
           {
-            activity?.status == 1
+            activity?.status == 0
             &&
             <>
               <h1 className='text-2xl font-bold'>
@@ -197,6 +254,7 @@ export default function DetailActivity() {
                           _active={{ bg: "yellow.500" }}
                           transitionDuration={"300ms"}
                           shadow={"md"}
+                          onClick={() => {payHandler()}}
                         >
                           Continue to Payment
                         </Button>
@@ -209,7 +267,7 @@ export default function DetailActivity() {
             </>
           }
           {
-            activity?.status == 0 && user.role == "Freelancer"
+            activity?.status == 1 && user.role == "Freelancer"
             &&
             <>
               <div className='flex justify-between h-16'>
@@ -233,8 +291,9 @@ export default function DetailActivity() {
                       transitionDuration={"300ms"}
                       shadow={"md"}
                       paddingX={"2rem"}
+                      onClick={() => {saveFileHandler()}}
                     >
-                      Save
+                      Save File
                     </Button>
                   </div>
                   <div className='w-full flex justify-end italic'>
@@ -243,8 +302,12 @@ export default function DetailActivity() {
                 </div>
               </div>
 
-              <div>
-                asdsa
+              <div className='w-full'>
+                {
+                  activity?.file.map((item, i) => {
+                    return <WorkBox key={i} file={item} />
+                  })
+                }
               </div>
 
 
