@@ -146,7 +146,7 @@ export default function DetailsPost() {
                   <div className='ml-5 h-full'>
                     <h1 className='font-semibold text-2xl text-navyblue-500'>{post?.title}</h1>
                     <div className='text-sm flex items-center'>
-                      <Link to={`/user?email=${post?.posted_by.email}`} className='underline hover:text-navyblue-500'>{post?.posted_by.name}</Link> &nbsp; &#x2022; &nbsp; <FaStar className=' text-yellow-500 mr-1' /> {post?.avg_rating} <span className='ml-1 text-ghostwhite-500'>({post?.comments.length})</span>
+                      <Link to={`/user?email=${post?.posted_by.email}`} className='underline hover:text-navyblue-500'>{post?.posted_by.name}</Link> &nbsp; &#x2022; &nbsp; <FaStar className=' text-yellow-500 mr-1' /> {post?.avg_rating == 0 ? 0 : post?.avg_rating.toFixed(1)} <span className='ml-1 text-ghostwhite-500'>({post?.comments.length})</span>
                     </div>
                   </div>
                 </div>
@@ -266,7 +266,7 @@ export default function DetailsPost() {
                   <div className='ml-5 h-full'>
                     <h1 className='font-semibold text-2xl text-indigo-200'>{post?.title}</h1>
                     <div className='text-sm flex items-center'>
-                      <Link to={`/user?email=${post?.posted_by.email}`} className='underline hover:text-indigo-200'>{post?.posted_by.name}</Link> &nbsp; &#x2022; &nbsp; <FaStar className=' text-yellow-500 mr-1' /> {post?.avg_rating} <span className='ml-1 text-ghostwhite-300'>({post?.comments.length})</span>
+                      <Link to={`/user?email=${post?.posted_by.email}`} className='underline hover:text-indigo-200'>{post?.posted_by.name}</Link> &nbsp; &#x2022; &nbsp; <FaStar className=' text-yellow-500 mr-1' /> {post?.avg_rating == 0 ? 0 : post?.avg_rating.toFixed(1)} <span className='ml-1 text-ghostwhite-300'>({post?.comments.length})</span>
                     </div>
                   </div>
                 </div>
@@ -377,6 +377,40 @@ export default function DetailsPost() {
                 }
               </div>
             }
+
+            <div className='w-[calc(100%-10rem)] px-7 py-7 h-fit mt-3 bg-lightblue-50 rounded shadow-xl'>
+              <h1 className='text-2xl font-bold mb-6'>Reviews <span className=' text-ghostwhite-500 font-semibold'>({post?.comments.length})</span></h1>
+
+              {
+                post?.comments.map((comment, idx) => {
+                  return (
+                    <div key={idx} className=' w-full border-t border-navyblue-800 px-5 py-5'>
+                      <div className='flex'>
+                        <Avatar size={"lg"} src={comment?.comment_by?.profile_picture} />
+
+                        <div className='w-full ml-5'>
+                          <div className=' flex items-center'>
+                            <h1 className='font-semibold text-xl'>{comment?.comment_by?.name}</h1>
+                            &nbsp; &#x2022; &nbsp;
+                            <div className='text-sm flex items-center'>
+                              <FaStar className=' text-yellow-500 mr-1' /> {comment?.rating}
+                            </div>
+                          </div>
+
+                          <div className=' whitespace-pre-line mt-1'>
+                            {comment?.comment}
+                          </div>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  )
+                })
+              }
+
+            </div>
+            
           </div>
         </div>
         
