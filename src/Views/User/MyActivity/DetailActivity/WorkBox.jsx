@@ -8,7 +8,7 @@ import {
   Box,
   Button,
 } from '@chakra-ui/react'
-import fetch from '../../../../Client/fetch';
+import client from '../../../../Client/fetch';
 
 export default function WorkBox({file, user, activity, setActivity}) {
   // console.log(file)
@@ -59,7 +59,7 @@ export default function WorkBox({file, user, activity, setActivity}) {
   
   const time = formattedDate.replace(/(\d+)\/(\d+)\/(\d+), (\d+):(\d+):(\d+)/, "$3/$2/$1 $4:$5:$6");
 
-  const { acceptFile, rejectFile } = fetch()
+  const { acceptFile, rejectFile } = client()
 
   const [comment, setComment] = useState("")
   const [err, setErr] = useState("")
