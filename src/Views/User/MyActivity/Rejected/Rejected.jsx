@@ -1,15 +1,15 @@
 import React from 'react'
 import { Link, useLocation, useOutletContext } from 'react-router-dom'
-import FinishedViewModel from './FinishedViewModel'
 import ActivityCard from '../Component/ActivityCard';
+import RejectedViewModel from './RejectedViewModel';
 
-export default function Finished() {
+export default function Rejected() {
   const [activity] = useOutletContext();
 
   const {
     user,
     isLogin
-  } = FinishedViewModel()
+  } = RejectedViewModel()
   
   const location = useLocation()
 
@@ -51,7 +51,7 @@ export default function Finished() {
           activity.length > 0
           &&
           activity.map((item, index) => {
-            if(item.status == 2)
+            if(item.status == -1)
             return (
               <ActivityCard key={index} activity={item} user={user} />
             )

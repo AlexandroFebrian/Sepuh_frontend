@@ -6,6 +6,7 @@ import InputFileButton from '../../../../components/InputFileButton/InputFileBut
 import { FaCloudArrowUp } from "react-icons/fa6";
 import Popup from '../../../../components/Popup/Popup'
 import WorkBox from './WorkBox'
+import { Rating } from '@mui/material'
 
 export default function DetailActivity() {
   const {
@@ -16,6 +17,7 @@ export default function DetailActivity() {
     minPrice,
     maxPrice,
     priceBefore,
+    err,
     setPrice,
     rejectHandler,
     changeBidHandler,
@@ -27,12 +29,20 @@ export default function DetailActivity() {
     wait,
     popup,
     popupTitle,
+    popupMessage,
     popupButtonMessage,
     popupType,
     setPopup,
     setWait,
     setPopupType,
-    doneHandler
+    doneHandler,
+    review,
+    setReview,
+    rating,
+    setRating,
+    ratingHover,
+    setRatingHover,
+    reviewHandler
   } = DetailActivityViewModel()
 
   const date = new Date(activity?.create_at)
@@ -73,6 +83,7 @@ export default function DetailActivity() {
         popupType={popupType}
         setPopupType={setPopupType}
         popupTitle={popupTitle}
+        popupMessage={popupMessage}
         popupButtonMessage={popupButtonMessage}
         className="fixed w-screen h-screen left-0"
         style={{ top: `${position}px` }}
@@ -109,21 +120,21 @@ export default function DetailActivity() {
                   marginRight={"1rem"}
                   onClick={() => {doneHandler()}}
                 >
-                  Done Project
+                  Complete Project
                 </Button>
               }
               {
                 (user.role == "Freelancer" && activity?.freelancer_status == 2 && activity?.company_status == 1)
                 &&
                 <p className='text-yellow-500 font-semibold'>
-                  Waiting for the company to Done the project!
+                  Waiting for the company to Complete the project!
                 </p>
               }
               {
                 (user.role == "Company" && activity?.company_status == 2 && activity?.freelancer_status == 1)
                 &&
                 <p className='text-yellow-500 font-semibold'>
-                  Waiting for the freelancer to Done the project!
+                  Waiting for the freelancer to Complete the project!
                 </p>
               }
             </div>
@@ -207,7 +218,7 @@ export default function DetailActivity() {
             &&
             <div className='w-full h-96 flex items-center justify-center'>
               <h1 className='text-3xl font-bold text-red-500'>
-                This work is rejected!
+                This work has been rejected!
               </h1>
             </div>
           }
@@ -270,7 +281,7 @@ export default function DetailActivity() {
                       />
 
                       <p className='ml-2 text-red-500'>
-                        
+                        {err}
                       </p>
                     </div>
                   </>
@@ -409,13 +420,71 @@ export default function DetailActivity() {
             </>
           }
           {
-            activity?.status == 2
+            ((activity?.status == 2 && activity?.post.user_id.email != user.email) || activity?.status == 3)
             &&
             <div className='w-full h-96 flex items-center justify-center'>
-              <h1 className='text-3xl font-bold text-green-600'>
-                This work has been finished!
-              </h1>
+              <div>
+                <h1 className='text-3xl font-bold text-green-600 text-center'>
+                  This work has been finished
+                </h1>
+                <h2 className='text-3xl font-bold text-green-600 text-center'>
+                  Thank you for your hard working!
+                </h2>
+
+              </div>
             </div>
+          }
+          {
+            (activity?.status == 2 && activity?.post.user_id.email == user.email)
+            &&
+            <>
+              <h1 className='text-2xl font-bold'>
+                Review & Rating
+              </h1>
+
+              <div className='w-full bg-ghostwhite-100 px-5 py-6 my-4 rounded'>
+                <h2 className='font-semibold'>
+                  Please give a review & rating
+                </h2>
+
+                <div className='flex items-center mt-2'>
+                  <p className='mr-1'>Rating: </p>
+                  <Rating
+                    name="simple-controlled"
+                    value={rating}
+                    onChange={(event, newValue) => {
+                      setRating(newValue);
+                    }}
+                    onChangeActive={(event, newValue) => {
+                      setRatingHover(newValue)
+                    }}
+                  />
+                  <p className='ml-2 text-ghostwhite-500'>({ratingHover == -1 ? rating : ratingHover})</p>
+                </div>
+                
+                <p>Review:</p>
+                <textarea className='w-full h-24 border border-gray-300 rounded-md p-2' placeholder='Write your review here...' onChange={(e) => {setReview(e.target.value)}}></textarea>
+                
+                <div className='flex items-center'>
+                  <Button
+                    color="ghostwhite.50"
+                    bg="green.500"
+                    _hover={{ bg: "green.600", shadow: "lg" }}
+                    _active={{ bg: "green.700" }}
+                    width="8.5rem"
+                    transitionDuration={"300ms"}
+                    shadow={"md"}
+                    marginRight={"1rem"}
+                    onClick={() => {reviewHandler()}}
+                  >
+                    Submit review
+                  </Button>
+
+                  <p className='text-red-600'>{err}</p>
+
+                </div>
+              </div>
+            </>
           }
         </div>
       </div>

@@ -9,7 +9,6 @@ export default function Ongoing() {
   const {
     user,
     isLogin,
-    posts
   } = OngoingViewModel()
   
   const location = useLocation()
@@ -18,7 +17,7 @@ export default function Ongoing() {
     <div className='w-full'>
       <h1 className='text-2xl font-bold'>My Activity</h1>
 
-      <div className='w-full h-14 mt-4 px-3 bg-ghostwhite-100 rounded flex'>
+      <div className='w-full h-14 mt-4 px-3 bg-ghostwhite-100 rounded flex justify-between'>
         <div>
           <Link to={"/activity/ongoing"}>
             <button 
@@ -36,6 +35,15 @@ export default function Ongoing() {
           </Link>
 
         </div>
+        <div>
+          <Link to={"/activity/rejected"}>
+            <button 
+              className={`h-full font-semibold px-4 mr-4 text-red-600 border-b-[4px] ${location.pathname.includes("rejected") ? "border-navyblue-800" : "border-ghostwhite-100"} hover:border-navyblue-800 transition-colors duration-300`}
+            >
+              Rejected Work
+            </button>
+          </Link>
+        </div>
       </div>
 
       <div className='w-full grid grid-cols-2 xl:grid-cols-3 gap-5 mt-4 px-5'>
@@ -43,7 +51,7 @@ export default function Ongoing() {
           activity.length > 0
           &&
           activity.map((item, index) => {
-            if(item.status < 3)
+            if(item.status >= 0 && item.status <= 1)
             return (
               <ActivityCard key={index} activity={item} user={user} />
             )

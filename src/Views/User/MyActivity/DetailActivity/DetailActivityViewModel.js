@@ -5,7 +5,7 @@ import fetch from "../../../../Client/fetch";
 
 
 export default function DetailActivityViewModel(){
-  const { checkToken, getActivityById, setDealPrice, acceptAgreement, saveFileAgreement, agreementPayment, setPaymentStatus, rejectAgreement, doneProject } = fetch();
+  const { checkToken, getActivityById, setDealPrice, acceptAgreement, saveFileAgreement, agreementPayment, setPaymentStatus, rejectAgreement, doneProject, submitReview } = fetch();
 
   const isLogin = useSelector((state) => state.user.isLogin);
   const user = useSelector((state) => state.user.userDetail);
@@ -16,6 +16,7 @@ export default function DetailActivityViewModel(){
   const [wait, setWait] = useState(false)
   const [popup, setPopup] = useState(false)
   const [popupTitle, setPopupTitle] = useState("")
+  const [popupMessage, setPopupMessage] = useState(null)
   const [popupButtonMessage, setPopupButtonMessage] = useState("")
   const [popupType, setPopupType] = useState(false)
 
@@ -27,6 +28,10 @@ export default function DetailActivityViewModel(){
   const [price, setPrice] = useState(0)
 
   const [file, setFile] = useState([])
+
+  const [review, setReview] = useState("")
+  const [rating, setRating] = useState(0)
+  const [ratingHover, setRatingHover] = useState(0)
 
   useEffect(() => {
     checkToken();
@@ -83,7 +88,18 @@ export default function DetailActivityViewModel(){
     setPopupType(true)
   }
 
+  const [err, setErr] = useState("")
+
   async function changeBidHandler(){
+    if(price < activity?.post.min_price){
+      setErr(`Price can't be less than Rp. ${minPrice}`)
+      return
+    }
+    if(price > activity?.post.max_price){
+      setErr(`Price can't be more than Rp. ${maxPrice}`)
+      return
+    }
+
     setWait(true)
 
     const response = await setDealPrice(activity?._id, price, setActivity, setWait, setPopup)
@@ -182,6 +198,7 @@ export default function DetailActivityViewModel(){
     setPopupTitle("Done Project Success")
     setPopupButtonMessage("Close")
     setPopupType(true)
+    setErr("")
   }
 
   async function payHandler(){
@@ -230,6 +247,47 @@ export default function DetailActivityViewModel(){
     })
   }
 
+  async function reviewHandler(){
+    if(rating <= 0){
+      setErr("Rating can't be 0")
+      return
+    }
+
+    if(review == ""){
+      setErr("Review can't be empty")
+      return
+    }
+
+    setWait(true)
+    
+    const response = await submitReview(review, rating, activity?._id, setActivity, setWait, setPopup)
+
+    if(response == undefined){
+      setPopupTitle("Network Error!")
+      setPopupButtonMessage("Try Again")
+      setPopupType(false)
+      return
+    }
+
+    if(response.status.toString()[0] != 2){
+      // console.log(response)
+      setPopupTitle(response.data.message)
+      setPopupButtonMessage("Try Again")
+      setPopupType(false)
+      return
+    }
+
+    setPopupTitle("Submit Review Success")
+    setPopupMessage("Thank you for your feedback!")
+    setPopupButtonMessage("Close")
+    setPopupType(true)
+    setErr("")
+  }
+
+  useEffect(() => {
+    console.log(popup)
+  }, [popup])
+
   return {
     isLogin,
     user,
@@ -238,6 +296,7 @@ export default function DetailActivityViewModel(){
     minPrice,
     maxPrice,
     priceBefore,
+    err,
     setPrice,
     rejectHandler,
     changeBidHandler,
@@ -249,11 +308,19 @@ export default function DetailActivityViewModel(){
     wait,
     popup,
     popupTitle,
+    popupMessage,
     popupButtonMessage,
     popupType,
     setPopup,
     setWait,
     setPopupType,
-    doneHandler
+    doneHandler,
+    review,
+    setReview,
+    rating,
+    setRating,
+    ratingHover,
+    setRatingHover,
+    reviewHandler
   }
 }

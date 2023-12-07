@@ -29,6 +29,7 @@ import PostingReports from "./Views/Admin/PostingReports/PostingReports";
 import IncomeReportsAdmin from "./Views/Admin/IncomeReports/IncomeReports";
 import PaymentReports from "./Views/Admin/PaymentReports/PaymentReports";
 import DetailActivity from "./Views/User/MyActivity/DetailActivity/DetailActivity";
+import Rejected from "./Views/User/MyActivity/Rejected/Rejected";
 
 const Router = createBrowserRouter([
   {
@@ -86,6 +87,10 @@ const Router = createBrowserRouter([
           {
             path: "finished",
             element: <Finished />,
+          },
+          {
+            path: "rejected",
+            element: <Rejected />
           },
           {
             path: ":actId",

@@ -801,6 +801,32 @@ export default function fetch() {
     }
   }
 
+  async function submitReview(comment, rating, agreementId, setActivity, setWait, setPopup){
+    const token = localStorage.getItem("token")
+
+    try {
+      return await client.post("posts/review",{
+        comment: comment,
+        rating: rating,
+        agreement_id: agreementId
+      },{
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      }).then(async (res) => {
+        console.log("masuk")
+        setPopup(true);
+        await getActivityById(agreementId, setActivity)
+        return res
+      }).catch((err) => {
+        alert("error")
+        return err.response
+      })
+    } catch (error) {
+      alert("error")
+    }
+  }
+
   async function getAllBankName(setBankName) {
     try {
       return await client
@@ -878,6 +904,7 @@ export default function fetch() {
     saveFileAgreement,
     acceptFile,
     rejectFile,
+    submitReview,
     getAllBankName,
     updateDocument,
   };
