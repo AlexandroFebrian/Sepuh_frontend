@@ -1,7 +1,9 @@
 import DashboardAdminViewModel from "./DashboardAdminViewModel";
+import NavigationAdmin from "../../../components/NavigationAdmin/NavigationAdmin";
 import { useEffect, useState } from "react";
 
 import Chart from "react-apexcharts";
+import { FaUser } from "react-icons/fa6";
 
 export default function DashboardAdmin() {
   const { dummy } = DashboardAdminViewModel();
@@ -23,7 +25,7 @@ export default function DashboardAdmin() {
 
   return (
     <>
-      <div className="container-dashboardAdmin bg-ghostwhite-50 w-full h-full flex">
+      <div className="container-dashboardAdmin flex">
         {/* <Chart
           options={{
             chart: {
@@ -61,9 +63,11 @@ export default function DashboardAdmin() {
           height="100%"
         /> */}
 
-        <div className="sideBar w-1/5 bg-navyblue-700 h-screen static left-0"></div>
-        <div className="contentright w-3/4">
-          <div className="totalincome bg-ghostwhite-100 w-1/5 h-40 my-5 p-5 mx-10 rounded-lg shadow-lg flex flex-col justify-center items-center">
+        <div className="sideBar w-1/5">
+          <NavigationAdmin />
+        </div>
+        <div className="right w-full pt-10 shadow-lg grid grid-cols-4">
+          <div className="totalincome bg-ghostwhite-100 w-3/4 h-40 my-5 p-5 mx-10 rounded-lg shadow-lg flex flex-col justify-center items-center">
             <div className="totalincome-title">
               <h1 className="text-2xl font-bold text-gray-700 text-center">
                 Total Income this month
@@ -76,19 +80,40 @@ export default function DashboardAdmin() {
             </div>
           </div>
 
-          <div className="jumlahUser bg-ghostwhite-100 w-1/5 h-40 my-5 p-5 mx-10 rounded-lg shadow-lg flex flex-col justify-center items-center">
-            <div className="jumlahUser-title">
+          <div className="jumlahFreelancer bg-ghostwhite-100 w-3/4 h-40 my-5 p-5 mx-10 rounded-lg shadow-lg flex flex-col justify-center items-center">
+            <div className="jumlahFreelancer-title">
               <h1 className="text-2xl font-bold text-gray-700 text-center">
                 Jumlah Freelancer
               </h1>
             </div>
-            <div className="jumlahUser-content">
+            <div className="jumlahFreelancer-content">
               <h1
                 className="text-xl font-bold text-gray-700 text-center"
-                id="jumlahUser"
+                id="jumlahFreelancer"
               >
                 1000 User
               </h1>
+            </div>
+          </div>
+
+          <div className="jumlahCompany bg-ghostwhite-100 w-3/4 h-40 my-5 p-5 mx-10 rounded-lg shadow-lg flex flex-col justify-center items-center">
+            <div className="icon">
+              <FaUser size={32} />
+            </div>
+            <div className="right">
+              <div className="jumlahCompany-title">
+                <h1 className="text-2xl font-bold text-gray-700 text-center">
+                  Jumlah Company
+                </h1>
+              </div>
+              <div className="jumlahCompany-content">
+                <h1
+                  className="text-xl font-bold text-gray-700 text-center"
+                  id="jumlahCompany"
+                >
+                  1000
+                </h1>
+              </div>
             </div>
           </div>
         </div>

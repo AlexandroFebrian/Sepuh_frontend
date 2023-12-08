@@ -44,7 +44,7 @@ export default function MasterUser() {
   return (
     <>
       <div className="container-masteruser flex">
-        <div className="sidebar w-1/5 bg-navyblue-700 h-screen static left-0">
+        <div className="sidebar w-1/5">
           <NavigationAdmin />
         </div>
         <div className="right w-full pt-10 shadow-lg">

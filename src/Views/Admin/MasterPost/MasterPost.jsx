@@ -12,12 +12,12 @@ export default function MasterPost() {
   return (
     <>
       <div className="container-masterPost flex">
-        <div className="sidebar w-1/5 bg-navyblue-700 h-screen static left-0">
+        <div className="sidebar w-1/5">
           <NavigationAdmin />
         </div>
 
         <div className="right w-full pt-10 shadow-lg">
-          <div className=" mb-10 min-h-[calc(100vh-5rem)] px-10 pb-10">
+          <div className="px-10 pb-10">
             <div className="bg-ghostwhite-100 mx-7">
               <Table className="w-full bg-ghostwhite-100 rounded-md">
                 <TableHeader className="border-b-2 border-navyblue-600">

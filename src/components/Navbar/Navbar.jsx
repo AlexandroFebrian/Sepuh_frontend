@@ -39,6 +39,7 @@ export default function Navbar() {
 
   const [showProfile, setShowProfile] = useState(false);
   const [closeProfile, setCloseProfile] = useState(false);
+  const [role, setRole] = useState(null);
 
   const [formatedBalance, setFormatedBalance] = useState(null);
 
@@ -103,6 +104,10 @@ export default function Navbar() {
 
   return (
     <>
+      {/* {console.log(user?.role)}
+      {user?.role !== undefined && (
+        <div className="container-navbar h-screen bg-red-500"></div>
+      )} */}
       {showFilter && (
         <div
           className={`fixed w-[100vw] h-[100vh] bg-black/50 z-20 animate__animated ${

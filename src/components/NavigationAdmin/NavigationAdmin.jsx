@@ -53,7 +53,7 @@ export default function NavigationAdmin() {
         </div>
       </div> */}
 
-      <div className="sideBar bg-navyblue-700 h-screen static left-0">
+      <div className="sideBar w-full bg-navyblue-700 h-screen static left-0">
         <div className="logo">
           <img
             src="/logo/Logo Putih.png"
@@ -61,7 +61,17 @@ export default function NavigationAdmin() {
             className="mx-auto w-1/2 py-10"
           />
         </div>
-        <div className="boxNavigationAdmin mid flex flex-col gap-10 px-5 py-5 rounded-md shadow-md text-white font-semibold text-center">
+        <div className="boxNavigationAdmin mid flex flex-col gap-10 px-5 py-5 rounded-md text-white font-semibold text-center">
+          <NavLink
+            to="/admin/dashboard"
+            className={(state) =>
+              state
+                ? "text-xl font-sarabun hover:underline hover:underline-offset-8"
+                : "text-xl font-sarabun hover:underline hover:underline-offset-8 font-semibold"
+            }
+          >
+            Dashboard
+          </NavLink>
           <NavLink
             to="/admin/masteruser"
             className={(state) =>
