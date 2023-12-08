@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 export default function DetailsPostViewModel(){
   const navigate = useNavigate()
-  const { checkToken, getPostById, createAgreements, addViewPost } = fetch();
+  const { checkToken, getPostById, createAgreements, addViewPost, createMessage } = fetch();
 
   const isLogin = useSelector((state) => state.user.isLogin);
   const user = useSelector((state) => state.user.userDetail);
@@ -84,6 +84,10 @@ export default function DetailsPostViewModel(){
     navigate(`/activity/${id}`)
   }
 
+  async function chatHandler(email) {
+    createMessage(email);
+  }
+
   useEffect(() => {
     console.log(post)
   }, [post])
@@ -102,6 +106,7 @@ export default function DetailsPostViewModel(){
     setWait,
     setPopupType,
     agreementsHandler,
-    applyHandler
+    applyHandler,
+    chatHandler
   }
 }

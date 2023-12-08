@@ -51,7 +51,7 @@ export default function Finished() {
           activity.length > 0
           &&
           activity.map((item, index) => {
-            if(item.status == 2)
+            if(item.status >= 2)
             return (
               <ActivityCard key={index} activity={item} user={user} />
             )

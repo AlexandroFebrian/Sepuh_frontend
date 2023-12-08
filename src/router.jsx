@@ -31,6 +31,7 @@ import IncomeReportsAdmin from "./Views/Admin/IncomeReports/IncomeReports";
 import PaymentReports from "./Views/Admin/PaymentReports/PaymentReports";
 import DetailActivity from "./Views/User/MyActivity/DetailActivity/DetailActivity";
 import Rejected from "./Views/User/MyActivity/Rejected/Rejected";
+import Dashboard from "./Views/User/Dashboard/Dashboard";
 
 const Router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const Router = createBrowserRouter([
       },
       {
         path: "home",
+        element: <HomePage />,
+      },
+      {
+        path: "browse",
         element: <HomePage />,
       },
       {
@@ -67,7 +72,7 @@ const Router = createBrowserRouter([
       },
       {
         path: "dashboard",
-        element: <Messages />,
+        element: <Dashboard />,
       },
       {
         path: "employee",

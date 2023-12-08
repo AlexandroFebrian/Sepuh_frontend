@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import fetch from "../../../Client/fetch";
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
+import { useLocation } from "react-router-dom";
 
 export default function MessagesViewModel(){
     const { checkToken, getAllChats, sendMessage } = fetch();
@@ -57,6 +58,13 @@ export default function MessagesViewModel(){
         scrollToBottom();
         if (selectedChat){
             setSelectedChat(contacts.find((c) => c._id == selectedChat._id));
+        }
+
+        const chat_with = JSON.parse(localStorage.getItem("chat_with"));
+        if (chat_with && contacts) {
+            setSelectedChat(contacts.find((c) => c._id == chat_with._id));
+            localStorage.removeItem("chat_with");
+            console.log(chat_with);
         }
     }, [contacts, height, selectedChat]);
 

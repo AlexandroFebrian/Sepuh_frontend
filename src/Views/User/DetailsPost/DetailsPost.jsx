@@ -30,7 +30,8 @@ export default function DetailsPost() {
     setWait,
     setPopupType,
     agreementsHandler,
-    applyHandler
+    applyHandler,
+    chatHandler
   } = DetailsPostViewModel()
 
   useEffect(() => {
@@ -232,6 +233,7 @@ export default function DetailsPost() {
                       transitionDuration={"300ms"}
                       fontSize={"sm"}
                       paddingY={"0.5rem"}
+                      onClick={() => {chatHandler(post.posted_by.email)}}
                     >
                       <IoChatboxEllipsesOutline size="1.5rem" className='mr-2' /> Chat the Company
                     </Button>
@@ -354,6 +356,7 @@ export default function DetailsPost() {
                       transitionDuration={"300ms"}
                       fontSize={"sm"}
                       paddingY={"0.5rem"}
+                      onClick={() => {chatHandler(post.posted_by.email)}}
                     >
                       <IoChatboxEllipsesOutline size="1.5rem" className='mr-2' /> Chat the Freelancer
                     </Button>
