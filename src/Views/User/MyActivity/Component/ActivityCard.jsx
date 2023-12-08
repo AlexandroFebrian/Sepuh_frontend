@@ -84,7 +84,7 @@ export default function ActivityCard({activity, user}) {
               </p>
             }
             {
-              activity.status == 2
+              activity.status >= 2
               &&
               <p className=' text-green-500 font-semibold'>
                 Finished

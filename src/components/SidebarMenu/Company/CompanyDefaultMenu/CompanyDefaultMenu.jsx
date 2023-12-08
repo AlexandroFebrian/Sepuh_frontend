@@ -6,6 +6,7 @@ import {
   FaListUl,
   FaGear,
   FaUserGroup,
+  FaMagnifyingGlass
 } from "react-icons/fa6";
 import { MdSpaceDashboard } from "react-icons/md";
 import { NavLink } from "react-router-dom";
@@ -18,17 +19,6 @@ export default function CompanyDefaultMenu() {
     <>
       <div className="flex flex-col">
         <NavLink 
-          to={"/home"} 
-          className={`w-full h-9 ${location.pathname == "/home" && "bg-ghostwhite-200"} hover:bg-ghostwhite-100 top-0 transition-colors duration-300 flex items-center justify-start p-9`}
-        >
-          <div className=" min-w-[2rem] max-w-[2rem]">
-            <FaHouseChimney className="mr-3" size={"100%"} />
-          </div>
-          <div className="pl-3 text-2xl">
-            Home
-          </div>
-        </NavLink>
-        <NavLink 
           to={"/dashboard"} 
           className={`w-full h-9 ${location.pathname == "/dashboard" && "bg-ghostwhite-200"} hover:bg-ghostwhite-100 top-0 transition-colors duration-300 flex items-center justify-start p-9`}
         >
@@ -37,6 +27,17 @@ export default function CompanyDefaultMenu() {
           </div>
           <div className="pl-3 text-2xl">
             Dashboard
+          </div>
+        </NavLink>
+        <NavLink 
+          to={"/browse"} 
+          className={`w-full h-9 ${location.pathname == "/browse" && "bg-ghostwhite-200"} hover:bg-ghostwhite-100 top-0 transition-colors duration-300 flex items-center justify-start p-9`}
+        >
+          <div className=" min-w-[2rem] max-w-[2rem]">
+            <FaMagnifyingGlass className="mr-3" size={"100%"} />
+          </div>
+          <div className="pl-3 text-2xl">
+            Browse
           </div>
         </NavLink>
         <NavLink 

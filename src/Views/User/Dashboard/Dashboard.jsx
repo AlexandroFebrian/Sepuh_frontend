@@ -1,8 +1,10 @@
 import React from 'react'
 import DashboardViewModel from './DashboardViewModel'
+import FreelancerDefaultMenu from '../../../components/SidebarMenu/Freelancer/FreelancerDefaultMenu/FreelancerDefaultMenu'
+import CompanyDefaultMenu from '../../../components/SidebarMenu/Company/CompanyDefaultMenu/CompanyDefaultMenu'
 
 export default function Dashboard() {
-  const { isLogin, user } = DashboardViewModel
+  const { isLogin, user } = DashboardViewModel()
 
   return (
     <>
@@ -27,12 +29,19 @@ export default function Dashboard() {
             
           </div>
         </div>
-        <div className="mid w-4/5 h-full">
+        <div className="mid w-3/5 h-full">
           <div className={`min-h-[calc(100vh-5rem)] h-fit ${isLogin && "border-l-2 border-navyblue-600"} z-0 px-10 py-10`}>
-            
+            <h1 className='font-bold text-3xl'>Dashboard</h1>
           </div>
         </div>
-      </div> 
+        {
+          isLogin && user && user.role == "Freelancer"
+          &&
+          <div className="right w-1/5">
+            <NowHiring />
+          </div>
+        }
+      </div>
     </>
   )
 }
