@@ -93,7 +93,7 @@ export default function FreelancerContentBox({item}) {
               <div className='text-sm flex items-center h-full font-semibold'>
                 <Link to={`/user?email=${email}`} className=' hover:underline' >
                   {item.posted_by.name}
-                </Link> <FaStar className=' text-yellow-500 mx-1' />  {item.avg_rating}
+                </Link> <FaStar className=' text-yellow-500 mx-1' />  {item.avg_rating == 0 ? item.avg_rating : item.avg_rating.toFixed(1)}
               </div>
             </div>
 

@@ -420,7 +420,7 @@ export default function DetailActivity() {
             </>
           }
           {
-            ((activity?.status == 2 && activity?.post.user_id.email != user.email) || activity?.status == 3)
+            ((activity?.status == 2 && activity?.post.user_id.email == user.email) || activity?.status == 3)
             &&
             <div className='w-full h-96 flex items-center justify-center'>
               <div>
@@ -428,14 +428,14 @@ export default function DetailActivity() {
                   This work has been finished
                 </h1>
                 <h2 className='text-3xl font-bold text-green-600 text-center'>
-                  Thank you for your hard working!
+                  Thank you for your hard work!
                 </h2>
 
               </div>
             </div>
           }
           {
-            (activity?.status == 2 && activity?.post.user_id.email == user.email)
+            (activity?.status == 2 && activity?.post.user_id.email != user.email)
             &&
             <>
               <h1 className='text-2xl font-bold'>

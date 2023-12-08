@@ -70,7 +70,7 @@ export default function ListContentBox({item, setList, setWait, setPopup, setPop
                 &nbsp; &#x2022; &nbsp; <FaRegClock className='mt-[0.18rem] mr-1'/>  {item.duration} {item.duration_type}
               </div>
               <div className='text-md h-full flex items-center'>
-                <FaStar className=' text-yellow-500 mx-1' /> {item.avg_rating}
+                <FaStar className=' text-yellow-500 mx-1' /> {item.avg_rating == 0 ? item.avg_rating : item.avg_rating.toFixed(1)}
                 
               </div>
             </div>

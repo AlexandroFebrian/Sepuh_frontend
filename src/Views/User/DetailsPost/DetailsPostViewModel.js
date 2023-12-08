@@ -84,6 +84,10 @@ export default function DetailsPostViewModel(){
     navigate(`/activity/${id}`)
   }
 
+  useEffect(() => {
+    console.log(post)
+  }, [post])
+
   return {
     isLogin,
     user,
