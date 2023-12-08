@@ -4,9 +4,11 @@ import { FaStar, FaRegUser } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import FreelancerContentBox from '../../../components/ContentBox/FreelancerContentBox/FreelancerContentBox';
 import CompanyContentBox from '../../../components/ContentBox/CompanyContentBox/CompanyContentBox';
+import fetch from '../../../Client/fetch';
 
 export default function ProfileBox({user, profile, posts}) {
-  const [content, setContent] = useState("Description")
+  const [content, setContent] = useState("Description");
+  const { createMessage } = fetch();
 
   const member = new Date(profile?.create_at)
   const monthNames = [
@@ -20,7 +22,9 @@ export default function ProfileBox({user, profile, posts}) {
     return { __html: formattedText };
   };
 
-
+  const chatHandler = async (email) => {
+    createMessage(email);
+}
 
   return (
     <div className="w-full max-h-full bg-lightblue-100 rounded mt-5 relative">
@@ -41,6 +45,7 @@ export default function ProfileBox({user, profile, posts}) {
                   variant={"outline"}
                   borderColor={"navyblue.800"}
                   color={"navyblue.800"}
+                  onClick={() => {chatHandler(profile.email)}}
                 >
                   Message
                 </Button>

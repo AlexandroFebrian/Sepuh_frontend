@@ -975,6 +975,30 @@ export default function fetch() {
     }
   }
 
+  async function createMessage(email) {
+    const token = localStorage.getItem("token");
+    try {
+      return await client
+        .post("chats", {
+            email: email
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          localStorage.setItem("chat_with", JSON.stringify(res.data));
+          navigate("/messages");
+        })
+        .catch((err) => {
+          return err.response;
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return {
     signIn,
     signUp,
@@ -1014,5 +1038,6 @@ export default function fetch() {
     submitReview,
     getAllBankName,
     updateDocument,
+    createMessage
   };
 }
