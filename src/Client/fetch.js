@@ -235,11 +235,10 @@ export default function fetch() {
         .get(`posts/details/${id}`)
         .then((res) => {
           // console.log(res.data[0]);
-          if(setPost){
+          if (setPost) {
             setPost(res.data[0]);
-
           }
-          return res.data[0]
+          return res.data[0];
         })
         .catch((err) => {
           alert("error");
@@ -249,21 +248,26 @@ export default function fetch() {
     }
   }
 
-  async function addViewPost(id){
+  async function addViewPost(id) {
     const token = localStorage.getItem("token");
 
     try {
-      return await client.put(`posts/${id}`, {}, {
-        headers:{
-          Authorization: `Bearer ${token}`
-        }
-      }).then((res) => {
-
-      }).catch((err) => {
-        console.log(err)
-      })
+      return await client
+        .put(
+          `posts/${id}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((res) => {})
+        .catch((err) => {
+          console.log(err);
+        });
     } catch (error) {
-      alert("error")
+      alert("error");
     }
   }
 
@@ -326,7 +330,15 @@ export default function fetch() {
           },
         })
         .then((res) => {
-          return res.data;
+          let filtered = res.data.users.filter((user) => {
+            return user.status !== 0;
+          });
+          console.log(filtered);
+
+          return {
+            users: filtered,
+            total: filtered.length,
+          };
         })
         .catch((err) => {
           console.log(err);
@@ -525,7 +537,7 @@ export default function fetch() {
           {
             email: email,
             post_id: postId,
-            min_price: minPrice
+            min_price: minPrice,
           },
           {
             headers: {
@@ -534,7 +546,6 @@ export default function fetch() {
           }
         )
         .then((res) => {
-          
           setPopup(true);
           return res;
         })
@@ -574,230 +585,304 @@ export default function fetch() {
     const token = localStorage.getItem("token");
 
     try {
-      return await client.get(`agreements/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }).then((res) => {
-        setActivity(res.data)
-        return res
-      }).catch((err) => {
-        //NOT FOUND
-        // console.log(err.response)
-        return err.response
-      })
+      return await client
+        .get(`agreements/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          setActivity(res.data);
+          return res;
+        })
+        .catch((err) => {
+          //NOT FOUND
+          // console.log(err.response)
+          return err.response;
+        });
     } catch (error) {
-      alert("error")
+      alert("error");
     }
   }
 
-  async function setDealPrice(agreementId, price, setActivity, setWait, setPopup){
+  async function setDealPrice(
+    agreementId,
+    price,
+    setActivity,
+    setWait,
+    setPopup
+  ) {
     const token = localStorage.getItem("token");
-    console.log(agreementId, price)
+    console.log(agreementId, price);
 
     try {
-      return await client.put(`agreements/price`, {
-        agreement_id: agreementId,
-        deal_price: price
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }).then(async (res) => {
-        setPopup(true);
-        await getActivityById(agreementId, setActivity)
-        return res
-      }).catch((err) => {
-        setPopup(true);
-        alert("error")
-        return err.response
-      })
+      return await client
+        .put(
+          `agreements/price`,
+          {
+            agreement_id: agreementId,
+            deal_price: price,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then(async (res) => {
+          setPopup(true);
+          await getActivityById(agreementId, setActivity);
+          return res;
+        })
+        .catch((err) => {
+          setPopup(true);
+          alert("error");
+          return err.response;
+        });
     } catch (error) {
-      alert("error")
+      alert("error");
     }
   }
 
-  async function acceptAgreement(agreementId, setActivity, setWait, setPopup){
-    const token = localStorage.getItem("token");
-
-    try {
-      return await client.put(`agreements/accept`, {
-        agreement_id: agreementId,
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }).then(async (res) => {
-        setPopup(true);
-        await getActivityById(agreementId, setActivity)
-        return res
-      }).catch((err) => {
-        setPopup(true);
-        alert("error")
-        return err.response
-      })
-    } catch (error) {
-      alert("error")
-    }
-  }
-
-  async function rejectAgreement(agreementId, setActivity, setWait, setPopup){
+  async function acceptAgreement(agreementId, setActivity, setWait, setPopup) {
     const token = localStorage.getItem("token");
 
     try {
-      return await client.put(`agreements/status/reject`, {
-        agreement_id: agreementId,
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }).then(async (res) => {
-        setPopup(true);
-        await getActivityById(agreementId, setActivity)
-        return res
-      }).catch((err) => {
-        setPopup(true);
-        alert("error")
-        return err.response
-      })
+      return await client
+        .put(
+          `agreements/accept`,
+          {
+            agreement_id: agreementId,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then(async (res) => {
+          setPopup(true);
+          await getActivityById(agreementId, setActivity);
+          return res;
+        })
+        .catch((err) => {
+          setPopup(true);
+          alert("error");
+          return err.response;
+        });
     } catch (error) {
-      alert("error")
+      alert("error");
     }
   }
 
-  async function doneProject(agreementId, setActivity, setWait, setPopup){
-    const token = localStorage.getItem("token")
-
-    try {
-      return await client.put("agreements/status/done", {
-        agreement_id: agreementId,
-      }, {
-        headers:{
-          Authorization: `Bearer ${token}`
-        }
-      }).then(async (res) => {
-        setPopup(true);
-        await getActivityById(agreementId, setActivity)
-        return res
-      }).catch((err) => {
-        setPopup(true);
-        alert("error")
-        return err.response
-      })
-    } catch (error) {
-      alert("error")
-    }
-  }
-
-  async function saveFileAgreement(agreementId, file, setActivity, setWait, setPopup){
+  async function rejectAgreement(agreementId, setActivity, setWait, setPopup) {
     const token = localStorage.getItem("token");
 
     try {
-      return await clientFile.post(`agreements/file`, {
-        agreement_id: agreementId,
-        file: file
-      },{
-        headers:{
-          Authorization: `Bearer ${token}`
-        }
-      }).then(async (res) => {
-        setPopup(true);
-        await getActivityById(agreementId, setActivity)
-        return res
-      }).catch((err) => {
-        setPopup(true);
-        alert("error")
-        return err.response
-      })
+      return await client
+        .put(
+          `agreements/status/reject`,
+          {
+            agreement_id: agreementId,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then(async (res) => {
+          setPopup(true);
+          await getActivityById(agreementId, setActivity);
+          return res;
+        })
+        .catch((err) => {
+          setPopup(true);
+          alert("error");
+          return err.response;
+        });
     } catch (error) {
-      alert("error")
+      alert("error");
     }
   }
 
-  async function agreementPayment(activity, openSnap, setActivity){
+  async function doneProject(agreementId, setActivity, setWait, setPopup) {
     const token = localStorage.getItem("token");
 
     try {
-      return await client.post("agreements/payment", {
-        agreement_id: activity._id,
-      }, {
-        headers:{
-          Authorization: `Bearer ${token}`
-        }
-      }).then((res) => {
-        openSnap(res.data.midtrans.token, res.data.invoice)
-        return res
-      }).catch((err) => {
-        alert("error")
-        return err.response
-      })
+      return await client
+        .put(
+          "agreements/status/done",
+          {
+            agreement_id: agreementId,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then(async (res) => {
+          setPopup(true);
+          await getActivityById(agreementId, setActivity);
+          return res;
+        })
+        .catch((err) => {
+          setPopup(true);
+          alert("error");
+          return err.response;
+        });
     } catch (error) {
-      alert("error")
+      alert("error");
     }
   }
 
-  async function setPaymentStatus(invoice, agreementId, setActivity){
+  async function saveFileAgreement(
+    agreementId,
+    file,
+    setActivity,
+    setWait,
+    setPopup
+  ) {
+    const token = localStorage.getItem("token");
+
     try {
-      return await client.post("agreements/dSfbZJgaMxGbGYFsRYDq", {
-        transaction_status: "settlement",
-        order_id: invoice
-      }).then(async (res) => {
-        await getActivityById(agreementId, setActivity)
-        return res
-      }).catch((err) => {
-        alert("error")
-        return err.response
-      })
+      return await clientFile
+        .post(
+          `agreements/file`,
+          {
+            agreement_id: agreementId,
+            file: file,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then(async (res) => {
+          setPopup(true);
+          await getActivityById(agreementId, setActivity);
+          return res;
+        })
+        .catch((err) => {
+          setPopup(true);
+          alert("error");
+          return err.response;
+        });
     } catch (error) {
-      alert("error")
+      alert("error");
     }
   }
 
-  async function acceptFile(agreementId, fileId, comment, setActivity){
-    const token = localStorage.getItem("token")
+  async function agreementPayment(activity, openSnap, setActivity) {
+    const token = localStorage.getItem("token");
 
     try {
-      return await client.put("agreements/file/accept", {
-        agreement_id: agreementId,
-        file_id: fileId,
-        comment: comment
-      }, {
-        headers:{
-          Authorization: `Bearer ${token}`
-        }
-      }).then(async (res) => {
-        await getActivityById(agreementId, setActivity)
-        return res
-      }).catch((err) => {
-        alert("error")
-        return err.response
-      })
+      return await client
+        .post(
+          "agreements/payment",
+          {
+            agreement_id: activity._id,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((res) => {
+          openSnap(res.data.midtrans.token, res.data.invoice);
+          return res;
+        })
+        .catch((err) => {
+          alert("error");
+          return err.response;
+        });
     } catch (error) {
-      alert("error")
+      alert("error");
     }
   }
 
-  async function rejectFile(agreementId, fileId, comment, setActivity){
-    const token = localStorage.getItem("token")
+  async function setPaymentStatus(invoice, agreementId, setActivity) {
+    try {
+      return await client
+        .post("agreements/dSfbZJgaMxGbGYFsRYDq", {
+          transaction_status: "settlement",
+          order_id: invoice,
+        })
+        .then(async (res) => {
+          await getActivityById(agreementId, setActivity);
+          return res;
+        })
+        .catch((err) => {
+          alert("error");
+          return err.response;
+        });
+    } catch (error) {
+      alert("error");
+    }
+  }
+
+  async function acceptFile(agreementId, fileId, comment, setActivity) {
+    const token = localStorage.getItem("token");
 
     try {
-      return await client.put("agreements/file/reject", {
-        agreement_id: agreementId,
-        file_id: fileId,
-        comment: comment
-      }, {
-        headers:{
-          Authorization: `Bearer ${token}`
-        }
-      }).then(async (res) => {
-        await getActivityById(agreementId, setActivity)
-        return res
-      }).catch((err) => {
-        alert("error")
-        return err.response
-      })
+      return await client
+        .put(
+          "agreements/file/accept",
+          {
+            agreement_id: agreementId,
+            file_id: fileId,
+            comment: comment,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then(async (res) => {
+          await getActivityById(agreementId, setActivity);
+          return res;
+        })
+        .catch((err) => {
+          alert("error");
+          return err.response;
+        });
     } catch (error) {
-      alert("error")
+      alert("error");
+    }
+  }
+
+  async function rejectFile(agreementId, fileId, comment, setActivity) {
+    const token = localStorage.getItem("token");
+
+    try {
+      return await client
+        .put(
+          "agreements/file/reject",
+          {
+            agreement_id: agreementId,
+            file_id: fileId,
+            comment: comment,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then(async (res) => {
+          await getActivityById(agreementId, setActivity);
+          return res;
+        })
+        .catch((err) => {
+          alert("error");
+          return err.response;
+        });
+    } catch (error) {
+      alert("error");
     }
   }
 
@@ -858,6 +943,28 @@ export default function fetch() {
         })
         .then((res) => {
           alert("Document Updated");
+          return res;
+        })
+        .catch((err) => {
+          return err.response;
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function saveBankAccount(data) {
+    const token = localStorage.getItem("token");
+    // api/users/profile but data is bank_name and account_number
+    try {
+      return await client
+        .put("users/profile", data, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          alert("Bank Account Updated");
           return res;
         })
         .catch((err) => {

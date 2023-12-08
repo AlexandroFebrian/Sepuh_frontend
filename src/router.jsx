@@ -22,6 +22,7 @@ import IncomeReportsUser from "./Views/User/IncomeReports/IncomeReports";
 
 // ADMIN
 import AdminLogin from "./Views/Admin/AdminLogin/AdminLogin";
+import DashboardAdmin from "./Views/Admin/Dashboard/DashboardAdmin";
 import MasterUser from "./Views/Admin/MasterUser/MasterUser";
 import MasterPost from "./Views/Admin/MasterPost/MasterPost";
 import UserReports from "./Views/Admin/UserReports/UserReports";
@@ -134,6 +135,10 @@ const Router = createBrowserRouter([
       {
         path: "admin",
         children: [
+          {
+            path: "dashboard",
+            element: <DashboardAdmin />,
+          },
           {
             path: "masteruser",
             element: <MasterUser />,

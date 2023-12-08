@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/select";
 
 export default function BankAccount() {
-  const { isLogin, user, bankName } = BankAccountViewModel();
+  const { isLogin, user, bankName, saveProfile } = BankAccountViewModel();
   console.log(bankName);
   return (
     <>
@@ -108,7 +108,10 @@ export default function BankAccount() {
               </div>
 
               <div className="w-full mt-5 flex justify-end">
-                <button className="w-28 py-1 bg-navyblue-700 text-white rounded-lg font-semibold text-xl border-2 border-navyblue-700 hover:bg-navyblue-800 hover:text-white duration-300 font-mono">
+                <button
+                  className="w-28 py-1 bg-navyblue-700 text-white rounded-lg font-semibold text-xl border-2 border-navyblue-700 hover:bg-navyblue-800 hover:text-white duration-300 font-mono"
+                  onClick={saveProfile}
+                >
                   Save
                 </button>
               </div>
