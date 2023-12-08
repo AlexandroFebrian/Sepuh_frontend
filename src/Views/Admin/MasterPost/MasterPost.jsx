@@ -1,5 +1,4 @@
 import NavigationAdmin from "../../../components/NavigationAdmin/NavigationAdmin";
-import FilteringAdmin from "../../../components/FilteringAdmin/FilteringAdmin";
 import {
   Table,
   TableBody,

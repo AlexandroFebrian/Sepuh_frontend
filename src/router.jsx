@@ -19,6 +19,7 @@ import DocumentCompletion from "./Views/User/DocumentCompletion/DocumentCompleti
 import WorkHistory from "./Views/User/WorkHistory/WorkHistory";
 import BankAccount from "./Views/User/BankAccount/BankAccount";
 import IncomeReportsUser from "./Views/User/IncomeReports/IncomeReports";
+import EmployeeReports from "./Views/User/CompanyEmployeeReports/EmployeeReports";
 
 // ADMIN
 import AdminLogin from "./Views/Admin/AdminLogin/AdminLogin";
@@ -96,7 +97,7 @@ const Router = createBrowserRouter([
           },
           {
             path: "rejected",
-            element: <Rejected />
+            element: <Rejected />,
           },
           {
             path: ":actId",
@@ -130,6 +131,10 @@ const Router = createBrowserRouter([
           {
             path: "bank",
             element: <BankAccount />,
+          },
+          {
+            path: "employeereports",
+            element: <EmployeeReports />,
           },
         ],
       },
