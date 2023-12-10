@@ -94,10 +94,10 @@ export default function ListContent() {
         {
           isLogin
           &&
-          <div className=' w-20 relative'>
-            <button className='w-20 h-20 p-[0.4rem] bg-navyblue-800 hover:bg-navyblue-700 transition-colors duration-300 rounded-full flex justify-center items-center sticky top-[90%]' onClick={() => (navigate("/addpost"))}>
+          <div className=' w-16 2xl:w-20 relative'>
+            <button className=' w-16 h-16 2xl:w-20 2xl:h-20 p-[0.4rem] bg-navyblue-800 hover:bg-navyblue-700 transition-colors duration-300 rounded-full flex justify-center items-center sticky top-[88%]' onClick={() => (navigate("/addpost"))}>
               <div className='w-full h-full rounded-full border-[0.15rem] border-ghostwhite-50 flex justify-center items-center'>
-                <FaPlus className=' text-ghostwhite-50 w-10 h-10'/>
+                <FaPlus className=' text-ghostwhite-50 2xl:w-10 2xl:h-10 w-8 h-8'/>
               </div>
             </button>
           </div>
