@@ -33,12 +33,14 @@ export default function BankAccountViewModel() {
   const [profileBio, setProfileBio] = useState("");
   const [profileCity, setProfileCity] = useState("");
   const [profileCountry, setProfileCountry] = useState("");
-  const [profileBankName, setProfileBankName] = useState("");
+  const [profileAccountNumber, setProfileAccountNumber] = useState("");
 
   const [profileLastEducation, setProfileLastEducation] = useState("");
   const [profileCurrentEducation, setProfileCurrentEducation] = useState("");
   const [profileFieldOfStudy, setProfileFieldOfStudy] = useState("");
   const [profileYearofStudy, setProfileYearofStudy] = useState("");
+
+  
 
   async function saveProfile(bank_name, account_number) {
     const data = {
@@ -57,7 +59,6 @@ export default function BankAccountViewModel() {
       account_number: account_number,
     };
     setWait(true);
-
     const response = await updateUserProfile(data, setWait, setPopup);
 
     if (response == undefined) {
@@ -78,6 +79,8 @@ export default function BankAccountViewModel() {
     setPopupTitle("Update Profile Success");
     setPopupButtonMessage("Close");
     setPopupType(true);
+    alert(response.data.message);
+    console.log(user);
   }
 
   useEffect(() => {
@@ -110,6 +113,7 @@ export default function BankAccountViewModel() {
       setProfileCurrentEducation(profile.current_education);
       setProfileFieldOfStudy(profile.field_of_study);
       setProfileYearofStudy(profile.year_of_study);
+      setProfileAccountNumber(profile.account_number);
     }
   }, [profile]);
 
@@ -118,6 +122,8 @@ export default function BankAccountViewModel() {
     user,
     profile,
     bankName,
+    profileAccountNumber,
+    setProfileAccountNumber,
     saveProfile,
   };
 }

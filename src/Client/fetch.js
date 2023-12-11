@@ -124,6 +124,7 @@ export default function fetch() {
         })
         .then((res) => {
           setPopup(true);
+          checkToken();
           return res;
         })
         .catch((err) => {

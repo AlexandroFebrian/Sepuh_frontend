@@ -4,20 +4,16 @@ import CompanyProfileMenu from "../../../components/SidebarMenu/Company/CompanyP
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { FaCircleExclamation } from "react-icons/fa6";
 import { Combobox } from "../../../components/ui/Combobox";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
 export default function BankAccount() {
-    const [bank_name, setBank_name] = useState("");
-    const accountNumber = useRef(null);
-
-    const { isLogin, user, bankName, saveProfile } = BankAccountViewModel();
+    const { isLogin, user, profileAccountNumber, setProfileAccountNumber, bankName, saveProfile } = BankAccountViewModel();
+    // console.log(user);
+    const [bank_name, setBank_name] = useState(user?.bank_name);
+    // useEffect(() => {
+    //     console.log(user?.accountNumber);
+    // }, [user])
+    // const accountNumber = useRef();
     return (
         <>
             <div className=" h-fit relative flex">
@@ -64,8 +60,11 @@ export default function BankAccount() {
                                     contentClassName={" pt-1 border-0 "}
                                     className="w-full rounded-md border-2 border-navyblue-600 py-2 px-3 mt-2"
                                     items={bankName}
-                                    item={user?.bankName}
-                                    onSelect={(value) => setBank_name(value)}
+                                    item={user?.bank_name}
+                                    onSelect={(value) => {
+                                        setBank_name(value);
+                                        console.log(value);
+                                    }}
                                 />
                             </div>
 
@@ -82,7 +81,8 @@ export default function BankAccount() {
                                     id="accountNumber"
                                     className="w-full rounded-md border-2 border-navyblue-600 py-2 px-3 mt-2"
                                     placeholder="610xxxx"
-                                    ref={accountNumber}
+                                    onChange={(e) => {setProfileAccountNumber(e.target.value)}}
+                                    defaultValue={profileAccountNumber}
                                 />
                             </div>
 
@@ -90,7 +90,7 @@ export default function BankAccount() {
                                 <button
                                     className="w-28 py-1 bg-navyblue-700 text-white rounded-lg font-semibold text-xl border-2 border-navyblue-700 hover:bg-navyblue-800 hover:text-white duration-300 font-mono"
                                     onClick={() => {
-                                        saveProfile(bank_name, accountNumber.current.value);
+                                        saveProfile(bank_name, profileAccountNumber);
                                     }}
                                 >
                                     Save
