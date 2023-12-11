@@ -46,7 +46,6 @@ export default function DetailActivityViewModel(){
   }, [user, actId])
 
   useEffect(() => {
-    console.log(activity)
 
     if(!activity) return
 
@@ -284,9 +283,6 @@ export default function DetailActivityViewModel(){
     setErr("")
   }
 
-  useEffect(() => {
-    console.log(popup)
-  }, [popup])
 
   return {
     isLogin,

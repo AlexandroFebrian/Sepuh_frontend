@@ -35,7 +35,6 @@ export default function AddPostViewModel() {
 
   function addHashtag() {
     setHashtag((prev) => [...prev, ""]);
-    console.log("add");
   }
 
   function hashtagChange(value, index) {
@@ -58,7 +57,6 @@ export default function AddPostViewModel() {
       min_price: minPrice,
       max_price: maxPrice,
     };
-    console.log(data);
 
     setWait(true);
 

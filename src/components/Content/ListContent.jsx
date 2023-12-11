@@ -24,9 +24,6 @@ export default function ListContent() {
     setCategoryFilter(value)
   }
 
-  useEffect(() => {
-    console.log(list)
-  }, [list])
 
   const [wait, setWait] = useState(false)
   const [popup, setPopup] = useState(false)

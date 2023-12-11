@@ -141,7 +141,6 @@ export default function fetch() {
       client
         .get(`users/profile/${email}`)
         .then((res) => {
-          console.log(res.data);
           setProfile(res.data);
         })
         .catch((err) => {
@@ -613,7 +612,6 @@ export default function fetch() {
     setPopup
   ) {
     const token = localStorage.getItem("token");
-    console.log(agreementId, price);
 
     try {
       return await client
@@ -899,7 +897,6 @@ export default function fetch() {
           Authorization: `Bearer ${token}`
         }
       }).then(async (res) => {
-        console.log("masuk")
         setPopup(true);
         await getActivityById(agreementId, setActivity)
         return res
@@ -987,7 +984,6 @@ export default function fetch() {
           },
         })
         .then((res) => {
-          console.log(res.data);
           localStorage.setItem("chat_with", JSON.stringify(res.data));
           navigate("/messages");
         })

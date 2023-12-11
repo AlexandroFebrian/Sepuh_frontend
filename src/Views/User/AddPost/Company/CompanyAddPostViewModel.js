@@ -37,7 +37,6 @@ export default function AddPostViewModel(){
 
   function addHashtag(){
     setHashtag(prev => [...prev, ""])
-    console.log("add")
   }
 
   function hashtagChange(value, index){
@@ -63,7 +62,6 @@ export default function AddPostViewModel(){
       duration: duration,
       duration_type: durationType
     }
-    console.log(data)
 
     setWait(true)
 

@@ -31,7 +31,6 @@ export default function MessagesViewModel(){
         }
     }, []);
     
-    console.log("onlineUsers: ", onlineUsers);
 
     useEffect(() => {
         if (socket === null) return;
@@ -64,7 +63,6 @@ export default function MessagesViewModel(){
         if (chat_with && contacts) {
             setSelectedChat(contacts.find((c) => c._id == chat_with._id));
             localStorage.removeItem("chat_with");
-            console.log(chat_with);
         }
     }, [contacts, height, selectedChat]);
 

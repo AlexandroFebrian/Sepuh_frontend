@@ -33,13 +33,14 @@ export default function BankAccountViewModel() {
   const [profileBio, setProfileBio] = useState("");
   const [profileCity, setProfileCity] = useState("");
   const [profileCountry, setProfileCountry] = useState("");
+  const [profileBankName, setProfileBankName] = useState("");
 
   const [profileLastEducation, setProfileLastEducation] = useState("");
   const [profileCurrentEducation, setProfileCurrentEducation] = useState("");
   const [profileFieldOfStudy, setProfileFieldOfStudy] = useState("");
   const [profileYearofStudy, setProfileYearofStudy] = useState("");
 
-  async function saveProfile() {
+  async function saveProfile(bank_name, account_number) {
     const data = {
       header_picture: bannerFile.length == 0 ? undefined : bannerFile[0],
       profile_picture: profileFile.length == 0 ? undefined : profileFile[0],
@@ -52,12 +53,9 @@ export default function BankAccountViewModel() {
       current_education: profileCurrentEducation,
       field_of_study: profileFieldOfStudy,
       year_of_study: profileYearofStudy,
-      bank_name: profile.bank_name ? profile.bank_name : undefined,
-      account_number: profile.account_number
-        ? profile.account_number
-        : undefined,
+      bank_name: bank_name,
+      account_number: account_number,
     };
-
     setWait(true);
 
     const response = await updateUserProfile(data, setWait, setPopup);
