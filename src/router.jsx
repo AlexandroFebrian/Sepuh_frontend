@@ -20,6 +20,7 @@ import WorkHistory from "./Views/User/WorkHistory/WorkHistory";
 import BankAccount from "./Views/User/BankAccount/BankAccount";
 import IncomeReportsUser from "./Views/User/IncomeReports/IncomeReports";
 import EmployeeReports from "./Views/User/CompanyEmployeeReports/EmployeeReports";
+import CompanyEmployeeList from "./Views/User/CompanyEmployeeList/CompanyEmployeeList";
 
 // ADMIN
 import AdminLogin from "./Views/Admin/AdminLogin/AdminLogin";
@@ -82,6 +83,10 @@ const Router = createBrowserRouter([
       {
         path: "post/:postId",
         element: <DetailsPost />,
+      },
+      {
+        path: "employeelists",
+        element: <CompanyEmployeeList />,
       },
       {
         path: "activity",

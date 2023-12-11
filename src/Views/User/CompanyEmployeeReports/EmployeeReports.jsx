@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import EmployeeReportsViewModel from "./EmployeeReportsViewModel";
 import FreelancerProfileMenu from "../../../components/SidebarMenu/Freelancer/FreelancerProfileMenu/FreelancerProfileMenu";
@@ -44,36 +45,6 @@ export default function EmployeeReports() {
       price: "Rp. 500.000",
     },
   ]);
-
-  //   const options = {
-  //     labels: [
-  //       "Januari",
-  //       "Februari",
-  //       "Maret",
-  //       "April",
-  //       "Mei",
-  //       "Juni",
-  //       "Juli",
-  //       "Agustus",
-  //       "September",
-  //       "Oktober",
-  //       "November",
-  //       "Desember",
-  //     ],
-  //     responsive: [
-  //       {
-  //         breakpoint: 480,
-  //         options: {
-  //           chart: {
-  //             width: 200,
-  //           },
-  //           legend: {
-  //             position: "bottom",
-  //           },
-  //         },
-  //       },
-  //     ],
-  //   };
 
   return (
     <>
@@ -184,14 +155,11 @@ export default function EmployeeReports() {
               </div>
             </div>
 
-            <div className="chart flex flex-row justify-between h-fit">
-              <div className="lineChart w-1/2 border-2 border-navyblue-600 h-full">
-                <div className="w-full rounded py-6 px-10">
+            <div className="chart flex flex-row justify-between h-full px-10">
+              <div className="lineChart w-1/2 border-2  h-full">
+                <div className="w-full rounded py-6 ">
                   <Chart
                     options={{
-                      chart: {
-                        id: "basic-bar",
-                      },
                       xaxis: {
                         categories: [
                           "Januari",
@@ -221,19 +189,26 @@ export default function EmployeeReports() {
                 </div>
               </div>
 
-              <div className="pieChart w-1/3 border-2 border-navyblue-600 h-full">
+              <div className="pieChart w-1/3 border-2 h-full">
                 <div className="w-full rounded py-6 px-10">
                   <Chart
                     options={{
                       labels: [
-                        "Team A",
-                        "Team B",
-                        "Team C",
-                        "Team D",
-                        "Team E",
+                        "Januari",
+                        "Februari",
+                        "Maret",
+                        "April",
+                        "Mei",
+                        "Juni",
+                        "Juli",
+                        "Agustus",
+                        "September",
+                        "Oktober",
+                        "November",
+                        "Desember",
                       ],
                     }}
-                    series={[44, 55, 13, 43, 22]}
+                    series={[14, 21, 53, 11, 10, 20, 30, 40, 50, 60, 70, 80]}
                     type="donut"
                     width="100%"
                   />
