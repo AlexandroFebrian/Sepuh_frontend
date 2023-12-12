@@ -105,14 +105,21 @@ export default function WorkHistory() {
               <div className="sort w-full mt-5 bg-ghostwhite-100 h-full rounded-md p-4">
                 <div className="flex gap-2">
                   <button
-                    // className="w-28 py-1 bg-navyblue-700 text-white rounded-full font-semibold text-xl border-2 border-navyblue-700"
-                    className="w-28 py-1 bg-ghostwhite-100 text-navyblue-800 rounded-full font-semibold text-xl border-2 border-navyblue-700 hover:bg-navyblue-700 hover:text-white duration-300"
+                    className={`w-28 py-1 text-navyblue-800 rounded-full font-semibold text-xl border-2 border-navyblue-700 ${
+                      sort == "latest"
+                        ? "bg-navyblue-700 text-white"
+                        : "bg-ghostwhite-100"
+                    }`}
                     onClick={() => setSort("latest")}
                   >
                     Latest
                   </button>
                   <button
-                    className="w-28 py-1 bg-ghostwhite-100 text-navyblue-800 rounded-full font-semibold text-xl border-2 border-navyblue-700 hover:bg-navyblue-700 hover:text-white duration-300"
+                    className={`w-28 py-1 text-navyblue-800 rounded-full font-semibold text-xl border-2 border-navyblue-700 ${
+                      sort == "oldest"
+                        ? "bg-navyblue-700 text-white"
+                        : "bg-ghostwhite-100"
+                    }`}
                     onClick={() => setSort("oldest")}
                   >
                     Oldest
