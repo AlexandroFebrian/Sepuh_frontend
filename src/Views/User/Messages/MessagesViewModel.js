@@ -21,6 +21,7 @@ export default function MessagesViewModel(){
 
     useEffect(() => {
         checkToken();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         scrollToBottom();
         
         const newSocket = io(import.meta.env.VITE_SOCKET_URL);

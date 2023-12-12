@@ -8,7 +8,6 @@ import fetch from '../../../Client/fetch';
 import Popup from '../../../components/Popup/Popup';
 
 export default function ProfileBox({user, profile, posts}) {
-  console.log(profile)
   const [content, setContent] = useState("Description");
   const { createMessage, hireOrApply } = fetch();
 

@@ -83,7 +83,7 @@ export default function MyPost() {
           {
             isLogin && user && user.role == "Freelancer"
             &&
-            <NowHiring />
+            <NowHiring user={user}/>
           }
         </div>
       </div> 
