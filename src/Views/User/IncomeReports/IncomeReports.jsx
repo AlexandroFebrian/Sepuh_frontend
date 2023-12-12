@@ -244,6 +244,7 @@ export default function IncomeReports() {
             </div>
           </div>
         </div>
+        <div className="right "></div>
       </div>
     </>
   );

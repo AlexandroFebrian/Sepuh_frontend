@@ -1,13 +1,14 @@
+/* eslint-disable no-unused-vars */
 import WorkHistoryViewModel from "./WorkHistoryViewModel";
 import FreelancerProfileMenu from "../../../components/SidebarMenu/Freelancer/FreelancerProfileMenu/FreelancerProfileMenu";
 import CompanyProfileMenu from "../../../components/SidebarMenu/Company/CompanyProfileMenu/CompanyProfileMenu";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Avatar } from "@chakra-ui/react";
-import { FaGreaterThan, FaLessThan } from "react-icons/fa6";
 
 export default function WorkHistory() {
-  const { isLogin, user } = WorkHistoryViewModel();
+  const { isLogin, user, activity } = WorkHistoryViewModel();
+  console.log("Activity", activity);
 
   const [pagination, setPagination] = useState(1);
   const [dataDummy, setDataDummy] = useState([
@@ -54,15 +55,20 @@ export default function WorkHistory() {
       status: "1",
     },
   ]);
+  const [workhistory, setWorkHistory] = useState([]);
 
   const formatDate = (date) => {
-    // 03 February 2023
     const d = new Date(date);
     const ye = new Intl.DateTimeFormat("ID", { year: "numeric" }).format(d);
     const mo = new Intl.DateTimeFormat("ID", { month: "long" }).format(d);
     const da = new Intl.DateTimeFormat("ID", { day: "2-digit" }).format(d);
     return `${da} ${mo} ${ye}`;
   };
+
+  useEffect(() => {
+    const workhistory = activity.filter((item) => item.status == 1);
+    console.log("workhistory", workhistory);
+  }, []);
 
   return (
     <>
@@ -73,7 +79,7 @@ export default function WorkHistory() {
             {isLogin && user?.role == "Company" && <CompanyProfileMenu />}
           </div>
         </div>
-        <div className="mid w-3/5">
+        <div className="mid w-full">
           <div className=" min-h-[calc(100vh-5rem)] h-fit border-l-2 border-navyblue-600 z-0 px-10 py-10">
             <div className="w-full rounded py-6 px-10">
               <h1 className="font-semibold text-xl">Work History</h1>
@@ -90,7 +96,7 @@ export default function WorkHistory() {
               </div>
 
               <div className="w-full h-full rounded-md py-2 shadow-md mt-5 bg-ghostwhite-50 ">
-                {dataDummy.map((data, index) => {
+                {workhistory.map((data, index) => {
                   return (
                     <div
                       key={index}
@@ -132,18 +138,15 @@ export default function WorkHistory() {
                 })}
 
                 <div className="flex justify-end my-2 mr-5">
-                  {/* < page > */}
                   <div className="flex gap-2">
                     <button className="w-10 py-1 bg-navyblue-700 text-white rounded-full font-semibold text-xl border-2 border-navyblue-700 hover:bg-navyblue-800 hover:text-white duration-300 font-mono">
                       &lt;
-                      {/* <FaLessThan /> */}
                     </button>
                     <button className="w-10 py-1 text-navyblue-700 rounded-full font-semibold text-xl">
                       {pagination}
                     </button>
                     <button className="w-10 py-1 bg-navyblue-700 text-white rounded-full font-semibold text-xl border-2 border-navyblue-700 hover:bg-navyblue-800 hover:text-white duration-300 font-mono">
                       &gt;
-                      {/* <FaGreaterThan /> */}
                     </button>
                   </div>
                 </div>
@@ -151,7 +154,7 @@ export default function WorkHistory() {
             </div>
           </div>
         </div>
-        <div className="right w-1/5"></div>
+        <div className="right"></div>
       </div>
     </>
   );

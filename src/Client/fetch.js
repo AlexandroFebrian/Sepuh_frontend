@@ -569,7 +569,7 @@ export default function fetch() {
           },
         })
         .then((res) => {
-          // console.log(res.data);
+          // console.log(res.data);g
           setActivity(res.data);
           return res;
         })
