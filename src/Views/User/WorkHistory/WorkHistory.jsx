@@ -91,7 +91,7 @@ export default function WorkHistory() {
   return (
     <>
       <div className=" h-fit relative flex">
-        <div className="left w-1/5 ">
+        <div className="left w-1/4 ">
           <div className="h-[calc(100vh-5rem)] w-full sticky top-[5rem]">
             {isLogin && user?.role == "Freelancer" && <FreelancerProfileMenu />}
             {isLogin && user?.role == "Company" && <CompanyProfileMenu />}
