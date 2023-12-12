@@ -77,7 +77,11 @@ export default function MyPost() {
         </div>
         
         <div className="right w-1/5">
-          <NowHiring />
+          {
+            isLogin && user && user.role == "Freelancer"
+            &&
+            <NowHiring />
+          }
         </div>
       </div> 
     </>

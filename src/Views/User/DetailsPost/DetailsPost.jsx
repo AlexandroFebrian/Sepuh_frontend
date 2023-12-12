@@ -5,7 +5,7 @@ import CompanyDefaultMenu from '../../../components/SidebarMenu/Company/CompanyD
 import NowHiring from '../../../components/NowHiring/NowHiring'
 import { Avatar, Button, Tag } from '@chakra-ui/react'
 import { Link, useNavigate } from 'react-router-dom'
-import { FaStar, FaRegClock, FaRegFileLines } from "react-icons/fa6";
+import { FaStar, FaRegClock, FaRegFileLines, FaArrowLeft } from "react-icons/fa6";
 import { IoChatboxEllipsesOutline } from "react-icons/io5";
 import { useSelector } from 'react-redux'
 import Popup from '../../../components/Popup/Popup'
@@ -134,14 +134,19 @@ export default function DetailsPost() {
         </div>
 
         <div className="mid w-3/5 h-full">
-          <div className=" min-h-[calc(100vh-5rem)] h-fit border-l-2 border-navyblue-600 z-0 px-10 py-10">
-            <h1 className='text-3xl font-bold'>Details</h1>
+          <div className={` min-h-[calc(100vh-5rem)] h-fit ${isLogin && "border-l-2 border-navyblue-600"}  z-0 px-10 py-10`}>
+            <div className='flex items-center'>
+              <FaArrowLeft 
+                className=" w-9 h-9 mr-3 cursor-pointer"
+                onClick={() => navigate(-1)}
+              />
+              <h1 className='text-3xl font-bold'>Details</h1>
+            </div>
 
-            {/* FREELANCER */}
             {
-              user && user.role == "Freelancer" && post && categories
+              post && categories
               &&
-              <div className='w-[calc(100%-10rem)] px-7 py-7 h-fit mt-3 bg-lightblue-50 rounded shadow-xl'>
+              <div className={` w-full px-7 py-7 h-fit mt-3 bg-lightblue-50 rounded shadow-xl`}>
                 <div className='w-full flex items-center'>
                   <Avatar size={"lg"} src={post?.posted_by.profile_picture} />
                   <div className='ml-5 h-full'>
@@ -180,7 +185,7 @@ export default function DetailsPost() {
                   </div>
                   
                   {
-                    post?.posted_by.email != user.email && user.role == "Freelancer"
+                    post?.posted_by.role == "Company"
                     &&
                     <div className='flex items-center'>
                       <FaRegClock className='mr-1 text-yellow-600' /> Duration: {post?.duration} {post?.duration_type}
@@ -217,7 +222,7 @@ export default function DetailsPost() {
                   </div>
                 </div>
                 {
-                  post?.posted_by.email != user.email
+                  post?.posted_by.email != user?.email && user?.role == "Freelancer"
                   &&
                   <div className='w-full flex justify-evenly mt-8'>
                     <Button 
@@ -255,11 +260,50 @@ export default function DetailsPost() {
                     </Button>
                   </div>
                 }
+                {
+                  post?.posted_by.email != user?.email && user?.role == "Company"
+                  &&
+
+                  <div className='w-full flex justify-evenly mt-8'>
+                    <Button 
+                      shadow={"lg"}
+                      color="ghostwhite.50"
+                      bg="indigo.300"
+                      _hover={{ bg: "indigo.350" }}
+                      _active={{ bg: "indigo.400" }}
+                      width="30%"
+                      height="2.25rem"
+                      className=" me-2"
+                      variant="solid"
+                      transitionDuration={"300ms"}
+                      fontSize={"sm"}
+                      paddingY={"0.5rem"}
+                      onClick={() => {chatHandler(post.posted_by.email)}}
+                    >
+                      <IoChatboxEllipsesOutline size="1.5rem" className='mr-2' /> Chat the Freelancer
+                    </Button>
+                    <Button 
+                      shadow={"lg"}
+                      color="navyblue.800"
+                      bg="yellow.300"
+                      _hover={{ bg: "yellow.400" }}
+                      _active={{ bg: "yellow.500" }}
+                      width="30%"
+                      height="2.25rem"
+                      variant="solid"
+                      transitionDuration={"300ms"}
+                      fontSize={"sm"}
+                      paddingY={"0.5rem"}
+                      onClick={() => {agreementsHandler()}}
+                    >
+                      <FaRegFileLines size="1.3rem" className='mr-2' /> Continue
+                    </Button>
+                  </div>
+                }
               </div>
             }
 
-            {/* COMPANY */}
-            {
+            {/* {
               user && user.role == "Company" && post && categories
               &&
               <div className='w-[calc(100%-10rem)] px-7 py-7 h-fit mt-3 bg-navyblue-800 text-ghostwhite-50 rounded shadow-xl'>
@@ -379,9 +423,9 @@ export default function DetailsPost() {
                   </div>
                 }
               </div>
-            }
+            } */}
 
-            <div className='w-[calc(100%-10rem)] px-7 py-7 h-fit mt-3 bg-lightblue-50 rounded shadow-xl'>
+            <div className={`w-full px-7 py-7 h-fit mt-3 bg-lightblue-50 rounded shadow-xl`}>
               <h1 className='text-2xl font-bold mb-6'>Reviews <span className=' text-ghostwhite-500 font-semibold'>({post?.comments.length})</span></h1>
 
               {
@@ -418,7 +462,11 @@ export default function DetailsPost() {
         </div>
         
         <div className="right w-1/5">
-          <NowHiring />
+          {
+            isLogin && user && user.role == "Freelancer"
+            &&
+            <NowHiring />
+          }
         </div>
       </div> 
     </>
