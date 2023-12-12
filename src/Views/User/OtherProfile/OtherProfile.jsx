@@ -28,7 +28,7 @@ export default function OtherProfile() {
           </div>
         </div>
         <div className="mid w-3/5 h-full">
-          <div className=" min-h-[calc(100vh-5rem)] max-h-[calc(100vh-5rem)] border-l-2 border-navyblue-600 z-0 px-10 py-10 relative">
+          <div className=" min-h-[calc(100vh-5rem)] max-h-[calc(100vh-5rem)] border-l-2 border-navyblue-600 z-0 px-10 py-10">
             <h1 className="font-bold text-3xl">View Profile {profile?.name}</h1>
             {
               profile
@@ -38,7 +38,11 @@ export default function OtherProfile() {
           </div>
         </div>
         <div className="right w-1/5">
-          <NowHiring />
+          {
+            isLogin && user && user.role == "Freelancer"
+            &&
+            <NowHiring />
+          }
         </div>
       </div>
     </>

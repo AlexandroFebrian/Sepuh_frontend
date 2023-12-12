@@ -6,8 +6,11 @@ import MyPostViewModel from './MyPostViewModel'
 import PostBox from './PostBox'
 import OpenImage from '../../../components/OpenImage/OpenImage'
 import { FaPlus } from 'react-icons/fa6'
+import { useNavigate } from 'react-router-dom'
 
 export default function MyPost() {
+  const navigate = useNavigate()
+
   const { isLogin, user, posts } = MyPostViewModel()
   const [open, setOpen] = useState(false)
   const [images, setImages] = useState([])
@@ -65,19 +68,23 @@ export default function MyPost() {
                 isLogin
                 &&
                 <div className=' w-16 2xl:w-20 relative'>
-            <button className=' w-16 h-16 2xl:w-20 2xl:h-20 p-[0.4rem] bg-navyblue-800 hover:bg-navyblue-700 transition-colors duration-300 rounded-full flex justify-center items-center sticky top-[88%]' onClick={() => (navigate("/addpost"))}>
-              <div className='w-full h-full rounded-full border-[0.15rem] border-ghostwhite-50 flex justify-center items-center'>
-                <FaPlus className=' text-ghostwhite-50 2xl:w-10 2xl:h-10 w-8 h-8'/>
-              </div>
-            </button>
-          </div>
+                  <button className=' w-16 h-16 2xl:w-20 2xl:h-20 p-[0.4rem] bg-navyblue-800 hover:bg-navyblue-700 transition-colors duration-300 rounded-full flex justify-center items-center sticky top-[88%]' onClick={() => (navigate("/addpost"))}>
+                    <div className='w-full h-full rounded-full border-[0.15rem] border-ghostwhite-50 flex justify-center items-center'>
+                      <FaPlus className=' text-ghostwhite-50 2xl:w-10 2xl:h-10 w-8 h-8'/>
+                    </div>
+                  </button>
+                </div>
               }
             </div>
           </div>
         </div>
         
         <div className="right w-1/5">
-          <NowHiring />
+          {
+            isLogin && user && user.role == "Freelancer"
+            &&
+            <NowHiring />
+          }
         </div>
       </div> 
     </>
