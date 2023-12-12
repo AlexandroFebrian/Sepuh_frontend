@@ -76,7 +76,9 @@ export default function fetch() {
           dispatch(setUserDetail(res.data.data));
         })
         .catch((err) => {
+          localStorage.removeItem("token");
           dispatch(setIsLogin(false));
+          dispatch(setUserDetail(null));
           if (location.pathname == "/" || location.pathname == "/home") {
           } else {
             navigate("/");
@@ -996,6 +998,28 @@ export default function fetch() {
     }
   }
 
+  async function hireOrApply(email, setWait, setPopup){
+    const token = localStorage.getItem("token");
+
+    try {
+      return await client.post("users/hire",{
+          email: email
+        },{
+          headers:{
+            Authorization: `Bearer ${token}`
+          }
+        }).then((res) => {
+          setPopup(true);
+          return res
+        }).catch((err) => {
+          setPopup(true);
+          return err.response
+        })
+    } catch (error) {
+      alert("error")
+    }
+  }
+
   return {
     signIn,
     signUp,
@@ -1035,6 +1059,7 @@ export default function fetch() {
     submitReview,
     getAllBankName,
     updateDocument,
-    createMessage
+    createMessage,
+    hireOrApply
   };
 }
