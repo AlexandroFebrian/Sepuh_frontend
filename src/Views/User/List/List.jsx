@@ -40,7 +40,7 @@ export default function List() {
           isLogin && user && user.role == "Freelancer"
           &&
           <div className="right w-1/5">
-            <NowHiring />
+            <NowHiring user={user} />
           </div>
         }
       </div>

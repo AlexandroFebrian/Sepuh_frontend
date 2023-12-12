@@ -465,7 +465,7 @@ export default function DetailsPost() {
           {
             isLogin && user && user.role == "Freelancer"
             &&
-            <NowHiring />
+            <NowHiring user={user} />
           }
         </div>
       </div> 

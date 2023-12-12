@@ -1,8 +1,37 @@
+import { Avatar, Tag } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { FaRotate } from "react-icons/fa6";
-export default function NowHiring() {
+import fetch from "../../Client/fetch";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+export default function NowHiring({user}) {
+  const { fetchCompanyPost } = fetch()
+  const categories = useSelector((state) => state.post.category)
+
+  const [companyPost, setCompanyPost] = useState([])
+  const [hiring, setHiring] = useState([])
+
+  useEffect(() => {
+    setCompanyPost([])
+
+    if(user){
+      if(user.role == "Freelancer"){
+        fetchCompanyPost(setCompanyPost)
+      }
+    }
+
+  }, [user])
+
+  useEffect(() => {
+    if(companyPost.length > 0){
+      setHiring(companyPost.slice(0, Math.min(4, companyPost.length)))
+    }
+  }, [companyPost])
+
   return (
     <div className="h-[calc(100vh-5rem)] w-full sticky top-[5rem] py-10 px-2">
-      <div className="w-full top-0 transition-colors duration-300 flex flex-col items-center justify-start p-4 shadow-xl bg-ghostwhite-100">
+      <div className="w-full top-0 transition-colors duration-300 flex flex-col items-center justify-start p-4 shadow-xl bg-ghostwhite-100 rounded">
         <div className="title border-navyblue-600 w-full">
           <h1 className="text-3xl w-full">Now Hiring</h1>
         </div>
@@ -10,97 +39,42 @@ export default function NowHiring() {
         <hr className=" bg-navyblue-800 w-full h-[0.1rem] my-3" />
 
         <div className="content w-full flex flex-col gap-4">
+          {
+            hiring.map((post, idx) => {
+              return(
+                <Link key={idx} to={`/post/${post._id}`}>
+                  <div className="card flex justify-between  w-full h-full font-semibold bg-ghostwhite-50 p-3 rounded-md shadow-lg hover:bg-lightblue-50 hover:scale-105 cursor-pointer transition-all duration-300">
+                    <div className="flex">
+                      <div className="card-image flex items-center">
+                        <Avatar
+                          src={post?.posted_by?.profile_picture}
+                          size={"lg"}
+                        />
+                      </div>
+                      <div className="card-description ml-2">
+                        <p className="text-lg">{post?.posted_by.name}</p>
+                        <div className="flex flex-wrap">
+                        {
+                          post.hashtag.map((tag, idx) => {
+                            return (
+                              // <div key={idx} className='bg-navyblue-800 text-white rounded-full px-2 py-1 text-xs mr-2'>
+                              //   {tag}
+                              // </div>
+                              <Tag key={idx} colorScheme='navyblue' className='mr-1 mt-1' fontSize={"xs"} >{categories.find(category => category.value == tag).label}</Tag>
+                            )
+                          })
+                        }
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              )
+            })
+          }
           {/* card1 */}
-          <div className="card flex justify-between  w-full h-full font-semibold bg-ghostwhite-50 p-3 rounded-md shadow-lg">
-            <div className="left flex items-center justify-start gap-3">
-              <div className="card-image">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-uTgnaOoiOKXyr6lhb6CQwEoS3xrhdm9BhDrOQ_RImhA77-GkV4dsLKIvHeDyYDh0EOA&usqp=CAU"
-                  alt="card"
-                  className="w-16 h-16 object-cover rounded-full"
-                />
-              </div>
-              <div className="card-description">
-                <h2>Data Scientist</h2>
-                <p>PT. Gudang Garam Tbk.</p>
-              </div>
-            </div>
-            <div className="right">
-              <div className="text-orange-500 rounded-full px-2 py-1 w-fit">
-                New!
-              </div>
-            </div>
-          </div>
-          {/* card2 */}
-          <div className="card flex justify-between  w-full h-full font-semibold bg-ghostwhite-50 p-3 rounded-md shadow-lg">
-            <div className="left flex items-center justify-start gap-3">
-              <div className="card-image">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-uTgnaOoiOKXyr6lhb6CQwEoS3xrhdm9BhDrOQ_RImhA77-GkV4dsLKIvHeDyYDh0EOA&usqp=CAU"
-                  alt="card"
-                  className="w-16 h-16 object-cover rounded-full"
-                />
-              </div>
-              <div className="card-description">
-                <h2>Data Scientist</h2>
-                <p>PT. Gudang Garam Tbk.</p>
-              </div>
-            </div>
-            <div className="right">
-              <div className="text-orange-500 rounded-full px-2 py-1 w-fit">
-                New!
-              </div>
-            </div>
-          </div>
-          {/* card3 */}
-          <div className="card flex justify-between  w-full h-full font-semibold bg-ghostwhite-50 p-3 rounded-md shadow-lg">
-            <div className="left flex items-center justify-start gap-3">
-              <div className="card-image">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-uTgnaOoiOKXyr6lhb6CQwEoS3xrhdm9BhDrOQ_RImhA77-GkV4dsLKIvHeDyYDh0EOA&usqp=CAU"
-                  alt="card"
-                  className="w-16 h-16 object-cover rounded-full"
-                />
-              </div>
-              <div className="card-description">
-                <h2>Data Scientist</h2>
-                <p>PT. Gudang Garam Tbk.</p>
-              </div>
-            </div>
-            <div className="right">
-              <div className="text-orange-500 rounded-full px-2 py-1 w-fit">
-                New!
-              </div>
-            </div>
-          </div>
-          {/* card4*/}
-          <div className="card flex justify-between  w-full h-full font-semibold bg-ghostwhite-50 p-3 rounded-md shadow-lg">
-            <div className="left flex items-center justify-start gap-3">
-              <div className="card-image">
-                <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-uTgnaOoiOKXyr6lhb6CQwEoS3xrhdm9BhDrOQ_RImhA77-GkV4dsLKIvHeDyYDh0EOA&usqp=CAU"
-                  alt="card"
-                  className="w-16 h-16 object-cover rounded-full"
-                />
-              </div>
-              <div className="card-description">
-                <h2>Data Scientist</h2>
-                <p>PT. Gudang Garam Tbk.</p>
-              </div>
-            </div>
-            <div className="right">
-              <div className="text-orange-500 rounded-full px-2 py-1 w-fit">
-                New!
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="refresh w-full mt-4 flex justify-end">
-          <button className=" text-black px-4 py-2 flex items-center justify-center">
-            <FaRotate className="mr-2" size={25} />
-            Refresh
-          </button>
+          
+          
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ import CompanyDefaultMenu from '../../../components/SidebarMenu/Company/CompanyD
 
 export default function AddPost() {
   const user = useSelector((state) => state.user.userDetail)
+  const isLogin = useSelector((state) => state.user.isLogin)
 
   return (
     <>
@@ -40,9 +41,13 @@ export default function AddPost() {
             </div>
           </div>
         </div>
-        <div className="right w-1/5">
-          <NowHiring />
-        </div>
+        {
+          isLogin && user && user.role == "Freelancer"
+          &&
+          <div className="right w-1/5">
+            <NowHiring user={user} />
+          </div>
+        }
       </div>
       
     </>

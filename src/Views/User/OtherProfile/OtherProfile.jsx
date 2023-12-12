@@ -41,7 +41,7 @@ export default function OtherProfile() {
           {
             isLogin && user && user.role == "Freelancer"
             &&
-            <NowHiring />
+            <NowHiring user={user} />
           }
         </div>
       </div>
