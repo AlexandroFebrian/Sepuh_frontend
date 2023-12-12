@@ -58,6 +58,7 @@ export default function WorkHistory() {
   const [workhistory, setWorkHistory] = useState([]);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
+  const [sort, setSort] = useState("latest"); // latest, oldest
 
   const formatDate = (date) => {
     const newDate = new Date(date);
@@ -72,6 +73,20 @@ export default function WorkHistory() {
       setWorkHistory(activity);
     }
   }, [activity]);
+
+  useEffect(() => {
+    if (sort == "latest") {
+      const sorted = [...workhistory].sort((a, b) => {
+        return new Date(b.start_date) - new Date(a.start_date);
+      });
+      setWorkHistory(sorted);
+    } else if (sort == "oldest") {
+      const sorted = [...workhistory].sort((a, b) => {
+        return new Date(a.start_date) - new Date(b.start_date);
+      });
+      setWorkHistory(sorted);
+    }
+  }, [sort]);
 
   return (
     <>
@@ -89,10 +104,17 @@ export default function WorkHistory() {
 
               <div className="sort w-full mt-5 bg-ghostwhite-100 h-full rounded-md p-4">
                 <div className="flex gap-2">
-                  <button className="w-28 py-1 bg-navyblue-700 text-white rounded-full font-semibold text-xl border-2 border-navyblue-700">
+                  <button
+                    // className="w-28 py-1 bg-navyblue-700 text-white rounded-full font-semibold text-xl border-2 border-navyblue-700"
+                    className="w-28 py-1 bg-ghostwhite-100 text-navyblue-800 rounded-full font-semibold text-xl border-2 border-navyblue-700 hover:bg-navyblue-700 hover:text-white duration-300"
+                    onClick={() => setSort("latest")}
+                  >
                     Latest
                   </button>
-                  <button className="w-28 py-1 bg-ghostwhite-100 text-navyblue-800 rounded-full font-semibold text-xl border-2 border-navyblue-700 hover:bg-navyblue-700 hover:text-white duration-300">
+                  <button
+                    className="w-28 py-1 bg-ghostwhite-100 text-navyblue-800 rounded-full font-semibold text-xl border-2 border-navyblue-700 hover:bg-navyblue-700 hover:text-white duration-300"
+                    onClick={() => setSort("oldest")}
+                  >
                     Oldest
                   </button>
                 </div>
