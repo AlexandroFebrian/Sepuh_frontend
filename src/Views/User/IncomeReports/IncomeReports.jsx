@@ -90,9 +90,13 @@ export default function IncomeReports() {
           <div className=" min-h-[calc(100vh-5rem)] h-fit border-l-2 border-navyblue-600 z-0 px-10 py-10">
             <div className="w-full rounded py-6 px-10">
               <h1 className="font-semibold text-xl">Income Reports</h1>
-              <div className="buttonTableOrChart mt-2">
+              <div className="buttonTableOrChart mt-2 flex gap-3">
                 <button
-                  className="bg-navyblue-700 text-white px-6 py-2 rounded-full"
+                  className={`w-28 py-1 text-navyblue-800 rounded-full font-semibold text-xl border-2 border-navyblue-700 ${
+                    dataActive == "Table"
+                      ? "bg-navyblue-700 text-white"
+                      : "bg-ghostwhite-100"
+                  }`}
                   onClick={() => {
                     setDataActive("Table");
                   }}
@@ -100,7 +104,11 @@ export default function IncomeReports() {
                   Table
                 </button>
                 <button
-                  className="bg-navyblue-700 text-white px-6 py-2 rounded-full ml-3"
+                  className={`w-28 py-1 text-navyblue-800 rounded-full font-semibold text-xl border-2 border-navyblue-700 ${
+                    dataActive == "Chart"
+                      ? "bg-navyblue-700 text-white"
+                      : "bg-ghostwhite-100"
+                  }`}
                   onClick={() => {
                     setDataActive("Chart");
                   }}
