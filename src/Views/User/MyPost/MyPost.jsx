@@ -6,8 +6,11 @@ import MyPostViewModel from './MyPostViewModel'
 import PostBox from './PostBox'
 import OpenImage from '../../../components/OpenImage/OpenImage'
 import { FaPlus } from 'react-icons/fa6'
+import { useNavigate } from 'react-router-dom'
 
 export default function MyPost() {
+  const navigate = useNavigate()
+
   const { isLogin, user, posts } = MyPostViewModel()
   const [open, setOpen] = useState(false)
   const [images, setImages] = useState([])
