@@ -34,6 +34,7 @@ import PaymentReports from "./Views/Admin/PaymentReports/PaymentReports";
 import DetailActivity from "./Views/User/MyActivity/DetailActivity/DetailActivity";
 import Rejected from "./Views/User/MyActivity/Rejected/Rejected";
 import Dashboard from "./Views/User/Dashboard/Dashboard";
+import Notification from "./Views/User/Notification/Notification";
 
 const Router = createBrowserRouter([
   {
@@ -79,6 +80,10 @@ const Router = createBrowserRouter([
       {
         path: "employee",
         element: <Messages />,
+      },
+      {
+        path: "notifications",
+        element: <Notification />
       },
       {
         path: "post/:postId",

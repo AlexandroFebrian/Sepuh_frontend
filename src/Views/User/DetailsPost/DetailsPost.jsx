@@ -176,9 +176,6 @@ export default function DetailsPost() {
                 </div>
 
                 <div className='mt-4'>
-                  <h1 className='text-2xl font-bold'>
-                    {post?.title}
-                  </h1>
 
                   <div className='font-semibold text-lg'>
                     Rp {minPrice} - {maxPrice}

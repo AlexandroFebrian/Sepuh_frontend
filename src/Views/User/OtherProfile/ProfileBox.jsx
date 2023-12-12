@@ -65,7 +65,7 @@ export default function ProfileBox({user, profile, posts}) {
   }
 
   async function yesHandler(){
-    const response = await hireOrApply(profile?.email)
+    const response = await hireOrApply(profile?.email, setWait, setPopup)
 
     if(response == undefined){
       setPopupTitle("Network Error!")

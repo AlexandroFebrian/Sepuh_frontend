@@ -183,18 +183,21 @@ export default function Navbar() {
                     My Activity
                   </Button>
                 </Link>
-                <Button
-                  leftIcon={<FaRegBell />}
-                  color="ghostwhite.50"
-                  _hover={{ bg: "whiteAlpha.200" }}
-                  _active={{ bg: "whiteAlpha.300" }}
-                  width="8.5rem"
-                  className=" me-6"
-                  variant="ghost"
-                  transitionDuration={"300ms"}
-                >
-                  Notifications
-                </Button>
+                <Link to={"/notifications"}>
+                  <Button
+                    leftIcon={<FaRegBell />}
+                    color="ghostwhite.50"
+                    _hover={{ bg: "whiteAlpha.200" }}
+                    _active={{ bg: "whiteAlpha.300" }}
+                    width="8.5rem"
+                    className=" me-6"
+                    variant="ghost"
+                    transitionDuration={"300ms"}
+                  >
+                    Notifications
+                  </Button>
+
+                </Link>
 
                 <Popover>
                   <PopoverTrigger className=" text-ghostwhite-50 font-semibold bg-indigo-300 w-[8.5rem] h-[2.5rem] rounded-md hover:bg-indigo-350 active:bg-indigo-400 transition-colors duration-300">
