@@ -56,19 +56,22 @@ export default function WorkHistory() {
     },
   ]);
   const [workhistory, setWorkHistory] = useState([]);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
 
   const formatDate = (date) => {
-    const d = new Date(date);
-    const ye = new Intl.DateTimeFormat("ID", { year: "numeric" }).format(d);
-    const mo = new Intl.DateTimeFormat("ID", { month: "long" }).format(d);
-    const da = new Intl.DateTimeFormat("ID", { day: "2-digit" }).format(d);
-    return `${da} ${mo} ${ye}`;
+    const newDate = new Date(date);
+    const month = newDate.toLocaleString("default", { month: "long" });
+    const day = newDate.getDate();
+    const year = newDate.getFullYear();
+    return `${day} ${month} ${year}`;
   };
 
   useEffect(() => {
-    const workhistory = activity.filter((item) => item.status == 1);
-    console.log("workhistory", workhistory);
-  }, []);
+    if (activity) {
+      setWorkHistory(activity);
+    }
+  }, [activity]);
 
   return (
     <>
@@ -96,7 +99,7 @@ export default function WorkHistory() {
               </div>
 
               <div className="w-full h-full rounded-md py-2 shadow-md mt-5 bg-ghostwhite-50 ">
-                {workhistory.map((data, index) => {
+                {workhistory.slice(0, limit).map((data, index) => {
                   return (
                     <div
                       key={index}
@@ -106,23 +109,26 @@ export default function WorkHistory() {
                         <div className="left flex items-center gap-3">
                           <Avatar
                             bg="ghostwhite.400"
-                            src={user?.profile_picture}
+                            src={data?.company?.profile_picture}
                             size={"lg"}
                             draggable={false}
                           />
                           <div className="details py-2">
                             <h2 className="font-semibold text-xl text-navyblue-800">
-                              {data.company} as {data.position}
+                              {data?.company?.name}
                             </h2>
-                            <h4 className="text-lg text-navyblue-800 bg-white w-fit px-2 py-1 rounded-full">
-                              {formatDate(data.startDate)} -{" "}
-                              {formatDate(data.endDate)}
+                            <h3 className="font-semibold text-md text-navyblue-800">
+                              {data?.post?.title}
+                            </h3>
+                            <h4 className="text-lg text-navyblue-800 w-fit py-1 rounded-full">
+                              {formatDate(data?.start_date)} -{" "}
+                              {formatDate(data?.end_date)}
                             </h4>
                           </div>
                         </div>
                         <div className="mid flex flex-col space-y-2 "></div>
                         <div className="right">
-                          {data.status == "0" ? (
+                          {data?.status == "0" ? (
                             <button className="w-28 py-1 bg-ghostwhite-50 text-yellow-500 rounded-full font-semibold text-xl border-2 border-yellow-500">
                               Ongoing
                             </button>
@@ -139,13 +145,29 @@ export default function WorkHistory() {
 
                 <div className="flex justify-end my-2 mr-5">
                   <div className="flex gap-2">
-                    <button className="w-10 py-1 bg-navyblue-700 text-white rounded-full font-semibold text-xl border-2 border-navyblue-700 hover:bg-navyblue-800 hover:text-white duration-300 font-mono">
+                    <button
+                      className="w-10 py-1 bg-navyblue-700 text-white rounded-full font-semibold text-xl border-2 border-navyblue-700 hover:bg-navyblue-800 hover:text-white duration-300 font-mono"
+                      onClick={() => {
+                        if (pagination > 1) {
+                          setPagination(pagination - 1);
+                          setLimit(limit - 10);
+                        }
+                      }}
+                    >
                       &lt;
                     </button>
                     <button className="w-10 py-1 text-navyblue-700 rounded-full font-semibold text-xl">
                       {pagination}
                     </button>
-                    <button className="w-10 py-1 bg-navyblue-700 text-white rounded-full font-semibold text-xl border-2 border-navyblue-700 hover:bg-navyblue-800 hover:text-white duration-300 font-mono">
+                    <button
+                      className="w-10 py-1 bg-navyblue-700 text-white rounded-full font-semibold text-xl border-2 border-navyblue-700 hover:bg-navyblue-800 hover:text-white duration-300 font-mono"
+                      onClick={() => {
+                        if (pagination < Math.ceil(workhistory.length / 10)) {
+                          setPagination(pagination + 1);
+                          setLimit(limit + 10);
+                        }
+                      }}
+                    >
                       &gt;
                     </button>
                   </div>
