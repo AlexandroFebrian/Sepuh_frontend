@@ -21,7 +21,12 @@ export default function DetailsPost() {
   const [dataDetailsPost, setDataDetailsPost] = useState([]);
 
   const getDetailsPost = async () => {
-    const response = await Axios.get(`${baseURL}posts/${emailSearch}`)
+    // localhost:3000/api/posts/admin/:email
+    const response = await Axios.get(`${baseURL}posts/admin/${emailSearch}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
       .then((res) => {
         setDataDetailsPost(res.data);
         return res.data;
@@ -29,7 +34,48 @@ export default function DetailsPost() {
       .catch((err) => {
         return err;
       });
-    console.log(response);
+  };
+
+  const suspendPost = async (id) => {
+    const token = localStorage.getItem("token");
+
+    const response = await Axios.put(
+      `${baseURL}posts/suspend/${id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((res) => {
+        getDetailsPost();
+        return res.data;
+      })
+      .catch((err) => {
+        return err;
+      });
+  };
+
+  const unsuspendPost = async (id) => {
+    const token = localStorage.getItem("token");
+
+    const response = await Axios.put(
+      `${baseURL}posts/unsuspend/${id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((res) => {
+        getDetailsPost();
+        return res.data;
+      })
+      .catch((err) => {
+        return err;
+      });
   };
 
   useEffect(() => {
@@ -39,128 +85,6 @@ export default function DetailsPost() {
   return (
     <>
       <div className="container-details">
-        {/* 
-        {
-        "_id": "656d59c028ccaf0df87bd4b1",
-        "title": "nyoba post kelas",
-        "duration": 0,
-        "duration_type": "",
-        "description": "sfas ddasd as\r\ndas\r\n as\r\ndasd\r\ndasd \r\ndqwdwqd qwd qw\r\nd ",
-        "image": [
-            "http://localhost:3000/api/public/1701665216203-366641969.png",
-            "http://localhost:3000/api/public/1701665216221-962164971.png"
-        ],
-        "hashtag": [
-            "machine learning",
-            "deep learning"
-        ],
-        "min_price": 50000,
-        "max_price": 125000,
-        "avg_rating": 5,
-        "visitor": 0,
-        "comments": [
-            {
-                "user_id": "655f1b6fe3d040af039b2dbc",
-                "rating": 5,
-                "comment": "coba",
-                "_id": "65719a9cd15af9551d6de265",
-                "comment_by": {
-                    "name": "Febrian test",
-                    "email": "cingkwok120@gmail.com",
-                    "headline": "Machine Learning Cohort at Bangkit Academy",
-                    "date_of_birth": "2003-02-03T00:00:00.000Z",
-                    "bio": "My name is Febrian Alexandro, a passionate individual eager to delve into the realm of machine learning. I identify as male and was born on Feb 5, 2003, in Indonesia.",
-                    "city": "Surabaya",
-                    "country": "Indonesia",
-                    "last_education": "High School",
-                    "current_education": "Bachelor Degree",
-                    "field_of_study": "Informatics",
-                    "year_of_study": 4,
-                    "header_picture": "1701052123170-374891553.png",
-                    "profile_picture": "http://localhost:3000/api/public/1701003158363-700251323.png",
-                    "role": "Freelancer",
-                    "balance": 4990000,
-                    "rating": 4.25,
-                    "account_number": "523413412",
-                    "notifications": [
-                        {
-                            "from": "65640432f45407c27c6f34c4",
-                            "message": "Accept",
-                            "category": "Applied Accept",
-                            "link": "/api/users/profile/febrian.a21@mhs.istts.ac.id",
-                            "read": false,
-                            "time": "2023-12-13T14:53:27.969Z",
-                            "status": 0,
-                            "_id": "6579c56741311ad91257f0d2"
-                        }
-                    ],
-                    "employees": [],
-                    "history": [],
-                    "list": [
-                        "6568738211e18ecbb22db2ed",
-                        "657811ef3591b62498509ddc",
-                        "6568733011e18ecbb22db2d8"
-                    ],
-                    "status": 1,
-                    "create_at": "2023-11-26T09:50:44.299Z",
-                    "update_at": "2023-12-13T14:53:27.970Z",
-                    "bank_name": "bank bni",
-                    "curriculum_vitae": "",
-                    "identity_card": "",
-                    "portofolio": "123123"
-                }
-            }
-        ],
-        "posted_by": {
-            "name": "Febrian test",
-            "email": "cingkwok120@gmail.com",
-            "headline": "Machine Learning Cohort at Bangkit Academy",
-            "date_of_birth": "2003-02-03T00:00:00.000Z",
-            "bio": "My name is Febrian Alexandro, a passionate individual eager to delve into the realm of machine learning. I identify as male and was born on Feb 5, 2003, in Indonesia.",
-            "city": "Surabaya",
-            "country": "Indonesia",
-            "last_education": "High School",
-            "current_education": "Bachelor Degree",
-            "field_of_study": "Informatics",
-            "year_of_study": 4,
-            "header_picture": "1701052123170-374891553.png",
-            "profile_picture": "http://localhost:3000/api/public/1701003158363-700251323.png",
-            "role": "Freelancer",
-            "balance": 4990000,
-            "rating": 4.25,
-            "account_number": "523413412",
-            "notifications": [
-                {
-                    "from": "65640432f45407c27c6f34c4",
-                    "message": "Accept",
-                    "category": "Applied Accept",
-                    "link": "/api/users/profile/febrian.a21@mhs.istts.ac.id",
-                    "read": false,
-                    "time": "2023-12-13T14:53:27.969Z",
-                    "status": 0,
-                    "_id": "6579c56741311ad91257f0d2"
-                }
-            ],
-            "employees": [],
-            "history": [],
-            "list": [
-                "6568738211e18ecbb22db2ed",
-                "657811ef3591b62498509ddc",
-                "6568733011e18ecbb22db2d8"
-            ],
-            "status": 1,
-            "create_at": "2023-11-26T09:50:44.299Z",
-            "update_at": "2023-12-13T14:53:27.970Z",
-            "bank_name": "bank bni",
-            "curriculum_vitae": "",
-            "identity_card": "",
-            "portofolio": "123123"
-        },
-        "status": 1,
-        "posted_at": "2023-12-04T04:46:56.248Z"
-    },
-        */}
-
         {dataDetailsPost.map((item, index) => {
           return (
             <Accordion allowToggle key={index}>
@@ -210,6 +134,44 @@ export default function DetailsPost() {
                           </div>
                         </div>
                       </div>
+                    </div>
+                    <div className="container-details-button">
+                      {/* <button
+                        className="button-details  bg-yellow-500 mx-5 p-2"
+                        onClick={() => {
+                          suspendPost(item.id);
+                        }}
+                      >
+                        Suspend
+                      </button>
+                      <button
+                        className="button-details bg-yellow-500 mx-5 p-2"
+                        onClick={() => {
+                          unsuspendPost(item.id);
+                        }}
+                      >
+                        Unsuspend
+                      </button> */}
+
+                      {item.status === -1 ? (
+                        <button
+                          className="button-details bg-yellow-500 mx-5 p-2"
+                          onClick={() => {
+                            unsuspendPost(item._id);
+                          }}
+                        >
+                          Unsuspend
+                        </button>
+                      ) : (
+                        <button
+                          className="button-details  bg-yellow-500 mx-5 p-2"
+                          onClick={() => {
+                            suspendPost(item._id);
+                          }}
+                        >
+                          Suspend
+                        </button>
+                      )}
                     </div>
                   </div>
                 </AccordionPanel>
