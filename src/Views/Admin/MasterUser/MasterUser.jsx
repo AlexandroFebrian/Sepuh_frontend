@@ -29,7 +29,6 @@ export default function MasterUser() {
   const { Users, BanUserVM, UnbanUserVM, Status, SetStatus } =
     MasterUserViewModel();
   const banUser = (email) => {
-    // AKU GATAU KENAPA BENTUKNYA GINI HEHEHEHE
     BanUserVM(email);
   };
 
@@ -89,8 +88,12 @@ export default function MasterUser() {
                         {dateFormat(user.create_at)}
                       </TableCell>
                       <TableCell className="font-medium text-lg">
-                        {user.history.length > 0
-                          ? `Banned on ${dateFormat(user.history)}`
+                        {/* {user.update_at
+                          ? `Banned on ${dateFormat(user.update_at)}`
+                          : "Not banned"} */}
+
+                        {user.create_at != user.update_at
+                          ? `Banned on ${dateFormat(user.update_at)}`
                           : "Not banned"}
                       </TableCell>
                       <TableCell className="font-medium text-lg">

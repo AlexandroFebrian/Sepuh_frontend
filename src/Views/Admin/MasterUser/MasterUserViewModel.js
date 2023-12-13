@@ -10,14 +10,12 @@ export default function MasterUserViewModel() {
 
   async function fetchData(first) {
     const res = await getAllUser();
-
     setUsers(res.users);
 
     if (first) SetStatus(res.users.map((user) => user.status));
   }
 
   useEffect(() => {
-    // checkToken();
     fetchData(true);
   }, []);
 

@@ -309,7 +309,7 @@ export default function fetch() {
       return await client
         .post("users/admin/login", data)
         .then((res) => {
-          console.log(res);
+          localStorage.setItem("token", res.data.token);
           return res;
         })
         .catch((err) => {
@@ -887,28 +887,42 @@ export default function fetch() {
     }
   }
 
-  async function submitReview(comment, rating, agreementId, setActivity, setWait, setPopup){
-    const token = localStorage.getItem("token")
+  async function submitReview(
+    comment,
+    rating,
+    agreementId,
+    setActivity,
+    setWait,
+    setPopup
+  ) {
+    const token = localStorage.getItem("token");
 
     try {
-      return await client.post("posts/review",{
-        comment: comment,
-        rating: rating,
-        agreement_id: agreementId
-      },{
-        headers:{
-          Authorization: `Bearer ${token}`
-        }
-      }).then(async (res) => {
-        setPopup(true);
-        await getActivityById(agreementId, setActivity)
-        return res
-      }).catch((err) => {
-        alert("error")
-        return err.response
-      })
+      return await client
+        .post(
+          "posts/review",
+          {
+            comment: comment,
+            rating: rating,
+            agreement_id: agreementId,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then(async (res) => {
+          setPopup(true);
+          await getActivityById(agreementId, setActivity);
+          return res;
+        })
+        .catch((err) => {
+          alert("error");
+          return err.response;
+        });
     } catch (error) {
-      alert("error")
+      alert("error");
     }
   }
 
@@ -979,13 +993,17 @@ export default function fetch() {
     const token = localStorage.getItem("token");
     try {
       return await client
-        .post("chats", {
-            email: email
-        }, {
-          headers: {
-            Authorization: `Bearer ${token}`,
+        .post(
+          "chats",
+          {
+            email: email,
           },
-        })
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((res) => {
           localStorage.setItem("chat_with", JSON.stringify(res.data));
           navigate("/messages");
@@ -998,25 +1016,32 @@ export default function fetch() {
     }
   }
 
-  async function hireOrApply(email, setWait, setPopup){
+  async function hireOrApply(email, setWait, setPopup) {
     const token = localStorage.getItem("token");
 
     try {
-      return await client.post("users/hire",{
-          email: email
-        },{
-          headers:{
-            Authorization: `Bearer ${token}`
+      return await client
+        .post(
+          "users/hire",
+          {
+            email: email,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
-        }).then((res) => {
+        )
+        .then((res) => {
           setPopup(true);
-          return res
-        }).catch((err) => {
-          setPopup(true);
-          return err.response
+          return res;
         })
+        .catch((err) => {
+          setPopup(true);
+          return err.response;
+        });
     } catch (error) {
-      alert("error")
+      alert("error");
     }
   }
 
@@ -1060,6 +1085,6 @@ export default function fetch() {
     getAllBankName,
     updateDocument,
     createMessage,
-    hireOrApply
+    hireOrApply,
   };
 }
