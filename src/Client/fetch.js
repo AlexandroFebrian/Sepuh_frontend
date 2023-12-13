@@ -1073,6 +1073,28 @@ export default function fetch() {
     }
   }
 
+  async function getAllAgreements() {
+    // http://localhost:3000/api/agreements/all
+
+    const token = localStorage.getItem("token");
+    try {
+      return await client
+        .get("agreements/all", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          return res.data;
+        })
+        .catch((err) => {
+          return err.response;
+        });
+    } catch (error) {
+      alert("error");
+    }
+  }
+
   return {
     signIn,
     signUp,
@@ -1115,5 +1137,6 @@ export default function fetch() {
     createMessage,
     hireOrApply,
     changePassword,
+    getAllAgreements,
   };
 }

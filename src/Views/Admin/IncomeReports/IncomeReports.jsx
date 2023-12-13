@@ -14,14 +14,6 @@ export default function IncomeReports() {
   const { activity } = IncomeReportsViewModelAdmin();
   console.log("activity", activity);
 
-  const formatDescription = (description) => {
-    if (description.length > 85) {
-      return description.substring(0, 85) + "...";
-    } else {
-      return description;
-    }
-  };
-
   const formatAmount = (amount) => {
     const amountString = amount.toString();
     const amountLength = amountString.length;
@@ -34,6 +26,19 @@ export default function IncomeReports() {
     }
     amountFormatted = "Rp. " + amountFormatted + ",00";
     return amountFormatted;
+  };
+
+  const formatDate = (date) => {
+    const newDate = new Date(date);
+    const month = newDate.toLocaleString("default", { month: "long" });
+    const day = newDate.getDate();
+    const year = newDate.getFullYear();
+    return `${day} ${month} ${year}`;
+  };
+
+  const adminFee = (amount) => {
+    const adminFee = (amount * 10) / 100;
+    return formatAmount(adminFee);
   };
 
   return (
@@ -66,53 +71,52 @@ export default function IncomeReports() {
                   <TableHeader className="border-b-2 border-navyblue-600">
                     <TableRow>
                       <TableHead className="text-2xl text-navyblue-800 font-bold">
-                        Income Date
+                        Invoice ID
                       </TableHead>
-                      <TableHead className="text-2xl text-navyblue-800 w-1/5 font-bold">
-                        Company Name
+                      <TableHead className="text-2xl text-navyblue-800 font-bold">
+                        Date
                       </TableHead>
-                      <TableHead className="text-2xl text-navyblue-800 w-1/2 font-bold">
-                        Description
+                      <TableHead className="text-2xl text-navyblue-800 font-bold">
+                        Company
                       </TableHead>
-                      <TableHead className="text-2xl text-navyblue-800 w-1/6 font-bold">
-                        Amount
+                      <TableHead className="text-2xl text-navyblue-800 font-bold">
+                        Freelancer
+                      </TableHead>
+                      <TableHead className="text-2xl text-navyblue-800 font-bold">
+                        Total Amount
+                      </TableHead>
+                      <TableHead className="text-2xl text-navyblue-800 font-bold">
+                        Admin fee
                       </TableHead>
                     </TableRow>
                   </TableHeader>
-                  {/* <TableBody>
-                    <TableRow>
-                      <TableCell className="font-medium text-lg text-navyblue-800">
-                        02 / 11 / 2022
-                      </TableCell>
-                      <TableCell className="font-medium text-lg text-navyblue-800">
-                        PT. Dwimuria Investama
-                      </TableCell>
-                      <TableCell className="font-medium text-lg text-navyblue-800">
-                        {formatDescription(
-                          "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa, odit! Qui recusandae vitae quae et ducimus ratione ab expedita error quo quasi sapiente cum dignissimos fuga laborum culpa alias veritatis, optio obcaecati temporibus pariatur voluptates ipsum saepe. Impedit, ratione aliquid recusandae nulla vero eos accusamus suscipit? Fugit, a. Consequatur, voluptatum?"
-                        )}
-                      </TableCell>
-                      <TableCell className="font-medium text-lg text-navyblue-800">
-                        {formatAmount(1000000)}
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="font-medium text-lg text-navyblue-800">
-                        02 / 11 / 2022
-                      </TableCell>
-                      <TableCell className="font-medium text-lg text-navyblue-800">
-                        PT. HM Sampoerna Tbk.
-                      </TableCell>
-                      <TableCell className="font-medium text-lg text-navyblue-800">
-                        {formatDescription(
-                          "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa, odit! Qui recusandae vitae quae et ducimus ratione ab expedita error quo quasi sapiente cum dignissimos fuga laborum culpa alias veritatis, optio obcaecati temporibus pariatur voluptates ipsum saepe. Impedit, ratione aliquid recusandae nulla vero eos accusamus suscipit? Fugit, a. Consequatur, voluptatum?"
-                        )}
-                      </TableCell>
-                      <TableCell className="font-medium text-lg text-navyblue-800">
-                        {formatAmount(500000)}
-                      </TableCell>
-                    </TableRow>
-                  </TableBody> */}
+                  <TableBody>
+                    {activity.map((item, index) => {
+                      return (
+                        <TableRow key={index}>
+                          <TableCell className="font-medium text-lg text-navyblue-800">
+                            {item.invoice}
+                          </TableCell>
+                          <TableCell className="font-medium text-lg text-navyblue-800">
+                            {/* {item.start_date} */}
+                            {formatDate(item.start_date)}
+                          </TableCell>
+                          <TableCell className="font-medium text-lg text-navyblue-800">
+                            {item.company}
+                          </TableCell>
+                          <TableCell className="font-medium text-lg text-navyblue-800">
+                            {item.freelancer}
+                          </TableCell>
+                          <TableCell className="font-medium text-lg text-navyblue-800">
+                            {formatAmount(item.deal_price)}
+                          </TableCell>
+                          <TableCell className="font-medium text-lg text-navyblue-800">
+                            {adminFee(item.deal_price)}
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
                 </Table>
               </div>
             </div>
