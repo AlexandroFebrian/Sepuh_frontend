@@ -83,7 +83,7 @@ const Router = createBrowserRouter([
       },
       {
         path: "notifications",
-        element: <Notification />
+        element: <Notification />,
       },
       {
         path: "post/:postId",
@@ -148,42 +148,42 @@ const Router = createBrowserRouter([
           },
         ],
       },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <AdminLogin />,
+  },
+  {
+    path: "admin",
+    children: [
       {
-        path: "/admin",
-        element: <AdminLogin />,
+        path: "dashboard",
+        element: <DashboardAdmin />,
       },
       {
-        path: "admin",
-        children: [
-          {
-            path: "dashboard",
-            element: <DashboardAdmin />,
-          },
-          {
-            path: "masteruser",
-            element: <MasterUser />,
-          },
-          {
-            path: "masterpost",
-            element: <MasterPost />,
-          },
-          {
-            path: "userreports",
-            element: <UserReports />,
-          },
-          {
-            path: "postingreports",
-            element: <PostingReports />,
-          },
-          {
-            path: "incomereports",
-            element: <IncomeReportsAdmin />,
-          },
-          {
-            path: "paymentreports",
-            element: <PaymentReports />,
-          },
-        ],
+        path: "masteruser",
+        element: <MasterUser />,
+      },
+      {
+        path: "masterpost",
+        element: <MasterPost />,
+      },
+      {
+        path: "userreports",
+        element: <UserReports />,
+      },
+      {
+        path: "postingreports",
+        element: <PostingReports />,
+      },
+      {
+        path: "incomereports",
+        element: <IncomeReportsAdmin />,
+      },
+      {
+        path: "paymentreports",
+        element: <PaymentReports />,
       },
     ],
   },
