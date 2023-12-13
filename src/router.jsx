@@ -21,6 +21,7 @@ import BankAccount from "./Views/User/BankAccount/BankAccount";
 import IncomeReportsUser from "./Views/User/IncomeReports/IncomeReports";
 import EmployeeReports from "./Views/User/CompanyEmployeeReports/EmployeeReports";
 import CompanyEmployeeList from "./Views/User/CompanyEmployeeList/CompanyEmployeeList";
+import Settings from "./Views/User/Settings/Settings";
 
 // ADMIN
 import AdminLogin from "./Views/Admin/AdminLogin/AdminLogin";
@@ -93,6 +94,10 @@ const Router = createBrowserRouter([
       {
         path: "employeelists",
         element: <CompanyEmployeeList />,
+      },
+      {
+        path: "settings",
+        element: <Settings />,
       },
       {
         path: "activity",

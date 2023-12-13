@@ -1045,6 +1045,34 @@ export default function fetch() {
     }
   }
 
+  async function changePassword(data) {
+    const token = localStorage.getItem("token");
+    console.log(token);
+    try {
+      return await client
+        .put(
+          "users/password",
+          {
+            old_password: data.old_password,
+            new_password: data.new_password,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((res) => {
+          return res;
+        })
+        .catch((err) => {
+          return err.response;
+        });
+    } catch (error) {
+      alert("error");
+    }
+  }
+
   return {
     signIn,
     signUp,
@@ -1086,5 +1114,6 @@ export default function fetch() {
     updateDocument,
     createMessage,
     hireOrApply,
+    changePassword,
   };
 }
