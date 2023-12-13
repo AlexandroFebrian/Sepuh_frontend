@@ -72,7 +72,7 @@ export default function PopupBox({
 
   return (
     <div
-      className={` w-[30rem] h-fit bg-white rounded-md p-10 animate__animated ${
+      className={` w-1/4 h-fit bg-white rounded-md p-10 animate__animated ${
         closeBox ? "animate__fadeOut" : "animate__fadeIn"
       } animate__faster`}
     >
