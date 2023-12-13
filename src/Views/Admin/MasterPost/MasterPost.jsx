@@ -17,27 +17,21 @@ export default function MasterPost() {
 
         <div className="right w-full pt-10 shadow-lg">
           <div className="px-10 pb-10">
-            <div className="bg-ghostwhite-100 mx-7">
+            <div className="mx-7">
               <Table className="w-full bg-ghostwhite-100 rounded-md">
-                <TableHeader className="border-b-2 border-navyblue-600">
+                <TableHeader className=" border-b-2 border-navyblue-600">
                   <TableRow>
                     <TableHead className="w-[100px] text-2xl text-navyblue-800 font-bold">
                       No
                     </TableHead>
-                    <TableHead className="text-2xl text-navyblue-800 w-1/5 font-bold">
+                    <TableHead className="text-2xl text-navyblue-800 w-1/3 font-bold">
                       Name
                     </TableHead>
-                    <TableHead className="text-2xl text-navyblue-800 w-1/5 font-bold">
-                      Date Upload
+                    <TableHead className="text-2xl text-navyblue-800 w-1/3 font-bold">
+                      Latest Date Upload
                     </TableHead>
                     <TableHead className="text-2xl text-navyblue-800 font-bold">
-                      Impressions
-                    </TableHead>
-                    <TableHead className="text-2xl text-navyblue-800 font-bold">
-                      History Actions
-                    </TableHead>
-                    <TableHead className="text-center text-2xl text-navyblue-800 w-1/5 font-bold">
-                      Actions
+                      Highest Impressions
                     </TableHead>
                   </TableRow>
                 </TableHeader>
@@ -51,16 +45,6 @@ export default function MasterPost() {
                       25 November 2023
                     </TableCell>
                     <TableCell className="font-medium text-lg">1000</TableCell>
-                    <TableCell className="font-medium text-lg">
-                      Banned on 27 November 2023
-                    </TableCell>
-                    <TableCell className="font-medium text-lg">
-                      <div className="buttonAction flex gap-2 items-center justify-center">
-                        <button className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-600 w-24">
-                          Suspend
-                        </button>
-                      </div>
-                    </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell className="font-medium text-lg">2</TableCell>
@@ -71,16 +55,6 @@ export default function MasterPost() {
                       25 November 2023
                     </TableCell>
                     <TableCell className="font-medium text-lg">1230</TableCell>
-                    <TableCell className="font-medium text-lg">
-                      Banned on 27 November 2023
-                    </TableCell>
-                    <TableCell className="font-medium text-lg">
-                      <div className="buttonAction flex gap-2 items-center justify-center">
-                        <button className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-600 w-24">
-                          Suspend
-                        </button>
-                      </div>
-                    </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell className="font-medium text-lg">3</TableCell>
@@ -91,16 +65,6 @@ export default function MasterPost() {
                       25 November 2023
                     </TableCell>
                     <TableCell className="font-medium text-lg">1230</TableCell>
-                    <TableCell className="font-medium text-lg">
-                      Banned on 27 November 2023
-                    </TableCell>
-                    <TableCell className="font-medium text-lg">
-                      <div className="buttonAction flex gap-2 items-center justify-center">
-                        <button className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-600 w-24">
-                          Suspend
-                        </button>
-                      </div>
-                    </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell className="font-medium text-lg">4</TableCell>
@@ -111,16 +75,6 @@ export default function MasterPost() {
                       25 November 2023
                     </TableCell>
                     <TableCell className="font-medium text-lg">1230</TableCell>
-                    <TableCell className="font-medium text-lg">
-                      Banned on 27 November 2023
-                    </TableCell>
-                    <TableCell className="font-medium text-lg">
-                      <div className="buttonAction flex gap-2 items-center justify-center">
-                        <button className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-600 w-24">
-                          Suspend
-                        </button>
-                      </div>
-                    </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>

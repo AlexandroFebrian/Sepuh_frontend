@@ -9,6 +9,10 @@ export default function IncomeReportsViewModelAdmin() {
 
   useEffect(() => {
     fetchActivity(setActivity);
+
+    return () => {
+      setActivity([]);
+    };
   }, []);
 
   return {
