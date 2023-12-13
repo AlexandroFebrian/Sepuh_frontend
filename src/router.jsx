@@ -35,6 +35,7 @@ import DetailActivity from "./Views/User/MyActivity/DetailActivity/DetailActivit
 import Rejected from "./Views/User/MyActivity/Rejected/Rejected";
 import Dashboard from "./Views/User/Dashboard/Dashboard";
 import Notification from "./Views/User/Notification/Notification";
+import DetailsPostAdmin from "./Views/Admin/DetailsPost/DetailsPost";
 
 const Router = createBrowserRouter([
   {
@@ -168,6 +169,10 @@ const Router = createBrowserRouter([
       {
         path: "masterpost",
         element: <MasterPost />,
+      },
+      {
+        path: "masterpost/details/",
+        element: <DetailsPostAdmin />,
       },
       {
         path: "userreports",

@@ -7,7 +7,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import MasterPostViewModel from "./MasterPostViewModel";
 export default function MasterPost() {
+  const { Users } = MasterPostViewModel();
+
   return (
     <>
       <div className="container-masterPost flex">
@@ -35,7 +38,7 @@ export default function MasterPost() {
                     </TableHead>
                   </TableRow>
                 </TableHeader>
-                <TableBody>
+                {/* <TableBody>
                   <TableRow>
                     <TableCell className="font-medium text-lg">1</TableCell>
                     <TableCell className="font-medium text-lg">
@@ -76,6 +79,35 @@ export default function MasterPost() {
                     </TableCell>
                     <TableCell className="font-medium text-lg">1230</TableCell>
                   </TableRow>
+                </TableBody> */}
+
+                <TableBody>
+                  {Users.map((user, index) => (
+                    <TableRow
+                      key={index}
+                      onClick={() => {
+                        console.log(
+                          "Navigating to:",
+                          `/admin/masterpost/details?email=${user.email}`
+                        );
+
+                        window.location.href = `/admin/masterpost/details?email=${user.email}`;
+                      }}
+                    >
+                      <TableCell className="font-medium text-lg">
+                        {index + 1}
+                      </TableCell>
+                      <TableCell className="font-medium text-lg">
+                        {user.name}
+                      </TableCell>
+                      <TableCell className="font-medium text-lg">
+                        {user.date}
+                      </TableCell>
+                      <TableCell className="font-medium text-lg">
+                        {user.impression}
+                      </TableCell>
+                    </TableRow>
+                  ))}
                 </TableBody>
               </Table>
             </div>

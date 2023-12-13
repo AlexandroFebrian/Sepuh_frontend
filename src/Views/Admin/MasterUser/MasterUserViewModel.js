@@ -10,6 +10,7 @@ export default function MasterUserViewModel() {
 
   async function fetchData(first) {
     const res = await getAllUser();
+    console.log(res.users);
     setUsers(res.users);
 
     if (first) SetStatus(res.users.map((user) => user.status));
