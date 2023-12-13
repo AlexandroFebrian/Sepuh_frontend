@@ -8,7 +8,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import IncomeReportsViewModelAdmin from "./IncomeReportsViewModelAdmin";
+
 export default function IncomeReports() {
+  const { activity } = IncomeReportsViewModelAdmin();
+  console.log("activity", activity);
+
   const formatDescription = (description) => {
     if (description.length > 85) {
       return description.substring(0, 85) + "...";
@@ -74,7 +79,7 @@ export default function IncomeReports() {
                       </TableHead>
                     </TableRow>
                   </TableHeader>
-                  <TableBody>
+                  {/* <TableBody>
                     <TableRow>
                       <TableCell className="font-medium text-lg text-navyblue-800">
                         02 / 11 / 2022
@@ -107,7 +112,7 @@ export default function IncomeReports() {
                         {formatAmount(500000)}
                       </TableCell>
                     </TableRow>
-                  </TableBody>
+                  </TableBody> */}
                 </Table>
               </div>
             </div>
