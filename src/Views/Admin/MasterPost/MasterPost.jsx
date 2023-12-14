@@ -51,7 +51,6 @@ export default function MasterPost() {
     const year = newDate.getFullYear();
     return `${day} ${month} ${year}`;
   };
-
   useEffect(() => {
     Users.map((user, index) => {
       console.log("user", user);
@@ -59,16 +58,8 @@ export default function MasterPost() {
     });
 
     setListUsers(Users);
-  }, []);
-
-  useEffect(() => {
-    Users.map((user, index) => {
-      console.log("user", user);
-      fetchPosts(user.email);
-    });
   }, [Users]);
 
-  // cari list user yang sesuai dengan keyword
   useEffect(() => {
     if (globalFilterValue) {
       const _filters = { ...filters };

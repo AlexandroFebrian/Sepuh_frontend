@@ -116,12 +116,7 @@ export default function IncomeReports() {
                   Chart
                 </button>
               </div>
-              <div
-                className="dateFromTo mt-5"
-                onClick={() => {
-                  alert("Masih error hehe");
-                }}
-              >
+              <div className="dateFromTo mt-5">
                 <div className={cn("grid gap-2", "grid-cols-2")}>
                   <Popover>
                     <PopoverTrigger asChild>
