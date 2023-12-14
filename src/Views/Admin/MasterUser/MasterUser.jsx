@@ -88,10 +88,6 @@ export default function MasterUser() {
                         {dateFormat(user.create_at)}
                       </TableCell>
                       <TableCell className="font-medium text-lg">
-                        {/* {user.update_at
-                          ? `Banned on ${dateFormat(user.update_at)}`
-                          : "Not banned"} */}
-
                         {user.create_at != user.update_at
                           ? `Banned on ${dateFormat(user.update_at)}`
                           : "Not banned"}
@@ -123,10 +119,6 @@ export default function MasterUser() {
                               Ban
                             </button>
                           )}
-
-                          <button className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-600 w-20">
-                            Edit
-                          </button>
                         </div>
                       </TableCell>
                     </TableRow>
