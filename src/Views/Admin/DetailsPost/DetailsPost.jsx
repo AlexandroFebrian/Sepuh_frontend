@@ -22,7 +22,7 @@ export default function DetailsPost() {
 
   const getDetailsPost = async () => {
     // localhost:3000/api/posts/admin/:email
-    const response = await Axios.get(`${baseURL}posts/admin/${emailSearch}`, {
+    const response = await Axios.get(`${baseURL}/posts/admin/${emailSearch}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -40,7 +40,7 @@ export default function DetailsPost() {
     const token = localStorage.getItem("token");
 
     const response = await Axios.put(
-      `${baseURL}posts/suspend/${id}`,
+      `${baseURL}/posts/suspend/${id}`,
       {},
       {
         headers: {
@@ -61,7 +61,7 @@ export default function DetailsPost() {
     const token = localStorage.getItem("token");
 
     const response = await Axios.put(
-      `${baseURL}posts/unsuspend/${id}`,
+      `${baseURL}/posts/unsuspend/${id}`,
       {},
       {
         headers: {
