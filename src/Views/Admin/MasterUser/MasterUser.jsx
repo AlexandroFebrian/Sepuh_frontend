@@ -7,7 +7,6 @@ import { FilterMatchMode } from "primereact/api";
 
 import MasterUserViewModel from "./MasterUserViewModel";
 import { useEffect, useState } from "react";
-import { FiSearch } from "react-icons/fi";
 
 export default function MasterUser() {
   const [ListUsers, setListUsers] = useState([]);
@@ -115,41 +114,41 @@ export default function MasterUser() {
                     field="email"
                     // header="Email"
                     header={
-                      <span className="text-navyblue-800 font-bold mr-2">
+                      <span className="text-navyblue-800 font-bold mr-2 text-3xl font-sarabun">
                         Email
                       </span>
                     }
                     sortable
-                    className="w-1/5"
+                    className="w-1/5 text-xl font-sarabun"
                   ></Column>
                   <Column
                     field="name"
                     header={
-                      <span className="text-navyblue-800 font-bold mr-2">
+                      <span className="text-navyblue-800 font-bold mr-2 text-3xl font-sarabun">
                         Name
                       </span>
                     }
                     sortable
-                    className="w-1/6"
+                    className="w-1/6 text-xl font-sarabun"
                   ></Column>
                   <Column
                     field="role"
                     header={
-                      <span className="text-navyblue-800 font-bold mr-2">
+                      <span className="text-navyblue-800 font-bold mr-2 text-3xl font-sarabun">
                         Role
                       </span>
                     }
                     sortable
-                    className="w-1/6"
+                    className="w-1/6 text-xl font-sarabun"
                   ></Column>
                   <Column
                     header={
-                      <span className="text-navyblue-800 font-bold mr-2">
+                      <span className="text-navyblue-800 font-bold mr-2 text-3xl font-sarabun">
                         Member Since
                       </span>
                     }
                     sortable
-                    className="w-1/5"
+                    className="w-1/5 text-xl font-sarabun"
                     body={(rowData) => {
                       return (
                         <span className="font-medium h-full">
@@ -160,7 +159,7 @@ export default function MasterUser() {
                   ></Column>
                   <Column
                     header={
-                      <span className="text-navyblue-800 font-bold mr-2">
+                      <span className="text-navyblue-800 font-bold mr-2 text-3xl font-sarabun">
                         History Action
                       </span>
                     }
@@ -168,7 +167,7 @@ export default function MasterUser() {
                     className="w-1/4"
                     body={(rowData) => {
                       return (
-                        <span className="font-medium h-full">
+                        <span className="font-medium h-full text-xl font-sarabun">
                           {rowData.create_at != rowData.update_at
                             ? `Banned on ${formatdate(rowData.update_at)}`
                             : "Not banned"}
@@ -177,9 +176,15 @@ export default function MasterUser() {
                     }}
                   ></Column>
                   <Column
+                    className="w-1/6"
+                    header={
+                      <span className="text-navyblue-800 font-bold mr-2 text-3xl font-sarabun ">
+                        Action
+                      </span>
+                    }
                     body={(rowData) => {
                       return (
-                        <div className="buttonAction flex gap-2">
+                        <div className="buttonAction flex gap-2 text-xl font-sarabun">
                           {rowData.status === -1 && (
                             <button
                               className=" bg-navyblue-500 text-white rounded-md px-3 py-2 hover:bg-navyblue-600  w-20"
@@ -208,8 +213,6 @@ export default function MasterUser() {
                         </div>
                       );
                     }}
-                    header="Action"
-                    style={{ width: "25%" }}
                   ></Column>
                 </DataTable>
               </div>
