@@ -1,33 +1,22 @@
 import NavigationAdmin from "../../../components/NavigationAdmin/NavigationAdmin";
-import FilteringAdmin from "../../../components/FilteringAdmin/FilteringAdmin";
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import { InputText } from "primereact/inputtext";
+import { FilterMatchMode } from "primereact/api";
+
 import MasterUserViewModel from "./MasterUserViewModel";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { FiSearch } from "react-icons/fi";
 
 export default function MasterUser() {
-  const dateFormat = (date) => {
-    const dateObj = new Date(date);
-    const month = dateObj.toLocaleString("default", { month: "long" });
-    const day = dateObj.getDate();
-    const year = dateObj.getFullYear();
-    return `${day} ${month} ${year}`;
-  };
+  const [ListUsers, setListUsers] = useState([]);
+  const [globalFilterValue, setGlobalFilterValue] = useState(null);
+  const [filters, setFilters] = useState({
+    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  });
 
-  // const Users = MasterUserViewModel();
-  // const banUserVM = MasterUserViewModel();
-  // const unbanUserVM = MasterUserViewModel();
-  // const Status = MasterUserViewModel();
-
-  const { Users, BanUserVM, UnbanUserVM, Status, SetStatus } =
-    MasterUserViewModel();
+  const { Users, BanUserVM, UnbanUserVM } = MasterUserViewModel();
   const banUser = (email) => {
     BanUserVM(email);
   };
@@ -40,6 +29,53 @@ export default function MasterUser() {
     document.title = "Master User - Sepuh";
   }, []);
 
+  const onGlobalFilterChange = (e) => {
+    const value = e.target.value;
+    let _filters = { ...filters };
+
+    _filters["global"].value = value;
+
+    setFilters(_filters);
+    setGlobalFilterValue(value);
+  };
+
+  const renderHeader = () => {
+    return (
+      <div className="relative mb-6h-fit">
+        <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+          <svg
+            className="svg-icon search-icon"
+            aria-labelledby="title desc"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 19.9 19.7"
+            width="20"
+            height="20"
+          >
+            <g className="search-path" fill="none" stroke="currentColor">
+              <path strokeLinecap="square" d="M18.5 18.3l-5.4-5.4" />
+              <circle cx="8" cy="8" r="7" />
+            </g>
+          </svg>
+        </div>
+        <InputText
+          value={globalFilterValue}
+          onChange={onGlobalFilterChange}
+          placeholder="Keyword Search"
+          className="border border-gray-300 text-gray-900 text-md block w-1/4 pl-10 p-2.5 rounded-md focus:ring-navyblue-500 focus:border-navyblue-500 focus:outline-none"
+        />
+      </div>
+    );
+  };
+
+  const formatdate = (date) => {
+    const dateObj = new Date(date);
+    const month = dateObj.toLocaleString("default", { month: "long" });
+    const day = dateObj.getDate();
+    const year = dateObj.getFullYear();
+    return `${day} ${month} ${year}`;
+  };
+
   return (
     <>
       <div className="container-masteruser flex">
@@ -49,82 +85,113 @@ export default function MasterUser() {
         <div className="right w-full pt-10 shadow-lg">
           <div className="mb-10 min-h-[calc(100vh-5rem)] px-10 pb-10 w-full">
             <div className="mx-7">
-              <Table className="w-full bg-ghostwhite-100 rounded-md">
-                <TableHeader className="border-b-2 border-navyblue-600">
-                  <TableRow>
-                    <TableHead className="w-[100px] text-2xl text-navyblue-800 font-bold">
-                      No
-                    </TableHead>
-                    <TableHead className="text-2xl text-navyblue-800 w-1/5 font-bold">
-                      Name
-                    </TableHead>
-                    <TableHead className="text-2xl text-navyblue-800 w-1/5 font-bold">
-                      Email
-                    </TableHead>
-                    <TableHead className="text-2xl text-navyblue-800 font-bold">
-                      Member Since
-                    </TableHead>
-                    <TableHead className="text-2xl text-navyblue-800 font-bold">
-                      History Actions
-                    </TableHead>
-                    <TableHead className="text-center text-2xl text-navyblue-800 w-1/5 font-bold">
-                      Actions
-                    </TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {Users.map((user, index) => (
-                    <TableRow key={index}>
-                      <TableCell className="font-medium text-lg">
-                        {index + 1}
-                      </TableCell>
-                      <TableCell className="font-medium text-lg">
-                        {user.name}
-                      </TableCell>
-                      <TableCell className="font-medium text-lg">
-                        <a href={`mailto:${user.email}`}>{user.email}</a>
-                      </TableCell>
-                      <TableCell className="font-medium text-lg">
-                        {dateFormat(user.create_at)}
-                      </TableCell>
-                      <TableCell className="font-medium text-lg">
-                        {user.create_at != user.update_at
-                          ? `Banned on ${dateFormat(user.update_at)}`
-                          : "Not banned"}
-                      </TableCell>
-                      <TableCell className="font-medium text-lg">
-                        <div className="buttonAction flex gap-2 items-center justify-center">
-                          {Status[index] === -1 && (
+              <div className="title">
+                <h2 className="text-3xl font-semibold">Master User</h2>
+              </div>
+              <div className="table w-full rounded-md my-5 ">
+                <DataTable
+                  value={Users}
+                  removableSort
+                  className="flex flex-col gap-5 p-datatable-sm w-full bg-ghostwhite-100 rounded-md p-5"
+                  paginator
+                  rows={10}
+                  rowsPerPageOptions={[10, 20, 30]}
+                  paginatorTemplate=" PrevPageLink PageLinks NextPageLink CurrentPageReport"
+                  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} users"
+                  emptyMessage="No users found"
+                  dataKey="id"
+                  filters={filters}
+                  filterDisplay="row"
+                  globalFilterFields={[
+                    "email",
+                    "name",
+                    "role",
+                    "create_at",
+                    "update_at",
+                  ]}
+                  header={renderHeader()}
+                >
+                  <Column
+                    field="email"
+                    header="Email"
+                    sortable
+                    className="w-1/5"
+                  ></Column>
+                  <Column
+                    field="name"
+                    header="Name"
+                    sortable
+                    className="w-1/6"
+                  ></Column>
+                  <Column
+                    field="role"
+                    header="Role"
+                    sortable
+                    className="w-1/6"
+                  ></Column>
+                  <Column
+                    header="Member Since"
+                    sortable
+                    className="w-1/5"
+                    body={(rowData) => {
+                      return (
+                        <span className="font-medium h-full">
+                          {formatdate(rowData.create_at)}
+                        </span>
+                      );
+                    }}
+                  ></Column>
+                  <Column
+                    header="History Actions"
+                    sortable
+                    className="w-1/4"
+                    body={(rowData) => {
+                      return (
+                        <span className="font-medium h-full">
+                          {rowData.create_at != rowData.update_at
+                            ? `Banned on ${formatdate(rowData.update_at)}`
+                            : "Not banned"}
+                        </span>
+                      );
+                    }}
+                  ></Column>
+                  <Column
+                    body={(rowData) => {
+                      return (
+                        <div className="buttonAction flex gap-2">
+                          {rowData.status === -1 && (
                             <button
                               className=" bg-navyblue-500 text-white rounded-md px-3 py-2 hover:bg-navyblue-600  w-20"
                               onClick={() => {
-                                unbanUser(user.email);
-                                Status[index] = 1;
-                                SetStatus([...Status]);
+                                unbanUser(rowData.email);
+                                rowData.status = 1;
+                                setListUsers([...ListUsers]);
                               }}
                             >
                               Unban
                             </button>
                           )}
 
-                          {Status[index] === 1 && (
+                          {rowData.status === 1 && (
                             <button
                               className="bg-red-500 text-white rounded-md px-3 py-2 hover:bg-red-700 w-20"
                               onClick={() => {
-                                banUser(user.email);
-                                Status[index] = -1;
-                                SetStatus([...Status]);
+                                banUser(rowData.email);
+                                rowData.status = -1;
+                                setListUsers([...ListUsers]);
                               }}
                             >
                               Ban
                             </button>
                           )}
                         </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                      );
+                    }}
+                    header="Action"
+                    style={{ width: "25%" }}
+                  ></Column>
+                </DataTable>
+              </div>
             </div>
           </div>
         </div>
