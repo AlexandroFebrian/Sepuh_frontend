@@ -2,7 +2,7 @@
 import fetch from "../../../Client/fetch";
 import { useEffect, useState } from "react";
 
-export default function MasterPostViewModel() {
+export default function UserReportsViewModel() {
   const { getAllUser, getUserPostsByEmail } = fetch();
 
   const [Users, setUsers] = useState([]);
@@ -12,11 +12,6 @@ export default function MasterPostViewModel() {
     const res = await getAllUser();
     setUsers(res.users);
     if (first) SetStatus(res.users.map((user) => user.status));
-  }
-
-  async function fetchPosts(email) {
-    const res = await getUserPostsByEmail(email);
-    console.log(res);
   }
 
   useEffect(() => {
@@ -30,6 +25,5 @@ export default function MasterPostViewModel() {
   return {
     Users,
     Status,
-    fetchPosts,
   };
 }

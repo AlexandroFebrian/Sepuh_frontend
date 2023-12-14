@@ -335,7 +335,6 @@ export default function fetch() {
           let filtered = res.data.users.filter((user) => {
             return user.status !== 0;
           });
-          console.log(filtered);
 
           return {
             users: filtered,
@@ -1095,87 +1094,107 @@ export default function fetch() {
     }
   }
 
-  async function getUserNotifications(setNotifications){
+  async function getUserNotifications(setNotifications) {
     const token = localStorage.getItem("token");
 
     try {
-      return await client.get("users/notifications", {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }).then((res) => {
-        setNotifications(res.data)
-        return res
-      }).catch((err) => {
-        return err.response
-      })
+      return await client
+        .get("users/notifications", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          setNotifications(res.data);
+          return res;
+        })
+        .catch((err) => {
+          return err.response;
+        });
     } catch (error) {
-      alert("error")
+      alert("error");
     }
   }
 
-  async function hireAccept(notifId, setPopup, setNotifications){
+  async function hireAccept(notifId, setPopup, setNotifications) {
     const token = localStorage.getItem("token");
 
     try {
-      return await client.put("users/hire/accept", {
-        notification_id: notifId
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }).then((res) => {
-        setPopup(true);
-        getUserNotifications(setNotifications)
-        return res
-      }).catch((err) => {
-        setPopup(true);
-        return err.response
-      })
+      return await client
+        .put(
+          "users/hire/accept",
+          {
+            notification_id: notifId,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((res) => {
+          setPopup(true);
+          getUserNotifications(setNotifications);
+          return res;
+        })
+        .catch((err) => {
+          setPopup(true);
+          return err.response;
+        });
     } catch (error) {
-      alert("error")
+      alert("error");
     }
   }
 
-  async function hireReject(notifId, setPopup, setNotifications){
+  async function hireReject(notifId, setPopup, setNotifications) {
     const token = localStorage.getItem("token");
 
     try {
-      return await client.put("users/hire/reject", {
-        notification_id: notifId
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }).then((res) => {
-        setPopup(true);
-        getUserNotifications(setNotifications)
-        return res
-      }).catch((err) => {
-        setPopup(true);
-        return err.response
-      })
+      return await client
+        .put(
+          "users/hire/reject",
+          {
+            notification_id: notifId,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((res) => {
+          setPopup(true);
+          getUserNotifications(setNotifications);
+          return res;
+        })
+        .catch((err) => {
+          setPopup(true);
+          return err.response;
+        });
     } catch (error) {
-      alert("error")
+      alert("error");
     }
   }
 
-  async function getEmployees(setEmployees){
+  async function getEmployees(setEmployees) {
     const token = localStorage.getItem("token");
 
     try {
-      return await client.get("users/employees", {
-        headers:{
-          Authorization: `Bearer ${token}`
-        }
-      }).then((res) => {
-        setEmployees(res.data)
-        return res
-      }).catch((err) => {
-        return err.response
-      })
+      return await client
+        .get("users/employees", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          setEmployees(res.data);
+          return res;
+        })
+        .catch((err) => {
+          return err.response;
+        });
     } catch (error) {
-      alert("error")
+      alert("error");
     }
   }
 

@@ -8,8 +8,62 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import MasterPostViewModel from "./MasterPostViewModel";
+import Axios from "axios";
+const baseURL = import.meta.env.VITE_BACKEND_URL;
+import { useEffect, useState } from "react";
+import { format } from "date-fns";
 export default function MasterPost() {
   const { Users } = MasterPostViewModel();
+
+  const [posts, setPosts] = useState([]);
+
+  const fetchPosts = async (email) => {
+    try {
+      const response = await Axios.get(`${baseURL}/posts/${email}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res) => {
+        setPosts(res.data);
+        return res.data;
+      });
+      return response;
+    } catch (err) {
+      return err;
+    }
+  };
+
+  const formatDate = (date) => {
+    const newDate = new Date(date);
+    const month = newDate.toLocaleString("default", { month: "long" });
+    const day = newDate.getDate();
+    const year = newDate.getFullYear();
+    return `${day} ${month} ${year}`;
+  };
+
+  useEffect(() => {
+    Users.map((user, index) => {
+      console.log("user", user);
+      fetchPosts(user.email);
+    });
+  }, []);
+
+  useEffect(() => {
+    Users.map((user, index) => {
+      console.log("user", user);
+      fetchPosts(user.email);
+    });
+  }, [Users]);
+
+  const getHighestImpression = (posts) => {
+    let highestImpression = 0;
+    posts.map((post) => {
+      if (post.impressions > highestImpression) {
+        highestImpression = post.impressions;
+      }
+    });
+    return highestImpression;
+  };
 
   return (
     <>
@@ -38,48 +92,6 @@ export default function MasterPost() {
                     </TableHead>
                   </TableRow>
                 </TableHeader>
-                {/* <TableBody>
-                  <TableRow>
-                    <TableCell className="font-medium text-lg">1</TableCell>
-                    <TableCell className="font-medium text-lg">
-                      Febrian Alexandro
-                    </TableCell>
-                    <TableCell className="font-medium text-lg">
-                      25 November 2023
-                    </TableCell>
-                    <TableCell className="font-medium text-lg">1000</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium text-lg">2</TableCell>
-                    <TableCell className="font-medium text-lg">
-                      Felicia Pangestu
-                    </TableCell>
-                    <TableCell className="font-medium text-lg">
-                      25 November 2023
-                    </TableCell>
-                    <TableCell className="font-medium text-lg">1230</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium text-lg">3</TableCell>
-                    <TableCell className="font-medium text-lg">
-                      Felicia Pangestu
-                    </TableCell>
-                    <TableCell className="font-medium text-lg">
-                      25 November 2023
-                    </TableCell>
-                    <TableCell className="font-medium text-lg">1230</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium text-lg">4</TableCell>
-                    <TableCell className="font-medium text-lg">
-                      Jonathan Wilbert Gunawan
-                    </TableCell>
-                    <TableCell className="font-medium text-lg">
-                      25 November 2023
-                    </TableCell>
-                    <TableCell className="font-medium text-lg">1230</TableCell>
-                  </TableRow>
-                </TableBody> */}
 
                 <TableBody>
                   {Users.map((user, index) => (
@@ -101,10 +113,14 @@ export default function MasterPost() {
                         {user.name}
                       </TableCell>
                       <TableCell className="font-medium text-lg">
-                        {user.date}
+                        {posts[index]?.posted_at
+                          ? formatDate(posts[index]?.posted_at)
+                          : "No Post"}
                       </TableCell>
                       <TableCell className="font-medium text-lg">
-                        {user.impression}
+                        {posts[index]?.visitor
+                          ? posts[index]?.visitor + " Visitor"
+                          : "0 Visitor"}
                       </TableCell>
                     </TableRow>
                   ))}
