@@ -95,58 +95,6 @@ export default function PaymentReports() {
           <div className="mb-10 px-10 pb-10">
             <div className="m-7">
               <div className="top">
-                {/* <Table>
-                  <TableHeader className="border-b-2 border-navyblue-600">
-                    <TableRow>
-                      <TableHead className="text-2xl text-navyblue-800 font-bold">
-                        Payment date
-                      </TableHead>
-                      <TableHead className="text-2xl text-navyblue-800 w-1/5 font-bold">
-                        Company Name
-                      </TableHead>
-                      <TableHead className="text-2xl text-navyblue-800 w-1/5 font-bold">
-                        Freelancer
-                      </TableHead>
-                      <TableHead className="text-2xl text-navyblue-800 w-1/5 font-bold">
-                        Status
-                      </TableHead>
-                      <TableHead className="text-2xl text-navyblue-800 w-1/5 font-bold">
-                        Amount
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-
-                  <TableBody>
-                    {ListActivity.slice(0, limit).map((item, index) => {
-                      return (
-                        <TableRow key={index}>
-                          <TableCell className="font-medium text-lg text-navyblue-800">
-                            {formatDate(item.start_date)}
-                          </TableCell>
-                          <TableCell className="font-medium text-lg text-navyblue-800">
-                            {item.company.name}
-                          </TableCell>
-                          <TableCell className="font-medium text-lg text-navyblue-800">
-                            {item.freelancer.name}
-                          </TableCell>
-                          {item.status === 2 ? (
-                            <TableCell className="font-bold text-lg text-green-500">
-                              Success
-                            </TableCell>
-                          ) : (
-                            <TableCell className="font-bold text-lg text-red-500">
-                              Failed
-                            </TableCell>
-                          )}
-                          <TableCell className="font-medium text-lg text-navyblue-800">
-                            {formatAmount(item.deal_price)}
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
-                  </TableBody>
-                </Table> */}
-
                 <div className="table w-full rounded-md my-5 ">
                   <DataTable
                     value={ListActivity}
@@ -178,11 +126,12 @@ export default function PaymentReports() {
                       }
                       body={(rowData) => {
                         return (
-                          <span className="font-medium h-full">
+                          <span className="font-medium h-full text-xl font-sarabun">
                             {formatDate(rowData.start_date)}
                           </span>
                         );
                       }}
+                      field="start_date"
                       sortable
                       className="w-1/4 text-xl font-sarabun"
                     ></Column>
@@ -193,6 +142,13 @@ export default function PaymentReports() {
                           Company Name
                         </span>
                       }
+                      body={(rowData) => {
+                        return (
+                          <span className="font-medium h-full text-xl font-sarabun">
+                            {rowData.company.name}
+                          </span>
+                        );
+                      }}
                       sortable
                       className="w-1/4 text-xl font-sarabun"
                     ></Column>
@@ -203,6 +159,13 @@ export default function PaymentReports() {
                           Freelancer
                         </span>
                       }
+                      body={(rowData) => {
+                        return (
+                          <span className="font-medium h-full text-xl font-sarabun">
+                            {rowData.freelancer.name}
+                          </span>
+                        );
+                      }}
                       sortable
                       className="w-1/4 text-xl font-sarabun"
                     ></Column>
@@ -217,13 +180,14 @@ export default function PaymentReports() {
                       className="w-1/5 text-xl font-sarabun"
                       body={(rowData) => {
                         return (
-                          <span className="font-medium h-full">
+                          <span className="font-medium h-full text-xl font-sarabun">
                             {formatAmount(rowData.deal_price)}
                           </span>
                         );
                       }}
                     ></Column>
                     <Column
+                      field="status"
                       header={
                         <span className="text-navyblue-800 font-bold mr-2 text-3xl font-sarabun">
                           Status
@@ -231,7 +195,7 @@ export default function PaymentReports() {
                       }
                       body={(rowData) => {
                         return (
-                          <span className="font-medium h-full">
+                          <span className="font-medium h-full text-xl font-sarabun">
                             {rowData.status === 2 ? (
                               <span className="font-bold text-lg text-green-500">
                                 Success

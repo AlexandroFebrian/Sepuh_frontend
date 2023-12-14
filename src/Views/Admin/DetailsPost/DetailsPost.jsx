@@ -84,8 +84,6 @@ export default function DetailsPost() {
 
   useEffect(() => {
     getDetailsPost();
-
-    getProfile(emailSearch);
   }, [emailSearch]);
 
   const formatAmount = (amount) => {
@@ -143,6 +141,7 @@ export default function DetailsPost() {
                     <div className="container-details">
                       <div className="container-details-image">
                         {item.image.map((item, index) => {
+                          console.log("item", item);
                           return (
                             <img
                               className="image-details w-1/5"
