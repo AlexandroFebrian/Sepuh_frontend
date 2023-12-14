@@ -113,24 +113,41 @@ export default function MasterUser() {
                 >
                   <Column
                     field="email"
-                    header="Email"
+                    // header="Email"
+                    header={
+                      <span className="text-navyblue-800 font-bold mr-2">
+                        Email
+                      </span>
+                    }
                     sortable
                     className="w-1/5"
                   ></Column>
                   <Column
                     field="name"
-                    header="Name"
+                    header={
+                      <span className="text-navyblue-800 font-bold mr-2">
+                        Name
+                      </span>
+                    }
                     sortable
                     className="w-1/6"
                   ></Column>
                   <Column
                     field="role"
-                    header="Role"
+                    header={
+                      <span className="text-navyblue-800 font-bold mr-2">
+                        Role
+                      </span>
+                    }
                     sortable
                     className="w-1/6"
                   ></Column>
                   <Column
-                    header="Member Since"
+                    header={
+                      <span className="text-navyblue-800 font-bold mr-2">
+                        Member Since
+                      </span>
+                    }
                     sortable
                     className="w-1/5"
                     body={(rowData) => {
@@ -142,7 +159,11 @@ export default function MasterUser() {
                     }}
                   ></Column>
                   <Column
-                    header="History Actions"
+                    header={
+                      <span className="text-navyblue-800 font-bold mr-2">
+                        History Action
+                      </span>
+                    }
                     sortable
                     className="w-1/4"
                     body={(rowData) => {
