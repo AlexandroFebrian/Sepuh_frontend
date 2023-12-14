@@ -13,6 +13,7 @@ export default function BankAccountViewModel() {
   const [profile, setProfile] = useState(null);
 
   const [bankName, setBankName] = useState([]);
+  const [bankSelect, setBankSelect] = useState('');
   const [wait, setWait] = useState(false);
   const [popup, setPopup] = useState(false);
   const [popupTitle, setPopupTitle] = useState("");
@@ -107,6 +108,7 @@ export default function BankAccountViewModel() {
       setProfileDateOfBirth(
         profile.date_of_birth != null && new Date(profile.date_of_birth)
       );
+      setBankSelect(profile.bank_name)
       setProfileHeadline(profile.headline);
       setProfileBio(profile.bio);
       setProfileCity(profile.city);
@@ -123,6 +125,7 @@ export default function BankAccountViewModel() {
     isLogin,
     user,
     profile,
+    bankSelect,
     bankName,
     profileAccountNumber,
     setProfileAccountNumber,

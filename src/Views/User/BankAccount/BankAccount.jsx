@@ -12,6 +12,7 @@ export default function BankAccount() {
     user,
     profileAccountNumber,
     setProfileAccountNumber,
+    bankSelect,
     bankName,
     saveProfile,
   } = BankAccountViewModel();
@@ -62,7 +63,8 @@ export default function BankAccount() {
                   contentClassName={" pt-1 border-0 "}
                   className="w-full rounded-md border-2 border-navyblue-600 py-2 px-3 mt-2"
                   items={bankName}
-                  item={user?.bank_name}
+                  item={bankSelect}
+                  // item={user?.bank_name}
                   onSelect={(value) => {
                     setBank_name(value);
                   }}
