@@ -1095,6 +1095,90 @@ export default function fetch() {
     }
   }
 
+  async function getUserNotifications(setNotifications){
+    const token = localStorage.getItem("token");
+
+    try {
+      return await client.get("users/notifications", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then((res) => {
+        setNotifications(res.data)
+        return res
+      }).catch((err) => {
+        return err.response
+      })
+    } catch (error) {
+      alert("error")
+    }
+  }
+
+  async function hireAccept(notifId, setPopup, setNotifications){
+    const token = localStorage.getItem("token");
+
+    try {
+      return await client.put("users/hire/accept", {
+        notification_id: notifId
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then((res) => {
+        setPopup(true);
+        getUserNotifications(setNotifications)
+        return res
+      }).catch((err) => {
+        setPopup(true);
+        return err.response
+      })
+    } catch (error) {
+      alert("error")
+    }
+  }
+
+  async function hireReject(notifId, setPopup, setNotifications){
+    const token = localStorage.getItem("token");
+
+    try {
+      return await client.put("users/hire/reject", {
+        notification_id: notifId
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then((res) => {
+        setPopup(true);
+        getUserNotifications(setNotifications)
+        return res
+      }).catch((err) => {
+        setPopup(true);
+        return err.response
+      })
+    } catch (error) {
+      alert("error")
+    }
+  }
+
+  async function getEmployees(setEmployees){
+    const token = localStorage.getItem("token");
+
+    try {
+      return await client.get("users/employees", {
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      }).then((res) => {
+        setEmployees(res.data)
+        return res
+      }).catch((err) => {
+        return err.response
+      })
+    } catch (error) {
+      alert("error")
+    }
+  }
+
   return {
     signIn,
     signUp,
@@ -1138,5 +1222,9 @@ export default function fetch() {
     hireOrApply,
     changePassword,
     getAllAgreements,
+    getUserNotifications,
+    hireAccept,
+    hireReject,
+    getEmployees,
   };
 }

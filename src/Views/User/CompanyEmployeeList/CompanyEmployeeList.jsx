@@ -1,8 +1,10 @@
 import FreelancerDefaultMenu from "../../../components/SidebarMenu/Freelancer/FreelancerDefaultMenu/FreelancerDefaultMenu";
 import CompanyDefaultMenu from "../../../components/SidebarMenu/Company/CompanyDefaultMenu/CompanyDefaultMenu";
 import CompanyEmployeeViewModel from "./CompanyEmployeeListViewModel";
+import { FaStar } from "react-icons/fa6";
+import { Avatar } from "@chakra-ui/react";
 export default function CompanyEmployeeList() {
-  const { isLogin, user } = CompanyEmployeeViewModel();
+  const { isLogin, user, employees } = CompanyEmployeeViewModel();
   return (
     <>
       <div className=" h-fit relative flex">
@@ -14,10 +16,47 @@ export default function CompanyEmployeeList() {
         </div>
         <div className="mid w-4/5">
           <div className=" min-h-[calc(100vh-5rem)] h-fit border-l-2 border-navyblue-600 z-0 px-10 py-10">
-            <div className="employeeList">
-              <div className="grid grid-cols-4 gap-4">
-                <div className="employeeCard"></div>
-              </div>
+            <h1 className=" text-3xl font-bold">
+              Employee Lists
+            </h1>
+
+            <div className="mt-5 grid grid-cols-3 2xl:grid-cols-4 gap-6">
+              {
+                employees?.map((item, idx) => {
+
+                  return (
+                    <div key={idx} className=" bg-navyblue-800 w-full h-72 rounded">
+                      <div 
+                        style={{
+                          backgroundImage: `url('${item.header_picture}')`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                          backgroundRepeat: "no-repeat",
+                        }}
+                        className="w-full h-40 rounded-t bg-navyblue-600"
+                      />
+
+                      <div className="px-3 py-3 w-full ">
+                        <div className="flex items-center">
+                          <Avatar src={item.profile_picture} size={"lg"} />
+                          <div className="ml-3 text-ghostwhite-50 truncate w-full">
+                            <h2 className=" text-lg font-semibold whitespace-normal">
+                              {item.name}
+                            </h2>
+                            <p className="truncate">
+                              {item.headline}
+                            </p>
+                          </div>
+
+                        </div>
+                        <div className=" text-ghostwhite-50 mt-1 flex items-center">
+                          <FaStar className="text-yellow-500 mr-1" /> {item.rating}
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })
+              }
             </div>
           </div>
         </div>

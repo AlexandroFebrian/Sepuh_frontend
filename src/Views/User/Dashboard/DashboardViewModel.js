@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 
 
 export default function DashboardViewModel(){
-  const { checkToken, myPost, fetchActivity } = fetch();
+  const { checkToken, myPost, fetchActivity, getUserNotifications } = fetch();
 
   const isLogin = useSelector((state) => state.user.isLogin);
   const user = useSelector((state) => state.user.userDetail);
@@ -20,6 +20,9 @@ export default function DashboardViewModel(){
   const [post, setPost] = useState([]);
   const [visitor, setVisitor] = useState(0);
 
+  const [notifications, setNotifications] = useState([]);
+  const [applicants, setApplicants] = useState(0);
+
   useEffect(() => {
     checkToken();
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -29,6 +32,7 @@ export default function DashboardViewModel(){
     if(user){
       fetchActivity(setActivity)
       myPost(user.email, setPost)
+      getUserNotifications(setNotifications)
     }
   }, [user])
 
@@ -62,7 +66,15 @@ export default function DashboardViewModel(){
     }
   }, [post])
 
-
+  useEffect(() => {
+    if(notifications.length > 0){
+      notifications.map((item) => {
+        if(item.category == "Applied" && item.status == 0){
+          setApplicants(prev => prev + 1)
+        }
+      })
+    }
+  }, [notifications])
 
   return {
     isLogin,
@@ -73,6 +85,7 @@ export default function DashboardViewModel(){
     ongoing,
     formattedOutcome,
     post,
-    visitor
+    visitor,
+    applicants
   }
 }

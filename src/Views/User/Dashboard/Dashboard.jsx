@@ -13,6 +13,7 @@ import Projects from './Projects';
 import Visitors from './Visitors';
 import Outcome from './Outcome';
 import Applicants from './Applicants';
+import { Link } from 'react-router-dom';
 
 export default function Dashboard() {
   const { 
@@ -24,7 +25,8 @@ export default function Dashboard() {
     ongoing,
     formattedOutcome,
     post,
-    visitor
+    visitor,
+    applicants
   } = DashboardViewModel()
 
   return (
@@ -106,22 +108,24 @@ export default function Dashboard() {
                 </div>
               </div>
               
-              <div className='w-full h-24 bg-darkblue-100 rounded-lg border-b-8 border-yellow-500 flex items-center justify-between px-5 hover:bg-darkblue-200 transition-all duration-300 cursor-pointer' onClick={() => {setPage(4)}}>
-                <div className='flex items-center'>
-                  <div className='rounded-full w-12 h-12 bg-yellow-500 flex items-center justify-center'>
-                    <FaUserPlus className='text-white text-3xl' />
-                  </div>
-                  <div className='ml-4'>
-                    <h2 className=' font-semibold text-xl'>Applicants</h2>
-                    <p className='font-semibold'>Total Applicants: {visitor}</p>
+              <Link to={"/notifications"}>
+                <div className='w-full h-24 bg-darkblue-100 rounded-lg border-b-8 border-yellow-500 flex items-center justify-between px-5 hover:bg-darkblue-200 transition-all duration-300 cursor-pointer' onClick={() => {setPage(4)}}>
+                  <div className='flex items-center'>
+                    <div className='rounded-full w-12 h-12 bg-yellow-500 flex items-center justify-center'>
+                      <FaUserPlus className='text-white text-3xl' />
+                    </div>
+                    <div className='ml-4'>
+                      <h2 className=' font-semibold text-xl'>Applicants</h2>
+                      <p className='font-semibold'>Total Applicants: {applicants}</p>
 
+                    </div>
+                  </div>
+
+                  <div className='flex items-center'>
+                    <FaAngleRight className='text-2xl ml-3 text-yellow-500' />
                   </div>
                 </div>
-
-                <div className='flex items-center'>
-                  <FaAngleRight className='text-2xl ml-3 text-yellow-500' />
-                </div>
-              </div>
+              </Link>
             </div>
 
             <div className='mt-4'>
@@ -140,11 +144,11 @@ export default function Dashboard() {
                 &&
                 <Outcome activity={activity.filter(item => item.status >= 2)} />
               }
-              {
+              {/* {
                 page == 4
                 &&
                 <Applicants />
-              }
+              } */}
             </div>
 
             </div>
