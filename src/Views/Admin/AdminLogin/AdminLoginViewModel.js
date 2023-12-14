@@ -12,7 +12,7 @@ export default function AdminViewModel() {
     const res = await handleAdminLogin(data);
     if (res.status === 200) {
       console.log("Login Success");
-      checkToken();
+      // checkToken();
       localStorage.setItem("token", res.data.token);
       window.location.href = "/admin/dashboard";
     }
