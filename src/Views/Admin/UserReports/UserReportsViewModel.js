@@ -10,7 +10,13 @@ export default function UserReportsViewModel() {
 
   async function fetchData(first) {
     const res = await getAllUser();
+
+    res.users.sort((a, b) => {
+      return b.rating - a.rating;
+    });
+
     setUsers(res.users);
+
     if (first) SetStatus(res.users.map((user) => user.status));
   }
 
