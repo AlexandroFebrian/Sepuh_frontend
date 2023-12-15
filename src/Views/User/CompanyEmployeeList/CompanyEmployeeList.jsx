@@ -3,6 +3,7 @@ import CompanyDefaultMenu from "../../../components/SidebarMenu/Company/CompanyD
 import CompanyEmployeeViewModel from "./CompanyEmployeeListViewModel";
 import { FaStar } from "react-icons/fa6";
 import { Avatar } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 export default function CompanyEmployeeList() {
   const { isLogin, user, employees } = CompanyEmployeeViewModel();
   return (
@@ -25,35 +26,37 @@ export default function CompanyEmployeeList() {
                 employees?.map((item, idx) => {
 
                   return (
-                    <div key={idx} className=" bg-navyblue-800 w-full h-72 rounded">
-                      <div 
-                        style={{
-                          backgroundImage: `url('${item.header_picture}')`,
-                          backgroundSize: "cover",
-                          backgroundPosition: "center",
-                          backgroundRepeat: "no-repeat",
-                        }}
-                        className="w-full h-40 rounded-t bg-navyblue-600"
-                      />
+                    <Link to={`/user?email=${item.email}`}>
+                      <div key={idx} className=" bg-navyblue-800 w-full h-72 rounded hover:scale-105 transition-all duration-300">
+                        <div 
+                          style={{
+                            backgroundImage: `url('${item.header_picture}')`,
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                            backgroundRepeat: "no-repeat",
+                          }}
+                          className="w-full h-40 rounded-t bg-navyblue-600"
+                        />
 
-                      <div className="px-3 py-3 w-full ">
-                        <div className="flex items-center">
-                          <Avatar src={item.profile_picture} size={"lg"} />
-                          <div className="ml-3 text-ghostwhite-50 truncate w-full">
-                            <h2 className=" text-lg font-semibold whitespace-normal">
-                              {item.name}
-                            </h2>
-                            <p className="truncate">
-                              {item.headline}
-                            </p>
+                        <div className="px-3 py-3 w-full ">
+                          <div className="flex items-center">
+                            <Avatar src={item.profile_picture} size={"lg"} />
+                            <div className="ml-3 text-ghostwhite-50 truncate w-full">
+                              <h2 className=" text-lg font-semibold whitespace-normal">
+                                {item.name}
+                              </h2>
+                              <p className="truncate">
+                                {item.headline}
+                              </p>
+                            </div>
+
                           </div>
-
-                        </div>
-                        <div className=" text-ghostwhite-50 mt-1 flex items-center">
-                          <FaStar className="text-yellow-500 mr-1" /> {item.rating}
+                          <div className=" text-ghostwhite-50 mt-1 flex items-center">
+                            <FaStar className="text-yellow-500 mr-1" /> {item.rating}
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   )
                 })
               }
