@@ -32,6 +32,11 @@ export default function Categories({photos}) {
       text: "Midjourney Artists",
       value: "midjourney artists",
       img_url: photos[5]
+    },
+    {
+      text: "UX Design",
+      value: "ux design",
+      img_url: photos[6]
     }
     
   ]
