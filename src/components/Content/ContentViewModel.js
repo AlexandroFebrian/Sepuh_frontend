@@ -61,6 +61,14 @@ export default function ContentViewModel(){
       setCategoryFilter(sessionStorage.getItem("category"))
     }
 
+    return () => {
+      if(sessionStorage.getItem("category")){
+        sessionStorage.removeItem("category")
+
+      }
+    
+    }
+
   }, [])
 
   return {
