@@ -422,17 +422,27 @@ export default function DetailActivity() {
           {
             ((activity?.status == 2 && activity?.post.user_id.email == user.email) || activity?.status == 3)
             &&
-            <div className='w-full h-96 flex items-center justify-center'>
-              <div>
-                <h1 className='text-3xl font-bold text-green-600 text-center'>
-                  This work has been finished
-                </h1>
-                <h2 className='text-3xl font-bold text-green-600 text-center'>
-                  Thank you for your hard work!
-                </h2>
+            <>
+              <div className='w-full flex items-center justify-center'>
+                <div>
+                  <h1 className='text-3xl font-bold text-green-600 text-center'>
+                    This work has been finished
+                  </h1>
+                  <h2 className='text-3xl font-bold text-green-600 text-center'>
+                    Thank you for your hard work!
+                  </h2>
 
+                </div>
               </div>
-            </div>
+
+              <div className='w-full mt-4'>
+                {
+                  activity?.file.reverse().map((item, i) => {
+                    return <WorkBox key={i} file={item} user={user} activity={activity} setActivity={setActivity} />
+                  })
+                }
+              </div>
+            </>
           }
           {
             (activity?.status == 2 && activity?.post.user_id.email != user.email)
@@ -483,6 +493,14 @@ export default function DetailActivity() {
                   <p className='text-red-600'>{err}</p>
 
                 </div>
+              </div>
+
+              <div className='w-full mt-4'>
+                {
+                  activity?.file.reverse().map((item, i) => {
+                    return <WorkBox key={i} file={item} user={user} activity={activity} setActivity={setActivity} />
+                  })
+                }
               </div>
             </>
           }
