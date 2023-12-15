@@ -181,7 +181,7 @@ export default function MasterPost() {
   useEffect(() => {
     setTimeout(() => {
       setListUsers(Users);
-    }, 1000);
+    }, 200);
   }, [Users]);
 
   return (

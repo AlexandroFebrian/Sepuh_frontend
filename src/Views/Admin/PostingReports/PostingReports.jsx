@@ -21,32 +21,64 @@ const baseURL = import.meta.env.VITE_BACKEND_URL;
 import Axios from "axios";
 
 export default function PostingReports() {
-  const [posts, setPosts] = useState([]);
-  const [averageRating, setAverageRating] = useState(0);
   const { Users } = PostingReportsViewModelAdmin();
-  const fetchPosts = async (email) => {
-    try {
-      setPosts([]);
-      const response = await Axios.get(`${baseURL}/posts/${email}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }).then((res) => {
-        setPosts((prev) => [...prev, res.data]);
+
+  const [post, setPost] = useState([]);
+  const [postCompany, setPostCompany] = useState([]);
+  const [postFreelancer, setPostFreelancer] = useState([]);
+  const getPostsCompany = async () => {
+    const token = localStorage.getItem("token");
+    const response = await Axios.get(`${baseURL}/posts/company`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        setPostCompany(res.data);
         return res.data;
+      })
+      .catch((err) => {
+        return err;
       });
-      return response;
-    } catch (err) {
-      return err;
-    }
+  };
+
+  const getPostsFreelancer = async () => {
+    const token = localStorage.getItem("token");
+    const response = await Axios.get(`${baseURL}/posts/freelancer`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        setPostFreelancer(res.data);
+        return res.data;
+      })
+      .catch((err) => {
+        return err;
+      });
   };
 
   useEffect(() => {
-    Users.map((user, index) => {
-      console.log("user", user);
-      fetchPosts(user.email);
+    getPostsCompany();
+    getPostsFreelancer();
+
+    const data = [...postCompany, ...postFreelancer];
+    const sortedData = data.sort((a, b) => {
+      console.log(a.posted_at);
+      return new Date(b.posted_at) - new Date(a.posted_at);
     });
+    setPost(sortedData);
   }, []);
+
+  const getAverageRating = (email) => {
+    const data = post.filter((item) => item.posted_by.email === email);
+    const banyakData = data.length;
+    const jumlahRating = data.reduce((acc, item) => {
+      return acc + item.avg_rating;
+    }, 0);
+    const average = jumlahRating / banyakData;
+    return average.toFixed(2);
+  };
 
   const formatDate = (date) => {
     const newDate = new Date(date);
@@ -59,10 +91,10 @@ export default function PostingReports() {
   return (
     <>
       <div className="container-postingReports flex">
-        <div className="sideBar w-1/5 bg-navyblue-700 h-screen static left-0">
+        <div className="sideBar w-1/6 bg-navyblue-700 h-screen static left-0">
           <NavigationAdmin />
         </div>
-        <div className="right w-full pt-10 shadow-lg">
+        <div className="right w-5/6 pt-10 absolute right-0">
           <div className="mb-10 min-h-[calc(100vh-5rem)] px-10 pb-10">
             <div className="container m-7 mx-auto">
               <div className="top flex justify-between items-center w-full my-10">
@@ -101,14 +133,14 @@ export default function PostingReports() {
                     <TableHead className="w-[100px] text-2xl text-navyblue-800 font-bold text-center">
                       No
                     </TableHead>
-                    <TableHead className="text-2xl text-navyblue-800 w-1/5 font-bold text-center">
+                    <TableHead className="text-2xl text-navyblue-800 w-1/3 font-bold text-center">
                       Name
                     </TableHead>
-                    <TableHead className="text-2xl text-navyblue-800 w-1/5 font-bold text-center">
+                    <TableHead className="text-2xl text-navyblue-800 w-1/3 font-bold text-center">
                       Member Since
                     </TableHead>
                     <TableHead className="text-2xl text-navyblue-800 font-bold text-center">
-                      Rating
+                      Average Rating
                     </TableHead>
                   </TableRow>
                 </TableHeader>
@@ -123,13 +155,10 @@ export default function PostingReports() {
                         {user.name}
                       </TableCell>
                       <TableCell className="font-medium text-lg text-center">
-                        {user.create_at}
+                        {formatDate(user.create_at)}
                       </TableCell>
                       <TableCell className="font-medium text-lg text-center">
-                        {user.rank}
-                      </TableCell>
-                      <TableCell className="font-medium text-lg text-center">
-                        {user.avg_rating}
+                        {getAverageRating(user.email)}
                       </TableCell>
                     </TableRow>
                   </TableBody>
