@@ -19,8 +19,7 @@ export default function DocumentCompletionViewModel() {
     window.scrollTo({ top: 0, behavior: "smooth" });
     getUserProfile(setProfile);
 
-    console.log("profile", profile);
-
+    console.log(profile);
     return () => {
       setProfile(null);
     };

@@ -5,19 +5,26 @@ import CompanyProfileMenu from "../../../components/SidebarMenu/Company/CompanyP
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { FaCircleExclamation } from "react-icons/fa6";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
+
+import { Toast } from "primereact/toast";
+import { FileUpload } from "primereact/fileupload";
 
 export default function DocumentCompletion() {
   const { isLogin, user, updateDocument } = DocumentCompletionViewModel();
+  const [tempIDCard, setTempIDCard] = useState(null);
+  const [tempCV, setTempCV] = useState(null);
 
   const identityCard = useRef(null);
   const curriculumVitae = useRef(null);
   const portofolio = useRef(null);
 
   const handleUpdateDocument = () => {
+    console.log(identityCard);
+
     const data = {
-      identityCard: identityCard.current.files[0],
-      curriculumVitae: curriculumVitae.current.files[0],
+      identityCard: identityCard.current.files[0].name,
+      curriculumVitae: curriculumVitae.current.files[0].name,
       portofolio: portofolio.current.value,
     };
 
@@ -25,6 +32,14 @@ export default function DocumentCompletion() {
       updateDocument(data);
     } else {
       alert("Please fill all fields");
+    }
+  };
+
+  const formatName = (name) => {
+    if (name.length > 15) {
+      return name.substr(0, 15) + "...";
+    } else {
+      return name;
     }
   };
 
@@ -66,14 +81,39 @@ export default function DocumentCompletion() {
                   </h2>
                   <div className="w-full h-full mt-2">
                     <div className="flex items-center justify-center w-full">
-                      {console.log(user?.identity_card)}
                       {user?.identity_card ? (
-                        <label
-                          htmlFor="FileIdentityCard"
-                          className="flex flex-col items-center justify-center w-full h-64 border-dashed cursor-pointer bg-ghostwhite-50 hover:bg-ghostwhite-200 duration-300 border-2 border-navyblue-600 rounded-md "
-                        >
-                          <h1>HAHAHA</h1>
-                        </label>
+                        <div className="bg-ghostwhite-50 flex flex-col items-center justify-center w-full h-64 border-dashed border-2 border-navyblue-600 rounded-md ">
+                          <div className="flex items-center justify-between px-2 py-5 h-full w-full">
+                            <img
+                              src={`http://localhost:3000/api/public/${user?.identity_card}`}
+                              alt="identity card"
+                              className="w-1/2 h-full object-cover"
+                            />
+
+                            <div className="button w-1/2 flex items-center justify-center ">
+                              <input
+                                type="file"
+                                id="files"
+                                className="hidden"
+                                onChange={(e) => {
+                                  setTempIDCard(e.target.files[0]);
+                                  console.log(e.target.files[0]);
+                                }}
+                                ref={identityCard}
+                              />
+                              <label
+                                htmlFor="files"
+                                className="w-1/2 h-fit flex items-center justify-center bg-navyblue-600 text-white rounded-md py-2 px-4 hover:bg-navyblue-800 duration-300 text-xl"
+                              >
+                                <span className="font-semibold w-fit">
+                                  {tempIDCard
+                                    ? formatName(tempIDCard.name)
+                                    : "Change"}
+                                </span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
                       ) : (
                         <label
                           htmlFor="FileIdentityCard"
@@ -162,7 +202,7 @@ export default function DocumentCompletion() {
                   </h2>
                   <div className="w-full h-full mt-2">
                     <div className="flex items-center justify-center w-full">
-                      <label
+                      {/* <label
                         htmlFor="FileCurriculumVitae"
                         className="flex flex-col items-center justify-center w-full h-64 border-dashed cursor-pointer bg-ghostwhite-50 hover:bg-ghostwhite-200 duration-300 border-2 border-navyblue-600 rounded-md "
                       >
@@ -196,7 +236,99 @@ export default function DocumentCompletion() {
                           className="hidden"
                           ref={curriculumVitae}
                         />
-                      </label>
+                      </label> */}
+
+                      {user?.curriculum_vitae ? (
+                        <div className="bg-ghostwhite-50 flex flex-col items-center justify-center w-full h-64 border-dashed border-2 border-navyblue-600 rounded-md ">
+                          <div className="flex items-center justify-around px-2 py-5 h-full w-full">
+                            <div className="left flex items-center justify-center">
+                              <svg
+                                className="w-8 h-8 text-gray-400"
+                                aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 20 16"
+                              >
+                                <path
+                                  stroke="currentColor"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth="2"
+                                  d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                                />
+                              </svg>
+                              <span className="ml-2 font-semibold">
+                                {formatName(user?.curriculum_vitae)}
+                              </span>
+                            </div>
+
+                            <div className="button w-1/2 flex flex-col items-center justify-center ">
+                              <div className="files w-full flex items-center justify-center">
+                                <input
+                                  type="file"
+                                  id="cv"
+                                  className="hidden"
+                                  onChange={(e) => {
+                                    setTempCV(e.target.files[0]);
+                                    console.log(e.target.files[0]);
+                                  }}
+                                  accept=".pdf"
+                                  ref={curriculumVitae}
+                                />
+                                <label
+                                  htmlFor="cv"
+                                  className="w-1/2 h-fit flex items-center justify-center bg-navyblue-600 text-white rounded-md py-2 px-4 hover:bg-navyblue-800 duration-300 text-xl"
+                                >
+                                  <span className="font-semibold w-fit">
+                                    {tempCV
+                                      ? formatName(tempCV.name)
+                                      : "Change"}
+                                  </span>
+                                </label>
+                              </div>
+                              <span className="helperText text-xs text-gray-500 ml-2">
+                                PDF
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <label
+                          htmlFor="FileCurriculumVitae"
+                          className="flex flex-col items-center justify-center w-full h-64 border-dashed cursor-pointer bg-ghostwhite-50 hover:bg-ghostwhite-200 duration-300 border-2 border-navyblue-600 rounded-md "
+                        >
+                          <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                            <svg
+                              className="w-8 h-8 mb-4 text-gray-400"
+                              aria-hidden="true"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 20 16"
+                            >
+                              <path
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                              />
+                            </svg>
+                            <p className="mb-2 text-sm text-gray-500">
+                              <span className="font-semibold">
+                                Click to upload
+                              </span>{" "}
+                              or drag and drop
+                            </p>
+                            <p className="text-xs text-gray-400">PDF</p>
+                          </div>
+                          <input
+                            id="FileCurriculumVitae"
+                            type="file"
+                            className="hidden"
+                            ref={curriculumVitae}
+                          />
+                        </label>
+                      )}
                     </div>
                   </div>
                 </div>
