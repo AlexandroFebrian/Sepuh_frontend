@@ -44,6 +44,16 @@ export default function MasterPost() {
     }
   };
 
+  const getHighestImpression = (posts) => {
+    let highestImpression = 0;
+    posts.map((post) => {
+      if (post.impressions > highestImpression) {
+        highestImpression = post.impressions;
+      }
+    });
+    return highestImpression;
+  };
+
   const formatDate = (date) => {
     const newDate = new Date(date);
     const month = newDate.toLocaleString("default", { month: "long" });
@@ -58,6 +68,8 @@ export default function MasterPost() {
     });
 
     setListUsers(Users);
+
+    const filteredPosts = posts.filter((post) => {});
   }, [Users]);
 
   useEffect(() => {

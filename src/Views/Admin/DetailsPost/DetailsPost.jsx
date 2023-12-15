@@ -22,13 +22,12 @@ export default function DetailsPost() {
   const [emailSearch, setEmailSearch] = useState(email);
   const [dataDetailsPost, setDataDetailsPost] = useState([]);
 
-  const { getProfile, profile } = DetailsPostViewModel();
-
   const getDetailsPost = async () => {
-    // localhost:3000/api/posts/admin/:email
+    const token = localStorage.getItem("token");
+    console.log("token", token);
     const response = await Axios.get(`${baseURL}/posts/admin/${emailSearch}`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${token}`,
       },
     })
       .then((res) => {
@@ -103,10 +102,10 @@ export default function DetailsPost() {
   return (
     <>
       <div className="container-details flex">
-        <div className="sideBar w-1/5 fixed left-0">
+        <div className="sideBar w-1/6 fixed left-0">
           <NavigationAdmin />
         </div>
-        <div className="right w-4/5 pt-10 absolute right-0">
+        <div className="right w-5/6 pt-10 absolute right-0">
           <div className="top flex px-5 pb-5">
             <div className="backButton">
               <button
@@ -120,7 +119,7 @@ export default function DetailsPost() {
             </div>
             <div className="boxUserData px-5">
               <div className="userData">
-                <div className="contentUserData text-3xl font-semibold">
+                <div className="contentUserData text-3xl font-semibold ">
                   {emailSearch} Details Post
                 </div>
               </div>
@@ -237,6 +236,16 @@ export default function DetailsPost() {
               </Accordion>
             );
           })}
+
+          {dataDetailsPost.length <= 0 ? (
+            <div className="container-details flex justify-center items-center">
+              <div className="no-data-details text-2xl font-semibold">
+                No data
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </>

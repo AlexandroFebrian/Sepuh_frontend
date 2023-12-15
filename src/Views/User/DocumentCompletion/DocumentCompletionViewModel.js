@@ -17,9 +17,11 @@ export default function DocumentCompletionViewModel() {
   useEffect(() => {
     checkToken();
     window.scrollTo({ top: 0, behavior: "smooth" });
+
     getUserProfile(setProfile);
 
     console.log(profile);
+
     return () => {
       setProfile(null);
     };
