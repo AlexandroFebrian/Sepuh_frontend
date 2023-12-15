@@ -26,8 +26,8 @@ export default function CompanyEmployeeList() {
                 employees?.map((item, idx) => {
 
                   return (
-                    <Link to={`/user?email=${item.email}`}>
-                      <div key={idx} className=" bg-navyblue-800 w-full h-72 rounded hover:scale-105 transition-all duration-300">
+                    <Link key={idx} to={`/user?email=${item.email}`}>
+                      <div className=" bg-navyblue-800 w-full h-72 rounded hover:scale-105 transition-all duration-300">
                         <div 
                           style={{
                             backgroundImage: `url('${item.header_picture}')`,
