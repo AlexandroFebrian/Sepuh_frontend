@@ -197,7 +197,6 @@ export default function fetch() {
           },
         })
         .then((res) => {
-          setPopup(true);
           return res;
         })
         .catch((err) => {

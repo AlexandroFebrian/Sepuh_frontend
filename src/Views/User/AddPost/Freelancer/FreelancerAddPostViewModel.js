@@ -1,8 +1,10 @@
 import { useSelector } from "react-redux";
 import fetch from "../../../../Client/fetch";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function AddPostViewModel() {
+  const navigate = useNavigate()
   const { checkToken, addPost } = fetch();
 
   const user = useSelector((state) => state.user.userDetail);
@@ -78,9 +80,12 @@ export default function AddPostViewModel() {
       return;
     }
 
-    setPopupTitle("Add Post Success");
-    setPopupButtonMessage("Close");
-    setPopupType(true);
+    const postId = response.data.post_id
+
+    navigate(`/post/${postId}`)
+    // setPopupTitle("Add Post Success");
+    // setPopupButtonMessage("Close");
+    // setPopupType(true);
   }
 
   return {
