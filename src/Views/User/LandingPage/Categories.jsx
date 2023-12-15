@@ -1,37 +1,37 @@
 import React from 'react'
 import CategoriesCard from './components/CategoriesCard'
 
-export default function Categories() {
+export default function Categories({photos}) {
   const categories = [
     {
-      img_url: "/carousel/carous_1.jpg",
       text: "Machine Learning",
-      value: "machine learning"
+      value: "machine learning",
+      img_url: photos[0]
     },
     {
-      img_url: "/carousel/carous_1.jpg",
       text: "AI Development",
-      value: "ai development"
+      value: "ai development",
+      img_url: photos[1]
     },
     {
-      img_url: "/carousel/carous_1.jpg",
       text: "Blockchain & Cryptocurrency",
-      value: "blockchain & cryptocurrency"
+      value: "blockchain & cryptocurrency",
+      img_url: photos[2]
     },
     {
-      img_url: "/carousel/carous_1.jpg",
-      text: "Logo Design",
-      value: "logo design"
+      text: "Graphic Design",
+      value: "graphic design",
+      img_url: photos[3]
     },
     {
-      img_url: "/carousel/carous_1.jpg",
       text: "Art & Illustration",
-      value: "art & illustration"
+      value: "art & illustration",
+      img_url: photos[4]
     },
     {
-      img_url: "/carousel/carous_1.jpg",
       text: "Midjourney Artists",
-      value: "midjourney artists"
+      value: "midjourney artists",
+      img_url: photos[5]
     }
     
   ]
@@ -42,9 +42,8 @@ export default function Categories() {
         <h1 className='text-4xl font-bold mb-5'>Top Categories</h1>
         <div className='py-5 flex overflow-x-auto overflow-y-hidden h-[350px] custom-scrollbar'>
           {
-            categories.map((category, idx) => <CategoriesCard category={category} key={idx}></CategoriesCard>)
+            categories.map((category, idx) => <CategoriesCard category={category} key={idx} photos={photos}></CategoriesCard>)
           }
-          
         </div>
       </div>
     </>

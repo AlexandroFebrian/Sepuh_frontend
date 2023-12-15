@@ -11,26 +11,49 @@ export default function About() {
   }, []);
   const about = [
     {
-      title: "Title",
+      title: "Positive Contribution to Unemployment Reduction",
       description:
-        "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Sepuh is driven by a strong purpose to reduce unemployment rates in Indonesia by providing an online platform that enables job seekers to explore various job opportunities.",
     },
     {
-      title: "Title",
+      title: "New Opportunities for Individuals and Companies",
       description:
-        "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "We open new doors for individuals seeking employment and companies in need of potential workforce. With Sepuh, you can explore and discover opportunities that align with your skills and requirements.",
     },
     {
-      title: "Title",
+      title: "Positive Transformation in the Job Market",
       description:
-        "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Sepuh not only provides a job search platform but is also committed to creating a positive transformation in the Indonesian job market. We support innovation and positive change to foster a better working environment.",
+    },
+  ];
+
+  const how = [
+    {
+      title: "Efficient Online Job Search",
+      description:
+        "Through the Sepuh platform, job seekers can easily search and apply for jobs that match their qualifications and interests.",
+    },
+    {
+      title: "Sophisticated Candidate Filtering",
+      description:
+        "Companies can use advanced filtering features to find candidates most suitable for their needs.",
+    },
+    {
+      title: "Career Development Support",
+      description:
+        "Sepuh provides support for job seekers to develop their careers through access to valuable information and resources.",
+    },
+    {
+      title: "Social Mission",
+      description:
+        "Beyond being a job search platform, Sepuh also has a social mission to reduce unemployment rates and improve the quality of the job market in Indonesia.",
     },
   ];
 
   return (
     <>
       <div className="mt-10">
-        <h1 className="text-4xl font-bold mb-5">What{"'"}s great about it?</h1>
+        <h1 className="text-4xl font-bold mb-5">Why Choose Our Services?</h1>
         <div className="py-5 flex justify-between">
           {about.map((about, idx) => (
             <div
@@ -42,6 +65,27 @@ export default function About() {
             >
               <h1 className="text-xl font-bold">{about.title}</h1>
               <p>{about.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+        
+      </hr>
+      <div className="mt-10">
+        <h1 className="text-4xl font-bold mb-5">How does Sepuh Achieve These Goals?</h1>
+        <div className="py-5 flex justify-between">
+          {how.map((how, idx) => (
+            <div
+              className="w-1/4 overflow-hidden"
+              key={idx}
+              data-aos={
+                idx === 0 ? "fade-left" : idx === 1 ? "fade-up" : "fade-right"
+              }
+            >
+              <h1 className="text-xl font-bold">{how.title}</h1>
+              <p>{how.description}</p>
             </div>
           ))}
         </div>
