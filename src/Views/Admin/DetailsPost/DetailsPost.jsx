@@ -133,20 +133,20 @@ export default function DetailsPost() {
                   <h2>
                     <AccordionButton>
                       <AccordionIcon />
-                      <div className="title-details">{item.title}</div>
+                      <div className="title-details text-xl">{item.title}</div>
                     </AccordionButton>
                   </h2>
                   <AccordionPanel pb={4}>
                     <div className="container-details">
-                      <div className="container-details-image">
+                      <div className="container-details-image grid grid-cols-3 gap-5">
                         {item.image.map((item, index) => {
-                          console.log("item", item);
                           return (
                             <img
-                              className="image-details w-1/5"
+                              className="image-details h-full"
                               src={item}
                               alt="image-details"
                               key={index}
+                              draggable="false"
                             />
                           );
                         })}
@@ -208,10 +208,10 @@ export default function DetailsPost() {
                             </div>
                           </div>
                         </div>
-                        <div className="container-details-button flex justify-end mr-5">
+                        <div className="container-details-button flex items-center justify-end mr-5">
                           {item.status === -1 ? (
                             <button
-                              className="button-details bg-yellow-500 p-2 rounded-lg"
+                              className="button-details bg-yellow-500 p-2 rounded-lg w-24 text-xl"
                               onClick={() => {
                                 unsuspendPost(item._id);
                               }}
@@ -220,7 +220,7 @@ export default function DetailsPost() {
                             </button>
                           ) : (
                             <button
-                              className="button-details  bg-yellow-500 p-2"
+                              className="button-details  bg-yellow-500 p-2 rounded-lg w-24 text-xl"
                               onClick={() => {
                                 suspendPost(item._id);
                               }}

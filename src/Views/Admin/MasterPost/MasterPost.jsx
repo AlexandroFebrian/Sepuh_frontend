@@ -15,43 +15,56 @@ import MasterPostViewModel from "./MasterPostViewModel";
 import Axios from "axios";
 const baseURL = import.meta.env.VITE_BACKEND_URL;
 import { useEffect, useState } from "react";
-import { format } from "date-fns";
-import { useSearchParams } from "react-router-dom";
 
 export default function MasterPost() {
   const { Users } = MasterPostViewModel();
+  const [ListUsers, setListUsers] = useState([]);
+  const [postCompany, setPostCompany] = useState([]);
+  const [postFreelancer, setPostFreelancer] = useState([]);
+  const [post, setPost] = useState([]);
 
-  const [posts, setPosts] = useState([]);
   const [globalFilterValue, setGlobalFilterValue] = useState(null);
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
-  const [ListUsers, setListUsers] = useState([]);
 
-  const fetchPosts = async (email) => {
-    try {
-      const response = await Axios.get(`${baseURL}/posts/${email}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }).then((res) => {
-        setPosts(res.data);
-        return res.data;
-      });
-      return response;
-    } catch (err) {
-      return err;
-    }
+  const onGlobalFilterChange = (e) => {
+    const value = e.target.value;
+    let _filters = { ...filters };
+
+    _filters["global"].value = value;
+
+    setFilters(_filters);
+    setGlobalFilterValue(value);
   };
 
-  const getHighestImpression = (posts) => {
-    let highestImpression = 0;
-    posts.map((post) => {
-      if (post.impressions > highestImpression) {
-        highestImpression = post.impressions;
-      }
-    });
-    return highestImpression;
+  const renderHeader = () => {
+    return (
+      <div className="relative mb-6h-fit">
+        <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+          <svg
+            className="svg-icon search-icon"
+            aria-labelledby="title desc"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 19.9 19.7"
+            width="20"
+            height="20"
+          >
+            <g className="search-path" fill="none" stroke="currentColor">
+              <path strokeLinecap="square" d="M18.5 18.3l-5.4-5.4" />
+              <circle cx="8" cy="8" r="7" />
+            </g>
+          </svg>
+        </div>
+        <InputText
+          value={globalFilterValue}
+          onChange={onGlobalFilterChange}
+          placeholder="Keyword Search"
+          className="border border-gray-300 text-gray-900 text-md block w-1/4 pl-10 p-2.5 rounded-md focus:ring-navyblue-500 focus:border-navyblue-500 focus:outline-none bg-ghostwhite-50"
+        />
+      </div>
+    );
   };
 
   const formatDate = (date) => {
@@ -61,16 +74,50 @@ export default function MasterPost() {
     const year = newDate.getFullYear();
     return `${day} ${month} ${year}`;
   };
+
+  const getPostsCompany = async () => {
+    const token = localStorage.getItem("token");
+    const response = await Axios.get(`${baseURL}/posts/company`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        setPostCompany(res.data);
+        return res.data;
+      })
+      .catch((err) => {
+        return err;
+      });
+  };
+
+  const getPostsFreelancer = async () => {
+    const token = localStorage.getItem("token");
+    const response = await Axios.get(`${baseURL}/posts/freelancer`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        setPostFreelancer(res.data);
+        return res.data;
+      })
+      .catch((err) => {
+        return err;
+      });
+  };
+
   useEffect(() => {
-    Users.map((user, index) => {
-      console.log("user", user);
-      fetchPosts(user.email);
+    getPostsCompany();
+    getPostsFreelancer();
+
+    const data = [...postCompany, ...postFreelancer];
+    const sortedData = data.sort((a, b) => {
+      console.log(a.posted_at);
+      return new Date(b.posted_at) - new Date(a.posted_at);
     });
-
-    setListUsers(Users);
-
-    const filteredPosts = posts.filter((post) => {});
-  }, [Users]);
+    setPost(sortedData);
+  }, []);
 
   useEffect(() => {
     if (globalFilterValue) {
@@ -92,14 +139,59 @@ export default function MasterPost() {
     }
   }, [globalFilterValue]);
 
+  const getHighestImpressions = (userEmail) => {
+    const data = post.filter((item) => {
+      return item.posted_by.email === userEmail;
+    });
+    const sortedData = data.sort((a, b) => {
+      return b.visitor - a.visitor;
+    });
+
+    if (sortedData.length > 0) {
+      return sortedData[0].visitor;
+    } else {
+      return 0;
+    }
+  };
+
+  const getLatestDateUpload = (userEmail) => {
+    const data = post.filter((item) => {
+      return item.posted_by.email === userEmail;
+    });
+    const sortedData = data.sort((a, b) => {
+      return new Date(b.posted_at) - new Date(a.posted_at);
+    });
+
+    if (sortedData.length > 0) {
+      return formatDate(sortedData[0].posted_at);
+    } else {
+      return "-";
+    }
+  };
+
+  useEffect(() => {
+    const data = [...postCompany, ...postFreelancer];
+    const sortedData = data.sort((a, b) => {
+      console.log(a.posted_at);
+      return new Date(b.posted_at) - new Date(a.posted_at);
+    });
+    setPost(sortedData);
+  }, [ListUsers]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setListUsers(Users);
+    }, 1000);
+  }, [Users]);
+
   return (
     <>
       <div className="container-masterPost flex">
-        <div className="sidebar w-1/5">
+        <div className="sidebar w-1/6 fixed left-0">
           <NavigationAdmin />
         </div>
 
-        <div className="right w-full pt-10 shadow-lg">
+        <div className="right w-5/6 pt-10 absolute right-0">
           <div className="px-10 pb-10">
             <div className="top flex justify-between items-center w-full my-5 mx-7">
               <input
@@ -109,9 +201,9 @@ export default function MasterPost() {
                 onChange={(e) => {
                   setGlobalFilterValue(e.target.value);
                 }}
+                defaultValue={globalFilterValue}
               />
             </div>
-
             <div className="mx-7">
               <Table className="w-full bg-ghostwhite-100 rounded-md">
                 <TableHeader className=" border-b-2 border-navyblue-600">
@@ -132,38 +224,98 @@ export default function MasterPost() {
                 </TableHeader>
 
                 <TableBody>
-                  {ListUsers.map((user, index) => (
-                    <TableRow
-                      key={index}
-                      onClick={() => {
-                        console.log(
-                          "Navigating to:",
-                          `/admin/masterpost/details?email=${user.email}`
-                        );
-
-                        window.location.href = `/admin/masterpost/details?email=${user.email}`;
-                      }}
-                    >
-                      <TableCell className="font-medium text-lg">
-                        {index + 1}
-                      </TableCell>
-                      <TableCell className="font-medium text-lg">
-                        {user.name}
-                      </TableCell>
-                      <TableCell className="font-medium text-lg">
-                        {posts[index]?.posted_at
-                          ? formatDate(posts[index]?.posted_at)
-                          : "No Post"}
-                      </TableCell>
-                      <TableCell className="font-medium text-lg">
-                        {posts[index]?.visitor
-                          ? posts[index]?.visitor + " Visitor"
-                          : "0 Visitor"}
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                  {ListUsers.map((user, index) => {
+                    return (
+                      <TableRow
+                        key={index}
+                        className="hover:bg-gray-100 cursor-pointer"
+                        onClick={() => {
+                          window.location.href = `/admin/masterpost/details?email=${user.email}`;
+                          D;
+                        }}
+                      >
+                        <TableCell className=" text-navyblue-800 text-2xl">
+                          {index + 1}
+                        </TableCell>
+                        <TableCell className=" text-navyblue-800 text-2xl">
+                          {user.name}
+                        </TableCell>
+                        <TableCell className=" text-navyblue-800 text-2xl">
+                          {getLatestDateUpload(user.email)}
+                        </TableCell>
+                        <TableCell className=" text-navyblue-800 text-2xl">
+                          {getHighestImpressions(user.email)} Visitor
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
                 </TableBody>
               </Table>
+
+              {/*<DataTable
+                value={Users}
+                removableSort
+                className="flex flex-col gap-5 p-datatable-sm w-full bg-ghostwhite-100 rounded-md p-5"
+                paginator
+                rows={10}
+                rowsPerPageOptions={[10, 20, 30]}
+                paginatorTemplate=" PrevPageLink PageLinks NextPageLink CurrentPageReport"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} users"
+                emptyMessage="No users found"
+                dataKey="id"
+                filters={filters}
+                filterDisplay="row"
+                globalFilterFields={["email", "name"]}
+                header={renderHeader()}
+              >
+                <Column
+                  field="name"
+                  header={
+                    <span className="text-navyblue-800 font-bold mr-2 text-3xl font-sarabun">
+                      Name
+                    </span>
+                  }
+                  sortable
+                  className="text-navyblue-800 text-2xl"
+                />
+                <Column
+                  field="email"
+                  header={
+                    <span className="text-navyblue-800 font-bold mr-2 text-3xl font-sarabun">
+                      Email
+                    </span>
+                  }
+                  sortable
+                  className="text-navyblue-800 text-2xl"
+                />
+                <Column
+                  field="latest_date_upload"
+                  header={
+                    <span className="text-navyblue-800 font-bold mr-2 text-3xl font-sarabun">
+                      Latest Date Upload
+                    </span>
+                  }
+                  sortable
+                  className="text-navyblue-800 text-2xl"
+                  body={(rowData) => {
+                    return getLatestDateUpload(rowData.email);
+                  }}
+                />
+                <Column
+                  field="highest_impressions"
+                  // header="Highest Impressions"
+                  header={
+                    <span className="text-navyblue-800 font-bold mr-2 text-3xl font-sarabun">
+                      Highest Impressions
+                    </span>
+                  }
+                  sortable
+                  className="text-navyblue-800 text-2xl"
+                  body={(rowData) => {
+                    return getHighestImpressions(rowData.email) + " Visitor";
+                  }}
+                />
+              </DataTable>*/}
             </div>
           </div>
         </div>

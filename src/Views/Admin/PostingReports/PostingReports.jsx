@@ -48,21 +48,13 @@ export default function PostingReports() {
     });
   }, []);
 
-  const hitungRataRata = (arr) => {
-    let total = 0;
-    arr.map((item) => {
-      total += item.avg_rating;
-    });
-    return (total / arr.length).toFixed(2);
+  const formatDate = (date) => {
+    const newDate = new Date(date);
+    const month = newDate.toLocaleString("default", { month: "long" });
+    const day = newDate.getDate();
+    const year = newDate.getFullYear();
+    return `${day} ${month} ${year}`;
   };
-
-  const sortUser = () => {
-    Users.sort((a, b) => {
-      return b.rating - a.rating;
-    });
-  };
-
-  sortUser();
 
   return (
     <>
@@ -116,9 +108,6 @@ export default function PostingReports() {
                       Member Since
                     </TableHead>
                     <TableHead className="text-2xl text-navyblue-800 font-bold text-center">
-                      Previous Rank
-                    </TableHead>
-                    <TableHead className="text-2xl text-navyblue-800 font-bold text-center">
                       Rating
                     </TableHead>
                   </TableRow>
@@ -134,15 +123,13 @@ export default function PostingReports() {
                         {user.name}
                       </TableCell>
                       <TableCell className="font-medium text-lg text-center">
-                        {user.created_at}
+                        {user.create_at}
                       </TableCell>
                       <TableCell className="font-medium text-lg text-center">
                         {user.rank}
                       </TableCell>
                       <TableCell className="font-medium text-lg text-center">
-                        {posts[index]?.length > 0 && (
-                          <div>{hitungRataRata(posts[index])} </div>
-                        )}
+                        {user.avg_rating}
                       </TableCell>
                     </TableRow>
                   </TableBody>
