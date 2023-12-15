@@ -14,7 +14,56 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useEffect, useState } from "react";
+import PostingReportsViewModelAdmin from "./PostingReportsViewModel";
+
+const baseURL = import.meta.env.VITE_BACKEND_URL;
+import Axios from "axios";
+
 export default function PostingReports() {
+  const [posts, setPosts] = useState([]);
+  const [averageRating, setAverageRating] = useState(0);
+  const { Users } = PostingReportsViewModelAdmin();
+  const fetchPosts = async (email) => {
+    try {
+      setPosts([]);
+      const response = await Axios.get(`${baseURL}/posts/${email}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res) => {
+        setPosts((prev) => [...prev, res.data]);
+        return res.data;
+      });
+      return response;
+    } catch (err) {
+      return err;
+    }
+  };
+
+  useEffect(() => {
+    Users.map((user, index) => {
+      console.log("user", user);
+      fetchPosts(user.email);
+    });
+  }, []);
+
+  const hitungRataRata = (arr) => {
+    let total = 0;
+    arr.map((item) => {
+      total += item.avg_rating;
+    });
+    return (total / arr.length).toFixed(2);
+  };
+
+  const sortUser = () => {
+    Users.sort((a, b) => {
+      return b.rating - a.rating;
+    });
+  };
+
+  sortUser();
+
   return (
     <>
       <div className="container-postingReports flex">
@@ -74,78 +123,30 @@ export default function PostingReports() {
                     </TableHead>
                   </TableRow>
                 </TableHeader>
-                <TableBody>
-                  <TableRow>
-                    <TableCell className="font-medium text-lg text-center">
-                      1
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      Febrian Alexandro
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      25 November 2023
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      <div className="arrow">
-                        <span>8</span>
-                      </div>
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      4.00
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium text-lg text-center">
-                      2
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      Febrian Alexandro
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      25 November 2023
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      1000
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      4.00
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium text-lg text-center">
-                      3
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      Febrian Alexandro
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      25 November 2023
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      1000
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      4.00
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium text-lg text-center">
-                      4
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      Febrian Alexandro
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      25 November 2023
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      1000
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      4.00
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
+
+                {Users.map((user, index) => (
+                  <TableBody key={index}>
+                    <TableRow>
+                      <TableCell className="font-medium text-lg text-center">
+                        {index + 1}
+                      </TableCell>
+                      <TableCell className="font-medium text-lg text-center">
+                        {user.name}
+                      </TableCell>
+                      <TableCell className="font-medium text-lg text-center">
+                        {user.created_at}
+                      </TableCell>
+                      <TableCell className="font-medium text-lg text-center">
+                        {user.rank}
+                      </TableCell>
+                      <TableCell className="font-medium text-lg text-center">
+                        {posts[index]?.length > 0 && (
+                          <div>{hitungRataRata(posts[index])} </div>
+                        )}
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                ))}
               </Table>
             </div>
           </div>

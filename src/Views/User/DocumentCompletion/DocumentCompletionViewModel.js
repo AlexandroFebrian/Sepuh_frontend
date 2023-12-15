@@ -10,11 +10,16 @@ export default function DocumentCompletionViewModel() {
   const user = useSelector((state) => state.user.userDetail);
 
   const [profile, setProfile] = useState(null);
+  const [identity_card, setIdentity_card] = useState(null);
+  const [cv, setCv] = useState(null);
+  const [portfolio, setPortfolio] = useState(null);
 
   useEffect(() => {
     checkToken();
     window.scrollTo({ top: 0, behavior: "smooth" });
     getUserProfile(setProfile);
+
+    console.log("profile", profile);
 
     return () => {
       setProfile(null);

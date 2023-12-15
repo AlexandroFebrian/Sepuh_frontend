@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
-import fetch from "../../../Client/fetch";
 import { useEffect, useState } from "react";
+import fetch from "../../../Client/fetch";
 
-export default function MasterPostViewModel() {
+export default function PostingReportsViewModelAdmin() {
   const { getAllUser, getUserPostsByEmail } = fetch();
 
   const [Users, setUsers] = useState([]);
@@ -29,6 +29,7 @@ export default function MasterPostViewModel() {
 
   return {
     Users,
+    Status,
     fetchPosts,
   };
 }

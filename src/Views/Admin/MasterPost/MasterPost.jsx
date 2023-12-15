@@ -80,45 +80,6 @@ export default function MasterPost() {
     }
   }, [globalFilterValue]);
 
-  const onGlobalFilterChange = (e) => {
-    const value = e.target.value;
-    let _filters = { ...filters };
-
-    _filters["global"].value = value;
-
-    setFilters(_filters);
-    setGlobalFilterValue(value);
-  };
-
-  const renderHeader = () => {
-    return (
-      <div className="relative mb-6h-fit">
-        <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-          <svg
-            className="svg-icon search-icon"
-            aria-labelledby="title desc"
-            role="img"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 19.9 19.7"
-            width="20"
-            height="20"
-          >
-            <g className="search-path" fill="none" stroke="currentColor">
-              <path strokeLinecap="square" d="M18.5 18.3l-5.4-5.4" />
-              <circle cx="8" cy="8" r="7" />
-            </g>
-          </svg>
-        </div>
-        <InputText
-          value={globalFilterValue}
-          onChange={onGlobalFilterChange}
-          placeholder="Keyword Search"
-          className="border border-gray-300 text-gray-900 text-md block w-1/4 pl-10 p-2.5 rounded-md focus:ring-navyblue-500 focus:border-navyblue-500 focus:outline-none"
-        />
-      </div>
-    );
-  };
-
   return (
     <>
       <div className="container-masterPost flex">
