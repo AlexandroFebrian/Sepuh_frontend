@@ -27,6 +27,7 @@ export default function MyActivity() {
               isLogin && "border-l-2 border-navyblue-600"
             } z-0 px-10 py-10`}
           >
+            <h1 className='text-3xl font-bold'>My Activity</h1>
             {isLogin && <Outlet context={[activity]} />}
           </div>
         </div>

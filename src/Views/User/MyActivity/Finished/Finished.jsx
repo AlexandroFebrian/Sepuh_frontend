@@ -15,7 +15,7 @@ export default function Finished() {
 
   return (
     <div className='w-full'>
-      <h1 className='text-2xl font-bold'>My Activity</h1>
+      
 
       <div className='w-full h-14 mt-4 px-3 bg-ghostwhite-100 rounded flex justify-between'>
         <div>
