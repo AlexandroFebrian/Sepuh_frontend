@@ -95,7 +95,7 @@ export default function MasterUser() {
                   paginator
                   rows={10}
                   rowsPerPageOptions={[10, 20, 30]}
-                  paginatorTemplate=" PrevPageLink PageLinks NextPageLink CurrentPageReport"
+                  paginatorTemplate="PrevPageLink CurrentPageReport NextPageLink"
                   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} users"
                   emptyMessage="No users found"
                   dataKey="id"

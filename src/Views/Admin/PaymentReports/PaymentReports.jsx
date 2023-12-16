@@ -101,11 +101,9 @@ export default function PaymentReports() {
                     removableSort
                     className="flex flex-col gap-5 w-full bg-ghostwhite-100 rounded-md p-5"
                     paginator
-                    rows={20}
-                    rowsPerPageOptions={[10, 20, 30]}
-                    paginatorTemplate=" PrevPageLink PageLinks NextPageLink CurrentPageReport"
-                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} data"
-                    emptyMessage="No data found"
+                    paginatorTemplate="PrevPageLink CurrentPageReport NextPageLink"
+                    rows={limit}
+                    emptyMessage="No users found"
                     dataKey="id"
                     filters={filters}
                     filterDisplay="row"
@@ -115,9 +113,27 @@ export default function PaymentReports() {
                       "freelancer.name",
                       "status",
                       "deal_price",
+                      "invoice",
                     ]}
                     header={renderHeader()}
                   >
+                    <Column
+                      header={
+                        <span className="text-navyblue-800 font-bold mr-2 text-3xl font-sarabun border-navyblue-700">
+                          Invoice ID
+                        </span>
+                      }
+                      body={(rowData) => {
+                        return (
+                          <span className="font-medium h-full text-xl font-sarabun">
+                            {rowData.invoice}
+                          </span>
+                        );
+                      }}
+                      field="id"
+                      sortable
+                      className="w-1/6 text-xl font-sarabun"
+                    ></Column>
                     <Column
                       header={
                         <span className="text-navyblue-800 font-bold mr-2 text-3xl font-sarabun border-navyblue-700">
@@ -133,7 +149,7 @@ export default function PaymentReports() {
                       }}
                       field="start_date"
                       sortable
-                      className="w-1/4 text-xl font-sarabun"
+                      className="w-1/5 text-xl font-sarabun"
                     ></Column>
                     <Column
                       field="company.name"
@@ -150,7 +166,7 @@ export default function PaymentReports() {
                         );
                       }}
                       sortable
-                      className="w-1/4 text-xl font-sarabun"
+                      className="w-1/5 text-xl font-sarabun"
                     ></Column>
                     <Column
                       field="freelancer.name"
@@ -167,7 +183,7 @@ export default function PaymentReports() {
                         );
                       }}
                       sortable
-                      className="w-1/4 text-xl font-sarabun"
+                      className="w-1/5 text-xl font-sarabun"
                     ></Column>
                     <Column
                       field="deal_price"
