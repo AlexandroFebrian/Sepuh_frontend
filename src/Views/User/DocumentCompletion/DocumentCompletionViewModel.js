@@ -20,8 +20,6 @@ export default function DocumentCompletionViewModel() {
 
     getUserProfile(setProfile);
 
-    console.log(profile);
-
     return () => {
       setProfile(null);
     };

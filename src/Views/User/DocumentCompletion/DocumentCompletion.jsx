@@ -28,7 +28,6 @@ export default function DocumentCompletion() {
 
     if (data.identity_card && data.curriculum_vitae && data.portofolio) {
       updateDocument(data);
-      // console.log(data);
     } else {
       alert("Please fill all fields");
     }
@@ -80,11 +79,15 @@ export default function DocumentCompletion() {
                   </h2>
                   <div className="w-full h-full mt-2">
                     <div className="flex items-center justify-center w-full">
-                      {user?.identity_card ? (
+                      {user?.identity_card || tempIDCard ? (
                         <div className="bg-ghostwhite-50 flex flex-col items-center justify-center w-full h-64 border-dashed border-2 border-navyblue-600 rounded-md ">
                           <div className="flex items-center justify-between px-2 py-5 h-full w-full">
                             <img
-                              src={`http://localhost:3000/api/public/${user?.identity_card}`}
+                              src={
+                                user?.identity_card == ""
+                                  ? URL.createObjectURL(tempIDCard)
+                                  : `http://localhost:3000/api/public/${user?.identity_card}`
+                              }
                               alt="identity card"
                               className="w-1/2 h-full object-cover"
                             />
@@ -96,7 +99,6 @@ export default function DocumentCompletion() {
                                 className="hidden"
                                 onChange={(e) => {
                                   setTempIDCard(e.target.files[0]);
-                                  console.log(e.target.files[0]);
                                 }}
                                 ref={identityCard}
                               />
@@ -149,9 +151,49 @@ export default function DocumentCompletion() {
                             type="file"
                             className="hidden"
                             ref={identityCard}
+                            onChange={(e) => {
+                              setTempIDCard(e.target.files[0]);
+                            }}
                           />
                         </label>
                       )}
+
+                      {/* {tempIDCard && user?.identity_card == "" && (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <div className="bg-ghostwhite-50 flex flex-col items-center justify-center w-full h-64 border-dashed border-2 border-navyblue-600 rounded-md ">
+                            <div className="flex items-center justify-between px-2 py-5 h-full w-full">
+                              <img
+                                src={URL.createObjectURL(tempIDCard)}
+                                alt="identity card"
+                                className="w-1/2 h-full object-cover"
+                              />
+
+                              <div className="button w-1/2 flex items-center justify-center ">
+                                <input
+                                  type="file"
+                                  id="files"
+                                  className="hidden"
+                                  onChange={(e) => {
+                                    setTempIDCard(e.target.files[0]);
+                                    console.log(e.target.files[0]);
+                                  }}
+                                  ref={identityCard}
+                                />
+                                <label
+                                  htmlFor="files"
+                                  className="w-1/2 h-fit flex items-center justify-center bg-navyblue-600 text-white rounded-md py-2 px-4 hover:bg-navyblue-800 duration-300 text-xl"
+                                >
+                                  <span className="font-semibold w-fit">
+                                    {tempIDCard
+                                      ? formatName(tempIDCard.name)
+                                      : "Change"}
+                                  </span>
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )} */}
                     </div>
                   </div>
                 </div>
@@ -161,7 +203,7 @@ export default function DocumentCompletion() {
                   </h2>
                   <div className="w-full h-full mt-2">
                     <div className="flex items-center justify-center w-full">
-                      {user?.curriculum_vitae ? (
+                      {user?.curriculum_vitae || tempCV ? (
                         <div className="bg-ghostwhite-50 flex flex-col items-center justify-center w-full h-64 border-dashed border-2 border-navyblue-600 rounded-md ">
                           <div className="flex items-center justify-around px-2 py-5 h-full w-full">
                             <div className="left flex items-center justify-center">
@@ -181,7 +223,9 @@ export default function DocumentCompletion() {
                                 />
                               </svg>
                               <span className="ml-2 font-semibold">
-                                {formatName(user?.curriculum_vitae)}
+                                {user?.curriculum_vitae == ""
+                                  ? formatName(tempCV.name)
+                                  : formatName(user?.curriculum_vitae)}
                               </span>
                             </div>
 
@@ -193,7 +237,6 @@ export default function DocumentCompletion() {
                                   className="hidden"
                                   onChange={(e) => {
                                     setTempCV(e.target.files[0]);
-                                    console.log(e.target.files[0]);
                                   }}
                                   accept=".pdf"
                                   ref={curriculumVitae}
@@ -249,6 +292,9 @@ export default function DocumentCompletion() {
                             type="file"
                             className="hidden"
                             ref={curriculumVitae}
+                            onChange={(e) => {
+                              setTempCV(e.target.files[0]);
+                            }}
                           />
                         </label>
                       )}
