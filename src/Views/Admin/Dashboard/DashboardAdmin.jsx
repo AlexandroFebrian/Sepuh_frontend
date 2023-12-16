@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import { FaUser } from "react-icons/fa6";
 import { FaMoneyBillWave } from "react-icons/fa";
+import { IoCodeSlashSharp } from "react-icons/io5";
 
 export default function DashboardAdmin() {
   const { activity, company, freelancer } = DashboardAdminViewModel();
@@ -112,7 +113,7 @@ export default function DashboardAdmin() {
 
             <div className="jumlahProject bg-ghostwhite-100 w-3/4 h-40 my-5 p-5 rounded-lg shadow-lg flex flex-col justify-center items-center">
               <div className="icon">
-                <FaUser size={32} />
+                <IoCodeSlashSharp size={32} />
               </div>
               <div className="jumlahProject-title">
                 <h1 className="text-2xl font-bold text-gray-700 text-center">
