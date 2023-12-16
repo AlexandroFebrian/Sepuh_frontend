@@ -28,6 +28,16 @@ export default function UserReports() {
     return `${day} ${month} ${year}`;
   };
 
+  const uniqueMonthsAndYears = new Set();
+  Users.map((user, index) => {
+    const date = new Date(user.create_at);
+    const month = date.toLocaleString("default", { month: "long" });
+    const year = date.getFullYear();
+    uniqueMonthsAndYears.add(`${month} ${year}`);
+  });
+
+  uniqueMonthsAndYears.add("All Time");
+
   return (
     <>
       <div className="container-userReports flex">
@@ -41,29 +51,17 @@ export default function UserReports() {
               <div className="top flex items-center w-full my-10">
                 <div className="left w-1/4">
                   <Select>
-                    <SelectTrigger className="w-1/2 bg-navyblue-800 text-white text-lg py-6">
-                      <SelectValue placeholder="October 2023" />
+                    <SelectTrigger className="w-3/4 bg-navyblue-800 text-white text-lg py-6">
+                      <SelectValue placeholder="All Time" />
                     </SelectTrigger>
                     <SelectContent>
-                      {/* <SelectItem value="monthyear">Month Year</SelectItem>
-                      <SelectItem value="bulantahun">Bulan Tahun</SelectItem> */}
-
-                      {/* get month and year from member since */}
-                      {Users.map((user, index) => (
-                        <SelectItem
-                          key={index}
-                          // ambil bulan dan tahun nya saja
-                          value={
-                            user.create_at.split("T")[0].split("-")[0] +
-                            "-" +
-                            user.create_at.split("T")[0].split("-")[1]
-                          }
-                        >
-                          {formatDate(user.create_at).split(" ")[1] +
-                            " " +
-                            formatDate(user.create_at).split(" ")[2]}
-                        </SelectItem>
-                      ))}
+                      {Array.from(uniqueMonthsAndYears).map(
+                        (monthYear, index) => (
+                          <SelectItem key={index} value={monthYear}>
+                            {monthYear}
+                          </SelectItem>
+                        )
+                      )}
                     </SelectContent>
                   </Select>
                 </div>
@@ -72,17 +70,6 @@ export default function UserReports() {
                     Top 5 Most Popular Freelancer October 2023
                   </h2>
                 </div>
-                {/* <div className="right w-1/4 flex justify-end">
-                  <Select>
-                    <SelectTrigger className="w-1/2 bg-navyblue-800 text-white text-lg py-6">
-                      <SelectValue placeholder="Freelancer" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="freelancer">Freelancer</SelectItem>
-                      <SelectItem value="company">Company</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div> */}
               </div>
 
               <Table className="w-full bg-ghostwhite-100 rounded-md">
@@ -176,7 +163,6 @@ export default function UserReports() {
                 </TableBody> */}
 
                 <TableBody>
-                  {console.log("Users", Users)}
                   {Users.map((user, index) => (
                     <TableRow key={index}>
                       <TableCell className="font-medium text-lg text-center">
