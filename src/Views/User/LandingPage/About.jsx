@@ -69,12 +69,12 @@ export default function About() {
           ))}
         </div>
       </div>
-      
-      <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-        
-      </hr>
+
+      <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
       <div className="mt-10">
-        <h1 className="text-4xl font-bold mb-5">How does Sepuh Achieve These Goals?</h1>
+        <h1 className="text-4xl font-bold mb-5">
+          How does Sepuh Achieve These Goals?
+        </h1>
         <div className="py-5 flex justify-between">
           {how.map((how, idx) => (
             <div
