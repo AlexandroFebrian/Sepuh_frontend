@@ -23,6 +23,11 @@ export default function MasterPost() {
   const [postFreelancer, setPostFreelancer] = useState([]);
   const [post, setPost] = useState([]);
 
+  const [pagination, setPagination] = useState(1);
+  const [totalPage, setTotalPage] = useState(0);
+  const [totalData, setTotalData] = useState(10);
+  const [limit, setLimit] = useState(10);
+
   const [globalFilterValue, setGlobalFilterValue] = useState(null);
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -176,6 +181,7 @@ export default function MasterPost() {
       return new Date(b.posted_at) - new Date(a.posted_at);
     });
     setPost(sortedData);
+    setTotalPage(Math.ceil(ListUsers.length / limit));
   }, [ListUsers]);
 
   useEffect(() => {
@@ -183,6 +189,15 @@ export default function MasterPost() {
       setListUsers(Users);
     }, 200);
   }, [Users]);
+
+  useEffect(() => {
+    const data = [...postCompany, ...postFreelancer];
+    const sortedData = data.sort((a, b) => {
+      console.log(a.posted_at);
+      return new Date(b.posted_at) - new Date(a.posted_at);
+    });
+    setPost(sortedData);
+  }, []);
 
   return (
     <>
@@ -224,14 +239,17 @@ export default function MasterPost() {
                 </TableHeader>
 
                 <TableBody>
-                  {ListUsers.map((user, index) => {
+                  {/* pakai limit */}
+                  {ListUsers.slice(
+                    (pagination - 1) * limit,
+                    pagination * limit
+                  ).map((user, index) => {
                     return (
                       <TableRow
                         key={index}
                         className="hover:bg-gray-100 cursor-pointer"
                         onClick={() => {
                           window.location.href = `/admin/masterpost/details?email=${user.email}`;
-                          D;
                         }}
                       >
                         <TableCell className=" text-navyblue-800 text-2xl">
@@ -251,6 +269,32 @@ export default function MasterPost() {
                   })}
                 </TableBody>
               </Table>
+
+              <div className="flex justify-center items-center gap-5 mt-10 ">
+                <button
+                  className="bg-navyblue-500 text-white text-2xl px-5 py-2 rounded-md"
+                  onClick={() => {
+                    if (pagination > 1) {
+                      setPagination(pagination - 1);
+                    }
+                  }}
+                >
+                  Prev
+                </button>
+                <span className="text-2xl text-navyblue-800 font-bold ">
+                  {pagination}
+                </span>
+                <button
+                  className="bg-navyblue-500 text-white text-2xl px-5 py-2 rounded-md"
+                  onClick={() => {
+                    if (pagination < totalPage) {
+                      setPagination(pagination + 1);
+                    }
+                  }}
+                >
+                  Next
+                </button>
+              </div>
 
               {/*<DataTable
                 value={Users}
