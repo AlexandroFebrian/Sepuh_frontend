@@ -395,7 +395,7 @@ export default function IncomeReports() {
                     </TableBody>
 
                     {agreementsTable.length == 0 && (
-                      <div className=" bg-red-500 w-24 text-center text-xl font-semibold py-5">
+                      <div className=" w-24 text-center text-xl font-semibold py-5">
                         No record found
                       </div>
                     )}
