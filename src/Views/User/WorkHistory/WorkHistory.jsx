@@ -29,7 +29,8 @@ export default function WorkHistory() {
 
   useEffect(() => {
     if (activity) {
-      setWorkHistory(activity);
+      const reversed = [...activity].reverse();
+      setWorkHistory(reversed);
     }
   }, [activity]);
 
