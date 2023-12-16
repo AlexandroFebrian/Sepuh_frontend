@@ -33,7 +33,7 @@ export default function NowHiring({user}) {
     <div className="h-[calc(100vh-5rem)] w-full sticky top-[5rem] py-10 px-2">
       <div className="w-full top-0 transition-colors duration-300 flex flex-col items-center justify-start p-4 shadow-xl bg-ghostwhite-100 rounded">
         <div className="title border-navyblue-600 w-full">
-          <h1 className="text-3xl w-full">Now Hiring</h1>
+          <h1 className="text-3xl w-full">Recently posted</h1>
         </div>
 
         <hr className=" bg-navyblue-800 w-full h-[0.1rem] my-3" />
