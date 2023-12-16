@@ -38,15 +38,32 @@ export default function UserReports() {
         <div className="right w-full pt-10 shadow-lg ">
           <div className=" mb-10 px-10 pb-10">
             <div className="container m-7 mx-auto">
-              <div className="top flex justify-between items-center w-full my-10">
+              <div className="top flex items-center w-full my-10">
                 <div className="left w-1/4">
                   <Select>
                     <SelectTrigger className="w-1/2 bg-navyblue-800 text-white text-lg py-6">
                       <SelectValue placeholder="October 2023" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="monthyear">Month Year</SelectItem>
-                      <SelectItem value="bulantahun">Bulan Tahun</SelectItem>
+                      {/* <SelectItem value="monthyear">Month Year</SelectItem>
+                      <SelectItem value="bulantahun">Bulan Tahun</SelectItem> */}
+
+                      {/* get month and year from member since */}
+                      {Users.map((user, index) => (
+                        <SelectItem
+                          key={index}
+                          // ambil bulan dan tahun nya saja
+                          value={
+                            user.create_at.split("T")[0].split("-")[0] +
+                            "-" +
+                            user.create_at.split("T")[0].split("-")[1]
+                          }
+                        >
+                          {formatDate(user.create_at).split(" ")[1] +
+                            " " +
+                            formatDate(user.create_at).split(" ")[2]}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </div>
@@ -55,7 +72,7 @@ export default function UserReports() {
                     Top 5 Most Popular Freelancer October 2023
                   </h2>
                 </div>
-                <div className="right w-1/4 flex justify-end">
+                {/* <div className="right w-1/4 flex justify-end">
                   <Select>
                     <SelectTrigger className="w-1/2 bg-navyblue-800 text-white text-lg py-6">
                       <SelectValue placeholder="Freelancer" />
@@ -65,7 +82,7 @@ export default function UserReports() {
                       <SelectItem value="company">Company</SelectItem>
                     </SelectContent>
                   </Select>
-                </div>
+                </div> */}
               </div>
 
               <Table className="w-full bg-ghostwhite-100 rounded-md">
