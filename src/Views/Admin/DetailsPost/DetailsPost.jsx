@@ -148,8 +148,6 @@ export default function DetailsPost() {
         } else if (
           item.title.toLowerCase().includes(globalFilterValue.toLowerCase()) ||
           item._id.toLowerCase().includes(globalFilterValue.toLowerCase())
-
-          // item.title.toLowerCase().includes(globalFilterValue.toLowerCase())
         ) {
           return item;
         }

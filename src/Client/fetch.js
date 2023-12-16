@@ -947,7 +947,7 @@ export default function fetch() {
 
     try {
       console.log(data);
-      return await client
+      return await clientFile
         .put("users/documents", data, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -955,6 +955,7 @@ export default function fetch() {
         })
         .then((res) => {
           alert("Document Updated");
+          checkToken();
           return res;
         })
         .catch((err) => {
@@ -1197,6 +1198,26 @@ export default function fetch() {
     }
   }
 
+  async function getAllAgreementsUser() {
+    const token = localStorage.getItem("token");
+    try {
+      return await client
+        .get("agreements", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          return res.data;
+        })
+        .catch((err) => {
+          return err.response;
+        });
+    } catch (error) {
+      alert("error");
+    }
+  }
+
   return {
     signIn,
     signUp,
@@ -1244,5 +1265,6 @@ export default function fetch() {
     hireAccept,
     hireReject,
     getEmployees,
+    getAllAgreementsUser,
   };
 }
