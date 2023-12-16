@@ -160,6 +160,13 @@ export default function Notification() {
                                 <span className="font-bold">{item.from.name}</span> started a conversation with you
                               </p>
                             }
+                            {
+                              item.category == "Agreement"
+                              &&
+                              <p className="text-lg">
+                                <span className="font-bold">{item.from.name}</span> wants to make an agreement with you
+                              </p>
+                            }
                             <div className="flex items-center">
                               <Link to={`/user?email=${item.from.email}`}>
                                 <Button
@@ -188,6 +195,23 @@ export default function Notification() {
                                 >
                                   View Chat
                                 </Button>
+                              }
+                              {
+                                item.category == "Agreement"
+                                &&
+                                <Link to={`/activity/${item.link}`}>
+                                  <Button
+                                    variant={"outline"}
+                                    borderColor={"navyblue.800"}
+                                    borderWidth={1}
+                                    rounded={"full"}
+                                    margin={0}
+                                    marginLeft={"0.5rem"}
+                                    height={"1.75rem"}
+                                  >
+                                    View Agreement
+                                  </Button>
+                                </Link>
                               }
                             </div>
                           </div>
