@@ -3,34 +3,51 @@ import { useSelector } from "react-redux";
 import fetch from "../../../Client/fetch";
 
 export default function DashboardAdminViewModel() {
-  const [dummy, setDummy] = useState([
-    {
-      income: 9500000,
-      expense: 5500000,
-    },
-    {
-      income: 12500000,
-      expense: 3500000,
-    },
-    {
-      income: 7500000,
-      expense: 10500000,
-    },
-    {
-      income: 1500000,
-      expense: 11500000,
-    },
-    {
-      income: 6500000,
-      expense: 8500000,
-    },
-    {
-      income: 4500000,
-      expense: 2500000,
-    },
-  ]);
+  const { getAllAgreements, getAllUser } = fetch();
+
+  const [activity, setActivity] = useState([]);
+  const [freelancer, setFreelancer] = useState([]);
+  const [company, setCompany] = useState([]);
+
+  useEffect(() => {
+    getAllUser().then((data) => {
+      const user = data.users;
+
+      user.map((item) => {
+        if (item.role === "Freelancer") {
+          console.log(
+            "item dengan nama" +
+              item.name +
+              "adalah freelancer dan akan di push ke array freelancer"
+          );
+          setFreelancer((freelancer) => [...freelancer, item]);
+          console.log(freelancer);
+        } else {
+          console.log(
+            "item dengan nama" +
+              item.name +
+              "adalah company dan akan di push ke array company"
+          );
+          setCompany((company) => [...company, item]);
+          console.log(company);
+        }
+      });
+    });
+
+    getAllAgreements().then((data) => {
+      setActivity(data);
+    });
+
+    return () => {
+      setActivity([]);
+      setFreelancer([]);
+      setCompany([]);
+    };
+  }, []);
 
   return {
-    dummy,
+    activity,
+    freelancer,
+    company,
   };
 }
