@@ -239,7 +239,6 @@ export default function MasterPost() {
                 </TableHeader>
 
                 <TableBody>
-                  {/* pakai limit */}
                   {ListUsers.slice(
                     (pagination - 1) * limit,
                     pagination * limit
