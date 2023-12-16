@@ -144,10 +144,14 @@ export default function IncomeReports() {
           new Date(item.start_date) <= selectedDays.to
         );
       });
+
+      setAgreementsTable(newAgreements);
     } else if (selectedDays.from) {
       const newAgreements = agreements.filter((item) => {
         return new Date(item.start_date) >= selectedDays.from;
       });
+
+      setAgreementsTable(newAgreements);
     } else {
       setNewAgreements(agreements);
     }
@@ -391,8 +395,8 @@ export default function IncomeReports() {
                     </TableBody>
 
                     {agreementsTable.length == 0 && (
-                      <div className="text-center text-xl font-semibold py-5">
-                        No Data
+                      <div className=" bg-red-500 w-24 text-center text-xl font-semibold py-5">
+                        No record found
                       </div>
                     )}
                   </Table>
