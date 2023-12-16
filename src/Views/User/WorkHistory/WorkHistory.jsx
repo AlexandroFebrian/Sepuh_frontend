@@ -12,53 +12,11 @@ export default function WorkHistory() {
   console.log("Activity", activity);
 
   const [pagination, setPagination] = useState(1);
-  const [dataDummy, setDataDummy] = useState([
-    {
-      company: "PT. Indofood Sukses Makmur Tbk",
-      position: "Software Engineer",
-      startDate: "2023-02-03",
-      endDate: "2023-08-08",
-      status: "0", // 0 = ongoing, 1 = finished
-    },
-    {
-      company: "PT. Indofood Sukses Makmur Tbk",
-      position: "Software Engineer",
-      startDate: "2023-02-03",
-      endDate: "2023-08-08",
-      status: "0",
-    },
-    {
-      company: "PT. Indofood Sukses Makmur Tbk",
-      position: "Software Engineer",
-      startDate: "2023-02-03",
-      endDate: "2023-08-08",
-      status: "1",
-    },
-    {
-      company: "PT. Indofood Sukses Makmur Tbk",
-      position: "Software Engineer",
-      startDate: "2023-02-03",
-      endDate: "2023-08-08",
-      status: "1",
-    },
-    {
-      company: "PT. Indofood Sukses Makmur Tbk",
-      position: "Software Engineer",
-      startDate: "2023-02-03",
-      endDate: "2023-08-08",
-      status: "1",
-    },
-    {
-      company: "PT. Indofood Sukses Makmur Tbk",
-      position: "Software Engineer",
-      startDate: "2023-02-03",
-      endDate: "2023-08-08",
-      status: "1",
-    },
-  ]);
+  const [totalPage, setTotalPage] = useState(0);
+  const [totalData, setTotalData] = useState(0);
+  const [limit, setLimit] = useState(10);
   const [workhistory, setWorkHistory] = useState([]);
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
   const [sort, setSort] = useState("latest"); // latest, oldest
 
   const formatDate = (date) => {
@@ -88,6 +46,19 @@ export default function WorkHistory() {
       setWorkHistory(sorted);
     }
   }, [sort]);
+
+  useEffect(() => {
+    setTotalPage(Math.ceil(workhistory.length / 10));
+    setTotalData(workhistory.length);
+  }, [workhistory]);
+
+  useEffect(() => {
+    if (page == 1) {
+      setLimit(10);
+    } else {
+      setLimit(page * 10);
+    }
+  }, [page]);
 
   return (
     <>
@@ -129,7 +100,7 @@ export default function WorkHistory() {
               </div>
 
               <div className="w-full h-full rounded-md py-2 shadow-md mt-5 bg-ghostwhite-50 ">
-                {workhistory.slice(0, limit).map((data, index) => {
+                {workhistory.slice(limit - 10, limit).map((data, index) => {
                   return (
                     <div
                       key={index}
