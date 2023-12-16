@@ -22,6 +22,7 @@ import IncomeReportsUser from "./Views/User/IncomeReports/IncomeReports";
 import EmployeeReports from "./Views/User/CompanyEmployeeReports/EmployeeReports";
 import CompanyEmployeeList from "./Views/User/CompanyEmployeeList/CompanyEmployeeList";
 import Settings from "./Views/User/Settings/Settings";
+import CompanyPaymentReports from "./Views/User/CompanyPaymentReports/CompanyPaymentReports";
 
 // ADMIN
 import AdminLogin from "./Views/Admin/AdminLogin/AdminLogin";
@@ -151,6 +152,10 @@ const Router = createBrowserRouter([
           {
             path: "employeereports",
             element: <EmployeeReports />,
+          },
+          {
+            path: "paymentreports",
+            element: <CompanyPaymentReports />,
           },
         ],
       },

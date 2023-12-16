@@ -126,7 +126,7 @@ export default function EmployeeReports() {
   return (
     <>
       <div className=" h-fit relative flex">
-        <div className="left w-1/5 ">
+        <div className="left w-1/4 ">
           <div className="h-[calc(100vh-5rem)] w-full sticky top-[5rem]">
             {isLogin && user?.role == "Freelancer" && <FreelancerProfileMenu />}
             {isLogin && user?.role == "Company" && <CompanyProfileMenu />}
@@ -135,7 +135,7 @@ export default function EmployeeReports() {
         <div className="mid w-full">
           <div className=" min-h-[calc(100vh-5rem)] h-fit border-l-2 border-navyblue-600 z-0 px-10 py-10">
             <div className="w-full rounded py-6 px-10">
-              <h1 className="font-semibold text-xl">Employee Reports</h1>
+              <h1 className="text-3xl font-bold">Employee Reports</h1>
             </div>
 
             <div className="dateFromTo mx-10">
