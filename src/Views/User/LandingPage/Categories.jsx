@@ -19,8 +19,8 @@ export default function Categories({photos}) {
       img_url: photos[2]
     },
     {
-      text: "Graphic Design",
-      value: "graphic design",
+      text: "Logo Design",
+      value: "logo design",
       img_url: photos[3]
     },
     {
