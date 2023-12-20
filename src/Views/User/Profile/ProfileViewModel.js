@@ -97,7 +97,7 @@ export default function ProfileViewModel() {
     const data = {
       header_picture: bannerFile.length == 0 ? undefined : bannerFile[0],
       profile_picture: profileFile.length == 0 ? undefined : profileFile[0],
-      date_of_birth: profileDateOfBirth,
+      date_of_birth: profileDateOfBirth == "" ? undefined : profileDateOfBirth,
       headline: profileHeadline,
       bio: profileBio,
       city: profileCity,
