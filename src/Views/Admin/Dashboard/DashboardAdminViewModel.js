@@ -15,21 +15,9 @@ export default function DashboardAdminViewModel() {
 
       user.map((item) => {
         if (item.role === "Freelancer") {
-          console.log(
-            "item dengan nama" +
-              item.name +
-              "adalah freelancer dan akan di push ke array freelancer"
-          );
           setFreelancer((freelancer) => [...freelancer, item]);
-          console.log(freelancer);
         } else {
-          console.log(
-            "item dengan nama" +
-              item.name +
-              "adalah company dan akan di push ke array company"
-          );
           setCompany((company) => [...company, item]);
-          console.log(company);
         }
       });
     });

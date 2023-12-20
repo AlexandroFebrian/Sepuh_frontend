@@ -71,7 +71,6 @@ export default function CompanyPaymentReports() {
       const found = acc.find(
         (item) => formatdate(item.start_date) == formatdate(curr.start_date)
       );
-      console.log("found", found);
       if (found) {
         found.deal_price += curr.deal_price;
       } else {

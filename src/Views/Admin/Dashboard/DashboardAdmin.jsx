@@ -6,6 +6,7 @@ import Chart from "react-apexcharts";
 import { FaUser } from "react-icons/fa6";
 import { FaMoneyBillWave } from "react-icons/fa";
 import { IoCodeSlashSharp } from "react-icons/io5";
+import { compose } from "@reduxjs/toolkit";
 
 export default function DashboardAdmin() {
   const { activity, company, freelancer } = DashboardAdminViewModel();
@@ -45,6 +46,57 @@ export default function DashboardAdmin() {
     Income.map((item) => (total += item.deal_price * 0.1));
     return total;
   };
+
+  const [IncomeTodayToLastWeek, setIncomeTodayToLastWeek] = useState([]);
+
+  useEffect(() => {
+    const income = Income;
+    const incomeFormatted = [];
+    income.map((item) => {
+      const date = new Date(item.create_at);
+      const month = date.toLocaleString("default", { month: "long" });
+      const day = date.getDate();
+      const year = date.getFullYear();
+      const dateFormatted = `${day} ${month} ${year}`;
+
+      const index = incomeFormatted.findIndex(
+        (item) => item.date === dateFormatted
+      );
+
+      if (index === -1) {
+        incomeFormatted.push({
+          date: dateFormatted,
+          deal_price: item.deal_price,
+        });
+      } else {
+        incomeFormatted[index].deal_price += item.deal_price;
+      }
+    });
+
+    const lastWeek = new Date();
+    lastWeek.setDate(lastWeek.getDate() - 7);
+    const lastWeekFormatted = formatDate(lastWeek);
+
+    const incomeFormattedLastWeek = incomeFormatted.filter(
+      (item) => item.date >= lastWeekFormatted
+    );
+
+    const today = new Date();
+    const todayFormatted = formatDate(today);
+    const indexToday = incomeFormattedLastWeek.findIndex(
+      (item) => item.date === todayFormatted
+    );
+    if (indexToday === -1) {
+      incomeFormattedLastWeek.push({
+        date: todayFormatted,
+        deal_price: 0,
+      });
+    }
+
+    setIncomeTodayToLastWeek(incomeFormattedLastWeek);
+  }, [Income]);
+
+  console.log("Income", setIncomeTodayToLastWeek);
 
   return (
     <>
@@ -131,30 +183,40 @@ export default function DashboardAdmin() {
             </div>
           </div>
 
+          <div className="titleChart mt-5">
+            <h1 className="text-2xl font-bold text-gray-700 text-center">
+              Income This Week
+            </h1>
+          </div>
           <div className="chart flex w-full justify-between my-5 gap-5 rounded-lg">
             <div className="line w-1/2 bg-ghostwhite-100 shadow-lg">
               <Chart
                 options={{
                   chart: {
-                    id: "basic-bar",
+                    id: "basic-line",
                   },
                   xaxis: {
-                    categories: Income.map((item) =>
-                      formatDate(item.create_at)
+                    categories: IncomeTodayToLastWeek.map((item) =>
+                      formatDate(item.date)
                     ),
                   },
                 }}
                 series={[
                   {
                     name: "Income",
-                    data: Income.map((item) => item.deal_price),
+                    // data: IncomeTodayToLastWeek.map(
+                    //   (item) => item.deal_price * 0.1
+                    // ),
+
+                    data: IncomeTodayToLastWeek.map((item) =>
+                      item.deal_price === 0 ? 0 : item.deal_price * 0.1
+                    ),
                   },
                 ]}
                 type="line"
                 width="100%"
               />
             </div>
-
             <div className="bar w-1/2 bg-ghostwhite-100 shadow-lg">
               <Chart
                 options={{
@@ -162,18 +224,32 @@ export default function DashboardAdmin() {
                     id: "basic-bar",
                   },
                   xaxis: {
-                    categories: Income.map((item) =>
-                      formatDate(item.create_at)
+                    categories: IncomeTodayToLastWeek.map((item) =>
+                      formatDate(item.date)
                     ),
                   },
                 }}
                 series={[
                   {
                     name: "Income",
-                    data: Income.map((item) => item.deal_price),
+                    data: IncomeTodayToLastWeek.map((item) => item.deal_price),
                   },
                 ]}
                 type="bar"
+                width="100%"
+              />
+            </div>
+
+            <div className="pie w-1/2 bg-ghostwhite-100 shadow-lg">
+              <Chart
+                options={{
+                  chart: {
+                    id: "basic-pie",
+                  },
+                  labels: IncomeTodayToLastWeek.map((item) => item.date),
+                }}
+                series={IncomeTodayToLastWeek.map((item) => item.deal_price)}
+                type="donut"
                 width="100%"
               />
             </div>
