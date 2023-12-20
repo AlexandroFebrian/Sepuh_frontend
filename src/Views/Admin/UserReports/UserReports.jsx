@@ -14,11 +14,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UserReportsViewModel from "./UserReportsViewModel";
 
 export default function UserReports() {
   const { Users } = UserReportsViewModel();
+
+  const [listUser, setListUser] = useState([]);
 
   const formatDate = (date) => {
     const newDate = new Date(date);
@@ -38,6 +40,27 @@ export default function UserReports() {
 
   uniqueMonthsAndYears.add("All Time");
 
+  useEffect(() => {
+    setListUser(Users);
+  }, [Users]);
+
+  const handleChangeSelect = (e) => {
+    const value = e;
+    console.log(value);
+
+    if (value !== "All Time") {
+      const data = Users.filter((user) => {
+        const date = new Date(user.create_at);
+        const month = date.toLocaleString("default", { month: "long" });
+        const year = date.getFullYear();
+        return `${month} ${year}` === value;
+      });
+      setListUser(data);
+    } else {
+      setListUser(Users);
+    }
+  };
+
   return (
     <>
       <div className="container-userReports flex">
@@ -50,9 +73,9 @@ export default function UserReports() {
             <div className="container m-7 mx-auto">
               <div className="top flex items-center w-full my-10">
                 <div className="left w-1/4">
-                  <Select>
+                  <Select onValueChange={handleChangeSelect}>
                     <SelectTrigger className="w-3/4 bg-navyblue-800 text-white text-lg py-6">
-                      <SelectValue placeholder="All Time" />
+                      <SelectValue placeholder="Member Since" />
                     </SelectTrigger>
                     <SelectContent>
                       {Array.from(uniqueMonthsAndYears).map(
@@ -89,81 +112,8 @@ export default function UserReports() {
                     </TableHead>
                   </TableRow>
                 </TableHeader>
-                {/* <TableBody>
-                  <TableRow>
-                    <TableCell className="font-medium text-lg text-center">
-                      1
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      Febrian Alexandro
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      25 November 2023
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      <div className="arrow">
-                        <span>8</span>
-                      </div>
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      4.00
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium text-lg text-center">
-                      2
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      Febrian Alexandro
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      25 November 2023
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      1000
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      4.00
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium text-lg text-center">
-                      3
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      Febrian Alexandro
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      25 November 2023
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      1000
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      4.00
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium text-lg text-center">
-                      4
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      Febrian Alexandro
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      25 November 2023
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      1000
-                    </TableCell>
-                    <TableCell className="font-medium text-lg text-center">
-                      4.00
-                    </TableCell>
-                  </TableRow>
-                </TableBody> */}
-
                 <TableBody>
-                  {Users.map((user, index) => (
+                  {listUser.map((user, index) => (
                     <TableRow key={index}>
                       <TableCell className="font-medium text-lg text-center">
                         {index + 1}

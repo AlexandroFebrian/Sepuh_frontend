@@ -66,9 +66,9 @@ export default function NavigationAdmin() {
             <NavLink
               to="/admin/dashboard"
               className={(state) =>
-                state
-                  ? "text-xl font-sarabun hover:underline hover:underline-offset-8"
-                  : "text-xl font-sarabun hover:underline hover:underline-offset-8 font-semibold"
+                state.isActive
+                  ? "text-xl font-sarabun underline underline-offset-8 font-semibold"
+                  : "text-xl font-sarabun hover:underline hover:underline-offset-8 font-semibold "
               }
             >
               Dashboard
@@ -76,40 +76,60 @@ export default function NavigationAdmin() {
             <NavLink
               to="/admin/masteruser"
               className={(state) =>
-                state
-                  ? "text-xl font-sarabun hover:underline hover:underline-offset-8"
-                  : "text-xl font-sarabun hover:underline hover:underline-offset-8 font-semibold"
+                state.isActive
+                  ? "text-xl font-sarabun underline underline-offset-8 font-semibold"
+                  : "text-xl font-sarabun hover:underline hover:underline-offset-8 font-semibold "
               }
             >
               Master User
             </NavLink>
             <NavLink
               to="/admin/masterpost"
-              className="text-xl font-sarabun hover:underline hover:underline-offset-8"
+              className={(state) =>
+                state.isActive
+                  ? "text-xl font-sarabun underline underline-offset-8 font-semibold"
+                  : "text-xl font-sarabun hover:underline hover:underline-offset-8 font-semibold "
+              }
             >
               Master Post
             </NavLink>
             <NavLink
               to="/admin/userreports"
-              className="text-xl font-sarabun hover:underline hover:underline-offset-8"
+              className={(state) =>
+                state.isActive
+                  ? "text-xl font-sarabun underline underline-offset-8 font-semibold"
+                  : "text-xl font-sarabun hover:underline hover:underline-offset-8 font-semibold "
+              }
             >
               User Reports
             </NavLink>
             <NavLink
               to="/admin/postingreports"
-              className="text-xl font-sarabun hover:underline hover:underline-offset-8"
+              className={(state) =>
+                state.isActive
+                  ? "text-xl font-sarabun underline underline-offset-8 font-semibold"
+                  : "text-xl font-sarabun hover:underline hover:underline-offset-8 font-semibold "
+              }
             >
               Post Reports
             </NavLink>
             <NavLink
               to="/admin/incomereports"
-              className="text-xl font-sarabun hover:underline hover:underline-offset-8"
+              className={(state) =>
+                state.isActive
+                  ? "text-xl font-sarabun underline underline-offset-8 font-semibold"
+                  : "text-xl font-sarabun hover:underline hover:underline-offset-8 font-semibold "
+              }
             >
               Income Reports
             </NavLink>
             <NavLink
               to="/admin/paymentreports"
-              className="text-xl font-sarabun hover:underline hover:underline-offset-8"
+              className={(state) =>
+                state.isActive
+                  ? "text-xl font-sarabun underline underline-offset-8 font-semibold"
+                  : "text-xl font-sarabun hover:underline hover:underline-offset-8 font-semibold "
+              }
             >
               Payment Reports
             </NavLink>

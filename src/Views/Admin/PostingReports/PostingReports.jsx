@@ -26,6 +26,7 @@ export default function PostingReports() {
   const [post, setPost] = useState([]);
   const [postCompany, setPostCompany] = useState([]);
   const [postFreelancer, setPostFreelancer] = useState([]);
+  const [listUser, setListUser] = useState([]);
   const getPostsCompany = async () => {
     const token = localStorage.getItem("token");
     const response = await Axios.get(`${baseURL}/posts/company`, {
@@ -101,30 +102,48 @@ export default function PostingReports() {
   uniqueMonthsAndYears.add("All Time");
 
   const handleChangeSelect = (e) => {
-    const value = e.target.value;
-    console.log("ngehe");
-    // if (value === "All Time") {
-    //   const data = [...postCompany, ...postFreelancer];
-    //   const sortedData = data.sort((a, b) => {
-    //     return new Date(b.posted_at) - new Date(a.posted_at);
-    //   });
-    //   setPost(sortedData);
-    // } else {
-    //   const data = [...postCompany, ...postFreelancer];
-    //   const filteredData = data.filter((item) => {
-    //     const date = new Date(item.posted_at);
-    //     const month = date.toLocaleString("default", { month: "long" });
-    //     const year = date.getFullYear();
-    //     return `${month} ${year}` === value;
-    //   });
-    //   const sortedData = filteredData.sort((a, b) => {
-    //     return new Date(b.posted_at) - new Date(a.posted_at);
-    //   });
-    //   setPost(sortedData);
-    // }
+    const value = e;
+    console.log(value);
 
-    // console.log(e);
+    if (value !== "All Time") {
+      const data = Users.filter((user) => {
+        const date = new Date(user.create_at);
+        const month = date.toLocaleString("default", { month: "long" });
+        const year = date.getFullYear();
+        return `${month} ${year}` === value;
+      });
+      setListUser(data);
+    } else {
+      setListUser(Users);
+    }
   };
+
+  const handleRoleChange = (e) => {
+    const value = e;
+    console.log(value);
+
+    if (value === "freelancer") {
+      const data = Users.filter((user) => user.role === "Freelancer");
+      setListUser(data);
+    } else if (value === "company") {
+      const data = Users.filter((user) => user.role === "Company");
+      setListUser(data);
+    } else {
+      setListUser(Users);
+    }
+  };
+
+  useEffect(() => {
+    setListUser(Users);
+  }, [Users]);
+
+  useEffect(() => {
+    const data = [...postCompany, ...postFreelancer];
+    const sortedData = data.sort((a, b) => {
+      return new Date(b.posted_at) - new Date(a.posted_at);
+    });
+    setPost(sortedData);
+  }, [postCompany, postFreelancer]);
 
   return (
     <>
@@ -139,7 +158,7 @@ export default function PostingReports() {
                 <div className="left w-1/4">
                   <Select onValueChange={handleChangeSelect}>
                     <SelectTrigger className="w-3/4 bg-navyblue-800 text-white text-lg py-6">
-                      <SelectValue placeholder="All Time" />
+                      <SelectValue placeholder="Member Since" />
                     </SelectTrigger>
                     <SelectContent>
                       {Array.from(uniqueMonthsAndYears).map(
@@ -158,11 +177,15 @@ export default function PostingReports() {
                   </h2>
                 </div>
                 <div className="right w-1/4 flex justify-end">
-                  <Select>
+                  <Select
+                    onValueChange={handleRoleChange}
+                    className="w-1/2 bg-navyblue-800 text-white text-lg py-6"
+                  >
                     <SelectTrigger className="w-1/2 bg-navyblue-800 text-white text-lg py-6">
-                      <SelectValue placeholder="Freelancer" />
+                      <SelectValue placeholder="All User" />
                     </SelectTrigger>
                     <SelectContent>
+                      <SelectItem value="All User">All User</SelectItem>
                       <SelectItem value="freelancer">Freelancer</SelectItem>
                       <SelectItem value="company">Company</SelectItem>
                     </SelectContent>
@@ -188,7 +211,7 @@ export default function PostingReports() {
                   </TableRow>
                 </TableHeader>
 
-                {Users.map((user, index) => (
+                {listUser.map((user, index) => (
                   <TableBody key={index}>
                     <TableRow>
                       <TableCell className="font-medium text-lg text-center">
