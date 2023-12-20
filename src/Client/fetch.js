@@ -65,6 +65,18 @@ export default function fetch() {
     }
   }
 
+  async function verifyEmail(token) {
+    try {
+      return await client.get(`users/verify/${token}`).then((res) => {
+        return res
+      }).catch((err) => {
+        return err.response;
+      })
+    } catch (error) {
+      alert("error");
+    }
+  }
+
   async function checkToken() {
     const token = localStorage.getItem("token");
 
@@ -1221,6 +1233,7 @@ export default function fetch() {
   return {
     signIn,
     signUp,
+    verifyEmail,
     checkToken,
     getCategory,
     getUserProfile,
