@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import MainLayout from "./Views/Layout/MainLayout";
+import Verification from "./Views/User/Verification/Verification";
+
 // USER
 import LandingPage from "./Views/User/LandingPage/LandingPage";
 import SignIn from "./Views/User/SignIn/SignIn";
@@ -23,6 +25,10 @@ import EmployeeReports from "./Views/User/CompanyEmployeeReports/EmployeeReports
 import CompanyEmployeeList from "./Views/User/CompanyEmployeeList/CompanyEmployeeList";
 import Settings from "./Views/User/Settings/Settings";
 import CompanyPaymentReports from "./Views/User/CompanyPaymentReports/CompanyPaymentReports";
+import DetailActivity from "./Views/User/MyActivity/DetailActivity/DetailActivity";
+import Rejected from "./Views/User/MyActivity/Rejected/Rejected";
+import Dashboard from "./Views/User/Dashboard/Dashboard";
+import Notification from "./Views/User/Notification/Notification";
 
 // ADMIN
 import AdminLogin from "./Views/Admin/AdminLogin/AdminLogin";
@@ -33,10 +39,6 @@ import UserReports from "./Views/Admin/UserReports/UserReports";
 import PostingReports from "./Views/Admin/PostingReports/PostingReports";
 import IncomeReportsAdmin from "./Views/Admin/IncomeReports/IncomeReports";
 import PaymentReports from "./Views/Admin/PaymentReports/PaymentReports";
-import DetailActivity from "./Views/User/MyActivity/DetailActivity/DetailActivity";
-import Rejected from "./Views/User/MyActivity/Rejected/Rejected";
-import Dashboard from "./Views/User/Dashboard/Dashboard";
-import Notification from "./Views/User/Notification/Notification";
 import DetailsPostAdmin from "./Views/Admin/DetailsPost/DetailsPost";
 
 const Router = createBrowserRouter([
@@ -202,6 +204,10 @@ const Router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/verify",
+    element: <Verification />
+  }
 
   // {
   //   path:   "*",
