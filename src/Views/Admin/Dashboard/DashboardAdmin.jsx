@@ -96,7 +96,25 @@ export default function DashboardAdmin() {
     setIncomeTodayToLastWeek(incomeFormattedLastWeek);
   }, [Income]);
 
-  console.log("Income", setIncomeTodayToLastWeek);
+  const getTodayIncome = () => {
+    let total = 0;
+
+    Income.filter((item) => {
+      const date = new Date(item.create_at);
+      const month = date.toLocaleString("default", { month: "long" });
+      const day = date.getDate();
+      const year = date.getFullYear();
+      const dateFormatted = `${day} ${month} ${year}`;
+
+      const today = new Date();
+      const todayFormatted = formatDate(today);
+
+      if (dateFormatted === todayFormatted) {
+        total += item.deal_price;
+      }
+    });
+    return total;
+  };
 
   return (
     <>
@@ -105,7 +123,7 @@ export default function DashboardAdmin() {
           <NavigationAdmin />
         </div>
         <div className="right w-5/6 absolute right-0 px-10">
-          <div className="data w-full pt-10 grid grid-cols-4">
+          <div className="data w-full pt-10 grid grid-cols-5">
             <div className="totalincome bg-ghostwhite-100 w-3/4 h-40 my-5 p-5 rounded-lg shadow-lg flex flex-col justify-center items-center">
               <div className="icon">
                 <FaMoneyBillWave size={32} />
@@ -178,6 +196,22 @@ export default function DashboardAdmin() {
                   id="jumlahProject"
                 >
                   {activity.length} Project
+                </h1>
+              </div>
+            </div>
+
+            <div className="todayIncome bg-ghostwhite-100 w-3/4 h-40 my-5 p-5 rounded-lg shadow-lg flex flex-col justify-center items-center">
+              <div className="icon">
+                <FaMoneyBillWave size={32} />
+              </div>
+              <div className="todayIncome-title">
+                <h1 className="text-2xl font-bold text-gray-700 text-center">
+                  Income Today
+                </h1>
+              </div>
+              <div className="todayIncome-content">
+                <h1 className="text-xl font-bold text-gray-700 text-center">
+                  {formatAmount(getTodayIncome())}
                 </h1>
               </div>
             </div>
