@@ -17,7 +17,7 @@ export default function Verification() {
     const response = await verifyEmail(token)
     console.log(response)
 
-    if(response.status == 200){
+    if(response.status == 201){
       navigate("/signin")
       return
     }else{
