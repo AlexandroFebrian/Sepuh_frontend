@@ -187,7 +187,7 @@ export default function MasterUser() {
                         <div className="buttonAction flex gap-2 text-xl font-sarabun">
                           {rowData.status === -1 && (
                             <button
-                              className=" bg-navyblue-500 text-white rounded-md px-3 py-2 hover:bg-navyblue-600  w-20"
+                              className=" bg-navyblue-500 text-white rounded-md px-3 py-2 hover:bg-navyblue-600  w-24"
                               onClick={() => {
                                 unbanUser(rowData.email);
                                 rowData.status = 1;
@@ -200,7 +200,7 @@ export default function MasterUser() {
 
                           {rowData.status === 1 && (
                             <button
-                              className="bg-red-500 text-white rounded-md px-3 py-2 hover:bg-red-700 w-20"
+                              className="bg-red-500 text-white rounded-md px-3 py-2 hover:bg-red-700 w-24"
                               onClick={() => {
                                 banUser(rowData.email);
                                 rowData.status = -1;
