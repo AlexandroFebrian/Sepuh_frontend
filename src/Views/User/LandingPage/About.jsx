@@ -80,9 +80,7 @@ export default function About() {
             <div
               className="w-1/4 overflow-hidden"
               key={idx}
-              data-aos={
-                idx === 0 ? "fade-left" : idx === 1 ? "fade-up" : "fade-right"
-              }
+              data-aos={"zoom-in-up"}
             >
               <h1 className="text-xl font-bold">{how.title}</h1>
               <p>{how.description}</p>

@@ -64,20 +64,22 @@ export default function PostingReports() {
 
     const data = [...postCompany, ...postFreelancer];
     const sortedData = data.sort((a, b) => {
-      console.log(a.posted_at);
       return new Date(b.posted_at) - new Date(a.posted_at);
     });
     setPost(sortedData);
   }, []);
 
-  const getAverageRating = (email) => {
+  const getHighestPostRating = (email) => {
     const data = post.filter((item) => item.posted_by.email === email);
-    const banyakData = data.length;
-    const jumlahRating = data.reduce((acc, item) => {
-      return acc + item.avg_rating;
-    }, 0);
-    const average = jumlahRating / banyakData;
-    return average.toFixed(2);
+    const sortedData = data.sort((a, b) => {
+      return b.avg_rating - a.avg_rating;
+    });
+
+    if (sortedData.length > 0) {
+      return sortedData[0].avg_rating;
+    } else {
+      return 0;
+    }
   };
 
   const formatDate = (date) => {
@@ -86,6 +88,42 @@ export default function PostingReports() {
     const day = newDate.getDate();
     const year = newDate.getFullYear();
     return `${day} ${month} ${year}`;
+  };
+
+  const uniqueMonthsAndYears = new Set();
+  Users.map((user, index) => {
+    const date = new Date(user.create_at);
+    const month = date.toLocaleString("default", { month: "long" });
+    const year = date.getFullYear();
+    uniqueMonthsAndYears.add(`${month} ${year}`);
+  });
+
+  uniqueMonthsAndYears.add("All Time");
+
+  const handleChangeSelect = (e) => {
+    const value = e.target.value;
+    console.log("ngehe");
+    // if (value === "All Time") {
+    //   const data = [...postCompany, ...postFreelancer];
+    //   const sortedData = data.sort((a, b) => {
+    //     return new Date(b.posted_at) - new Date(a.posted_at);
+    //   });
+    //   setPost(sortedData);
+    // } else {
+    //   const data = [...postCompany, ...postFreelancer];
+    //   const filteredData = data.filter((item) => {
+    //     const date = new Date(item.posted_at);
+    //     const month = date.toLocaleString("default", { month: "long" });
+    //     const year = date.getFullYear();
+    //     return `${month} ${year}` === value;
+    //   });
+    //   const sortedData = filteredData.sort((a, b) => {
+    //     return new Date(b.posted_at) - new Date(a.posted_at);
+    //   });
+    //   setPost(sortedData);
+    // }
+
+    // console.log(e);
   };
 
   return (
@@ -99,13 +137,18 @@ export default function PostingReports() {
             <div className="container m-7 mx-auto">
               <div className="top flex justify-between items-center w-full my-10">
                 <div className="left w-1/4">
-                  <Select>
-                    <SelectTrigger className="w-1/2 bg-navyblue-800 text-white text-lg py-6">
-                      <SelectValue placeholder="October 2023" />
+                  <Select onValueChange={handleChangeSelect}>
+                    <SelectTrigger className="w-3/4 bg-navyblue-800 text-white text-lg py-6">
+                      <SelectValue placeholder="All Time" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="monthyear">Month Year</SelectItem>
-                      <SelectItem value="bulantahun">Bulan Tahun</SelectItem>
+                      {Array.from(uniqueMonthsAndYears).map(
+                        (monthYear, index) => (
+                          <SelectItem key={index} value={monthYear}>
+                            {monthYear}
+                          </SelectItem>
+                        )
+                      )}
                     </SelectContent>
                   </Select>
                 </div>
@@ -157,8 +200,19 @@ export default function PostingReports() {
                       <TableCell className="font-medium text-lg text-center">
                         {formatDate(user.create_at)}
                       </TableCell>
-                      <TableCell className="font-medium text-lg text-center">
-                        {getAverageRating(user.email)}
+                      <TableCell className="font-medium text-lg text-center flex justify-center items-center gap-2">
+                        <span className="flex items-center justify-center gap-2">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            className="fill-current text-yellow-400"
+                          >
+                            <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z" />
+                          </svg>
+                        </span>
+                        {getHighestPostRating(user.email)}
                       </TableCell>
                     </TableRow>
                   </TableBody>
