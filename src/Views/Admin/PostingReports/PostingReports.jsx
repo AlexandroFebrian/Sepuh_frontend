@@ -149,7 +149,7 @@ export default function PostingReports() {
   return (
     <>
       <div className="container-postingReports flex">
-        <div className="sideBar w-1/6 bg-navyblue-700 h-screen static left-0">
+        <div className="sideBar w-1/6 bg-navyblue-700 h-screen fixed left-0">
           <NavigationAdmin />
         </div>
         <div className="right w-5/6 pt-10 absolute right-0">

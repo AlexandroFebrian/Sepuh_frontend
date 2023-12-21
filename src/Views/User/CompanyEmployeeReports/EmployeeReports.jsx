@@ -28,46 +28,48 @@ import Chart from "react-apexcharts";
 import { object } from "joi";
 
 export default function EmployeeReports() {
-  // const { isLogin, user, employees } = EmployeeReportsViewModel();
-  const { isLogin, user } = EmployeeReportsViewModel();
-  const [data, setData] = useState([
-    {
-      name: `Name_${Math.floor(Math.random() * 1000)}`, // Generate random name
-      role: Math.floor(Math.random() * 2) + 1 == 1 ? "Freelancer" : "Company",
-      date_start: new Date("2021-10-10"), // Generate random date in 2023
-      deal_price: Math.floor(Math.random() * 1000000) + 1, // Generate random deal price between 1 and 100 million
-    },
-    {
-      name: `Name_${Math.floor(Math.random() * 1000)}`,
-      role: Math.floor(Math.random() * 2) + 1 == 1 ? "Freelancer" : "Company",
-      date_start: new Date("2023-12-14"),
-      deal_price: Math.floor(Math.random() * 1000000) + 1,
-    },
-    {
-      name: `Name_${Math.floor(Math.random() * 1000)}`,
-      role: Math.floor(Math.random() * 2) + 1 == 1 ? "Freelancer" : "Company",
-      date_start: new Date("2023-12-17"),
-      deal_price: Math.floor(Math.random() * 1000000) + 1,
-    },
-    {
-      name: `Name_${Math.floor(Math.random() * 1000)}`,
-      role: Math.floor(Math.random() * 2) + 1 == 1 ? "Freelancer" : "Company",
-      date_start: new Date("2023-12-18"),
-      deal_price: Math.floor(Math.random() * 1000000) + 1,
-    },
-    {
-      name: `Name_${Math.floor(Math.random() * 1000)}`,
-      role: Math.floor(Math.random() * 2) + 1 == 1 ? "Freelancer" : "Company",
-      date_start: new Date("2023-12-13"),
-      deal_price: Math.floor(Math.random() * 1000000) + 1,
-    },
-    {
-      name: `Name_${Math.floor(Math.random() * 1000)}`,
-      role: Math.floor(Math.random() * 2) + 1 == 1 ? "Freelancer" : "Company",
-      date_start: new Date("2023-12-12"),
-      deal_price: Math.floor(Math.random() * 1000000) + 1,
-    },
-  ]);
+  const { isLogin, user, employees } = EmployeeReportsViewModel();
+//   const { isLogin, user } = EmployeeReportsViewModel();
+//   const [data, setData] = useState([
+//     {
+//       name: `Name_${Math.floor(Math.random() * 1000)}`, // Generate random name
+//       role: Math.floor(Math.random() * 2) + 1 == 1 ? "Freelancer" : "Company",
+//       date_start: new Date("2021-10-10"), // Generate random date in 2023
+//       deal_price: Math.floor(Math.random() * 1000000) + 1, // Generate random deal price between 1 and 100 million
+//     },
+//     {
+//       name: `Name_${Math.floor(Math.random() * 1000)}`,
+//       role: Math.floor(Math.random() * 2) + 1 == 1 ? "Freelancer" : "Company",
+//       date_start: new Date("2023-12-14"),
+//       deal_price: Math.floor(Math.random() * 1000000) + 1,
+//     },
+//     {
+//       name: `Name_${Math.floor(Math.random() * 1000)}`,
+//       role: Math.floor(Math.random() * 2) + 1 == 1 ? "Freelancer" : "Company",
+//       date_start: new Date("2023-12-17"),
+//       deal_price: Math.floor(Math.random() * 1000000) + 1,
+//     },
+//     {
+//       name: `Name_${Math.floor(Math.random() * 1000)}`,
+//       role: Math.floor(Math.random() * 2) + 1 == 1 ? "Freelancer" : "Company",
+//       date_start: new Date("2023-12-18"),
+//       deal_price: Math.floor(Math.random() * 1000000) + 1,
+//     },
+//     {
+//       name: `Name_${Math.floor(Math.random() * 1000)}`,
+//       role: Math.floor(Math.random() * 2) + 1 == 1 ? "Freelancer" : "Company",
+//       date_start: new Date("2023-12-13"),
+//       deal_price: Math.floor(Math.random() * 1000000) + 1,
+//     },
+//     {
+//       name: `Name_${Math.floor(Math.random() * 1000)}`,
+//       role: Math.floor(Math.random() * 2) + 1 == 1 ? "Freelancer" : "Company",
+//       date_start: new Date("2023-12-12"),
+//       deal_price: Math.floor(Math.random() * 1000000) + 1,
+//     },
+//   ]);
+
+  const [data, setData] = useState([]);
 
   const [selectedDays, setSelectedDays] = useState({
     from: undefined,
@@ -88,30 +90,35 @@ export default function EmployeeReports() {
     return amountFormatted;
   };
 
-  // useEffect(() => {
-  //   if (employees) {
-  //     setData(employees);
-  //   }
-  // }, [employees]);
+  useEffect(() => {
+    if (employees) {
+      setData(employees);
+    }
+  }, [employees]);
+
+  const [pagination, setPagination] = useState(1);
+  const [totalPage, setTotalPage] = useState(0);
+  const [totalData, setTotalData] = useState(0);
+  const [limit, setLimit] = useState(10);
 
   useEffect(() => {
     if (selectedDays.from && selectedDays.to) {
-      const filteredData = data.filter((item) => {
-        const date = new Date(item.date_start);
+      const newEmployees = employees.filter((item) => {
         return (
-          date >= selectedDays.from &&
-          date <= selectedDays.to.setDate(selectedDays.to.getDate() + 1)
+          new Date(item.create_at) >= selectedDays.from &&
+          new Date(item.create_at) <= selectedDays.to
         );
       });
-      setData(filteredData);
+
+      setData(newEmployees);
     } else if (selectedDays.from) {
-      const filteredData = data.filter((item) => {
-        const date = new Date(item.date_start);
-        return date >= selectedDays.from;
+      const newEmployees = employees.filter((item) => {
+        return new Date(item.create_at) >= selectedDays.from;
       });
-      setData(filteredData);
+
+      setData(newEmployees);
     } else {
-      setData(data);
+      setData(employees);
     }
   }, [selectedDays]);
 
@@ -139,60 +146,60 @@ export default function EmployeeReports() {
             </div>
 
             <div className="dateFromTo mx-10">
-              <div
-                className={cn(
-                  "grid gap-2",
-                  !selectedDays.from && "text-muted-foreground"
-                )}
-              >
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <Button
-                      id="date"
-                      variant={"outline"}
-                      className={cn(
-                        "w-[300px] justify-start text-left font-normal",
-                        !selectedDays.from && "text-muted-foreground"
-                      )}
-                    >
-                      <FaCalendarAlt className="mr-2 h-4 w-4" />
+                <div
+                  className={cn(
+                    "grid gap-2",
+                    !selectedDays.from && "text-muted-foreground"
+                  )}
+                >
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        id="date"
+                        variant={"outline"}
+                        className={cn(
+                          "w-[300px] justify-start text-left font-normal",
+                          !selectedDays.from && "text-muted-foreground"
+                        )}
+                      >
+                        <FaCalendarAlt className="mr-2 h-4 w-4" />
 
-                      {selectedDays.from
-                        ? selectedDays.to
-                          ? `${formatdate(selectedDays.from)} - ${formatdate(
-                              selectedDays.to
-                            )}`
-                          : formatdate(selectedDays.from)
-                        : "Pick a date"}
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      initialFocus
-                      mode="range"
-                      selectedDays={selectedDays}
-                      onDayClick={(day) => {
-                        if (selectedDays.from && selectedDays.to) {
-                          setSelectedDays({ from: day, to: undefined });
-                        } else if (selectedDays.from) {
-                          if (day < selectedDays.from) {
+                        {selectedDays.from
+                          ? selectedDays.to
+                            ? `${formatdate(selectedDays.from)} - ${formatdate(
+                                selectedDays.to
+                              )}`
+                            : formatdate(selectedDays.from)
+                          : "Pick a date"}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        initialFocus
+                        mode="range"
+                        selectedDays={selectedDays}
+                        onDayClick={(day) => {
+                          if (selectedDays.from && selectedDays.to) {
                             setSelectedDays({ from: day, to: undefined });
+                          } else if (selectedDays.from) {
+                            if (day < selectedDays.from) {
+                              setSelectedDays({ from: day, to: undefined });
+                            } else {
+                              setSelectedDays({
+                                from: selectedDays.from,
+                                to: day,
+                              });
+                            }
                           } else {
-                            setSelectedDays({
-                              from: selectedDays.from,
-                              to: day,
-                            });
+                            setSelectedDays({ from: day, to: undefined });
                           }
-                        } else {
-                          setSelectedDays({ from: day, to: undefined });
-                        }
-                      }}
-                      numberOfMonths={2}
-                    />
-                  </PopoverContent>
-                </Popover>
+                        }}
+                        numberOfMonths={2}
+                      />
+                    </PopoverContent>
+                  </Popover>
+                </div>
               </div>
-            </div>
 
             <div className="table w-full my-10">
               <div className="bg-ghostwhite-100 mx-7 rounded-md">
@@ -202,17 +209,17 @@ export default function EmployeeReports() {
                       <TableHead className="w-[100px] text-2xl text-navyblue-800 font-bold">
                         No
                       </TableHead>
-                      <TableHead className="text-2xl text-navyblue-800 w-1/5 font-bold">
+                      <TableHead className="text-2xl text-navyblue-800 w-1/4 font-bold">
                         Name
                       </TableHead>
-                      <TableHead className="text-2xl text-navyblue-800 w-1/5 font-bold">
+                      <TableHead className="text-2xl text-navyblue-800 w-1/4 font-bold">
+                        Email
+                      </TableHead>
+                      <TableHead className="text-2xl text-navyblue-800 w-1/4 font-bold">
                         Role
                       </TableHead>
                       <TableHead className="text-2xl text-navyblue-800 font-bold">
                         Date Start
-                      </TableHead>
-                      <TableHead className="text-2xl text-navyblue-800 font-bold">
-                        Salary
                       </TableHead>
                     </TableRow>
                   </TableHeader>
@@ -223,16 +230,16 @@ export default function EmployeeReports() {
                           {index + 1}
                         </TableCell>
                         <TableCell className="font-semibold font-sarabun text-lg">
-                          {Object.values(item.name)}
+                            {item.name}
                         </TableCell>
                         <TableCell className="font-semibold font-sarabun text-lg">
-                          {Object.values(item.role)}
+                            {item.email}
                         </TableCell>
                         <TableCell className="font-semibold font-sarabun text-lg">
-                          {format(item.date_start, "dd MMMM yyyy")}
+                            {item.role}
                         </TableCell>
                         <TableCell className="font-semibold font-sarabun text-lg">
-                          {formatAmount(item.deal_price)}
+                            {formatdate(item.create_at)}
                         </TableCell>
                       </TableRow>
                     ))}
@@ -241,7 +248,7 @@ export default function EmployeeReports() {
               </div>
             </div>
 
-            <div className="chart flex flex-row justify-between h-full px-10">
+            {/* <div className="chart flex flex-row justify-between h-full px-10"> 
               <div className="lineChart w-1/2 border-2  h-full">
                 <div className="w-full rounded py-6 ">
                   <Chart
@@ -273,7 +280,7 @@ export default function EmployeeReports() {
                   />
                 </div>
               </div>
-            </div>
+            </div>*/}
           </div>
         </div>
       </div>

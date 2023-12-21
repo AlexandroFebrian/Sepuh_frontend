@@ -67,11 +67,11 @@ export default function UserReports() {
   return (
     <>
       <div className="container-userReports flex">
-        <div className="sidebar w-1/5 bg-navyblue-700 h-screen static left-0">
+        <div className="sidebar w-1/6 bg-navyblue-700 h-screen fixed left-0">
           <NavigationAdmin />
         </div>
 
-        <div className="right w-full pt-10 shadow-lg ">
+        <div className="right w-5/6 pt-10 shadow-lg absolute right-0">
           <div className=" mb-10 px-10 pb-10">
             <div className="container m-7 mx-auto">
               <div className="top flex items-center w-full my-10">
