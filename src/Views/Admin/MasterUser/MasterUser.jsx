@@ -142,6 +142,7 @@ export default function MasterUser() {
                     className="w-1/6 text-xl font-sarabun"
                   ></Column>
                   <Column
+                    field="create_at"
                     header={
                       <span className="text-navyblue-800 font-bold mr-2 text-3xl font-sarabun">
                         Member Since
@@ -158,6 +159,7 @@ export default function MasterUser() {
                     }}
                   ></Column>
                   <Column
+                    field="update_at"
                     header={
                       <span className="text-navyblue-800 font-bold mr-2 text-3xl font-sarabun">
                         History Action
