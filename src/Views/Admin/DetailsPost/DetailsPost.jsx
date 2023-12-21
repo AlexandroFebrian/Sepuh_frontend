@@ -155,6 +155,15 @@ export default function DetailsPost() {
     );
   }, [globalFilterValue]);
 
+  useEffect(() => {
+    setDataTampil(
+      dataDetailsPost.slice(
+        (pagination - 1) * limit,
+        (pagination - 1) * limit + limit
+      )
+    );
+  }, [dataDetailsPost]);
+
   return (
     <>
       <div className="container-details flex">
@@ -310,6 +319,7 @@ export default function DetailsPost() {
                                 <button
                                   className="button-details bg-yellow-500 p-2 rounded-lg w-32 text-xl"
                                   onClick={() => {
+                                    console.log(item.status)
                                     unsuspendPost(item._id);
                                   }}
                                 >
@@ -319,6 +329,7 @@ export default function DetailsPost() {
                                 <button
                                   className="button-details  bg-yellow-500 p-2 rounded-lg w-32 text-xl"
                                   onClick={() => {
+                                    console.log(item.status)
                                     suspendPost(item._id);
                                   }}
                                 >
