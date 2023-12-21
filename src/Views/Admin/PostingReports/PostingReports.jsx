@@ -100,10 +100,10 @@ export default function PostingReports() {
   });
 
   uniqueMonthsAndYears.add("All Time");
+  const [monthNow, setMonthNow] = useState("All Time");
 
   const handleChangeSelect = (e) => {
     const value = e;
-    console.log(value);
 
     if (value !== "All Time") {
       const data = Users.filter((user) => {
@@ -113,14 +113,15 @@ export default function PostingReports() {
         return `${month} ${year}` === value;
       });
       setListUser(data);
+      setMonthNow(value);
     } else {
       setListUser(Users);
+      setMonthNow(value);
     }
   };
 
   const handleRoleChange = (e) => {
     const value = e;
-    console.log(value);
 
     if (value === "freelancer") {
       const data = Users.filter((user) => user.role === "Freelancer");
@@ -173,7 +174,8 @@ export default function PostingReports() {
                 </div>
                 <div className="center w-1/2">
                   <h2 className="text-4xl font-semibold text-center">
-                    Top 5 Most Popular Posting October 2023
+                    {/* Top 5 Most Popular Posting October 2023 */}
+                    Top 5 Most Popular Posting of {monthNow}
                   </h2>
                 </div>
                 <div className="right w-1/4 flex justify-end">
