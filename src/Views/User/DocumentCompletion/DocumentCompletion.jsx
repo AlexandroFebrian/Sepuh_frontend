@@ -26,11 +26,8 @@ export default function DocumentCompletion() {
       portofolio: portofolio.current.value,
     };
 
-    if (data.identity_card && data.curriculum_vitae && data.portofolio) {
       updateDocument(data);
-    } else {
-      alert("Please fill all fields");
-    }
+    
   };
 
   const formatName = (name) => {
