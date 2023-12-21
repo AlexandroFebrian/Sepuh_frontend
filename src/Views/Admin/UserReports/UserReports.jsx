@@ -21,6 +21,7 @@ export default function UserReports() {
   const { Users } = UserReportsViewModel();
 
   const [listUser, setListUser] = useState([]);
+  const [monthNow, setMonthNow] = useState("All Time");
 
   const formatDate = (date) => {
     const newDate = new Date(date);
@@ -46,7 +47,6 @@ export default function UserReports() {
 
   const handleChangeSelect = (e) => {
     const value = e;
-    console.log(value);
 
     if (value !== "All Time") {
       const data = Users.filter((user) => {
@@ -55,9 +55,12 @@ export default function UserReports() {
         const year = date.getFullYear();
         return `${month} ${year}` === value;
       });
+
       setListUser(data);
+      setMonthNow(value);
     } else {
       setListUser(Users);
+      setMonthNow(value);
     }
   };
 
@@ -90,7 +93,10 @@ export default function UserReports() {
                 </div>
                 <div className="center w-1/2">
                   <h2 className="text-4xl font-semibold text-center">
-                    Top 5 Most Popular Freelancer October 2023
+                    {/* `Top 5 Most Popular Users  */}
+                    {monthNow === "All Time"
+                      ? "Top 5 Most Popular Users of All Time"
+                      : `Top 5 Most Popular Users of ${monthNow}`}
                   </h2>
                 </div>
               </div>
