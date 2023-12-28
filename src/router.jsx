@@ -41,6 +41,8 @@ import IncomeReportsAdmin from "./Views/Admin/IncomeReports/IncomeReports";
 import PaymentReports from "./Views/Admin/PaymentReports/PaymentReports";
 import DetailsPostAdmin from "./Views/Admin/DetailsPost/DetailsPost";
 
+import ErrorPage from "./Views/Error/ErrorPage";
+
 const Router = createBrowserRouter([
   {
     path: "/signin",
@@ -49,6 +51,7 @@ const Router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
