@@ -117,23 +117,28 @@ export default function ProfileBox({user, profile, posts}) {
 
         <div className="pt-10 pb-5">
           <div className="w-full px-8">
-            <Avatar size="2xl" src={profile.profile_picture} className='mr-4' border={"1px"} color={"blackAlpha.800"}/>
+            <Avatar size="2xl" src={profile.profile_picture} className='mr-4' border={"1px"} color={"blackAlpha.800"} bgColor={"ghostwhite.50"}/>
           </div>
           
           <div className="w-full px-8 mt-5">
             <div className='w-full flex justify-between items-center'>
               <h1 className="font-bold text-2xl">{profile.name} &#x2022; {profile.role}</h1>
               <div className='flex items-center'>
-                <Link className='mr-2'>
-                  <Button
-                    variant={"outline"}
-                    borderColor={"navyblue.800"}
-                    color={"navyblue.800"}
-                    onClick={() => {chatHandler(profile.email)}}
-                  >
-                    Message
-                  </Button>
-                </Link>
+                {
+                  user
+                  &&
+                  <Link className='mr-2'>
+                    <Button
+                      variant={"outline"}
+                      borderColor={"navyblue.800"}
+                      color={"navyblue.800"}
+                      onClick={() => {chatHandler(profile.email)}}
+                    >
+                      Message
+                    </Button>
+                  </Link>
+
+                }
 
                 {
                   profile?.role == "Freelancer" && user?.role == "Company"

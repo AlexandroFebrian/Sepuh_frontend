@@ -87,7 +87,8 @@ export default function DetailsPost() {
 
   function hashtagHandler(tag){
     sessionStorage.setItem("category", tag)
-    if(user.role == "Freelancer"){
+    
+    if(!user || user.role == "Freelancer"){
       navigate("/home")
 
     }else if(user.role == "Company"){

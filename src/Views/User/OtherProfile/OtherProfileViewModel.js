@@ -19,7 +19,7 @@ export default function OtherProfileViewModel(){
   
 
   useEffect(() => {
-    checkToken();
+    // checkToken();
     getUserProfileByEmail(email, setProfile)
     getUserPostsByEmail(email, setPosts)
   }, [])
