@@ -154,7 +154,7 @@ export default function DetailsPost() {
               &&
               <div className={` w-full px-7 py-7 h-fit mt-3 bg-lightblue-50 rounded shadow-xl`}>
                 <div className='w-full flex items-center'>
-                  <Avatar size={"lg"} src={post?.posted_by.profile_picture} />
+                  <Avatar size={"lg"} src={post?.posted_by.profile_picture} bgColor={"ghostwhite.400"} />
                   <div className='ml-5 h-full'>
                     <h1 className='font-semibold text-2xl text-navyblue-500'>{post?.title}</h1>
                     <div className='text-sm flex items-center'>
@@ -436,7 +436,7 @@ export default function DetailsPost() {
                   return (
                     <div key={idx} className=' w-full border-t border-navyblue-800 px-5 py-5'>
                       <div className='flex'>
-                        <Avatar size={"lg"} src={comment?.comment_by?.profile_picture} />
+                        <Avatar size={"lg"} src={comment?.comment_by?.profile_picture} bgColor={"ghostwhite.400"} />
 
                         <div className='w-full ml-5'>
                           <div className=' flex items-center'>

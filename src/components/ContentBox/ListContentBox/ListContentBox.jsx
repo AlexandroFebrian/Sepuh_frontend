@@ -54,7 +54,7 @@ export default function ListContentBox({item, setList, setWait, setPopup, setPop
       <div className='w-full h-fit mb-5 rounded shadow-lg bg-indigo-50 flex p-5 relative z-0 border border-navyblue-800 hover:bg-indigo-100/50 transition-colors duration-300'>
 
         <div className='pr-5'>
-          <Avatar src={item.posted_by.profile_picture} size={"lg"} bgColor={"ghostwhite.50"}/>
+          <Avatar src={item.posted_by.profile_picture} size={"lg"} bgColor={"ghostwhite.400"}/>
         </div>
         
         <div className='w-full relative'>

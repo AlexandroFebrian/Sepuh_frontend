@@ -81,7 +81,7 @@ export default function FreelancerContentBox({item}) {
       <div className='w-full h-fit mb-5 rounded shadow-lg bg-navyblue-800 flex p-5 relative z-0 text-ghostwhite-50 hover:bg-navyblue-700 transition-colors duration-300'>
 
         <div className='pr-5'>
-          <Avatar src={item.posted_by.profile_picture} size={"lg"} bgColor={"ghostwhite.50"} />
+          <Avatar src={item.posted_by.profile_picture} size={"lg"} bgColor={"ghostwhite.400"} />
         </div>
         
         <div className='w-full relative'>

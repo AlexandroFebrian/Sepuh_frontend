@@ -117,7 +117,7 @@ export default function ProfileBox({user, profile, posts}) {
 
         <div className="pt-10 pb-5">
           <div className="w-full px-8">
-            <Avatar size="2xl" src={profile.profile_picture} className='mr-4' border={"1px"} color={"blackAlpha.800"} bgColor={"ghostwhite.50"}/>
+            <Avatar size="2xl" src={profile.profile_picture} className='mr-4' border={"1px"} color={"blackAlpha.800"} bgColor={"ghostwhite.400"}/>
           </div>
           
           <div className="w-full px-8 mt-5">
