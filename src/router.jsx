@@ -43,6 +43,8 @@ import DetailsPostAdmin from "./Views/Admin/DetailsPost/DetailsPost";
 
 import ErrorPage from "./Views/Error/ErrorPage";
 
+import {cekToken} from "./Auth/Authentication"
+
 const Router = createBrowserRouter([
   {
     path: "/signin",
@@ -64,34 +66,42 @@ const Router = createBrowserRouter([
       {
         path: "browse",
         element: <HomePage />,
+        loader: cekToken,
       },
       {
         path: "addpost",
         element: <AddPost />,
+        loader: cekToken,
       },
       {
         path: "messages",
         element: <Messages />,
+        loader: cekToken,
       },
       {
         path: "lists",
         element: <List />,
+        loader: cekToken,
       },
       {
         path: "myposts",
         element: <MyPost />,
+        loader: cekToken,
       },
       {
         path: "dashboard",
         element: <Dashboard />,
+        loader: cekToken,
       },
       {
         path: "employee",
         element: <Messages />,
+        loader: cekToken,
       },
       {
         path: "notifications",
         element: <Notification />,
+        loader: cekToken,
       },
       {
         path: "post/:postId",
@@ -100,10 +110,12 @@ const Router = createBrowserRouter([
       {
         path: "employeelists",
         element: <CompanyEmployeeList />,
+        loader: cekToken,
       },
       {
         path: "settings",
         element: <Settings />,
+        loader: cekToken,
       },
       {
         path: "activity",
@@ -112,18 +124,22 @@ const Router = createBrowserRouter([
           {
             path: "ongoing",
             element: <Ongoing />,
+            loader: cekToken,
           },
           {
             path: "finished",
             element: <Finished />,
+            loader: cekToken,
           },
           {
             path: "rejected",
             element: <Rejected />,
+            loader: cekToken,
           },
           {
             path: ":actId",
             element: <DetailActivity />,
+            loader: cekToken,
           },
         ],
       },
@@ -137,30 +153,37 @@ const Router = createBrowserRouter([
           {
             path: "profile",
             element: <Profile />,
+            loader: cekToken,
           },
           {
             path: "document",
             element: <DocumentCompletion />,
+            loader: cekToken,
           },
           {
             path: "history",
             element: <WorkHistory />,
+            loader: cekToken,
           },
           {
             path: "income",
             element: <IncomeReportsUser />,
+            loader: cekToken,
           },
           {
             path: "bank",
             element: <BankAccount />,
+            loader: cekToken,
           },
           {
             path: "employeereports",
             element: <EmployeeReports />,
+            loader: cekToken,
           },
           {
             path: "paymentreports",
             element: <CompanyPaymentReports />,
+            loader: cekToken,
           },
         ],
       },

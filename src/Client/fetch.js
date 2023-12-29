@@ -77,7 +77,7 @@ export default function fetch() {
     }
   }
 
-  async function checkToken() {
+  async function checkToken(cek) {
     const token = localStorage.getItem("token");
 
     try {
@@ -93,13 +93,21 @@ export default function fetch() {
           dispatch(setUserDetail(null));
           if (location.pathname == "/" || location.pathname == "/home") {
           } else {
-            navigate("/");
+            // navigate("/");
+            if(cek){
+              cek(true)
+
+            }
           }
         });
     } catch (error) {
       dispatch(setIsLogin(false));
       alert("error");
-      navigate("/");
+      // navigate("/");
+      if(cek){
+        cek(true)
+
+      }
     }
   }
 
