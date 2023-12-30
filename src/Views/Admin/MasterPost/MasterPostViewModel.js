@@ -3,7 +3,7 @@ import fetch from "../../../Client/fetch";
 import { useEffect, useState } from "react";
 
 export default function MasterPostViewModel() {
-  const { getAllUser, getUserPostsByEmail } = fetch();
+  const { getAllUser, getUserPostsByEmail, checkTokenAdmin } = fetch();
 
   const [Users, setUsers] = useState([]);
   const [Status, SetStatus] = useState([]);
@@ -20,6 +20,9 @@ export default function MasterPostViewModel() {
   }
 
   useEffect(() => {
+    checkTokenAdmin();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
     fetchData(true);
   }, []);
 

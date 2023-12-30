@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import fetch from "../../../Client/fetch";
 export default function DetailsPostViewModel() {
-  const { getUserPostsByEmail } = fetch();
+  const { getUserPostsByEmail, checkTokenAdmin } = fetch();
   const [emailSearch, setEmailSearch] = useState("");
 
   const [Posts, setPosts] = useState([]);
@@ -10,6 +10,14 @@ export default function DetailsPostViewModel() {
   }
 
   useEffect(() => {
+    checkTokenAdmin();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
+    checkTokenAdmin();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
     fetchData();
   }, [emailSearch]);
 

@@ -67,11 +67,14 @@ export default function fetch() {
 
   async function verifyEmail(token) {
     try {
-      return await client.get(`users/verify/${token}`).then((res) => {
-        return res
-      }).catch((err) => {
-        return err.response;
-      })
+      return await client
+        .get(`users/verify/${token}`)
+        .then((res) => {
+          return res;
+        })
+        .catch((err) => {
+          return err.response;
+        });
     } catch (error) {
       alert("error");
     }
@@ -94,9 +97,8 @@ export default function fetch() {
           if (location.pathname == "/" || location.pathname == "/home") {
           } else {
             // navigate("/");
-            if(cek){
-              cek(true)
-
+            if (cek) {
+              cek(true);
             }
           }
         });
@@ -104,9 +106,35 @@ export default function fetch() {
       dispatch(setIsLogin(false));
       alert("error");
       // navigate("/");
-      if(cek){
-        cek(true)
+      if (cek) {
+        cek(true);
+      }
+    }
+  }
 
+  async function checkTokenAdmin(cek) {
+    const token = localStorage.getItem("token");
+
+    try {
+      return await client
+        .post("cekTokenAdmin", { token: token })
+        .then((res) => {
+          console.log(res.data);
+          dispatch(setIsLogin(true));
+          dispatch(setUserDetail(res.data.data));
+        })
+        .catch((err) => {
+          console.log("Ini error", err);
+          localStorage.removeItem("token");
+          dispatch(setIsLogin(false));
+          dispatch(setUserDetail(null));
+          navigate("/admin");
+        });
+    } catch (error) {
+      dispatch(setIsLogin(false));
+      alert(error);
+      if (cek) {
+        cek(true);
       }
     }
   }
@@ -1287,5 +1315,6 @@ export default function fetch() {
     hireReject,
     getEmployees,
     getAllAgreementsUser,
+    checkTokenAdmin,
   };
 }

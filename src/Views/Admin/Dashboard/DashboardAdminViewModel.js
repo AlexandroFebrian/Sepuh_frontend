@@ -3,13 +3,16 @@ import { useSelector } from "react-redux";
 import fetch from "../../../Client/fetch";
 
 export default function DashboardAdminViewModel() {
-  const { getAllAgreements, getAllUser } = fetch();
+  const { getAllAgreements, getAllUser, checkTokenAdmin } = fetch();
 
   const [activity, setActivity] = useState([]);
   const [freelancer, setFreelancer] = useState([]);
   const [company, setCompany] = useState([]);
 
   useEffect(() => {
+    checkTokenAdmin();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
     getAllUser().then((data) => {
       const user = data.users;
 

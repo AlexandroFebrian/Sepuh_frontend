@@ -26,8 +26,8 @@ export default function DocumentCompletion() {
       portofolio: portofolio.current.value,
     };
 
-      updateDocument(data);
-    
+    console.log("identity card", identityCard.current);
+    console.log("curriculum vitae", curriculumVitae.current);
   };
 
   const formatName = (name) => {
@@ -95,9 +95,11 @@ export default function DocumentCompletion() {
                                 id="files"
                                 className="hidden"
                                 onChange={(e) => {
+                                  console.log("e", e.target.files[0]);
                                   setTempIDCard(e.target.files[0]);
                                 }}
                                 ref={identityCard}
+                                accept="image/*"
                               />
                               <label
                                 htmlFor="files"
@@ -149,6 +151,7 @@ export default function DocumentCompletion() {
                             className="hidden"
                             ref={identityCard}
                             onChange={(e) => {
+                              console.log("e", e.target.files[0]);
                               setTempIDCard(e.target.files[0]);
                             }}
                           />

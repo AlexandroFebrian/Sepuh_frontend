@@ -3,7 +3,8 @@ import fetch from "../../../Client/fetch";
 import { useEffect, useState } from "react";
 
 export default function MasterUserViewModel() {
-  const { checkToken, getAllUser, BanUser, UnbanUser } = fetch();
+  const { checkToken, getAllUser, BanUser, UnbanUser, checkTokenAdmin } =
+    fetch();
 
   const [Users, setUsers] = useState([]);
   const [Status, SetStatus] = useState([]);
@@ -17,6 +18,9 @@ export default function MasterUserViewModel() {
   }
 
   useEffect(() => {
+    checkTokenAdmin();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
     fetchData(true);
   }, []);
 
