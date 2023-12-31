@@ -110,6 +110,7 @@ export default function Navbar() {
       )} */}
       {showFilter && (
         <div
+          id="close_filter"
           className={`fixed w-[100vw] h-[100vh] bg-black/50 z-20 animate__animated ${
             closeFilter ? "animate__fadeOut" : "animate__fadeIn"
           } animate__faster`}
@@ -121,7 +122,7 @@ export default function Navbar() {
 
       <nav className="w-full h-20 bg-navyblue-800 flex justify-between px-7 py-4 fixed top-0 z-[60]">
         <div className="w-1/5">
-          <Link to={`${isLogin ? "/home" : ""}`}>
+          <Link to={`${isLogin ? "/home" : ""}`} id="home">
             <img
               src="/logo/Logo Putih.png"
               alt="Logo"
@@ -143,6 +144,7 @@ export default function Navbar() {
               </InputLeftElement>
 
               <Input
+                id="search"
                 placeholder="Search"
                 onKeyDown={(e) => {
                   searchHandler(e);
@@ -169,7 +171,7 @@ export default function Navbar() {
           <div className="w-4/12 flex items-center justify-end">
             {isLogin ? (
               <>
-                <Link to={"/activity/ongoing"}>
+                <Link to={"/activity/ongoing"} id="my_activity">
                   <Button
                     leftIcon={<IoIosTimer />}
                     color="ghostwhite.50"
@@ -183,7 +185,7 @@ export default function Navbar() {
                     My Activity
                   </Button>
                 </Link>
-                <Link to={"/notifications"}>
+                <Link to={"/notifications"} id="notifications">
                   <Button
                     leftIcon={<FaRegBell />}
                     color="ghostwhite.50"
@@ -221,7 +223,7 @@ export default function Navbar() {
                         {/* {formatAmount(999999999999999)} */}
                       </h2>
                     </div>
-                    <Link to={"user/profile"}>
+                    <Link to={"user/profile"} id="view_profile">
                       <Button
                         color="ghostwhite.50"
                         borderColor="indigo.300"
@@ -251,6 +253,7 @@ export default function Navbar() {
                       onClick={() => {
                         logout();
                       }}
+                      id="logout"
                     >
                       Logout
                     </Button>
@@ -259,7 +262,7 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Link to={"/signin?signup=true"} className="me-6">
+                <Link to={"/signin?signup=true"} className="me-6" id="signup">
                   <Button
                     color="ghostwhite.50"
                     bg="indigo.300"
@@ -271,7 +274,7 @@ export default function Navbar() {
                     Sign Up
                   </Button>
                 </Link>
-                <Link to={"/signin"}>
+                <Link to={"/signin"} id="signin">
                   <Button
                     color="ghostwhite.50"
                     borderColor="indigo.300"

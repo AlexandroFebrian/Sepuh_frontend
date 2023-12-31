@@ -97,7 +97,8 @@ export default function SignIn() {
         <Jumbo jumbo={jumbo} handleClick={handleClick} api={api}>
           <div className="w-full h-full p-7">
             <div className="flex items-center">
-              <FaArrowLeft 
+              <FaArrowLeft
+                id="back" 
                 className=" text-white w-10 h-10 mr-5 cursor-pointer hover:text-ghostwhite-100 transition-colors duration-300"
                 onClick={() => navigate(-1)}
               />

@@ -99,7 +99,7 @@ export default function SignUpBox({ handleClick }) {
                   <Input
                     variant="outline"
                     type="text"
-                    id="NamemeInputSignUp"
+                    id="NameInputSignUp"
                     className="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5  outline-none"
                     placeholder="Name"
                     {...signUpForm("name")}
@@ -129,6 +129,7 @@ export default function SignUpBox({ handleClick }) {
                       placeholder="Enter password"
                       className="outline-none"
                       variant="outline"
+                      id="PasswordInputSignUp"
                       {...signUpForm("password")}
                     />
 
@@ -167,6 +168,7 @@ export default function SignUpBox({ handleClick }) {
                       placeholder="Confirm password"
                       className="outline-none"
                       variant="outline"
+                      id="ConfirmPasswordInputSignUp"
                       {...signUpForm("confirm")}
                     />
 
@@ -191,6 +193,7 @@ export default function SignUpBox({ handleClick }) {
                 <div className="flex w-full justify-center items-center mb-2">
                   <span className="mr-3">Sign up as: </span>
                   <Select
+                    id="RoleInputSignUp"
                     defaultValue={"Freelancer"}
                     width={"11rem"}
                     bg={"navyblue.500"}
@@ -217,7 +220,10 @@ export default function SignUpBox({ handleClick }) {
 
                 <div className="flex w-full justify-center mb-2">
                   <div>
-                    <Checkbox {...signUpForm("terms")}>
+                    <Checkbox
+                      id="TermsInputSignUp"
+                      {...signUpForm("terms")}
+                    >
                       I agree to the{" "}
                       <Link
                         to={"#"}
@@ -235,6 +241,7 @@ export default function SignUpBox({ handleClick }) {
 
                 <div className="flex w-full justify-center">
                   <Button
+                    id="SignUpButton"
                     colorScheme={"navyblue"}
                     color={"ghostwhite"}
                     className="w-full"
@@ -253,6 +260,7 @@ export default function SignUpBox({ handleClick }) {
             <p>
               Already have account?{" "}
               <span
+                id="SignIn"
                 className=" underline text-indigo-300 hover:text-indigo-400 cursor-pointer"
                 onClick={handleClick}
               >

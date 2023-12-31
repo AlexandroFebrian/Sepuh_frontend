@@ -92,6 +92,7 @@ export default function SignInBox({ handleClick }) {
                   placeholder="Enter password"
                   className="outline-none"
                   variant="outline"
+                  id="PasswordInputSignIn"
                   {...signInForm("password")}
                 />
                 <InputRightElement width="4.5rem">
@@ -111,6 +112,7 @@ export default function SignInBox({ handleClick }) {
               <div className="flex w-full justify-center">
                 <div className="w-full mt-10">
                   <Button
+                    id="SignInButton"
                     colorScheme={"navyblue"}
                     color={"ghostwhite"}
                     className="w-full"
@@ -129,6 +131,7 @@ export default function SignInBox({ handleClick }) {
             <p>
               Don't have account?{" "}
               <span
+                id="SignUp"
                 className=" underline text-indigo-300 hover:text-indigo-400 cursor-pointer"
                 onClick={handleClick}
               >
