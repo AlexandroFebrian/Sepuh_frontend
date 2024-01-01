@@ -170,9 +170,11 @@ export default function MasterUser() {
                     body={(rowData) => {
                       return (
                         <span className="font-medium h-full text-xl font-sarabun">
-                          {rowData.create_at != rowData.update_at
-                            ? `Banned on ${formatdate(rowData.update_at)}`
-                            : "Not banned"}
+                          {rowData.status === -1 &&
+                            `Banned on ${formatdate(rowData.update_at)}`}
+                          {rowData.status === 1 &&
+                            `Unbanned on ${formatdate(rowData.update_at)}`}
+                          {rowData.status === 0 && `Not banned`}
                         </span>
                       );
                     }}

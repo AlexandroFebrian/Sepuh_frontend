@@ -7,27 +7,34 @@ import { FaCircleExclamation } from "react-icons/fa6";
 
 import { useRef, useState } from "react";
 
-import { Toast } from "primereact/toast";
-import { FileUpload } from "primereact/fileupload";
-
 export default function DocumentCompletion() {
-  const { isLogin, user, updateDocument } = DocumentCompletionViewModel();
+  const { isLogin, user, updateDocument, checkToken } =
+    DocumentCompletionViewModel();
   const [tempIDCard, setTempIDCard] = useState(null);
   const [tempCV, setTempCV] = useState(null);
 
-  const identityCard = useRef(null);
-  const curriculumVitae = useRef(null);
-  const portofolio = useRef(null);
+  const identityCard = useRef();
+  const curriculumVitae = useRef();
+  const portofolio = useRef();
 
   const handleUpdateDocument = () => {
     const data = {
-      identity_card: identityCard.current.files[0],
-      curriculum_vitae: curriculumVitae.current.files[0],
+      identity_card: tempIDCard,
+      curriculum_vitae: tempCV,
       portofolio: portofolio.current.value,
     };
 
-    console.log("identity card", identityCard.current);
-    console.log("curriculum vitae", curriculumVitae.current);
+    if (
+      !data.identity_card ||
+      !data.curriculum_vitae ||
+      data.portofolio == ""
+    ) {
+      alert("All data must be filled!");
+      return;
+    } else {
+      updateDocument(data);
+      checkToken();
+    }
   };
 
   const formatName = (name) => {
@@ -95,7 +102,6 @@ export default function DocumentCompletion() {
                                 id="files"
                                 className="hidden"
                                 onChange={(e) => {
-                                  console.log("e", e.target.files[0]);
                                   setTempIDCard(e.target.files[0]);
                                 }}
                                 ref={identityCard}

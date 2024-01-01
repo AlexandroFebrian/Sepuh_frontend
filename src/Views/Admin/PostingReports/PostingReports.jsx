@@ -213,7 +213,7 @@ export default function PostingReports() {
                   </TableRow>
                 </TableHeader>
 
-                {listUser.map((user, index) => (
+                {listUser.slice(0, 5).map((user, index) => (
                   <TableBody key={index}>
                     <TableRow>
                       <TableCell className="font-medium text-lg text-center">

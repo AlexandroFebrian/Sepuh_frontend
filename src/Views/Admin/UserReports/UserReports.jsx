@@ -71,7 +71,7 @@ export default function UserReports() {
           <NavigationAdmin />
         </div>
 
-        <div className="right w-5/6 pt-10 shadow-lg absolute right-0">
+        <div className="right w-5/6 pt-10 absolute right-0">
           <div className=" mb-10 px-10 pb-10">
             <div className="container m-7 mx-auto">
               <div className="top flex items-center w-full my-10">
@@ -101,7 +101,7 @@ export default function UserReports() {
                 </div>
               </div>
 
-              <Table className="w-full bg-ghostwhite-100 rounded-md">
+              <Table className="w-full bg-ghostwhite-100 rounded-md shadow-lg">
                 <TableHeader className="border-b-2 border-navyblue-600">
                   <TableRow>
                     <TableHead className="w-[100px] text-2xl text-navyblue-800 font-bold text-center">
@@ -119,7 +119,7 @@ export default function UserReports() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {listUser.map((user, index) => (
+                  {listUser.slice(0, 5).map((user, index) => (
                     <TableRow key={index}>
                       <TableCell className="font-medium text-lg text-center">
                         {index + 1}

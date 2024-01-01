@@ -30,5 +30,6 @@ export default function DocumentCompletionViewModel() {
     user,
     profile,
     updateDocument,
+    checkToken,
   };
 }
