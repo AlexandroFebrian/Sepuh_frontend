@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import CompanyContentBox from '../ContentBox/CompanyContentBox/CompanyContentBox';
 import FreelancerContentBox from '../ContentBox/FreelancerContentBox/FreelancerContentBox';
+import { Box, SkeletonCircle, SkeletonText } from '@chakra-ui/react';
 
 export default function Content() {
   const navigate = useNavigate()
@@ -87,6 +88,39 @@ export default function Content() {
         <div className={`${isLogin ? "w-[calc(100%-5rem)] mr-10" : "w-full"}`}>
           {
             freelancerPost.length == 0 && companyPost.length == 0
+            &&
+            <>
+              <Box padding='6' mb='5' boxShadow='lg' bg='white' className='flex' rounded={"md"}>
+                <div className='mr-4'>
+                  <SkeletonCircle size='16' />
+
+                </div>
+                <div className='w-full'>
+                  <SkeletonText noOfLines={3} spacing='5' skeletonHeight='3' />
+                  <SkeletonText mt={5} noOfLines={5} spacing='5' skeletonHeight='3' />
+                </div>
+              </Box>
+              <Box padding='6' mb='5' boxShadow='lg' bg='white' className='flex' rounded={"md"}>
+                <div className='mr-4'>
+                  <SkeletonCircle size='16' />
+
+                </div>
+                <div className='w-full'>
+                  <SkeletonText noOfLines={3} spacing='5' skeletonHeight='3' />
+                  <SkeletonText mt={5} noOfLines={5} spacing='5' skeletonHeight='3' />
+                </div>
+              </Box>
+              <Box padding='6' mb='5' boxShadow='lg' bg='white' className='flex' rounded={"md"}>
+                <div className='mr-4'>
+                  <SkeletonCircle size='16' />
+
+                </div>
+                <div className='w-full'>
+                  <SkeletonText noOfLines={3} spacing='5' skeletonHeight='3' />
+                  <SkeletonText mt={5} noOfLines={5} spacing='5' skeletonHeight='3' />
+                </div>
+              </Box>
+            </>
           }
           {
             freelancerPost.map((item, idx) => {
