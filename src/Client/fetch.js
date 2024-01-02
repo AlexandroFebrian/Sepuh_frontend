@@ -124,15 +124,14 @@ export default function fetch() {
           dispatch(setUserDetail(res.data.data));
         })
         .catch((err) => {
-          console.log("Ini error", err);
           localStorage.removeItem("token");
           dispatch(setIsLogin(false));
           dispatch(setUserDetail(null));
-          navigate("/admin");
+          // navigate("/admin");
+          //
         });
     } catch (error) {
       dispatch(setIsLogin(false));
-      alert(error);
       if (cek) {
         cek(true);
       }
@@ -390,10 +389,9 @@ export default function fetch() {
         })
         .catch((err) => {
           console.log(err);
-          alert("error");
         });
     } catch (error) {
-      alert("error");
+      console.log(error.message);
     }
   }
 
@@ -1121,8 +1119,6 @@ export default function fetch() {
   }
 
   async function getAllAgreements() {
-    // http://localhost:3000/api/agreements/all
-
     const token = localStorage.getItem("token");
     try {
       return await client
@@ -1138,7 +1134,7 @@ export default function fetch() {
           return err.response;
         });
     } catch (error) {
-      alert("error");
+      console.log("500 - Server Error");
     }
   }
 

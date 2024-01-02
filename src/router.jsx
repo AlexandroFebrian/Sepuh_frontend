@@ -43,7 +43,7 @@ import DetailsPostAdmin from "./Views/Admin/DetailsPost/DetailsPost";
 
 import ErrorPage from "./Views/Error/ErrorPage";
 
-import {cekToken} from "./Auth/Authentication"
+import { cekToken } from "./Auth/Authentication";
 
 const Router = createBrowserRouter([
   {
@@ -195,6 +195,7 @@ const Router = createBrowserRouter([
   },
   {
     path: "admin",
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "dashboard",
@@ -232,8 +233,8 @@ const Router = createBrowserRouter([
   },
   {
     path: "/verify",
-    element: <Verification />
-  }
+    element: <Verification />,
+  },
 
   // {
   //   path:   "*",
