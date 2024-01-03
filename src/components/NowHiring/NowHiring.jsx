@@ -1,4 +1,4 @@
-import { Avatar, Tag } from "@chakra-ui/react";
+import { Avatar, Box, SkeletonCircle, SkeletonText, Tag } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { FaRotate } from "react-icons/fa6";
 import fetch from "../../Client/fetch";
@@ -39,6 +39,47 @@ export default function NowHiring({user}) {
         <hr className=" bg-navyblue-800 w-full h-[0.1rem] my-3" />
 
         <div className="content w-full flex flex-col gap-4">
+          {
+            hiring.length == 0 &&
+            <>
+              <Box padding='3' boxShadow='lg' bg='white' className='flex w-full' rounded={"md"}>
+                <div className='mr-4'>
+                  <SkeletonCircle size='16' />
+
+                </div>
+                <div className='w-full flex items-center'>
+                  <SkeletonText noOfLines={3} spacing='2' skeletonHeight='2' width={"full"} />
+                </div>
+              </Box>
+              <Box padding='3' boxShadow='lg' bg='white' className='flex w-full' rounded={"md"}>
+                <div className='mr-4'>
+                  <SkeletonCircle size='16' />
+
+                </div>
+                <div className='w-full flex items-center'>
+                  <SkeletonText noOfLines={3} spacing='2' skeletonHeight='2' width={"full"} />
+                </div>
+              </Box>
+              <Box padding='3' boxShadow='lg' bg='white' className='flex w-full' rounded={"md"}>
+                <div className='mr-4'>
+                  <SkeletonCircle size='16' />
+
+                </div>
+                <div className='w-full flex items-center'>
+                  <SkeletonText noOfLines={3} spacing='2' skeletonHeight='2' width={"full"} />
+                </div>
+              </Box>
+              <Box padding='3' boxShadow='lg' bg='white' className='flex w-full' rounded={"md"}>
+                <div className='mr-4'>
+                  <SkeletonCircle size='16' />
+
+                </div>
+                <div className='w-full flex items-center'>
+                  <SkeletonText noOfLines={3} spacing='2' skeletonHeight='2' width={"full"} />
+                </div>
+              </Box>
+            </>
+          }
           {
             hiring.map((post, idx) => {
               return(
