@@ -86,7 +86,7 @@ export default function MessagesViewModel(){
                 socket.off("getMessage");
             }
         });
-    }, [socket, contacts]);
+    }, [socket]);
 
     function selectContactHandler(index) {
         setSelectedChat(contacts[index]);
