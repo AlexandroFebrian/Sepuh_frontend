@@ -43,7 +43,7 @@ import DetailsPostAdmin from "./Views/Admin/DetailsPost/DetailsPost";
 
 import ErrorPage from "./Views/Error/ErrorPage";
 
-import { cekToken } from "./Auth/Authentication";
+import { cekToken, cekTokenAdmin } from "./Auth/Authentication";
 
 const Router = createBrowserRouter([
   {
@@ -200,35 +200,47 @@ const Router = createBrowserRouter([
       {
         path: "dashboard",
         element: <DashboardAdmin />,
+        loader: cekTokenAdmin,
       },
       {
         path: "masteruser",
         element: <MasterUser />,
+        loader: cekTokenAdmin,
       },
       {
         path: "masterpost",
         element: <MasterPost />,
+        loader: cekTokenAdmin,
       },
       {
         path: "masterpost/details/",
         element: <DetailsPostAdmin />,
+        loader: cekTokenAdmin,
       },
       {
         path: "userreports",
         element: <UserReports />,
+        loader: cekTokenAdmin,
       },
       {
         path: "postingreports",
         element: <PostingReports />,
+        loader: cekTokenAdmin,
       },
       {
         path: "incomereports",
         element: <IncomeReportsAdmin />,
+        loader: cekTokenAdmin,
       },
       {
         path: "paymentreports",
         element: <PaymentReports />,
+        loader: cekTokenAdmin,
       },
+      // {
+      //   path: "*",
+      //   element: <ErrorPage />,
+      // },
     ],
   },
   {

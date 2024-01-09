@@ -14,24 +14,40 @@ const client = axios.create({
   },
 });
 
-
 export async function cekToken() {
-
   const token = localStorage.getItem("token");
-  let cek = false
-  
+  let cek = false;
+
   await client
     .post("cekToken", { token: token })
-    .then((res) => {
-    })
+    .then((res) => {})
     .catch((err) => {
       localStorage.removeItem("token");
       cek = true;
     });
 
-  if(cek == true){
-    throw new Response ("", {status: 403})
+  if (cek == true) {
+    throw new Response("", { status: 403 });
   }
 
-  return "OK"
+  return "OK";
+}
+
+export async function cekTokenAdmin() {
+  const token = localStorage.getItem("token");
+  let cek = false;
+
+  await client
+    .post("cekTokenAdmin", { token: token })
+    .then((res) => {})
+    .catch((err) => {
+      localStorage.removeItem("token");
+      cek = true;
+    });
+
+  if (cek == true) {
+    throw new Response("", { status: 403 });
+  }
+
+  return "OK";
 }
