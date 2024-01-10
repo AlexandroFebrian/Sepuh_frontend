@@ -7,6 +7,8 @@ import { FaCircleExclamation } from "react-icons/fa6";
 
 import { useRef, useState } from "react";
 
+const baseURL = import.meta.env.VITE_BACKEND_URL;
+
 export default function DocumentCompletion() {
   const { isLogin, user, updateDocument, checkToken } =
     DocumentCompletionViewModel();
@@ -90,7 +92,8 @@ export default function DocumentCompletion() {
                               src={
                                 user?.identity_card == ""
                                   ? URL.createObjectURL(tempIDCard)
-                                  : `http://localhost:3000/api/public/${user?.identity_card}`
+                                  : // : `http://localhost:3000/api/public/${user?.identity_card}`
+                                    `${baseURL}/public/${user?.identity_card}`
                               }
                               alt="identity card"
                               className="w-1/2 h-full object-cover"
